@@ -880,7 +880,8 @@ static int emitOutput(mlir::OwningOpRef<ModuleOp> &module,
     if (preserveLocations)
       flags.enableDebugInfo();
     module->print(llvm::outs(), flags);
-    return CompilerSuccess;
+    return emitOutputFiles(outputNameNoExt, emissionTarget, context, module);
+    // return CompilerSuccess;
   }
   return emitOutputFiles(outputNameNoExt, emissionTarget, context, module);
 }
@@ -908,8 +909,10 @@ int compileModule(mlir::OwningOpRef<ModuleOp> &module,
     accel->getOrLoadDialects(context);
     accel->addPasses(module, pm, emissionTarget);
   }
-  if (!hasAccel)
+  if (!hasAccel) {
+    // ANCHOR
     addPasses(module, pm, emissionTarget);
+  }
   mlir::applyPassManagerCLOptions(pm);
   mlir::applyDefaultTimingPassManagerCLOptions(pm);
 

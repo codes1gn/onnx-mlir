@@ -133,6 +133,7 @@ void ONNXOpTransformPass::runOnOperation() {
 
   uint64_t currentTag;
   uint64_t previousTag;
+  printf("anchor");
 
   if (failed(createTagForIR(module, &currentTag)))
     return signalPassFailure();
@@ -140,6 +141,7 @@ void ONNXOpTransformPass::runOnOperation() {
   int n = onnxOpTransformThreshold;
   bool targetCPU = onnxOpTransformTargetCPU;
   do {
+    printf("anchor iter - %d", n);
     previousTag = currentTag;
     OpPassManager dynamicPM("builtin.module");
     dynamicPM.addNestedPass<func::FuncOp>(
@@ -156,11 +158,13 @@ void ONNXOpTransformPass::runOnOperation() {
     }
     dynamicPM.addNestedPass<func::FuncOp>(
         onnx_mlir::createConstPropONNXToONNXPass());
+    
     if (failed(runPipeline(dynamicPM, module)))
       return signalPassFailure();
     if (failed(createTagForIR(module, &currentTag)))
       return signalPassFailure();
   } while (currentTag != previousTag && --n > 0);
+
   if (currentTag != previousTag) {
     module->emitWarning()
         << "ONNXOpTransform did not converge after " << onnxOpTransformThreshold
@@ -172,6 +176,16 @@ void ONNXOpTransformPass::runOnOperation() {
                  << " times, converged "
                  << ((currentTag == previousTag) ? "true" : "false") << "\n";
   }
+
+  // ANCHOR dedicate pass to elide constants
+  OpPassManager dynamicPM("builtin.module", OpPassManager::Nesting::Implicit);
+  dynamicPM.addPass(
+      onnx_mlir::createElideConstantValuePass());
+  if (failed(runPipeline(dynamicPM, module))) 
+    return signalPassFailure();
+  if (failed(createTagForIR(module, &currentTag)))
+    return signalPassFailure();
+
 }
 
 } // end anonymous namespace

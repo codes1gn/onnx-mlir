@@ -66,8 +66,10 @@ void addONNXToMLIRPasses(mlir::PassManager &pm, int transformThreshold,
   // inferred shapes.
   pm.addNestedPass<func::FuncOp>(onnx_mlir::createConstPropONNXToONNXPass());
 
+  // ANCHOR this path
   if (transformThreshold > 0) {
     // Dynamic iterate in ONNXOpTransformPass
+    printf("anchor %d", transformThreshold);
     pm.addPass(onnx_mlir::createONNXOpTransformPass(transformThreshold,
         transformReport, targetCPU, enableSimdDataLayoutOpt));
   } else {
@@ -197,9 +199,12 @@ void addPasses(mlir::OwningOpRef<ModuleOp> &module, mlir::PassManager &pm,
     EmissionTargetType emissionTarget) {
   InputIRLevelType inputIRLevel = determineInputIRLevel(module);
 
-  if (inputIRLevel <= ONNXLevel && emissionTarget >= EmitONNXIR)
+  if (inputIRLevel <= ONNXLevel && emissionTarget >= EmitONNXIR) {
+    // ANCHOR this path
     addONNXToMLIRPasses(pm, onnxOpTransformThreshold, onnxOpTransformReport,
         /*target CPU*/ maccel.empty(), enableSimdDataLayout);
+
+  }
 
   if (emissionTarget >= EmitMLIR) {
     if (inputIRLevel <= ONNXLevel)
@@ -209,8 +214,10 @@ void addPasses(mlir::OwningOpRef<ModuleOp> &module, mlir::PassManager &pm,
       addKrnlToAffinePasses(pm);
   }
 
-  if (inputIRLevel <= LLVMLevel && emissionTarget >= EmitLLVMIR)
+  if (inputIRLevel <= LLVMLevel && emissionTarget >= EmitLLVMIR) {
     addKrnlToLLVMPasses(pm, /*enableCSE=*/true, verifyInputTensors);
+
+  }
 }
 
 } // namespace onnx_mlir
