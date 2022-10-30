@@ -35,6 +35,10 @@
 #include "src/Compiler/CompilerUtils.hpp"
 #include "src/Dialect/Krnl/KrnlOps.hpp"
 #include "src/Dialect/ONNX/ONNXOps.hpp"
+// TODO
+#include "src/Dialect/Crt/CrtDialect.hpp"
+#include "src/Dialect/Crt/CrtOps.hpp"
+
 #include "src/InitMLIRPasses.hpp"
 #include "src/InitOMPasses.hpp"
 #include "src/Pass/Passes.hpp"
@@ -134,6 +138,7 @@ int main(int argc, char **argv) {
   registry.insert<mlir::memref::MemRefDialect>();
   registry.insert<mlir::ONNXDialect>();
   registry.insert<mlir::KrnlDialect>();
+  registry.insert<mlir::CrtDialect>();
   registry.insert<mlir::tosa::TosaDialect>();
 
   // Initialize accelerators if they exist.

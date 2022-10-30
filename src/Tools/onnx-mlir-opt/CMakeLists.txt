@@ -7,6 +7,9 @@ add_onnx_mlir_executable(onnx-mlir-opt
 
   LINK_LIBS PRIVATE
   ${OMLibs}
+
+  # TODO add crt into opttool
+  CrtDialect
   CompilerOptions
   CompilerUtils
   Accelerator
