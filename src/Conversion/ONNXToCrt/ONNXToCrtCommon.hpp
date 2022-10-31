@@ -54,19 +54,7 @@ inline bool isCrtFloat(mlir::Type type) {
   return type.isa<mlir::Float32Type>();
   // return type.isa<mlir::BFloat16Type, mlir::Float16Type, mlir::Float32Type>();
 }
-//
-// //===----------------------------------------------------------------------===//
-// // This is to get a crt operation of a given type for a specific operation.
-// //===----------------------------------------------------------------------===//
-template <typename ONNXOp>
-struct CrtDialectOp {
-  using Op = void;
-};
 
-template <typename Op>
-using CrtOp = typename CrtDialectOp<Op>::Op;
-//
-// `Math` directory methods:
 void populateLoweringONNXToCrtPattern(mlir::ConversionTarget &,
     mlir::RewritePatternSet &, mlir::TypeConverter &, mlir::MLIRContext *);
 } // namespace onnx_mlir
