@@ -213,6 +213,31 @@ def Crt_ConvOp : Crt_Op<"conv"> {
   let assemblyFormat = "$in `,` $filter attr-dict `:` functional-type(operands, results)";
 }
 
+def Crt_GemmOp : Crt_Op<"gemm"> {
+  let summary = "2-D channel first convolution";
+  let description = [{
+    Performs 2-D convolution. This op is inspired by PyTorch's Conv2d layer (https://pytorch.org/docs/stable/generated/torch.nn.Conv2d.html).
+
+    The tensors have dimensions:
+    - in:     [N, Cin, H, W]
+    - filter: [Cout, Cin, KH, KW]
+    - result: [N, Cout, Hout, Wout]
+
+    The tensors must meet the following conditions; otherwise, this op aborts the program.
+    - H is greater than or equal to KH
+    - W is greater than or equal to KW
+    - Cin matches between in and filter
+  }];
+  let arguments = (ins 
+      TensorRankOf<[F32], [2]>:$in,
+      TensorRankOf<[F32], [2]>:$filter,
+      TensorRankOf<[F32], [1]>:$bias
+  );
+  let results = (outs 2DTensorOf<[F32]>:$result);
+
+  let assemblyFormat = "$in `,` $filter `,` $bias attr-dict `:` functional-type(operands, results)";
+}
+
 // ANCHOR tmp impl for paper phantom-ir
 def Crt_ConvaddOp : Crt_Op<"convadd"> {
   let summary = "2-D channel first convolution";

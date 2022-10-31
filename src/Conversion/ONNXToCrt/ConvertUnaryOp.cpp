@@ -117,6 +117,7 @@ void populateLoweringONNXToCrtPattern(ConversionTarget &target,
 
   // ANCHOR TENARY
   patterns.add<ConvertTenaryOpOnnxToCrt<ONNXConvOp, crt::ConvaddOp>>(typeConverter, ctx);
+  patterns.add<ConvertTenaryOpOnnxToCrt<ONNXGemmOp, crt::GemmOp>>(typeConverter, ctx);
 }
 
 } // namespace onnx_mlir
