@@ -108,6 +108,11 @@ void initOMPasses(int optLevel) {
     return createConvertONNXToTOSAPass();
   });
 
+  // ANCHOR
+  mlir::registerPass([]() -> std::unique_ptr<mlir::Pass> {
+    return createConvertONNXToCrtPass();
+  });
+
 #ifdef ONNX_MLIR_ENABLE_MHLO
   mlir::registerPass(
       []() -> std::unique_ptr<mlir::Pass> { return createLowerToMhloPass(); });

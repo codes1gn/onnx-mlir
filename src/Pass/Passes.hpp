@@ -107,4 +107,7 @@ std::unique_ptr<mlir::Pass> createConvertKrnlToLLVMPass(
 /// Pass for lowering Onnx ops to TOSA dialect
 std::unique_ptr<mlir::Pass> createConvertONNXToTOSAPass();
 
+/// ANCHOR Pass for lowering Onnx ops to Crt dialect
+std::unique_ptr<mlir::Pass> createConvertONNXToCrtPass();
+
 } // namespace onnx_mlir
