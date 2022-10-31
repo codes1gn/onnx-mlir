@@ -21,7 +21,7 @@ namespace onnx_mlir {
 void populateONNXToCrtConversionPattern(ConversionTarget &target,
     RewritePatternSet &patterns, TypeConverter &typeConverter,
     MLIRContext *ctx) {
-  populateLoweringONNXUnaryOpToCrtPattern(target, patterns, typeConverter, ctx);
+  populateLoweringONNXToCrtPattern(target, patterns, typeConverter, ctx);
 }
 
 // Performs lowering to Crt dialect
@@ -60,7 +60,7 @@ void FrontendToCrtLoweringPass::runOnOperation() {
   });
 
   // Define legal dialects and operations
-  target.addLegalDialect<CrtDialect, func::FuncDialect>();
+  target.addLegalDialect<crt::CrtDialect, func::FuncDialect>();
 
   // Define patterns
   populateONNXToCrtConversionPattern(target, patterns, typeConverter, context);

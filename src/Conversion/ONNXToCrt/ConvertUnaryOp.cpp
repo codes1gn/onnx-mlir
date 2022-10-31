@@ -66,19 +66,56 @@ public:
   LogicalResult matchAndRewrite(ONNXReluOp op, OpAdaptor adaptor,
       ConversionPatternRewriter &rewriter) const override {
 
-    rewriter.replaceOpWithNewOp<IdentityOp>(op, op->getOperand(0).getType(), op->getOperand(0));
+    rewriter.replaceOpWithNewOp<crt::ReluOp>(op, op->getOperand(0).getType(), op->getOperand(0));
+    return success();
+  }
+};
+
+class ExpOp2Crt : public OpConversionPattern<ONNXExpOp> {
+public:
+  using OpConversionPattern::OpConversionPattern;
+  LogicalResult matchAndRewrite(ONNXExpOp op, OpAdaptor adaptor,
+      ConversionPatternRewriter &rewriter) const override {
+
+    rewriter.replaceOpWithNewOp<crt::ExpOp>(op, op->getOperand(0).getType(), op->getOperand(0));
+    return success();
+  }
+};
+
+class AbsOp2Crt : public OpConversionPattern<ONNXAbsOp> {
+public:
+  using OpConversionPattern::OpConversionPattern;
+  LogicalResult matchAndRewrite(ONNXAbsOp op, OpAdaptor adaptor,
+      ConversionPatternRewriter &rewriter) const override {
+
+    rewriter.replaceOpWithNewOp<crt::AbsOp>(op, op->getOperand(0).getType(), op->getOperand(0));
+    return success();
+  }
+};
+
+class AddOp2Crt : public OpConversionPattern<ONNXAddOp> {
+public:
+  using OpConversionPattern::OpConversionPattern;
+  LogicalResult matchAndRewrite(ONNXAddOp op, OpAdaptor adaptor,
+      ConversionPatternRewriter &rewriter) const override {
+
+    rewriter.replaceOpWithNewOp<crt::AddOp>(op, op->getOperand(0).getType(), op->getOperand(0), op->getOperand(1));
     return success();
   }
 };
 
 } // namespace
 
-void populateLoweringONNXUnaryOpToCrtPattern(ConversionTarget &target,
+void populateLoweringONNXToCrtPattern(ConversionTarget &target,
     RewritePatternSet &patterns, TypeConverter &typeConverter,
     MLIRContext *ctx) {
-  // patterns.add<ONNXElementwiseUnaryOpLoweringToCrt<ONNXNegOp>>(typeConverter, ctx);,
+  // ANCHOR UNARY
   patterns.add<ReluOp2Crt>(typeConverter, ctx);
-  // patterns.add<ONNXFloorOpLoweringToCrt>(typeConverter, ctx);,
+  patterns.add<ExpOp2Crt>(typeConverter, ctx);
+  patterns.add<AbsOp2Crt>(typeConverter, ctx);
+  //
+  // ANCHOR BINARY
+  patterns.add<AddOp2Crt>(typeConverter, ctx);
 }
 
 } // namespace onnx_mlir

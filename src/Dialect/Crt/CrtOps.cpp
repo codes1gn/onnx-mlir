@@ -9,7 +9,7 @@
 #include "src/Dialect/Crt/CrtOps.hpp"
 
 using namespace mlir; 
-// using namespace mlir::crt;
+using namespace mlir::crt;
 
 #define GET_OP_CLASSES
 #include "src/Dialect/Crt/CrtOps.cpp.inc"

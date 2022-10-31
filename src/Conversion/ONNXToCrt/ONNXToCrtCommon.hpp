@@ -67,6 +67,6 @@ template <typename Op>
 using CrtOp = typename CrtDialectOp<Op>::Op;
 //
 // `Math` directory methods:
-void populateLoweringONNXUnaryOpToCrtPattern(mlir::ConversionTarget &,
+void populateLoweringONNXToCrtPattern(mlir::ConversionTarget &,
     mlir::RewritePatternSet &, mlir::TypeConverter &, mlir::MLIRContext *);
 } // namespace onnx_mlir

@@ -7,7 +7,7 @@ include "mlir/Interfaces/InferTypeOpInterface.td"
 
 def Crt_Dialect : Dialect {
   let name = "crt";
-  let cppNamespace = "::mlir";
+  let cppNamespace = "::mlir::crt";
   let description = [{
 The `crt` dialect is namely the abstract-tensor-intermediate-representation that
   serves as the entry language into the MLIR eco-system.
@@ -31,6 +31,28 @@ class UnaryArithmeticOp<string mnemonic, list<Trait> traits = []> :
 }
 
 def Crt_IdentityOp : UnaryArithmeticOp<"identity", [NoSideEffect, 
+                                                    ResultsAreFloatLike,
+                                                    SameOperandsAndResultType,
+                                                    SameOperandsAndResultShape,
+                                                    SameOperandsAndResultElementType]> {
+  let summary = "identity function";
+  let description = [{
+    See crt.identity for more details.
+  }];
+}
+
+def Crt_AbsOp : UnaryArithmeticOp<"abs", [NoSideEffect, 
+                                                    ResultsAreFloatLike,
+                                                    SameOperandsAndResultType,
+                                                    SameOperandsAndResultShape,
+                                                    SameOperandsAndResultElementType]> {
+  let summary = "abs function";
+  let description = [{
+    See crt.abs for more details.
+  }];
+}
+
+def Crt_ReluOp : UnaryArithmeticOp<"relu", [NoSideEffect, 
                                                     ResultsAreFloatLike,
                                                     SameOperandsAndResultType,
                                                     SameOperandsAndResultShape,

@@ -10,7 +10,7 @@
 #include "src/Dialect/Crt/CrtOps.hpp"
 
 using namespace mlir;
-// using namespace mlir::crt;
+using namespace mlir::crt;
 
 // Code for CRT_Dialect class
 // TODO not this line originally missed, dialect cpp has inc, hpp has inc,

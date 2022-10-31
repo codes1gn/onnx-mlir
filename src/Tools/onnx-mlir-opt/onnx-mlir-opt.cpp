@@ -138,7 +138,7 @@ int main(int argc, char **argv) {
   registry.insert<mlir::memref::MemRefDialect>();
   registry.insert<mlir::ONNXDialect>();
   registry.insert<mlir::KrnlDialect>();
-  registry.insert<mlir::CrtDialect>();
+  registry.insert<mlir::crt::CrtDialect>();
   registry.insert<mlir::tosa::TosaDialect>();
 
   // Initialize accelerators if they exist.
