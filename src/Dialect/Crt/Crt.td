@@ -18,6 +18,18 @@ class Crt_Op<string mnemonic, list<Trait> traits = []>
     : Op<Crt_Dialect, mnemonic, traits> {
 }
 
+def Crt_ConstantOp : Crt_Op<"constant"> {
+  let summary = "Performs a maxpool";
+  let description = [{
+    maxpool.
+  }];
+  let arguments = (ins);
+  let results = (outs
+      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$result);
+
+  let assemblyFormat = "attr-dict `:` functional-type(operands, results)";
+}
+
 class UnaryArithmeticOp<string mnemonic, list<Trait> traits = []> :
   Crt_Op<mnemonic,
         !listconcat(traits, [AllTypesMatch<["operand", "result"]>])>,
@@ -84,6 +96,48 @@ def Crt_TanhOp : UnaryArithmeticOp<"tanh", [NoSideEffect,
   }];
 }
 
+def Crt_MaxpoolOp : Crt_Op<"maxpool"> {
+  let summary = "Performs a maxpool";
+  let description = [{
+    maxpool.
+  }];
+  let arguments = (
+      ins
+      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$operand);
+  let results = (outs
+      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$result);
+
+  let assemblyFormat = "$operand attr-dict `:` functional-type(operands, results)";
+}
+
+def Crt_FlattenOp : Crt_Op<"flatten"> {
+  let summary = "Performs a maxpool";
+  let description = [{
+    maxpool.
+  }];
+  let arguments = (
+      ins
+      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$operand);
+  let results = (outs
+      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$result);
+
+  let assemblyFormat = "$operand attr-dict `:` functional-type(operands, results)";
+}
+
+def Crt_ReducemeanOp : Crt_Op<"reducemean"> {
+  let summary = "Performs a maxpool";
+  let description = [{
+    maxpool.
+  }];
+  let arguments = (
+      ins
+      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$operand);
+  let results = (outs
+      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$result);
+
+  let assemblyFormat = "$operand attr-dict `:` functional-type(operands, results)";
+}
+
 def Crt_NegateOp : UnaryArithmeticOp<"negate", [NoSideEffect,
                                              SameOperandsAndResultType,
                                              SameOperandsAndResultShape,
@@ -134,6 +188,56 @@ def Crt_Conv2DCFirstOp : Crt_Op<"conv_2d_cfirst"> {
   let assemblyFormat = "$in `,` $filter attr-dict `:` functional-type(operands, results)";
 }
 
+// ANCHOR tmp impl for paper phantom-ir
+def Crt_ConvOp : Crt_Op<"conv"> {
+  let summary = "2-D channel first convolution";
+  let description = [{
+    Performs 2-D convolution. This op is inspired by PyTorch's Conv2d layer (https://pytorch.org/docs/stable/generated/torch.nn.Conv2d.html).
+
+    The tensors have dimensions:
+    - in:     [N, Cin, H, W]
+    - filter: [Cout, Cin, KH, KW]
+    - result: [N, Cout, Hout, Wout]
+
+    The tensors must meet the following conditions; otherwise, this op aborts the program.
+    - H is greater than or equal to KH
+    - W is greater than or equal to KW
+    - Cin matches between in and filter
+  }];
+  let arguments = (ins 
+      TensorRankOf<[F32], [4]>:$in,
+      TensorRankOf<[F32], [4]>:$filter
+  );
+  let results = (outs 4DTensorOf<[F32]>:$result);
+
+  let assemblyFormat = "$in `,` $filter attr-dict `:` functional-type(operands, results)";
+}
+
+// ANCHOR tmp impl for paper phantom-ir
+def Crt_ConvaddOp : Crt_Op<"convadd"> {
+  let summary = "2-D channel first convolution";
+  let description = [{
+    Performs 2-D convolution. This op is inspired by PyTorch's Conv2d layer (https://pytorch.org/docs/stable/generated/torch.nn.Conv2d.html).
+
+    The tensors have dimensions:
+    - in:     [N, Cin, H, W]
+    - filter: [Cout, Cin, KH, KW]
+    - result: [N, Cout, Hout, Wout]
+
+    The tensors must meet the following conditions; otherwise, this op aborts the program.
+    - H is greater than or equal to KH
+    - W is greater than or equal to KW
+    - Cin matches between in and filter
+  }];
+  let arguments = (ins 
+      TensorRankOf<[F32], [4]>:$in,
+      TensorRankOf<[F32], [4]>:$filter,
+      TensorRankOf<[F32], [1]>:$bias
+  );
+  let results = (outs 4DTensorOf<[F32]>:$result);
+
+  let assemblyFormat = "$in `,` $filter `,` $bias attr-dict `:` functional-type(operands, results)";
+}
 
 class BinaryArithmeticOp<string mnemonic, list<Trait> traits = []> :
    Crt_Op<mnemonic, traits> {
