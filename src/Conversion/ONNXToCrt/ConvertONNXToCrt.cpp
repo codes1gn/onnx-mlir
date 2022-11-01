@@ -64,6 +64,8 @@ void FrontendToCrtLoweringPass::runOnOperation() {
 
   // Define patterns
   populateONNXToCrtConversionPattern(target, patterns, typeConverter, context);
+  // ANCHOR find ONNX.Reshape op is
+  module.dump();
 
   if (failed(applyPartialConversion(module, target, std::move(patterns)))) {
     signalPassFailure();

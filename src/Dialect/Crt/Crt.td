@@ -178,6 +178,20 @@ def Crt_MatmulOp : Crt_Op<"matmul"> {
   let assemblyFormat = "$lhs `,` $rhs attr-dict `:` functional-type(operands, results)";
 }
 
+def Crt_ReshapeOp : Crt_Op<"reshape"> {
+  let summary = "Performs a reshape dma op";
+  let description = [{
+    Performs a matrix multiplication.
+
+    If the `K` dimension mismatches between the operands, this op aborts the
+    program.
+  }];
+  let arguments = (ins TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4]>:$lhs, TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4]>:$rhs);
+  let results = (outs TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4]>:$result);
+
+  let assemblyFormat = "$lhs `,` $rhs attr-dict `:` functional-type(operands, results)";
+}
+
 def Crt_Conv2DCFirstOp : Crt_Op<"conv_2d_cfirst"> {
   let summary = "2-D channel first convolution";
   let description = [{

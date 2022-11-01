@@ -71,6 +71,7 @@ public:
       OpAdaptor adaptor,
       ConversionPatternRewriter &rewriter
   ) const override {
+    op.dump();
     rewriter.replaceOpWithNewOp<TgtOp>(op, op.getType(), op->getOperand(0), op->getOperand(1));
     return success();
   }
@@ -90,6 +91,40 @@ public:
       ConversionPatternRewriter &rewriter
   ) const override {
     rewriter.replaceOpWithNewOp<TgtOp>(op, op.getType(), op->getOperand(0), op->getOperand(1), op->getOperand(2));
+    return success();
+  }
+};
+
+class ConvertReshape
+    : public OpConversionPattern<ONNXReshapeOp> {
+public:
+  using OpConversionPattern<ONNXReshapeOp>::OpConversionPattern;
+  using OpAdaptor = typename ONNXReshapeOp::Adaptor;
+  LogicalResult matchAndRewrite(
+      ONNXReshapeOp op,
+      OpAdaptor adaptor,
+      ConversionPatternRewriter &rewriter
+  ) const override {
+    op.dump();
+    rewriter.replaceOpWithNewOp<crt::ReshapeOp>(op, op.getType(), op->getOperand(0), op->getOperand(1));
+    return success();
+  }
+};
+
+struct ONNXReshapeOpLoweringToCrt : public ConversionPattern {
+  ONNXReshapeOpLoweringToCrt(MLIRContext *ctx)
+      : ConversionPattern(mlir::ONNXReshapeOp::getOperationName(), 1, ctx) {}
+
+  LogicalResult matchAndRewrite(Operation *op, ArrayRef<Value> operands,
+      ConversionPatternRewriter &rewriter) const final {
+    ONNXReshapeOpAdaptor operandAdaptor(operands, op->getAttrDictionary());
+    Location loc = op->getLoc();
+    Value data = operandAdaptor.data();
+    Value shape = operandAdaptor.shape();
+    Type outputType = *op->result_type_begin();
+    Value result =
+        rewriter.create<crt::ReshapeOp>(loc, outputType, data, shape);
+    rewriter.replaceOp(op, result);
     return success();
   }
 };
@@ -115,6 +150,10 @@ void populateLoweringONNXToCrtPattern(ConversionTarget &target,
   patterns.add<ConvertBinaryOpOnnxToCrt<ONNXSubOp, crt::SubOp>>(typeConverter, ctx);
   patterns.add<ConvertBinaryOpOnnxToCrt<ONNXMulOp, crt::MulOp>>(typeConverter, ctx);
   patterns.add<ConvertBinaryOpOnnxToCrt<ONNXDivOp, crt::DivOp>>(typeConverter, ctx);
+  // ANCHOR why this work, ConversionPattern > OpConversionPattern
+  patterns.add<ONNXReshapeOpLoweringToCrt>(ctx);
+  // patterns.add<ConvertReshape>(typeConverter, ctx);
+  // patterns.add<ConvertBinaryOpOnnxToCrt<ONNXReshapeOp, crt::ReshapeOp>>(typeConverter, ctx);
 
   // ANCHOR TENARY
   patterns.add<ConvertTenaryOpOnnxToCrt<ONNXConvOp, crt::ConvaddOp>>(typeConverter, ctx);
