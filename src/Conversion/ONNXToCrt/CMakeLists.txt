@@ -1,7 +1,7 @@
 
 add_onnx_mlir_library(OMONNXToCrt
   ConvertONNXToCrt.cpp
-  ConvertUnaryOp.cpp
+  OpConversionPatterns.cpp
 
   LINK_LIBS PUBLIC
   OMONNXOps

@@ -108,6 +108,7 @@ void populateLoweringONNXToCrtPattern(ConversionTarget &target,
   patterns.add<ConvertUnaryOpOnnxToCrt<ONNXFlattenOp, crt::FlattenOp>>(typeConverter, ctx);
   patterns.add<ConvertUnaryOpOnnxToCrt<ONNXMaxPoolSingleOutOp, crt::MaxpoolOp>>(typeConverter, ctx);
   patterns.add<ConvertUnaryOpOnnxToCrt<ONNXReduceMeanOp, crt::ReducemeanOp>>(typeConverter, ctx);
+  patterns.add<ConvertUnaryOpOnnxToCrt<ONNXSoftmaxOp, crt::SoftmaxOp>>(typeConverter, ctx);
   
   // ANCHOR BINARY
   patterns.add<ConvertBinaryOpOnnxToCrt<ONNXAddOp, crt::AddOp>>(typeConverter, ctx);

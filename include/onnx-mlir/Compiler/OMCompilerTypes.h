@@ -14,6 +14,7 @@ namespace onnx_mlir {
 typedef enum {
   EmitONNXBasic,
   EmitONNXIR,
+  EmitCRT,
   EmitMLIR,
   EmitLLVMIR,
   EmitObj,

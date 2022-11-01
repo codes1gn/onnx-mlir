@@ -33,6 +33,9 @@
 #include "src/Compiler/CompilerPasses.hpp"
 #include "src/Compiler/CompilerUtils.hpp"
 #include "src/Dialect/ONNX/ONNXDialect.hpp"
+// ANCHOR
+#include "src/Dialect/Crt/CrtDialect.hpp"
+#include "src/Dialect/Crt/CrtOps.hpp"
 #include "src/Version/Version.hpp"
 
 #define DEBUG_TYPE "compiler_utils"
@@ -365,6 +368,9 @@ std::string getTargetFilename(
   case EmitONNXIR:
   case EmitMLIR:
     return filenameNoExt + ".onnx.mlir";
+  case EmitCRT:
+    return filenameNoExt + ".crt";
+
   }
   llvm_unreachable("all cases should be handled in switch");
 }
@@ -619,6 +625,7 @@ void registerDialects(mlir::MLIRContext &context) {
   context.getOrLoadDialect<mlir::memref::MemRefDialect>();
   context.getOrLoadDialect<mlir::ONNXDialect>();
   context.getOrLoadDialect<mlir::KrnlDialect>();
+  context.getOrLoadDialect<mlir::crt::CrtDialect>();
 }
 
 namespace {

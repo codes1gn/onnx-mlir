@@ -4,16 +4,16 @@
 module attributes {llvm.data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128", llvm.target_triple = "x86_64-unknown-linux-gnu"} {
   func.func @main_graph(%arg0: tensor<1x3x224x224xf32>) -> tensor<1x1000xf32> attributes {input_names = ["data"], output_names = ["resnetv15_dense0_fwd"]} {
 // CHECK-LABEL:  func @main_graph
-    %0 = "onnx.Constant"() {value = dense<1.0> : tensor<1000x512xf32>}: () -> tensor<1000x512xf32>
-    %1 = "onnx.Constant"() {value = dense<1.0> : tensor<1000xf32>}: () -> tensor<1000xf32>
-    %2 = "onnx.Constant"() {value = dense<1.0> : tensor<64x3x7x7xf32>}: () -> tensor<64x3x7x7xf32>
-    %3 = "onnx.Constant"() {value = dense<1.0> : tensor<64xf32>}: () -> tensor<64xf32>
-    %4 = "onnx.Constant"() {value = dense<1.0> : tensor<64x64x3x3xf32>}: () -> tensor<64x64x3x3xf32>
-    %5 = "onnx.Constant"() {value = dense<1.0> : tensor<64xf32>}: () -> tensor<64xf32>
-    %6 = "onnx.Constant"() {value = dense<1.0> : tensor<64x64x3x3xf32>}: () -> tensor<64x64x3x3xf32>
-    %7 = "onnx.Constant"() {value = dense<1.0> : tensor<64xf32>}: () -> tensor<64xf32>
-    %8 = "onnx.Constant"() {value = dense<1.0> : tensor<64x64x3x3xf32>}: () -> tensor<64x64x3x3xf32>
-    %9 = "onnx.Constant"() {value = dense<1.0> : tensor<64xf32>}: () -> tensor<64xf32>
+    %0 = "onnx.Constant"() : () -> tensor<1000x512xf32>
+    %1 = "onnx.Constant"() : () -> tensor<1000xf32>
+    %2 = "onnx.Constant"() : () -> tensor<64x3x7x7xf32>
+    %3 = "onnx.Constant"() : () -> tensor<64xf32>
+    %4 = "onnx.Constant"() : () -> tensor<64x64x3x3xf32>
+    %5 = "onnx.Constant"() : () -> tensor<64xf32>
+    %6 = "onnx.Constant"() : () -> tensor<64x64x3x3xf32>
+    %7 = "onnx.Constant"() : () -> tensor<64xf32>
+    %8 = "onnx.Constant"() : () -> tensor<64x64x3x3xf32>
+    %9 = "onnx.Constant"() : () -> tensor<64xf32>
     %10 = "onnx.Constant"() : () -> tensor<64x64x3x3xf32>
     %11 = "onnx.Constant"() : () -> tensor<64xf32>
     %12 = "onnx.Constant"() : () -> tensor<128x64x1x1xf32>

@@ -133,7 +133,6 @@ void ONNXOpTransformPass::runOnOperation() {
 
   uint64_t currentTag;
   uint64_t previousTag;
-  printf("anchor");
 
   if (failed(createTagForIR(module, &currentTag)))
     return signalPassFailure();
@@ -141,7 +140,6 @@ void ONNXOpTransformPass::runOnOperation() {
   int n = onnxOpTransformThreshold;
   bool targetCPU = onnxOpTransformTargetCPU;
   do {
-    printf("anchor iter - %d", n);
     previousTag = currentTag;
     OpPassManager dynamicPM("builtin.module");
     dynamicPM.addNestedPass<func::FuncOp>(

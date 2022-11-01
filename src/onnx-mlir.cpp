@@ -42,6 +42,8 @@ int main(int argc, char *argv[]) {
               "inferred shapes."),
           clEnumVal(
               EmitONNXIR, "Ingest ONNX and emit corresponding ONNX dialect."),
+          clEnumVal(EmitCRT,
+              "Lower the input to CRT bytecode."),
           clEnumVal(EmitMLIR,
               "Lower the input to MLIR built-in transformation dialect."),
           clEnumVal(

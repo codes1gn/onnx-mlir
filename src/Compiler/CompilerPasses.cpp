@@ -69,7 +69,6 @@ void addONNXToMLIRPasses(mlir::PassManager &pm, int transformThreshold,
   // ANCHOR this path
   if (transformThreshold > 0) {
     // Dynamic iterate in ONNXOpTransformPass
-    printf("anchor %d", transformThreshold);
     pm.addPass(onnx_mlir::createONNXOpTransformPass(transformThreshold,
         transformReport, targetCPU, enableSimdDataLayoutOpt));
   } else {
@@ -87,6 +86,11 @@ void addONNXToMLIRPasses(mlir::PassManager &pm, int transformThreshold,
 
   // Clean dead code.
   pm.addPass(mlir::createSymbolDCEPass());
+
+}
+
+void addONNXToCRTPasses(mlir::PassManager &pm) {
+    pm.addPass(onnx_mlir::createConvertONNXToCrtPass());
 }
 
 void addONNXToKrnlPasses(mlir::PassManager &pm, int optLevel, bool enableCSE,
@@ -203,7 +207,9 @@ void addPasses(mlir::OwningOpRef<ModuleOp> &module, mlir::PassManager &pm,
     // ANCHOR this path
     addONNXToMLIRPasses(pm, onnxOpTransformThreshold, onnxOpTransformReport,
         /*target CPU*/ maccel.empty(), enableSimdDataLayout);
-
+  }
+  if (emissionTarget >= EmitCRT) {
+    addONNXToCRTPasses(pm);
   }
 
   if (emissionTarget >= EmitMLIR) {

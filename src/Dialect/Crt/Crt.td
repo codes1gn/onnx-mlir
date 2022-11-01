@@ -25,7 +25,7 @@ def Crt_ConstantOp : Crt_Op<"constant"> {
   }];
   let arguments = (ins);
   let results = (outs
-      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$result);
+      TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4]>:$result);
 
   let assemblyFormat = "attr-dict `:` functional-type(operands, results)";
 }
@@ -72,6 +72,17 @@ def Crt_ReluOp : UnaryArithmeticOp<"relu", [NoSideEffect,
   let summary = "identity function";
   let description = [{
     See crt.identity for more details.
+  }];
+}
+
+def Crt_SoftmaxOp : UnaryArithmeticOp<"softmax", [NoSideEffect, 
+                                                    ResultsAreFloatLike,
+                                                    SameOperandsAndResultType,
+                                                    SameOperandsAndResultShape,
+                                                    SameOperandsAndResultElementType]> {
+  let summary = "softmax function";
+  let description = [{
+    See crt.softmax for more details.
   }];
 }
 

@@ -142,6 +142,8 @@ add_onnx_mlir_library(CompilerUtils
 
   LINK_LIBS PUBLIC
   ${OMLibs}
+
+  CrtDialect
   CompilerPasses
   Accelerator
   InitAccelerators

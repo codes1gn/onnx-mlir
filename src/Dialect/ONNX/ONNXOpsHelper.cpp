@@ -309,8 +309,9 @@ int64_t ArrayAttrIntVal(Optional<ArrayAttr> a, int i) {
 
 DenseElementsAttr getDenseElementAttributeFromONNXValue(Value value) {
   ONNXConstantOp constantOp = getONNXConstantOp(value);
+  // ANCHOR fix bug that accept null value
   if (constantOp)
-    return constantOp.valueAttr().dyn_cast<DenseElementsAttr>();
+    return constantOp.valueAttr().dyn_cast_or_null<DenseElementsAttr>();
   return nullptr;
 }
 
