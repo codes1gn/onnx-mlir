@@ -176,13 +176,13 @@ void ONNXOpTransformPass::runOnOperation() {
   }
 
   // ANCHOR dedicate pass to elide constants
-  OpPassManager dynamicPM("builtin.module", OpPassManager::Nesting::Implicit);
-  dynamicPM.addPass(
-      onnx_mlir::createElideConstantValuePass());
-  if (failed(runPipeline(dynamicPM, module))) 
-    return signalPassFailure();
-  if (failed(createTagForIR(module, &currentTag)))
-    return signalPassFailure();
+  // OpPassManager dynamicPM("builtin.module", OpPassManager::Nesting::Implicit);
+  // dynamicPM.addPass(
+  //     onnx_mlir::createElideConstantValuePass());
+  // if (failed(runPipeline(dynamicPM, module))) 
+  //   return signalPassFailure();
+  // if (failed(createTagForIR(module, &currentTag)))
+  //   return signalPassFailure();
 
 }
 
