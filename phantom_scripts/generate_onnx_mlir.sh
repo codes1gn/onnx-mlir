@@ -53,7 +53,7 @@ do
 		name_no_ext=$(FilePrefix ${fname})
 		echo $name_no_ext
 		$top_dir_realpath/onnx-build/Debug/bin/onnx-mlir --EmitONNXIR $ONNX_TGT_DIR/$name_no_ext-simp.onnx
-		mv $ONNX_TGT_DIR/$name_no_ext-simp.onnx $ONNX_IR_DIR/$name_no_ext.mlir
+		mv $ONNX_TGT_DIR/$name_no_ext-simp.tmp $ONNX_IR_DIR/$name_no_ext.mlir
 	fi
 done
 

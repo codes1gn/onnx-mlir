@@ -179,7 +179,7 @@ void ONNXOpTransformPass::runOnOperation() {
   // OpPassManager dynamicPM("builtin.module", OpPassManager::Nesting::Implicit);
   // dynamicPM.addPass(
   //     onnx_mlir::createElideConstantValuePass());
-  // if (failed(runPipeline(dynamicPM, module))) 
+  // if (failed(runPipeline(dynamicPM, module)))
   //   return signalPassFailure();
   // if (failed(createTagForIR(module, &currentTag)))
   //   return signalPassFailure();
