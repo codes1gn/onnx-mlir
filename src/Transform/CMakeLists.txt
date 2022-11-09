@@ -60,11 +60,12 @@ add_onnx_mlir_library(OMLowerKrnlRegion
   MLIRTransformUtils
   )
 
-add_onnx_mlir_library(OMDataParallel
-  DataParallel.cpp
+add_onnx_mlir_library(OMRaptorAutoParallel
+  RaptorAutoParallel.cpp
 
   LINK_LIBS PUBLIC
   OMSupport
+  OMRapCostModel
   MLIRTransformUtils
   CrtDialect
   )

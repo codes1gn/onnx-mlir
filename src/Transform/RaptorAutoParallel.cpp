@@ -21,6 +21,7 @@
 #include "src/Dialect/Crt/CrtDialect.hpp"
 #include "src/Dialect/Crt/CrtOps.hpp"
 #include "src/Pass/Passes.hpp"
+#include "src/RapCostModel/CostModel.hpp"
 
 using namespace mlir;
 using namespace onnx_mlir;
