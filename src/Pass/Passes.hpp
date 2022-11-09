@@ -110,4 +110,7 @@ std::unique_ptr<mlir::Pass> createConvertONNXToTOSAPass();
 /// ANCHOR Pass for lowering Onnx ops to Crt dialect
 std::unique_ptr<mlir::Pass> createConvertONNXToCrtPass();
 
+/// ANCHOR pass for data-parallel
+std::unique_ptr<mlir::Pass> createDataParallelPass();
+
 } // namespace onnx_mlir

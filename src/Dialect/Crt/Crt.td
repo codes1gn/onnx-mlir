@@ -18,6 +18,30 @@ class Crt_Op<string mnemonic, list<Trait> traits = []>
     : Op<Crt_Dialect, mnemonic, traits> {
 }
 
+class Crt_PureOp<string mnemonic, list<Trait> traits = []>
+    : Crt_Op<mnemonic, !listconcat(traits, [NoSideEffect])> {
+}
+
+// phantom.block
+def Crt_PhantomBlockOp : Crt_PureOp<"pblock", [NoTerminator, SingleBlock]> {
+  let summary = [{a group of ops}];
+  let description = [{
+    block of ops
+  }];
+
+  let arguments = (
+      ins
+      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$operand);
+  let results = (outs TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4]>:$result);
+  let regions = (region AnyRegion:$body);
+  /* let hasCanonicalizer = 1; */
+  /* let hasCustomAssemblyFormat = 1; */
+  /* let hasVerifier = 1; */
+  /* let assemblyFormat = "attr-dict regions"; */
+  let assemblyFormat = "$operand attr-dict `:` functional-type(operands, results) $body";
+}
+
+
 def Crt_ConstantOp : Crt_Op<"constant"> {
   let summary = "Performs a maxpool";
   let description = [{
