@@ -2,6 +2,7 @@
 #define CRT_DIALECT
 
 include "mlir/IR/OpBase.td"
+include "mlir/Interfaces/ControlFlowInterfaces.td"
 include "mlir/Interfaces/SideEffectInterfaces.td"
 include "mlir/Interfaces/InferTypeOpInterface.td"
 
@@ -22,8 +23,12 @@ class Crt_PureOp<string mnemonic, list<Trait> traits = []>
     : Crt_Op<mnemonic, !listconcat(traits, [NoSideEffect])> {
 }
 
+//===----------------------------------------------------------------------===//
+// YieldOp
+//===----------------------------------------------------------------------===//
+
 // phantom.block
-def Crt_PhantomBlockOp : Crt_PureOp<"pblock", [NoTerminator, SingleBlock]> {
+def Crt_PhantomBlockOp : Crt_PureOp<"pblock", [SingleBlockImplicitTerminator<"YieldOp">]> {
   let summary = [{a group of ops}];
   let description = [{
     block of ops
@@ -33,6 +38,8 @@ def Crt_PhantomBlockOp : Crt_PureOp<"pblock", [NoTerminator, SingleBlock]> {
       ins
       TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$operand);
   let results = (outs TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4]>:$result);
+
+  /* let results = (outs Variadic<AnyType>); */
   let regions = (region AnyRegion:$body);
   /* let hasCanonicalizer = 1; */
   /* let hasCustomAssemblyFormat = 1; */
@@ -40,6 +47,28 @@ def Crt_PhantomBlockOp : Crt_PureOp<"pblock", [NoTerminator, SingleBlock]> {
   /* let assemblyFormat = "attr-dict regions"; */
   let assemblyFormat = "$operand attr-dict `:` functional-type(operands, results) $body";
 }
+
+def Crt_YieldOp : Crt_PureOp<"yield", [ReturnLike, Terminator,
+                               ParentOneOf<["PhantomBlockOp"]>]> {
+  let summary = "loop yield and termination operation";
+  let description = [{
+    "crt.yield" yields an SSA value from the crt.pblock region
+  }];
+
+  let arguments = (
+      ins
+      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$results);
+  /* let arguments = (ins Variadic<AnyType>:$results); */
+
+  let builders = [OpBuilder<(ins), [{ /* nothing to do */ }]>];
+  let assemblyFormat =
+      [{  attr-dict $results `:` type($results) }];
+      // this is optional group that matches Variadic length of args
+      // refers to scf.yield and async.yield
+      /* [{  attr-dict ($results^ `:` type($results))? }]; */
+  /* let hasVerifier = 1; */
+}
+
 
 
 def Crt_ConstantOp : Crt_Op<"constant"> {

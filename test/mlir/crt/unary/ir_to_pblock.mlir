@@ -1,4 +1,4 @@
-// RUN: onnx-mlir-opt %s --data-parallel-v2 -split-input-file | FileCheck %s
+// RUN: onnx-mlir-opt %s --raptor-auto-parallel -split-input-file | FileCheck %s
 
 // CHECK-LABEL: func.func @crt_identity_test_shapedtensor_ret
 func.func @crt_identity_test_shapedtensor_ret(%arg0: tensor<17x16xf32>) -> tensor<17x16xf32>{

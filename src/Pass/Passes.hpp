@@ -111,6 +111,6 @@ std::unique_ptr<mlir::Pass> createConvertONNXToTOSAPass();
 std::unique_ptr<mlir::Pass> createConvertONNXToCrtPass();
 
 /// ANCHOR pass for data-parallel
-std::unique_ptr<mlir::Pass> createDataParallelPass();
+std::unique_ptr<mlir::Pass> createRaptorAutoParallelPass();
 
 } // namespace onnx_mlir

@@ -115,7 +115,7 @@ void initOMPasses(int optLevel) {
 
   // ANCHOR
   mlir::registerPass([]() -> std::unique_ptr<mlir::Pass> {
-    return createDataParallelPass();
+    return createRaptorAutoParallelPass();
   });
 
 #ifdef ONNX_MLIR_ENABLE_MHLO

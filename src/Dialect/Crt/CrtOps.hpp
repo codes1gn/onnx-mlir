@@ -6,6 +6,7 @@
 #include "mlir/IR/OpImplementation.h"
 #include "mlir/Interfaces/SideEffectInterfaces.h"
 #include "mlir/Interfaces/InferTypeOpInterface.h"
+#include "mlir/Interfaces/ControlFlowInterfaces.h"
 
 #include "src/Dialect/Crt/CrtDialect.hpp"
 
