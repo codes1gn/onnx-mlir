@@ -16,3 +16,17 @@ func.func @crt_identity_test_shapedtensor_ret(%arg0: tensor<17x16xf32>) -> tenso
   return %3 : tensor<17x16xf32>
 }
 
+func.func @crt_dp_pattern(%arg0: tensor<17x16xf32>) -> tensor<17x16xf32>{
+  // CHECK: crt.identity %arg0 : (tensor<17x16xf32>) -> tensor<17x16xf32>
+  %0 = crt.identity %arg0: (tensor<17x16xf32>) -> tensor<17x16xf32>
+  %1 = crt.pblock %0: (tensor<17x16xf32>) -> tensor<17x16xf32> {
+    %1 = crt.identity %0: (tensor<17x16xf32>) -> tensor<17x16xf32>
+    crt.yield %1 : tensor<17x16xf32>
+  }
+  %2 = crt.pblock %0: (tensor<17x16xf32>) -> tensor<17x16xf32> {
+    %2 = crt.identity %0: (tensor<17x16xf32>) -> tensor<17x16xf32>
+    crt.yield %2 : tensor<17x16xf32>
+  }
+  %3 = crt.allreduce %1, %2: (tensor<17x16xf32>, tensor<17x16xf32>) -> tensor<17x16xf32>
+  return %3 : tensor<17x16xf32>
+}

@@ -95,54 +95,57 @@ set_target_properties(ExecutionSession
 # also removes some of the compile definitions and include directories
 # which we add back through target_compile_definitions and
 # target_include_directories.
-pybind11_add_module(PyRuntime PyExecutionSession.cpp)
-add_dependencies(PyRuntime onnx_proto)
-target_compile_options(PyRuntime
-  PRIVATE
-  $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:-frtti -fexceptions>
-  $<$<CXX_COMPILER_ID:MSVC>:/EHsc /GR>
-  )
-target_compile_definitions(PyRuntime
-  PRIVATE
-  $<TARGET_PROPERTY:onnx,COMPILE_DEFINITIONS>
-  )
-target_include_directories(PyRuntime
-  PRIVATE
-  $<TARGET_PROPERTY:onnx,INCLUDE_DIRECTORIES>
-  )
-target_link_libraries(PyRuntime
-  PRIVATE
-  ExecutionSession
-  )
-llvm_update_compile_flags(PyRuntime)
 
-install(TARGETS PyRuntime
-  DESTINATION lib
-  )
 
-pybind11_add_module(PyCompileAndRuntime PyOMCompileExecutionSession.cpp)
-add_dependencies(PyCompileAndRuntime onnx_proto)
-target_compile_options(PyCompileAndRuntime
-  PRIVATE
-  $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:-frtti -fexceptions>
-  $<$<CXX_COMPILER_ID:MSVC>:/EHsc /GR>
-  )
-target_compile_definitions(PyCompileAndRuntime
-  PRIVATE
-  $<TARGET_PROPERTY:onnx,COMPILE_DEFINITIONS>
-  )
-target_include_directories(PyCompileAndRuntime
-  PRIVATE
-  ${ONNX_MLIR_SRC_ROOT}/include
-  $<TARGET_PROPERTY:onnx,INCLUDE_DIRECTORIES>
-  )
-target_link_libraries(PyCompileAndRuntime
-  PRIVATE
-  OnnxMlirCompiler
-  ExecutionSession
-  )
-llvm_update_compile_flags(PyCompileAndRuntime)
-
-install(TARGETS PyCompileAndRuntime
-  DESTINATION lib
-  )
+# for boosting debug time
+# pybind11_add_module(PyRuntime PyExecutionSession.cpp)
+# add_dependencies(PyRuntime onnx_proto)
+# target_compile_options(PyRuntime
+#   PRIVATE
+#   $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:-frtti -fexceptions>
+#   $<$<CXX_COMPILER_ID:MSVC>:/EHsc /GR>
+#   )
+# target_compile_definitions(PyRuntime
+#   PRIVATE
+#   $<TARGET_PROPERTY:onnx,COMPILE_DEFINITIONS>
+#   )
+# target_include_directories(PyRuntime
+#   PRIVATE
+#   $<TARGET_PROPERTY:onnx,INCLUDE_DIRECTORIES>
+#   )
+# target_link_libraries(PyRuntime
+#   PRIVATE
+#   ExecutionSession
+#   )
+# llvm_update_compile_flags(PyRuntime)
+#
+# install(TARGETS PyRuntime
+#   DESTINATION lib
+#   )
+#
+# pybind11_add_module(PyCompileAndRuntime PyOMCompileExecutionSession.cpp)
+# add_dependencies(PyCompileAndRuntime onnx_proto)
+# target_compile_options(PyCompileAndRuntime
+#   PRIVATE
+#   $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:-frtti -fexceptions>
+#   $<$<CXX_COMPILER_ID:MSVC>:/EHsc /GR>
+#   )
+# target_compile_definitions(PyCompileAndRuntime
+#   PRIVATE
+#   $<TARGET_PROPERTY:onnx,COMPILE_DEFINITIONS>
+#   )
+# target_include_directories(PyCompileAndRuntime
+#   PRIVATE
+#   ${ONNX_MLIR_SRC_ROOT}/include
+#   $<TARGET_PROPERTY:onnx,INCLUDE_DIRECTORIES>
+#   )
+# target_link_libraries(PyCompileAndRuntime
+#   PRIVATE
+#   OnnxMlirCompiler
+#   ExecutionSession
+#   )
+# llvm_update_compile_flags(PyCompileAndRuntime)
+#
+# install(TARGETS PyCompileAndRuntime
+#   DESTINATION lib
+#   )

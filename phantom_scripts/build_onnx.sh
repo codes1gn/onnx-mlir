@@ -24,5 +24,5 @@ cmake --build .
 
 #	-DCMAKE_BUILD_TYPE=Debug \
 # Run lit tests:
-export LIT_OPTS=-v
-cmake --build . --target check-onnx-lit
+# export LIT_OPTS=-v
+# cmake --build . --target check-onnx-lit

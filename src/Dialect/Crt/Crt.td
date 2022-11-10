@@ -44,8 +44,8 @@ def Crt_PhantomBlockOp : Crt_PureOp<"pblock", [SingleBlockImplicitTerminator<"Yi
   /* let hasCanonicalizer = 1; */
   /* let hasCustomAssemblyFormat = 1; */
   /* let hasVerifier = 1; */
-  /* let assemblyFormat = "attr-dict regions"; */
-  let assemblyFormat = "$operand attr-dict `:` functional-type(operands, results) $body";
+  /* let assemblyFormat = "attr-dict-with-keyword regions"; */
+  let assemblyFormat = "$operand attr-dict-with-keyword `:` functional-type(operands, results) $body";
 }
 
 def Crt_YieldOp : Crt_PureOp<"yield", [ReturnLike, Terminator,
@@ -69,6 +69,18 @@ def Crt_YieldOp : Crt_PureOp<"yield", [ReturnLike, Terminator,
   /* let hasVerifier = 1; */
 }
 
+def Crt_AllreduceOp : Crt_Op<"allreduce", [
+                                             SameOperandsAndResultShape,
+                                             SameOperandsAndResultElementType]> {
+  let summary = "negate function";
+  let description = [{
+    See crt.negate for more details.
+  }];
+  let arguments = (ins Variadic<TensorRankOf<[F32], [0, 1, 2, 3, 4]>>:$operand);
+  let results = (outs
+      TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4]>:$result);
+  let assemblyFormat = "($operand^)? `:` functional-type(operands, results) attr-dict";
+}
 
 
 def Crt_ConstantOp : Crt_Op<"constant"> {
