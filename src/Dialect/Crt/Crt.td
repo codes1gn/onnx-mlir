@@ -36,7 +36,8 @@ def Crt_PhantomBlockOp : Crt_PureOp<"pblock", [SingleBlockImplicitTerminator<"Yi
 
   let arguments = (
       ins
-      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$operand);
+      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$operand,
+      OptionalAttr<I32ArrayAttr>:$devat);
   let results = (outs TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4]>:$result);
 
   /* let results = (outs Variadic<AnyType>); */

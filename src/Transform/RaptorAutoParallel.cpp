@@ -155,7 +155,9 @@ LogicalResult replicatePBlock(func::FuncOp funcOp, MLIRContext *context, int rep
       // connect clonedPB to next allreduce's operands
       for (auto user: op.getOperation()->getUsers()) {
         assert(isa<crt::AllreduceOp>(user));
-        MutableOperandRange mor(user);
+        // this legacy way but always works, better way is to use below method
+        // MutableOperandRange mor(user);
+        auto mor = llvm::cast<crt::AllreduceOp>(user).getOperandMutable();
         mor.append(clonedPB.getResult());
       }
 
