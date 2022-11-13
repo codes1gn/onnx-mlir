@@ -24,6 +24,7 @@
 #include "src/Dialect/Crt/CrtDialect.hpp"
 #include "src/Dialect/Crt/CrtOps.hpp"
 #include "src/Pass/Passes.hpp"
+
 #include "src/RapCostModel/CostModel.hpp"
 
 using namespace mlir;
@@ -64,7 +65,7 @@ public:
   
   inline void addMapping(Operation* from, Operation* to);
 
-  inline mlir::Value fixMapping(Operation* op);
+  inline void fixMapping(Operation* op);
 
   inline void pprint_two_values(mlir::Value lhs, mlir::Value rhs) {
     printf("%p vs %p, equal = %d\n", lhs, rhs, lhs==rhs);
@@ -118,7 +119,7 @@ inline void RapHelper::addMapping(Operation* from, Operation* to) {
   }
 }
 
-inline mlir::Value RapHelper::fixMapping(Operation* op) {
+inline void RapHelper::fixMapping(Operation* op) {
   if (isa<crt::ExpOp>(op)) {
     auto new_operand = valueMapping.lookup(op->getOperand(0));
     op->replaceUsesOfWith(op->getOperand(0), new_operand);
@@ -131,6 +132,17 @@ inline mlir::Value RapHelper::fixMapping(Operation* op) {
   } else {
     assert(0);
   }
+}
+
+LogicalResult estimateCost(func::FuncOp funcOp, MLIRContext *context) {
+  std::cout << "processing estimateCost" << std::endl;
+
+  onnx_mlir::CostEstimator cest;
+  assert(cest.verify().succeeded());
+
+  cest.estimate_function(funcOp);
+
+  return success();
 }
 
 LogicalResult replicatePBlock(func::FuncOp funcOp, MLIRContext *context, int rep_cnt) {
@@ -294,6 +306,9 @@ struct RaptorAutoParallelPass
       } else if (std::strcmp(env_p, "dp4") == 0) {
         packUpEntireRegionWithPBlock(funcOp, context);
         replicatePBlock(funcOp, context, 4);
+      } else if (std::strcmp(env_p, "costest") == 0) {
+        packUpEntireRegionWithPBlock(funcOp, context);
+        estimateCost(funcOp, context);
       }
       else {
         std::cout << env_p << "\n";
