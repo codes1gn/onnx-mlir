@@ -90,6 +90,9 @@ void addONNXToMLIRPasses(mlir::PassManager &pm, int transformThreshold,
 }
 
 void addONNXToCRTPasses(mlir::PassManager &pm) {
+    pm.addPass(onnx_mlir::createShapeInferencePass());
+    pm.addPass(mlir::createCanonicalizerPass());
+    pm.addPass(onnx_mlir::createShapeInferencePass());
     pm.addPass(onnx_mlir::createConvertONNXToCrtPass());
 }
 
@@ -208,6 +211,9 @@ void addPasses(mlir::OwningOpRef<ModuleOp> &module, mlir::PassManager &pm,
     addONNXToMLIRPasses(pm, onnxOpTransformThreshold, onnxOpTransformReport,
         /*target CPU*/ maccel.empty(), enableSimdDataLayout);
   }
+pm.addPass(onnx_mlir::createShapeInferencePass());
+pm.addPass(mlir::createCanonicalizerPass());
+pm.addPass(onnx_mlir::createShapeInferencePass());
   if (emissionTarget >= EmitCRT) {
     addONNXToCRTPasses(pm);
   }

@@ -50,6 +50,8 @@ UNARY_OPS_TO_MEASURE = [
     (_maxpool, [1, 1, 28, 28]), 
 ]
 
+BATCH_SIZE_CANDIDATES = [1, 2, 4, 8] + [16*k for k in range(256)]
+
 def black_box_unary(fn, arg, ntimes=100):
     timetraces = []
     for i in range(ntimes):
@@ -179,56 +181,76 @@ def gen_perf_query_entry_binary(operation, lhs_shape, rhs_shape):
 def gen_value_insert_action(query_key, mean, stdev):
     return "this->atomic_cost.insert(std::make_pair(StringRef(\"" + query_key + "\"), " + "{}".format(mean) + "));\nthis->atomic_uncertainty.insert(std::make_pair(StringRef(\"" + query_key + "\"), " + "{}".format(stdev) + "));\n"
 
-
-if __name__ == '__main__':
+def gen_inc_file(filename, compute_power):
     gen_file_str = GEN_FILE_HEADER
     for (operation, arg_shape) in UNARY_OPS_TO_MEASURE:
         # print("{}".format(operation))
         original_bs = arg_shape[0]
-        for batch_size in [1, 2, 4, 8, 16, 32, 64, 128, 256]:
+        for batch_size in BATCH_SIZE_CANDIDATES:
             arg_shape[0] = original_bs * batch_size
 
             query_key = gen_query_key_unary(operation, arg_shape)
             # print(query_key)
             _mean, _stdev = gen_perf_query_entry_unary(operation, arg_shape)
 
+            # consider heterogenous
+            # hardcode 10% ratio of uncertainty
+            _mean = _mean / compute_power
+
             gen_cppinc_item = gen_value_insert_action(query_key, _mean, _stdev);
             print(gen_cppinc_item)
 
             gen_file_str += gen_cppinc_item
+        # reset shape
+        arg_shape[0] = original_bs
     for (operation, lhs_shape, rhs_shape) in BINARY_OPS_TO_MEASURE:
         # print("{}".format(operation))
         original_bs = lhs_shape[0]
-        for batch_size in [1, 2, 4, 8, 16, 32, 64, 128, 256]:
+        for batch_size in BATCH_SIZE_CANDIDATES:
             lhs_shape[0] = original_bs * batch_size 
 
             query_key = gen_query_key_binary(operation, lhs_shape, rhs_shape)
             # print(query_key)
             _mean, _stdev = gen_perf_query_entry_binary(operation, lhs_shape, rhs_shape)
 
+            # consider heterogenous
+            # hardcode 10% ratio of uncertainty
+            _mean = _mean / compute_power
+
             gen_cppinc_item = gen_value_insert_action(query_key, _mean, _stdev);
             print(gen_cppinc_item)
 
             gen_file_str += gen_cppinc_item
+        lhs_shape[0] = original_bs
 
     for (operation, lhs_shape, rhs_shape, bias_shape) in TENARY_OPS_TO_MEASURE:
         # print("{}".format(operation))
         original_bs = lhs_shape[0]
-        for batch_size in [1, 2, 4, 8, 16, 32, 64, 128, 256]:
+        for batch_size in BATCH_SIZE_CANDIDATES:
             lhs_shape[0] = original_bs * batch_size 
 
             query_key = gen_query_key_tenary(operation, lhs_shape, rhs_shape, bias_shape)
             # print(query_key)
             _mean, _stdev = gen_perf_query_entry_binary(operation, lhs_shape, rhs_shape)
 
+            # consider heterogenous
+            # hardcode 10% ratio of uncertainty
+            _mean = _mean / compute_power
+
             gen_cppinc_item = gen_value_insert_action(query_key, _mean, _stdev);
             print(gen_cppinc_item)
 
             gen_file_str += gen_cppinc_item
+        lhs_shape[0] = original_bs
 
     gen_file_str += GEN_FILE_TAIL
 
-    writer = open("CrtOpsCosts.cpp.inc", "w")
+    writer = open(filename, "w")
     writer.write(gen_file_str)
     writer.close()
+
+if __name__ == '__main__':
+    gen_inc_file("CrtOpsCPUCosts.cpp.inc", 1.0)
+    gen_inc_file("CrtOpsGPUTypeACosts.cpp.inc", 3.3)
+    gen_inc_file("CrtOpsGPUTypeBCosts.cpp.inc", 5.1)
 

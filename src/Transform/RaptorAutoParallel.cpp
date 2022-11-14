@@ -81,6 +81,17 @@ inline Operation* RapHelper::replicateOpWithRemapping(Operation* op) {
   Operation* cloned_op;
   if (isa<crt::PhantomBlockOp>(op)) {
     OpBuilder builder(op);
+
+  } else if (
+      isa<crt::ConstantOp>(op)) {
+    OpBuilder builder(op);
+    cloned_op = builder.create<crt::ConstantOp>(
+        op->getLoc(), 
+        op->getResultTypes()
+    ).getOperation();
+    this->addMapping(op, cloned_op);
+    this->fixMapping(cloned_op);
+
   } else if (isa<crt::ExpOp>(op)) {
     OpBuilder builder(op);
     cloned_op = builder.create<crt::ExpOp>(
@@ -90,6 +101,62 @@ inline Operation* RapHelper::replicateOpWithRemapping(Operation* op) {
     ).getOperation();
     this->addMapping(op, cloned_op);
     this->fixMapping(cloned_op);
+
+  } else if (isa<crt::ReluOp>(op)) {
+    OpBuilder builder(op);
+    cloned_op = builder.create<crt::ReluOp>(
+        op->getLoc(), 
+        op->getResultTypes(), 
+        op->getOperand(0)
+    ).getOperation();
+    this->addMapping(op, cloned_op);
+    this->fixMapping(cloned_op);
+
+  } else if (isa<crt::SoftmaxOp>(op)) {
+    OpBuilder builder(op);
+    cloned_op = builder.create<crt::SoftmaxOp>(
+        op->getLoc(), 
+        op->getResultTypes(), 
+        op->getOperand(0)
+    ).getOperation();
+    this->addMapping(op, cloned_op);
+    this->fixMapping(cloned_op);
+
+  } else if (isa<crt::MaxpoolOp>(op)) {
+    OpBuilder builder(op);
+    cloned_op = builder.create<crt::MaxpoolOp>(
+        op->getLoc(), 
+        op->getResultTypes(), 
+        op->getOperand(0)
+    ).getOperation();
+    this->addMapping(op, cloned_op);
+    this->fixMapping(cloned_op);
+
+  } else if (
+      isa<crt::ReshapeOp>(op)) {
+    OpBuilder builder(op);
+    cloned_op = builder.create<crt::ReshapeOp>(
+        op->getLoc(), 
+        op->getResultTypes(), 
+        op->getOperand(0),
+        op->getOperand(1)
+    ).getOperation();
+    this->addMapping(op, cloned_op);
+    this->fixMapping(cloned_op);
+
+  } else if (
+      isa<crt::GemmOp>(op)) {
+    OpBuilder builder(op);
+    cloned_op = builder.create<crt::GemmOp>(
+        op->getLoc(), 
+        op->getResultTypes(), 
+        op->getOperand(0),
+        op->getOperand(1),
+        op->getOperand(2)
+    ).getOperation();
+    this->addMapping(op, cloned_op);
+    this->fixMapping(cloned_op);
+
   } else if (isa<crt::YieldOp>(op)) {
     OpBuilder builder(op);
     cloned_op = builder.create<crt::YieldOp>(
@@ -110,8 +177,26 @@ inline void RapHelper::addMapping(Operation* from, Operation* to) {
   if (isa<crt::PhantomBlockOp>(from) && isa<crt::PhantomBlockOp>(to)) {
     this->valueMapping.insert(std::make_pair(from->getResult(0), to->getResult(0)));
     this->valueMapping.insert(std::make_pair(from->getOperand(0), to->getOperand(0)));
-  } else if (isa<crt::ExpOp>(from) && isa<crt::ExpOp>(to)) {
+
+  } else if (
+      (isa<crt::ConstantOp>(from) && isa<crt::ConstantOp>(to))) {
     this->valueMapping.insert(std::make_pair(from->getResult(0), to->getResult(0)));
+
+  } else if (
+      (isa<crt::ReshapeOp>(from) && isa<crt::ReshapeOp>(to))) {
+    this->valueMapping.insert(std::make_pair(from->getResult(0), to->getResult(0)));
+
+  } else if (
+      (isa<crt::GemmOp>(from) && isa<crt::GemmOp>(to))) {
+    this->valueMapping.insert(std::make_pair(from->getResult(0), to->getResult(0)));
+
+  } else if (
+      (isa<crt::ExpOp>(from) && isa<crt::ExpOp>(to)) ||
+      (isa<crt::MaxpoolOp>(from) && isa<crt::MaxpoolOp>(to)) ||
+      (isa<crt::SoftmaxOp>(from) && isa<crt::SoftmaxOp>(to)) ||
+      (isa<crt::ReluOp>(from) && isa<crt::ReluOp>(to))) {
+    this->valueMapping.insert(std::make_pair(from->getResult(0), to->getResult(0)));
+
   } else if (isa<crt::YieldOp>(from) && isa<crt::YieldOp>(to)) {
     assert(1);
   } else {
@@ -120,15 +205,41 @@ inline void RapHelper::addMapping(Operation* from, Operation* to) {
 }
 
 inline void RapHelper::fixMapping(Operation* op) {
-  if (isa<crt::ExpOp>(op)) {
+  if (isa<crt::ExpOp>(op) || 
+      isa<crt::MaxpoolOp>(op) ||
+      isa<crt::ReluOp>(op) ||
+      isa<crt::SoftmaxOp>(op)) {
     auto new_operand = valueMapping.lookup(op->getOperand(0));
     op->replaceUsesOfWith(op->getOperand(0), new_operand);
+
+  } else if (isa<crt::ConstantOp>(op)) {
+    // auto new_operand = valueMapping.lookup(op->getOperand(0));
+    // op->replaceUsesOfWith(op->getOperand(0), new_operand);
+    // zenary op, do not need to remap operands
+    assert(1);
+    
+  } else if (isa<crt::ReshapeOp>(op)) {
+    auto lhs_new_operand = valueMapping.lookup(op->getOperand(0));
+    op->replaceUsesOfWith(op->getOperand(0), lhs_new_operand);
+    auto rhs_new_operand = valueMapping.lookup(op->getOperand(1));
+    op->replaceUsesOfWith(op->getOperand(1), rhs_new_operand);
+
+  } else if (isa<crt::GemmOp>(op)) {
+    auto first_new_operand = valueMapping.lookup(op->getOperand(0));
+    op->replaceUsesOfWith(op->getOperand(0), first_new_operand);
+    auto second_new_operand = valueMapping.lookup(op->getOperand(1));
+    op->replaceUsesOfWith(op->getOperand(1), second_new_operand);
+    auto third_new_operand = valueMapping.lookup(op->getOperand(2));
+    op->replaceUsesOfWith(op->getOperand(2), third_new_operand);
+
   } else if (isa<crt::YieldOp>(op)) {
     auto new_operand = valueMapping.lookup(op->getOperand(0));
     op->replaceUsesOfWith(op->getOperand(0), new_operand);
+
   } else if (isa<crt::PhantomBlockOp>(op)) {
     auto new_operand = valueMapping.lookup(op->getOperand(0));
     op->replaceUsesOfWith(op->getOperand(0), new_operand);
+
   } else {
     assert(0);
   }
@@ -141,6 +252,31 @@ LogicalResult estimateCost(func::FuncOp funcOp, MLIRContext *context) {
   assert(cest.verify().succeeded());
 
   cest.estimate_function(funcOp);
+
+  return success();
+}
+
+LogicalResult singleDev(func::FuncOp funcOp, MLIRContext *context) {
+  funcOp.dump();
+  std::cout << "processing single-dev-strategy" << std::endl;
+
+  onnx_mlir::CostEstimator cest;
+  assert(cest.verify().succeeded());
+
+  float total_cost = cest.single_dev(funcOp);
+  std::cout << "======> single-dev-strategy <Estimated Wall-Time in ms> = " << total_cost << "(ms) <======" << std::endl;
+
+  return success();
+}
+
+LogicalResult useAllGPUs(func::FuncOp funcOp, MLIRContext *context) {
+  std::cout << "processing dispatch-to-all-GPUs-strategy" << std::endl;
+
+  onnx_mlir::CostEstimator cest;
+  assert(cest.verify().succeeded());
+
+  float total_cost = cest.dispatch_to_all_gpus(funcOp);
+  std::cout << "======> dispatch-to-all-GPUs-strategy <Estimated Wall-Time in ms> = " << total_cost << "(ms) <======" << std::endl;
 
   return success();
 }
@@ -188,6 +324,209 @@ LogicalResult replicatePBlock(func::FuncOp funcOp, MLIRContext *context, int rep
       }
     }
   });
+
+  return success();
+}
+
+LogicalResult dispatchAllToDev(func::FuncOp funcOp, MLIRContext *context, int devat) {
+  std::cout << "processing dispatchAllToDev" << std::endl;
+  funcOp.walk([&](crt::PhantomBlockOp op) {
+    op.dump();
+    OpBuilder builder(op);
+    llvm::SmallVector<int32_t> arr;
+    arr.push_back(devat);
+    mlir::ArrayAttr arratt = builder.getI32ArrayAttr(arr);
+    op.setDevatAttr(arratt);
+    op.dump();
+  });
+  return success();
+}
+
+LogicalResult shardingBatchSizeWithGiven(func::FuncOp funcOp, MLIRContext *context, SmallVector<int64_t> replica_batch_size) {
+  std::cout << "processing shardingBatchSizeEvenly" << std::endl;
+  mlir::Region& region = funcOp.getBody();
+
+  SmallVector<Operation *, 1024> pblocklist;
+  int pblock_count = 0;
+  int count = 0;
+
+  region.front().walk([&](crt::PhantomBlockOp op) {
+    pblocklist.push_back(op);
+    pblock_count++;
+  });
+
+  auto argument = funcOp.getArgument(0);
+  auto shaped_type = argument.getType();
+  ArrayRef<int64_t> shape = llvm::cast<mlir::TensorType>(shaped_type).getShape();
+  llvm::SmallVector<int64_t> revised_shape;
+  llvm::SmallVector<int64_t> revised_shape1;
+  llvm::SmallVector<int64_t> revised_shape2;
+  llvm::SmallVector<int64_t> revised_shape3;
+  for (auto dim: shape) {
+    int64_t new_dim = dim;
+    revised_shape.push_back(new_dim);
+    revised_shape1.push_back(new_dim);
+    revised_shape2.push_back(new_dim);
+    revised_shape3.push_back(new_dim);
+  }
+  revised_shape[0] = replica_batch_size[0];
+  revised_shape1[0] = replica_batch_size[1];
+  revised_shape2[0] = replica_batch_size[2];
+  revised_shape3[0] = replica_batch_size[3];
+  auto revisedTensorType =
+    RankedTensorType::get(revised_shape, shaped_type.cast<ShapedType>().getElementType());
+  auto revisedTensorType1 =
+    RankedTensorType::get(revised_shape1, shaped_type.cast<ShapedType>().getElementType());
+  auto revisedTensorType2 =
+    RankedTensorType::get(revised_shape2, shaped_type.cast<ShapedType>().getElementType());
+  auto revisedTensorType3 =
+    RankedTensorType::get(revised_shape3, shaped_type.cast<ShapedType>().getElementType());
+  argument.setType(revisedTensorType);
+  auto arg0 = funcOp.getArgument(0);
+  auto tmpop = pblocklist[0];
+  OpBuilder builder(tmpop);
+  auto arg1 = builder.create<crt::ConstantOp>(
+      tmpop->getLoc(), 
+      revisedTensorType1);
+  auto arg2 = builder.create<crt::ConstantOp>(
+      tmpop->getLoc(), 
+      revisedTensorType2);
+  auto arg3 = builder.create<crt::ConstantOp>(
+      tmpop->getLoc(), 
+      revisedTensorType3);
+
+  for (int idx = 0; idx < replica_batch_size.size(); idx++) {
+    auto pblock = pblocklist[idx];
+    if (idx == 0) {
+      pblock->replaceUsesOfWith(pblock->getOperand(0), arg0);
+    } else if (idx == 1) {
+      pblock->replaceUsesOfWith(pblock->getOperand(0), arg1);
+    } else if (idx == 2) {
+      pblock->replaceUsesOfWith(pblock->getOperand(0), arg2);
+    } else if (idx == 3) {
+      pblock->replaceUsesOfWith(pblock->getOperand(0), arg3);
+    }
+
+    auto batch_size = replica_batch_size[idx];
+    pblock->walk([&](Operation* op) {
+      if (isa<crt::ConstantOp>(op)) return;
+      std::cout << "before ========" << op->getName().getStringRef().str() <<  std::endl;
+      op->dump();
+
+      // handle result
+      auto results = op->getResults();
+      for (auto result: results) {
+      // auto result = op->getResult(0);
+      // {
+        auto shaped_type = result.getType();
+        ArrayRef<int64_t> shape = llvm::cast<mlir::TensorType>(shaped_type).getShape();
+        // shaped_type.dump();
+
+        llvm::SmallVector<int64_t> revised_shape;
+        for (auto dim: shape) {
+          int64_t new_dim = dim;
+          revised_shape.push_back(new_dim);
+        }
+        revised_shape[0] = batch_size;
+        auto revisedTensorType =
+          RankedTensorType::get(revised_shape, shaped_type.cast<ShapedType>().getElementType());
+        result.setType(revisedTensorType);
+      }
+      // }
+      std::cout << "after ========" << op->getName().getStringRef().str() << std::endl;
+      op->dump();
+
+    });
+  }
+
+  return success();
+}
+
+LogicalResult shardingBatchSizeEvenly(func::FuncOp funcOp, MLIRContext *context, int replica_cnt) {
+  std::cout << "processing shardingBatchSizeEvenly" << std::endl;
+  mlir::Region& region = funcOp.getBody();
+
+  SmallVector<Operation *, 1024> worklist;
+  int count = 0;
+
+  region.front().walk([&](Operation *op) {
+    worklist.push_back(op);
+  });
+
+  // // adjust funcOp operand
+  // {
+  //   auto func_type = funcOp.getFunctionType();
+  //   auto shaped_type = func_type.getInput(0);
+  //   ArrayRef<int64_t> shape = llvm::cast<mlir::TensorType>(shaped_type).getShape();
+  //   llvm::SmallVector<int64_t> revised_shape;
+  //   for (auto dim: shape) {
+  //     int64_t new_dim = dim;
+  //     revised_shape.push_back(new_dim);
+  //   }
+  //   revised_shape[0] = revised_shape[0] / replica_cnt;
+  //   auto revisedTensorType =
+  //     RankedTensorType::get(revised_shape, shaped_type.cast<ShapedType>().getElementType());
+  //   func_type.setType(revisedTensorType);
+  // }
+
+  // adjust funcOp's block argument0
+  auto argument = funcOp.getArgument(0);
+  auto shaped_type = argument.getType();
+  ArrayRef<int64_t> shape = llvm::cast<mlir::TensorType>(shaped_type).getShape();
+  llvm::SmallVector<int64_t> revised_shape;
+  for (auto dim: shape) {
+    int64_t new_dim = dim;
+    revised_shape.push_back(new_dim);
+  }
+  revised_shape[0] = revised_shape[0] / replica_cnt;
+  auto revisedTensorType =
+    RankedTensorType::get(revised_shape, shaped_type.cast<ShapedType>().getElementType());
+  argument.setType(revisedTensorType);
+
+  for (auto op: worklist) {
+    // auto _moduleOp = llvm::cast<ModuleOp>();
+    // handle terminator, add pblock and link pblocks two side to head and tail
+    if (isa<crt::ConstantOp>(op)) continue;
+    std::cout << "before ========" << op->getName().getStringRef().str() <<  std::endl;
+    op->dump();
+    // handle operand
+    // auto operand = op->getOperands()[0];
+    // auto shaped_type = operand.getType();
+    // ArrayRef<int64_t> shape = llvm::cast<mlir::TensorType>(shaped_type).getShape();
+    //
+    // llvm::SmallVector<int64_t> revised_shape;
+    // for (auto dim: shape) {
+    //   int64_t new_dim = dim;
+    //   revised_shape.push_back(new_dim);
+    // }
+    // revised_shape[0] = revised_shape[0] / replica_cnt;
+    // auto revisedTensorType =
+    //   RankedTensorType::get(revised_shape, shaped_type.cast<ShapedType>().getElementType());
+    // operand.setType(revisedTensorType);
+
+    // handle result
+    auto results = op->getResults();
+    for (auto result: results) {
+    // auto result = op->getResult(0);
+    // {
+      auto shaped_type = result.getType();
+      ArrayRef<int64_t> shape = llvm::cast<mlir::TensorType>(shaped_type).getShape();
+      // shaped_type.dump();
+
+      llvm::SmallVector<int64_t> revised_shape;
+      for (auto dim: shape) {
+        int64_t new_dim = dim;
+        revised_shape.push_back(new_dim);
+      }
+      revised_shape[0] = revised_shape[0] / replica_cnt;
+      auto revisedTensorType =
+        RankedTensorType::get(revised_shape, shaped_type.cast<ShapedType>().getElementType());
+      result.setType(revisedTensorType);
+    }
+    // }
+    std::cout << "after ========" << op->getName().getStringRef().str() << std::endl;
+    op->dump();
+  }
 
   return success();
 }
@@ -306,9 +645,25 @@ struct RaptorAutoParallelPass
       } else if (std::strcmp(env_p, "dp4") == 0) {
         packUpEntireRegionWithPBlock(funcOp, context);
         replicatePBlock(funcOp, context, 4);
-      } else if (std::strcmp(env_p, "costest") == 0) {
-        packUpEntireRegionWithPBlock(funcOp, context);
+      } else if (std::strcmp(env_p, "estimate") == 0) {
+        // packUpEntireRegionWithPBlock(funcOp, context);
         estimateCost(funcOp, context);
+      } else if (std::strcmp(env_p, "single-dev") == 0) {
+        // packUpEntireRegionWithPBlock(funcOp, context);
+        singleDev(funcOp, context);
+      } else if (std::strcmp(env_p, "data-parallel-evenly") == 0) {
+        packUpEntireRegionWithPBlock(funcOp, context);
+        replicatePBlock(funcOp, context, 4);
+        shardingBatchSizeEvenly(funcOp, context, 4);
+        useAllGPUs(funcOp, context);
+        // singleDev(funcOp, context);
+      } else if (std::strcmp(env_p, "data-parallel-with-arbitrary-bs") == 0) {
+        packUpEntireRegionWithPBlock(funcOp, context);
+        replicatePBlock(funcOp, context, 4);
+        SmallVector<int64_t> rep_bs{320, 320, 192, 192};
+        shardingBatchSizeWithGiven(funcOp, context, rep_bs);
+        useAllGPUs(funcOp, context);
+        // singleDev(funcOp, context);
       }
       else {
         std::cout << env_p << "\n";
@@ -319,6 +674,20 @@ struct RaptorAutoParallelPass
     }
   }
 };
+      // legacy branches
+      // else if (std::strcmp(env_p, "single-dev-at-0") == 0) {
+      //   packUpEntireRegionWithPBlock(funcOp, context);
+      //   dispatchAllToDev(funcOp, context, 0);
+      //   estimateCost(funcOp, context);
+      // } else if (std::strcmp(env_p, "single-dev-at-1") == 0) {
+      //   packUpEntireRegionWithPBlock(funcOp, context);
+      //   dispatchAllToDev(funcOp, context, 1);
+      //   estimateCost(funcOp, context);
+      // } else if (std::strcmp(env_p, "single-dev-at-3") == 0) {
+      //   packUpEntireRegionWithPBlock(funcOp, context);
+      //   dispatchAllToDev(funcOp, context, 3);
+      //   estimateCost(funcOp, context);
+      // }
 
 } // namespace
 
