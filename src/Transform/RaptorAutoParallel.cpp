@@ -167,7 +167,7 @@ inline Operation* RapHelper::replicateOpWithRemapping(Operation* op) {
     this->addMapping(op, cloned_op);
     this->fixMapping(cloned_op);
   } else {
-    op->dump();
+    // op->dump();
     assert(0);
   }
   return cloned_op;
@@ -257,7 +257,7 @@ LogicalResult estimateCost(func::FuncOp funcOp, MLIRContext *context) {
 }
 
 LogicalResult singleDev(func::FuncOp funcOp, MLIRContext *context) {
-  funcOp.dump();
+  // funcOp.dump();
   std::cout << "processing single-dev-strategy" << std::endl;
 
   onnx_mlir::CostEstimator cest;
@@ -281,6 +281,18 @@ LogicalResult useAllGPUs(func::FuncOp funcOp, MLIRContext *context) {
   return success();
 }
 
+LogicalResult mpmdSchedule(func::FuncOp funcOp, MLIRContext *context, SmallVector<int32_t> to_devs) {
+  std::cout << "processing mpmdSchedule with HEFT" << std::endl;
+
+  onnx_mlir::CostEstimator cest;
+  assert(cest.verify().succeeded());
+
+  float total_cost = cest.mpmdSchedule(funcOp, to_devs);
+  std::cout << "======> dispatch-to-all-GPUs-strategy <Estimated Wall-Time in ms> = " << total_cost << "(ms) <======" << std::endl;
+
+  return success();
+}
+
 LogicalResult replicatePBlock(func::FuncOp funcOp, MLIRContext *context, int rep_cnt) {
   std::cout << "processing replicatePBlock, with replicates count = " << rep_cnt << std::endl;
 
@@ -288,7 +300,7 @@ LogicalResult replicatePBlock(func::FuncOp funcOp, MLIRContext *context, int rep
   // replicate once
   funcOp.walk([&](crt::PhantomBlockOp op) {
     for (int rep_idx = 1; rep_idx < rep_cnt; rep_idx++) {
-      std::cout << rep_idx << std::endl;
+      // std::cout << rep_idx << std::endl;
 
       worklist.clear();
       RapHelper chelper;
@@ -317,7 +329,7 @@ LogicalResult replicatePBlock(func::FuncOp funcOp, MLIRContext *context, int rep
       // replicate ops in pblock region
       // std::reverse(worklist.begin(), worklist.end());
       for (auto _op: worklist) {
-        _op->dump();
+        // _op->dump();
         auto new_op = chelper.replicateOpWithRemapping(_op);
         new_op->remove();
         clonedPB.getBody().front().push_back(new_op);
@@ -331,13 +343,13 @@ LogicalResult replicatePBlock(func::FuncOp funcOp, MLIRContext *context, int rep
 LogicalResult dispatchAllToDev(func::FuncOp funcOp, MLIRContext *context, int devat) {
   std::cout << "processing dispatchAllToDev" << std::endl;
   funcOp.walk([&](crt::PhantomBlockOp op) {
-    op.dump();
+    // op.dump();
     OpBuilder builder(op);
     llvm::SmallVector<int32_t> arr;
     arr.push_back(devat);
     mlir::ArrayAttr arratt = builder.getI32ArrayAttr(arr);
     op.setDevatAttr(arratt);
-    op.dump();
+    // op.dump();
   });
   return success();
 }
@@ -410,8 +422,8 @@ LogicalResult shardingBatchSizeWithGiven(func::FuncOp funcOp, MLIRContext *conte
     auto batch_size = replica_batch_size[idx];
     pblock->walk([&](Operation* op) {
       if (isa<crt::ConstantOp>(op)) return;
-      std::cout << "before ========" << op->getName().getStringRef().str() <<  std::endl;
-      op->dump();
+      // std::cout << "before ========" << op->getName().getStringRef().str() <<  std::endl;
+      // op->dump();
 
       // handle result
       auto results = op->getResults();
@@ -433,8 +445,8 @@ LogicalResult shardingBatchSizeWithGiven(func::FuncOp funcOp, MLIRContext *conte
         result.setType(revisedTensorType);
       }
       // }
-      std::cout << "after ========" << op->getName().getStringRef().str() << std::endl;
-      op->dump();
+      // std::cout << "after ========" << op->getName().getStringRef().str() << std::endl;
+      // op->dump();
 
     });
   }
@@ -487,8 +499,8 @@ LogicalResult shardingBatchSizeEvenly(func::FuncOp funcOp, MLIRContext *context,
     // auto _moduleOp = llvm::cast<ModuleOp>();
     // handle terminator, add pblock and link pblocks two side to head and tail
     if (isa<crt::ConstantOp>(op)) continue;
-    std::cout << "before ========" << op->getName().getStringRef().str() <<  std::endl;
-    op->dump();
+    // std::cout << "before ========" << op->getName().getStringRef().str() <<  std::endl;
+    // op->dump();
     // handle operand
     // auto operand = op->getOperands()[0];
     // auto shaped_type = operand.getType();
@@ -524,8 +536,8 @@ LogicalResult shardingBatchSizeEvenly(func::FuncOp funcOp, MLIRContext *context,
       result.setType(revisedTensorType);
     }
     // }
-    std::cout << "after ========" << op->getName().getStringRef().str() << std::endl;
-    op->dump();
+    // std::cout << "after ========" << op->getName().getStringRef().str() << std::endl;
+    // op->dump();
   }
 
   return success();
@@ -651,6 +663,10 @@ struct RaptorAutoParallelPass
       } else if (std::strcmp(env_p, "single-dev") == 0) {
         // packUpEntireRegionWithPBlock(funcOp, context);
         singleDev(funcOp, context);
+      } else if (std::strcmp(env_p, "hlest") == 0) {
+        // packUpEntireRegionWithPBlock(funcOp, context);
+        // hlestListScheduling(funcOp, context);
+        assert(1);
       } else if (std::strcmp(env_p, "data-parallel-evenly") == 0) {
         packUpEntireRegionWithPBlock(funcOp, context);
         replicatePBlock(funcOp, context, 4);
@@ -664,8 +680,11 @@ struct RaptorAutoParallelPass
         shardingBatchSizeWithGiven(funcOp, context, rep_bs);
         useAllGPUs(funcOp, context);
         // singleDev(funcOp, context);
-      }
-      else {
+      } else if (std::strcmp(env_p, "mpmd") == 0) {
+        packUpEntireRegionWithPBlock(funcOp, context);
+        SmallVector<int32_t> to_devs{0, 1, 2, 3, 4};
+        mpmdSchedule(funcOp, context, to_devs);
+      } else {
         std::cout << env_p << "\n";
         std::cout << "no matching mode for RAP envs";
       }
