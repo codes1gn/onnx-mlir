@@ -13,6 +13,7 @@
 //===----------------------------------------------------------------------===//
 
 #include "src/Conversion/ONNXToCrt/ONNXToCrtCommon.hpp"
+#include <iostream>
 
 using namespace mlir;
 
@@ -65,11 +66,14 @@ void FrontendToCrtLoweringPass::runOnOperation() {
   // Define patterns
   populateONNXToCrtConversionPattern(target, patterns, typeConverter, context);
   // ANCHOR find ONNX.Reshape op is
+  std::cout << "before conversion" << std::endl;
   module.dump();
 
   if (failed(applyPartialConversion(module, target, std::move(patterns)))) {
     signalPassFailure();
   }
+  std::cout << "after conversion" << std::endl;
+  module.dump();
 }
 
 std::unique_ptr<Pass> createConvertONNXToCrtPass() {

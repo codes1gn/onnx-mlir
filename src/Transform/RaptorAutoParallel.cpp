@@ -693,20 +693,6 @@ struct RaptorAutoParallelPass
     }
   }
 };
-      // legacy branches
-      // else if (std::strcmp(env_p, "single-dev-at-0") == 0) {
-      //   packUpEntireRegionWithPBlock(funcOp, context);
-      //   dispatchAllToDev(funcOp, context, 0);
-      //   estimateCost(funcOp, context);
-      // } else if (std::strcmp(env_p, "single-dev-at-1") == 0) {
-      //   packUpEntireRegionWithPBlock(funcOp, context);
-      //   dispatchAllToDev(funcOp, context, 1);
-      //   estimateCost(funcOp, context);
-      // } else if (std::strcmp(env_p, "single-dev-at-3") == 0) {
-      //   packUpEntireRegionWithPBlock(funcOp, context);
-      //   dispatchAllToDev(funcOp, context, 3);
-      //   estimateCost(funcOp, context);
-      // }
 
 } // namespace
 

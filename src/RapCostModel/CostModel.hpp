@@ -29,14 +29,16 @@ class SimulatorBase {
 
 protected:
   llvm::DenseMap<StringRef, float> atomic_cost;
+  llvm::DenseMap<StringRef, float> real_atomic_cost;
   llvm::DenseMap<StringRef, float> atomic_uncertainty;
+  llvm::DenseMap<StringRef, float> real_atomic_uncertainty;
 
 public:
   inline LogicalResult verify() {
     return success();
   }
-  
-  inline float estimate_atomic_op(Operation* op) {
+
+  inline float mock_atomic_op(Operation* op) {
     std::string query_key;
     std::string op_name_str = op->getName().stripDialect().str();
     query_key += op_name_str;
@@ -72,6 +74,60 @@ public:
       return 0.0;
     } else if (isa<crt::AllreduceOp>(op)) {
       // TODO adjust cost;
+      return 7.53;
+    } else if (isa<func::ReturnOp>(op) || isa<crt::YieldOp>(op)) {
+      return 0.43;
+    } else if (isa<func::FuncOp>(op) || isa<crt::PhantomBlockOp>(op)) {
+      assert(0 && "FuncOp cannot get atomic cost");
+    } else if (isa<crt::ReshapeOp>(op)) {
+      return 1.1;
+    } else {
+
+      if (this->real_atomic_cost.count(query_key) == 0) {
+        std::cout << "failure in lookup cost for op #" << query_key << std::endl;
+        assert(0);
+      };
+      float _cost = this->real_atomic_cost.lookup(query_key);
+      return _cost;
+    } 
+  }
+  
+  inline float estimate_atomic_op(Operation* op) {
+    std::string query_key;
+    std::string op_name_str = op->getName().stripDialect().str();
+    query_key += op_name_str;
+
+    auto operand_type_range = op->getOperandTypes();
+    for (auto operand_type: operand_type_range) {
+      auto _type = llvm::cast<mlir::TensorType>(operand_type);
+      ArrayRef _shape = _type.getShape();
+      std::string operand_type_str;
+      for (auto dim: _shape) {
+        if (!operand_type_str.empty()) operand_type_str += "x";
+        operand_type_str += std::to_string(dim);
+      }
+      query_key += "-";
+      query_key += operand_type_str;
+    }
+
+    auto result_type_range = op->getResultTypes();
+    for (auto result_type: result_type_range) {
+      auto _type = llvm::cast<mlir::TensorType>(result_type);
+      ArrayRef _shape = _type.getShape();
+      std::string result_type_str;
+      for (auto dim: _shape) {
+        if (!result_type_str.empty()) result_type_str += "x";
+        result_type_str += std::to_string(dim);
+      }
+      query_key += "-";
+      query_key += result_type_str;
+    }
+    // std::cout << query_key << std::endl;
+
+    if (isa<crt::ConstantOp>(op)) {
+      return 0.0;
+    } else if (isa<crt::AllreduceOp>(op)) {
+      // TODO adjust cost;
       return 0.53;
     } else if (isa<func::ReturnOp>(op) || isa<crt::YieldOp>(op)) {
       return 0.0;
@@ -80,9 +136,12 @@ public:
     } else if (isa<crt::ReshapeOp>(op)) {
       return 0.0;
     } else {
-      assert(this->atomic_cost.count(query_key) == 1);
+
+      if (this->atomic_cost.count(query_key) == 0) {
+        std::cout << "failure in lookup cost for op #" << query_key << std::endl;
+        assert(0);
+      };
       float _cost = this->atomic_cost.lookup(query_key);
-      assert(_cost != 0);
       return _cost;
     } 
   }
@@ -93,6 +152,9 @@ public:
   CPUSimulator() {
 #define GET_OP_COST
 #include "src/RapCostModel/CrtOpsCPUCosts.cpp.inc"
+
+#define GET_OP_COST
+#include "src/RapCostModel/RealCrtOpsCPUCosts.cpp.inc"
   }
 };
 
@@ -101,6 +163,8 @@ public:
   GPUTypeASimulator() {
 #define GET_OP_COST
 #include "src/RapCostModel/CrtOpsGPUTypeACosts.cpp.inc"
+#define GET_OP_COST
+#include "src/RapCostModel/RealCrtOpsGPUTypeACosts.cpp.inc"
   }
 };
 
@@ -109,6 +173,8 @@ public:
   GPUTypeBSimulator() {
 #define GET_OP_COST
 #include "src/RapCostModel/CrtOpsGPUTypeBCosts.cpp.inc"
+#define GET_OP_COST
+#include "src/RapCostModel/RealCrtOpsGPUTypeBCosts.cpp.inc"
   }
 };
 
@@ -155,7 +221,7 @@ public:
     return this->unbounded_estimate_dag_at(funcOp, 4);
   }
 
-  inline float mpmdSchedule(func::FuncOp funcOp,  llvm::SmallVector<int32_t> devices_idx) {
+  inline float mpmdSchedule(func::FuncOp funcOp, llvm::SmallVector<int32_t> devices_idx) {
     llvm::SmallVector<Operation*> worklist;
     funcOp.getBody().front().walk([&](Operation* op){
       Operation* parentOp = op->getParentOp();
@@ -205,10 +271,12 @@ public:
       } else if (isa<crt::ConstantOp>(_op)) {
         value_ready_worklist.insert(std::make_pair(_op->getResult(0), (float)0.0));
       } else if (isa<crt::PhantomBlockOp>(_op)) {
-        float _extra_time = this->mpmdSchedulePBlockWithHEFTStrategy(
+        llvm::DenseMap<Operation*, int32_t> _strategy = this->mpmdSchedulePBlockWithHEFTStrategy(
             llvm::cast<crt::PhantomBlockOp>(_op), 
             devices_idx
         );
+        float _extra_time = this->mockPBlockWithStrategy(llvm::cast<crt::PhantomBlockOp>(_op), _strategy, devices_idx);
+
         auto _operands = _op->getOperands();
         float _base_time = -1.0;
         for (auto _operand: _operands) {
@@ -236,8 +304,240 @@ public:
     return 0.0;
   }
 
+  inline float mockPBlockWithStrategy(
+      crt::PhantomBlockOp pblock, 
+      llvm::DenseMap<Operation*, int32_t> dispatch_records,
+      llvm::SmallVector<int32_t> devices_idx) {
+
+    std::cout << "==================> MOCK SESSION ==================>" << std::endl;
+    std::cout << "==================> MOCK SESSION ==================>" << std::endl;
+    Block& blk = pblock->getRegion(0).front();
+    llvm::SmallVector<Operation*> op_worklist;
+    llvm::SmallVector<Operation*> rev_op_worklist;
+    llvm::DenseMap<Operation*, float> avg_op_cost_worklist;
+    llvm::DenseMap<Operation*, float> upward_rank;
+    llvm::DenseMap<Operation*, float> downward_rank;
+
+    blk.walk([&](Operation* op){
+      op_worklist.push_back(op);
+      rev_op_worklist.push_back(op);
+    });
+    std::reverse(rev_op_worklist.begin(), rev_op_worklist.end());
+
+    // simulate avg op cost
+    // std::cout << " ========== calc avg op cost ENTER =========== " << std::endl;
+    for (auto _op: op_worklist) {
+      // std::cout << "handling op " << _op->getName().getStringRef().str() << std::endl;
+      int count = 0;
+      float cost = 0.0;
+      for (auto _dev_id: devices_idx) {
+        // std::cout << "handling dev " << _dev_id << std::endl;
+        cost += this->estimate_atomic_op_at(_op, _dev_id);
+        // std::cout << "cost sum = " << cost << std::endl;
+        count++;
+      }
+      avg_op_cost_worklist.insert(std::make_pair(_op, cost/count));
+      // std::cout << "avg cost = " << avg_op_cost_worklist.lookup(_op) << std::endl;
+    }
+    // std::cout << " ========== calc avg op cost EXIT =========== " << std::endl;
+
+    // calc upward rank
+    // std::cout << " ========== calc upward-rank ENTER =========== " << std::endl;
+    for (auto _op: rev_op_worklist) {
+      // std::cout << "handling op ==> " << std::endl;
+      // _op->dump(); 
+      // handle terminators
+      if (isa<crt::YieldOp>(_op)) {
+        auto _base_cost = 0.0;
+        auto _cost = avg_op_cost_worklist.lookup(_op);
+        // std::cout << "cost of this op = " << _cost << std::endl;
+        upward_rank.insert(std::make_pair(_op, _base_cost + _cost));
+        // std::cout << "uprank = " << _base_cost + _cost << std::endl;
+      } else {
+        auto _users = _op->getUsers();
+        float _base_cost = 0.0;
+        for (auto _user: _users) {
+          // std::cout << "succesor ==> " << std::endl; 
+          // _user->dump();
+          auto tmp = upward_rank.lookup(_user);
+          // std::cout << "get a succesor uprank = " << tmp << std::endl;
+          _base_cost = (tmp > _base_cost) ? tmp : _base_cost;
+        }
+        // std::cout << "base uprank = " << _base_cost << std::endl;
+        auto _cost = avg_op_cost_worklist.lookup(_op);
+        auto _uprank = _cost + _base_cost;
+        // std::cout << "cost of this op = " << _cost << std::endl;
+        upward_rank.insert(std::make_pair(_op, _uprank));
+        // std::cout << "uprank = " << _uprank << std::endl << std::endl;
+      }
+    }
+    // std::cout << " ========== calc upward-rank EXIT =========== " << std::endl;
+
+    std::cout << " ========== Mock Procedure Enter =========== " << std::endl;
+    // iterate over worklist, fetch partialEQ op group
+    llvm::DenseMap<mlir::Value, float> value_EFT_timelist;
+    llvm::SmallVector<float> device_EAT_timelist;
+    auto args = pblock.getOperation()->getOperands();
+    for (auto arg: args) {
+      value_EFT_timelist.insert(std::make_pair(llvm::cast<mlir::Value>(arg), 0.0));
+    }
+
+    // init, set device_EAT all ready at time 0.0
+    for (auto devid: devices_idx) {
+      device_EAT_timelist.push_back(0.0);
+    }
+
+    llvm::SmallVector<Operation*> dispatch_waitlist;
+    for (auto _op: op_worklist) {
+
+      // std::cout << "filtering zero-indegree op " << _op->getName().getStringRef().str() << std::endl;
+      bool isReady = true;
+      auto _operands = _op->getOperands();
+      for (auto _operand: _operands) {
+        // printf("anchor operand %p", _operand);
+        if (value_EFT_timelist.count(_operand) == 0) {
+          isReady = false;
+        }
+      }
+      if (isReady) {
+        // if this op already in dispatch_waitlist, continue
+        if (std::find(dispatch_waitlist.begin(), dispatch_waitlist.end(), _op) == dispatch_waitlist.end()) {
+          dispatch_waitlist.push_back(_op);
+        }
+      }
+    }
+
+    do {
+      // filter out all zero-indegree ops in this iteration
+      Operation* choice_op;
+      int choice_id = -1;
+      float _earliest_start_time = -1.0;
+      // std::cout << "found zero-indegree nodes this time with count = " << dispatch_waitlist.size() << std::endl;
+      // HEFT
+      for (int idx = 0; idx < dispatch_waitlist.size(); idx++) {
+        auto _op = dispatch_waitlist[idx];
+        // std::cout << "calc est of " << _op->getName().getStringRef().str() << std::endl;
+        // auto _uprank = upward_rank.lookup(_op);
+        auto _operands = _op->getOperands();
+        float _earliest_operand_ready_time = 0.0;
+        for (auto _operand: _operands) {
+          // printf("anchor operand %p", _operand);
+          float _operand_ready_time = value_EFT_timelist.lookup(_operand);
+          _earliest_operand_ready_time = (_operand_ready_time > _earliest_operand_ready_time) ? _operand_ready_time : _earliest_operand_ready_time;
+        }
+        //
+        if (_earliest_operand_ready_time > _earliest_start_time) {
+          // std::cout << "_earliest_start_time = " << _earliest_start_time << ", need to update to " << _earliest_operand_ready_time << std::endl;
+          _earliest_start_time = _earliest_operand_ready_time;
+          choice_op = _op;
+          choice_id = idx;
+        }
+      }
+      //
+      // // PICK FIRST
+      // for (int idx = 0; idx < dispatch_waitlist.size(); idx++) {
+      //   choice_id = 0;
+      //   choice_op = dispatch_waitlist[idx];
+      // }
+      //
+      // // PICK LAST 
+      // for (int idx = dispatch_waitlist.size()-1; idx >= 0; idx--) {
+      //   choice_id = 0;
+      //   choice_op = dispatch_waitlist[idx];
+      // }
+
+      // dispatch_waitlist.swap(choice_op, dispatch_waitlist.end());
+      dispatch_waitlist[choice_id] = dispatch_waitlist[dispatch_waitlist.size()-1];
+      dispatch_waitlist.pop_back();
+      // dispatch_waitlist.erase(choice_op);
+
+      // find EFT of it and corresponding dev
+      // 1. find latest operand value eft
+      // float _operands_eft = -1.0;
+      // auto _operands = choice_op->getOperands();
+      // std::cout << "step 1: calc value eft time\n";
+      // for (auto _operand: _operands) {
+      //   auto _operand_ready_time = value_EFT_timelist.lookup(_operand);
+      //   std::cout << "operand ready time = " << _operand_ready_time << std::endl;
+      //   _operands_eft = (_operands_eft < _operand_ready_time) ? _operand_ready_time : _operands_eft;
+      // }
+      // std::cout << "value eft = " << _operands_eft << std::endl;
+      float _operands_eft = _earliest_start_time;
+
+      int _best_dev = dispatch_records.lookup(choice_op);
+      float _dev_eat_time = device_EAT_timelist[_best_dev];
+      auto _compute_cost = this->mock_atomic_op_at(choice_op, _best_dev);
+      auto _finish_time = (float)std::max(_dev_eat_time, _operands_eft) + _compute_cost;
+      // std::cout << "step 2: probe devs, find EFT\n";
+      // for (auto dev_id: devices_idx) {
+      //   std::cout << "device " << dev_id << "'s eat time = ";
+      //   float _dev_eat_time = device_EAT_timelist[dev_id]; 
+      //   std::cout << _dev_eat_time << std::endl;
+      //
+      //   std::cout << "if dispatch to dev #" << dev_id << std::endl;
+      //   auto _compute_cost = this->estimate_atomic_op_at(choice_op, dev_id);
+      //   std::cout << "compute cost = " << _compute_cost << std::endl;
+      //   auto _eft_tmp = (float)std::max(_dev_eat_time, _operands_eft) + _compute_cost;
+      //   if (_eft_tmp < _finish_time) {
+      //     _finish_time = _eft_tmp;
+      //     _best_dev = dev_id;
+      //   }
+      // }
+      std::cout << "op #" << choice_op->getName().getStringRef().str()
+        << " will be dispatched into dev #" << _best_dev << "; with EFT = "
+        << _finish_time << std::endl;
+
+      // std::cout << "step 3: update value-EFT table and device-EAT table\n";
+      value_EFT_timelist.insert(std::make_pair(choice_op->getResult(0), _finish_time));
+      device_EAT_timelist[_best_dev] = _finish_time;
+
+      // update dispatch_waitlist, consider above compute newly defined value, add this values users if ready
+      auto _users = choice_op->getResult(0).getUsers();
+      for (auto _op: _users) {
+        // std::cout << "filtering successors users " << _op->getName().getStringRef().str() << std::endl;
+        bool isReady = true;
+        auto _operands = _op->getOperands();
+        for (auto _operand: _operands) {
+          // printf("anchor operand %p", _operand);
+          if (value_EFT_timelist.count(_operand) == 0) {
+            isReady = false;
+          }
+        }
+        if (isReady) {
+          // if this op already in dispatch_waitlist, continue
+          if (std::find(dispatch_waitlist.begin(), dispatch_waitlist.end(), _op) == dispatch_waitlist.end()) {
+            dispatch_waitlist.push_back(_op);
+          }
+        }
+      }
+
+    } while (!dispatch_waitlist.empty());
+
+    std::cout << " ========== Mock SUMMARY =========" << std::endl;
+    // float dev_last_time = -1.0;
+    // for (auto _dev_time: device_EAT_timelist) {
+    //   dev_last_time = (_dev_time > dev_last_time) ? _dev_time : dev_last_time;
+    // }
+    // std::cout << "latest dev eat = " << dev_last_time << std::endl;
+    // 
+    float value_last_time = -1.0;
+    for (auto _op: op_worklist) {
+      if (isa<crt::YieldOp>(_op)) {
+        auto opers = _op->getOperands();
+        for (auto _operand_yield: opers) {
+          auto value_time = value_EFT_timelist.lookup(_operand_yield);
+          value_last_time = (value_time > value_last_time) ? value_time : value_last_time;
+        }
+      }
+    }
+    std::cout << "latest value eft = " << value_last_time << std::endl;
+    // assert(value_last_time == dev_last_time);
+    // std::cout << " ========== Mock SUMMARY =========" << std::endl;
+    return value_last_time;
+  }
+
   // assume PhantomBlockOp
-  inline float mpmdSchedulePBlockWithHEFTStrategy(crt::PhantomBlockOp pblock, llvm::SmallVector<int32_t> devices_idx) {
+  inline llvm::DenseMap<Operation*, int32_t> mpmdSchedulePBlockWithHEFTStrategy(crt::PhantomBlockOp pblock, llvm::SmallVector<int32_t> devices_idx) {
     Block& blk = pblock->getRegion(0).front();
     llvm::SmallVector<Operation*> op_worklist;
     llvm::SmallVector<Operation*> rev_op_worklist;
@@ -318,106 +618,135 @@ public:
     llvm::SmallVector<Operation*> dispatch_waitlist;
     llvm::DenseMap<Operation*, int32_t> dispatch_records;
 
-    while (dispatch_records.size() < op_worklist.size()) {
-      // reset waitlist for reorder for dispatch
-      dispatch_waitlist.clear();
-      // filter out all zero-indegree ops in this iteration
-      for (auto _op: op_worklist) {
+    for (auto _op: op_worklist) {
 
-        // if this op already dispatch, skip it
-        if (dispatch_records.count(_op) > 0) continue;
+      // if this op already dispatch, skip it
+      if (dispatch_records.count(_op) > 0) continue;
 
-        std::cout << "filtering zero-indegree op " << _op->getName().getStringRef().str() << std::endl;
+      std::cout << "filtering zero-indegree op " << _op->getName().getStringRef().str() << std::endl;
+      bool isReady = true;
+      auto _operands = _op->getOperands();
+      for (auto _operand: _operands) {
+        printf("anchor operand %p", _operand);
+        if (value_EFT_timelist.count(_operand) == 0) {
+          isReady = false;
+        }
+      }
+      if (isReady) {
+        dispatch_waitlist.push_back(_op);
+        std::cout << "find zero-indegree op " << _op->getName().getStringRef().str() << std::endl;
+      }
+    }
+
+    // Filter out all zero-indegree ops in this iteration
+    // 1. consume one op with bigest uprank, and dispatch it
+    // 2. alloc to dev, with EFT
+    // 3. add result to value_EFT_timelist with EFT 
+    // 4. update dev_EAT_timelist
+    do {
+      // choice max uprank op
+      std::cout << "step 0: find max uprank op " 
+        << std::endl
+        << std::endl;
+      Operation* choice_op;
+      int choice_id = -1;
+      float max_uprank = -1.0;
+      std::cout << "found zero-indegree nodes this time with count = " << dispatch_waitlist.size() << std::endl;
+      // HEFT
+      for (int idx = 0; idx < dispatch_waitlist.size(); idx++) {
+        auto _op = dispatch_waitlist[idx];
+        auto _uprank = upward_rank.lookup(_op);
+        std::cout << "_uprank = " << _uprank << std::endl;
+        if (_uprank > max_uprank) {
+          std::cout << "max uprank = " << max_uprank << ", need to update to " << _uprank << std::endl;
+          max_uprank = _uprank;
+          choice_op = _op;
+          choice_id = idx;
+        }
+      }
+      //
+      // // PICK FIRST
+      // for (int idx = 0; idx < dispatch_waitlist.size(); idx++) {
+      //   choice_id = 0;
+      //   choice_op = dispatch_waitlist[idx];
+      // }
+      //
+      // // PICK LAST 
+      // for (int idx = dispatch_waitlist.size()-1; idx >= 0; idx--) {
+      //   choice_id = 0;
+      //   choice_op = dispatch_waitlist[idx];
+      // }
+
+      // dispatch_waitlist.swap(choice_op, dispatch_waitlist.end());
+      dispatch_waitlist[choice_id] = dispatch_waitlist[dispatch_waitlist.size()-1];
+      dispatch_waitlist.pop_back();
+      // dispatch_waitlist.erase(choice_op);
+
+      // find EFT of it and corresponding dev
+      // 1. find latest operand value eft
+      float _operands_eft = -1.0;
+      auto _operands = choice_op->getOperands();
+      std::cout << "step 1: calc value eft time\n";
+      for (auto _operand: _operands) {
+        auto _operand_ready_time = value_EFT_timelist.lookup(_operand);
+        std::cout << "operand ready time = " << _operand_ready_time << std::endl;
+        _operands_eft = (_operands_eft < _operand_ready_time) ? _operand_ready_time : _operands_eft;
+      }
+      std::cout << "value eft = " << _operands_eft << std::endl;
+
+      float _finish_time = 10000000.0;
+      int _best_dev = -1;
+      std::cout << "step 2: probe devs, find EFT\n";
+      for (auto dev_id: devices_idx) {
+        std::cout << "device " << dev_id << "'s eat time = ";
+        float _dev_eat_time = device_EAT_timelist[dev_id]; 
+        std::cout << _dev_eat_time << std::endl;
+
+        std::cout << "if dispatch to dev #" << dev_id << std::endl;
+        auto _compute_cost = this->estimate_atomic_op_at(choice_op, dev_id);
+        std::cout << "compute cost = " << _compute_cost << std::endl;
+        auto _eft_tmp = (float)std::max(_dev_eat_time, _operands_eft) + _compute_cost;
+        if (_eft_tmp < _finish_time) {
+          _finish_time = _eft_tmp;
+          _best_dev = dev_id;
+        }
+      }
+      std::cout << "op #" << choice_op->getName().getStringRef().str()
+        << " will be dispatched into dev #" << _best_dev << "; with EFT = " 
+        << _finish_time << std::endl;
+
+      std::cout << "step 3: update value-EFT table and device-EAT table\n";
+      value_EFT_timelist.insert(std::make_pair(choice_op->getResult(0), _finish_time));
+      device_EAT_timelist[_best_dev] = _finish_time;
+      dispatch_records.insert(std::make_pair(choice_op, _best_dev));
+
+      // because new value ready, update dispatch_waitlist with its users
+      auto _users = choice_op->getResult(0).getUsers();
+      for (auto _op: _users) {
+        // std::cout << "filtering successors users " << _op->getName().getStringRef().str() << std::endl;
         bool isReady = true;
         auto _operands = _op->getOperands();
         for (auto _operand: _operands) {
-          printf("anchor operand %p", _operand);
+          // printf("anchor operand %p", _operand);
           if (value_EFT_timelist.count(_operand) == 0) {
             isReady = false;
           }
         }
         if (isReady) {
-          dispatch_waitlist.push_back(_op);
-          std::cout << "find zero-indegree op " << _op->getName().getStringRef().str() << std::endl;
+          // if this op already in dispatch_waitlist, continue
+          if (std::find(dispatch_waitlist.begin(), dispatch_waitlist.end(), _op) == dispatch_waitlist.end()) {
+            dispatch_waitlist.push_back(_op);
+          }
         }
       }
 
-      // 1. consume one op with bigest uprank, and dispatch it
-      // 2. alloc to dev, with EFT
-      // 3. add result to value_EFT_timelist with EFT 
-      // 4. update dev_EAT_timelist
-      do {
-        // choice max uprank op
-        std::cout << "step 0: find max uprank op " 
-          << std::endl
-          << std::endl;
-        Operation* choice_op;
-        int choice_id = -1;
-        float max_uprank = -1.0;
-        std::cout << "found zero-indegree nodes this time with count = " << dispatch_waitlist.size() << std::endl;
-        for (int idx = 0; idx < dispatch_waitlist.size(); idx++) {
-          auto _op = dispatch_waitlist[idx];
-          auto _uprank = upward_rank.lookup(_op);
-          std::cout << "_uprank = " << _uprank << std::endl;
-          if (_uprank > max_uprank) {
-            std::cout << "max uprank = " << max_uprank << ", need to update to " << _uprank << std::endl;
-            max_uprank = _uprank;
-            choice_op = _op;
-            choice_id = idx;
-          }
-        }
+    } while (!dispatch_waitlist.empty());
 
-        // dispatch_waitlist.swap(choice_op, dispatch_waitlist.end());
-        dispatch_waitlist[choice_id] = dispatch_waitlist[dispatch_waitlist.size()-1];
-        dispatch_waitlist.pop_back();
-        // dispatch_waitlist.erase(choice_op);
-
-        // find EFT of it and corresponding dev
-        // 1. find latest operand value eft
-        float _operands_eft = -1.0;
-        auto _operands = choice_op->getOperands();
-        std::cout << "step 1: calc value eft time\n";
-        for (auto _operand: _operands) {
-          auto _operand_ready_time = value_EFT_timelist.lookup(_operand);
-          std::cout << "operand ready time = " << _operand_ready_time << std::endl;
-          _operands_eft = (_operands_eft < _operand_ready_time) ? _operand_ready_time : _operands_eft;
-        }
-        std::cout << "value eft = " << _operands_eft << std::endl;
-
-        float _finish_time = 10000000.0;
-        int _best_dev = -1;
-        std::cout << "step 2: probe devs, find EFT\n";
-        for (auto dev_id: devices_idx) {
-          std::cout << "device " << dev_id << "'s eat time = ";
-          float _dev_eat_time = device_EAT_timelist[dev_id]; 
-          std::cout << _dev_eat_time << std::endl;
-
-          std::cout << "if dispatch to dev #" << dev_id << std::endl;
-          auto _compute_cost = this->estimate_atomic_op_at(choice_op, dev_id);
-          std::cout << "compute cost = " << _compute_cost << std::endl;
-          auto _eft_tmp = (float)std::max(_dev_eat_time, _operands_eft) + _compute_cost;
-          if (_eft_tmp < _finish_time) {
-            _finish_time = _eft_tmp;
-            _best_dev = dev_id;
-          }
-        }
-        std::cout << "op #" << choice_op->getName().getStringRef().str()
-          << " will be dispatched into dev #" << _best_dev << "; with EFT = " 
-          << _finish_time << std::endl;
-
-        std::cout << "step 3: update value-EFT table and device-EAT table\n";
-        value_EFT_timelist.insert(std::make_pair(choice_op->getResult(0), _finish_time));
-        device_EAT_timelist[_best_dev] = _finish_time;
-        dispatch_records.insert(std::make_pair(choice_op, _best_dev));
-
-      } while (!dispatch_waitlist.empty());
-
-    };
     std::cout << " ========== dispatch with HEFT strategy Exit =========== " 
       << std::endl
       << std::endl;
 
-    std::cout << " ========== SUMMARY =========" << std::endl;
+    std::cout << " ========== ESTIMATOR SUMMARY =========" << std::endl;
     float dev_last_time = -1.0;
     for (auto _dev_time: device_EAT_timelist) {
       dev_last_time = (_dev_time > dev_last_time) ? _dev_time : dev_last_time;
@@ -436,8 +765,8 @@ public:
     }
     std::cout << "latest value eft = " << value_last_time << std::endl;
     assert(value_last_time == dev_last_time);
-    std::cout << " ========== SUMMARY =========" << std::endl;
-    return value_last_time;
+    std::cout << " ========== ESTIMATOR SUMMARY =========" << std::endl;
+    return dispatch_records;
   }
 
   // dag execute on device at specified idx, where this device can
@@ -719,6 +1048,10 @@ public:
 
   inline float estimate_atomic_op_at(Operation* op, int devat) {
     return this->simulators[devat]->estimate_atomic_op(op);
+  }
+
+  inline float mock_atomic_op_at(Operation* op, int devat) {
+    return this->simulators[devat]->mock_atomic_op(op);
   }
   
   inline LogicalResult verify() {

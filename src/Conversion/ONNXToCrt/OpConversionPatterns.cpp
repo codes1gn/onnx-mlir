@@ -14,6 +14,7 @@
 
 #include "mlir/IR/TypeUtilities.h"
 #include "src/Conversion/ONNXToCrt/ONNXToCrtCommon.hpp"
+#include <iostream>
 
 using namespace mlir;
 
@@ -128,6 +129,25 @@ struct ONNXReshapeOpLoweringToCrt : public ConversionPattern {
     return success();
   }
 };
+
+struct ONNXGatherOpLoweringToCrt : public ConversionPattern {
+  ONNXGatherOpLoweringToCrt(MLIRContext *ctx)
+      : ConversionPattern(mlir::ONNXGatherOp::getOperationName(), 1, ctx) {}
+
+  LogicalResult matchAndRewrite(Operation *op, ArrayRef<Value> operands,
+      ConversionPatternRewriter &rewriter) const final {
+    ONNXGatherOpAdaptor operandAdaptor(operands, op->getAttrDictionary());
+    op->dump();
+    Location loc = op->getLoc();
+    Value data = operandAdaptor.data();
+    Value indices = operandAdaptor.indices();
+    Type outputType = *op->result_type_begin();
+    Value result =
+        rewriter.create<crt::GatherOp>(loc, outputType, data, indices);
+    rewriter.replaceOp(op, result);
+    return success();
+  }
+};
 } // namespace
 
 void populateLoweringONNXToCrtPattern(ConversionTarget &target,
@@ -144,14 +164,19 @@ void populateLoweringONNXToCrtPattern(ConversionTarget &target,
   patterns.add<ConvertUnaryOpOnnxToCrt<ONNXMaxPoolSingleOutOp, crt::MaxpoolOp>>(typeConverter, ctx);
   patterns.add<ConvertUnaryOpOnnxToCrt<ONNXReduceMeanOp, crt::ReducemeanOp>>(typeConverter, ctx);
   patterns.add<ConvertUnaryOpOnnxToCrt<ONNXSoftmaxOp, crt::SoftmaxOp>>(typeConverter, ctx);
+  patterns.add<ConvertUnaryOpOnnxToCrt<ONNXAveragePoolOp, crt::AvgpoolOp>>(typeConverter, ctx);
   
   // ANCHOR BINARY
   patterns.add<ConvertBinaryOpOnnxToCrt<ONNXAddOp, crt::AddOp>>(typeConverter, ctx);
   patterns.add<ConvertBinaryOpOnnxToCrt<ONNXSubOp, crt::SubOp>>(typeConverter, ctx);
   patterns.add<ConvertBinaryOpOnnxToCrt<ONNXMulOp, crt::MulOp>>(typeConverter, ctx);
   patterns.add<ConvertBinaryOpOnnxToCrt<ONNXDivOp, crt::DivOp>>(typeConverter, ctx);
+  patterns.add<ConvertBinaryOpOnnxToCrt<ONNXMatMulOp, crt::MatmulOp>>(typeConverter, ctx);
+  patterns.add<ConvertBinaryOpOnnxToCrt<ONNXGatherOp, crt::GatherOp>>(typeConverter, ctx);
+  // patterns.add<ConvertBinaryOpOnnxToCrt<ONNXUnsqueezeOp, crt::UnsqueezeOp>>(typeConverter, ctx);
   // ANCHOR why this work, ConversionPattern > OpConversionPattern
   patterns.add<ONNXReshapeOpLoweringToCrt>(ctx);
+  patterns.add<ONNXGatherOpLoweringToCrt>(ctx);
   // patterns.add<ConvertReshape>(typeConverter, ctx);
   // patterns.add<ConvertBinaryOpOnnxToCrt<ONNXReshapeOp, crt::ReshapeOp>>(typeConverter, ctx);
 

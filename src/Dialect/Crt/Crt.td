@@ -36,9 +36,9 @@ def Crt_PhantomBlockOp : Crt_PureOp<"pblock", [SingleBlockImplicitTerminator<"Yi
 
   let arguments = (
       ins
-      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$operand,
+      TensorRankOf<[F32], [0, 1, 2, 3, 4, 5, 6]>:$operand,
       OptionalAttr<I32ArrayAttr>:$devat);
-  let results = (outs TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4]>:$result);
+  let results = (outs TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4, 5, 6]>:$result);
 
   /* let results = (outs Variadic<AnyType>); */
   let regions = (region AnyRegion:$body);
@@ -58,7 +58,7 @@ def Crt_YieldOp : Crt_PureOp<"yield", [ReturnLike, Terminator,
 
   let arguments = (
       ins
-      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$results);
+      TensorRankOf<[F32], [0, 1, 2, 3, 4, 5, 6]>:$results);
   /* let arguments = (ins Variadic<AnyType>:$results); */
 
   let builders = [OpBuilder<(ins), [{ /* nothing to do */ }]>];
@@ -77,9 +77,9 @@ def Crt_AllreduceOp : Crt_Op<"allreduce", [
   let description = [{
     See crt.negate for more details.
   }];
-  let arguments = (ins Variadic<TensorRankOf<[F32], [0, 1, 2, 3, 4]>>:$operand);
+  let arguments = (ins Variadic<TensorRankOf<[F32], [0, 1, 2, 3, 4, 5, 6]>>:$operand);
   let results = (outs
-      TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4]>:$result);
+      TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4, 5, 6]>:$result);
   let assemblyFormat = "($operand^)? `:` functional-type(operands, results) attr-dict";
 }
 
@@ -91,7 +91,7 @@ def Crt_ConstantOp : Crt_Op<"constant"> {
   }];
   let arguments = (ins);
   let results = (outs
-      TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4]>:$result);
+      TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4, 5, 6]>:$result);
 
   let assemblyFormat = "attr-dict `:` functional-type(operands, results)";
 }
@@ -102,9 +102,9 @@ class UnaryArithmeticOp<string mnemonic, list<Trait> traits = []> :
   AllTypesMatch<["operand", "result"]> {
   let arguments = (
       ins
-      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$operand);
+      TensorRankOf<[F32], [0, 1, 2, 3, 4, 5, 6]>:$operand);
   let results = (outs
-      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$result);
+      TensorRankOf<[F32], [0, 1, 2, 3, 4, 5, 6]>:$result);
   let assemblyFormat = "$operand attr-dict `:` functional-type(operands, results)";
 }
 
@@ -173,6 +173,20 @@ def Crt_TanhOp : UnaryArithmeticOp<"tanh", [NoSideEffect,
   }];
 }
 
+def Crt_AvgpoolOp : Crt_Op<"avgpool"> {
+  let summary = "Performs a avgpool";
+  let description = [{
+    avgpool.
+  }];
+  let arguments = (
+      ins
+      TensorRankOf<[F32], [0, 1, 2, 3, 4, 5, 6]>:$operand);
+  let results = (outs
+      TensorRankOf<[F32], [0, 1, 2, 3, 4, 5, 6]>:$result);
+
+  let assemblyFormat = "$operand attr-dict `:` functional-type(operands, results)";
+}
+
 def Crt_MaxpoolOp : Crt_Op<"maxpool"> {
   let summary = "Performs a maxpool";
   let description = [{
@@ -180,9 +194,9 @@ def Crt_MaxpoolOp : Crt_Op<"maxpool"> {
   }];
   let arguments = (
       ins
-      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$operand);
+      TensorRankOf<[F32], [0, 1, 2, 3, 4, 5, 6]>:$operand);
   let results = (outs
-      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$result);
+      TensorRankOf<[F32], [0, 1, 2, 3, 4, 5, 6]>:$result);
 
   let assemblyFormat = "$operand attr-dict `:` functional-type(operands, results)";
 }
@@ -194,9 +208,9 @@ def Crt_FlattenOp : Crt_Op<"flatten"> {
   }];
   let arguments = (
       ins
-      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$operand);
+      TensorRankOf<[F32], [0, 1, 2, 3, 4, 5, 6]>:$operand);
   let results = (outs
-      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$result);
+      TensorRankOf<[F32], [0, 1, 2, 3, 4, 5, 6]>:$result);
 
   let assemblyFormat = "$operand attr-dict `:` functional-type(operands, results)";
 }
@@ -208,9 +222,9 @@ def Crt_ReducemeanOp : Crt_Op<"reducemean"> {
   }];
   let arguments = (
       ins
-      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$operand);
+      TensorRankOf<[F32], [0, 1, 2, 3, 4, 5, 6]>:$operand);
   let results = (outs
-      TensorRankOf<[F32], [0, 1, 2, 3, 4]>:$result);
+      TensorRankOf<[F32], [0, 1, 2, 3, 4, 5, 6]>:$result);
 
   let assemblyFormat = "$operand attr-dict `:` functional-type(operands, results)";
 }
@@ -238,8 +252,19 @@ def Crt_MatmulOp : Crt_Op<"matmul"> {
     If the `K` dimension mismatches between the operands, this op aborts the
     program.
   }];
-  let arguments = (ins TensorRankOf<[F32], [2, 3]>:$lhs, TensorRankOf<[F32], [2, 3]>:$rhs);
-  let results = (outs TensorRankOf<[F32], [2, 3]>:$result);
+  let arguments = (ins TensorRankOf<[F32], [1, 2, 3, 4, 5]>:$lhs, TensorRankOf<[F32], [1, 2, 3, 4, 5]>:$rhs);
+  let results = (outs TensorRankOf<[F32], [1, 2, 3, 4, 5]>:$result);
+
+  let assemblyFormat = "$lhs `,` $rhs attr-dict `:` functional-type(operands, results)";
+}
+
+def Crt_GatherOp : Crt_Op<"gather"> {
+  let summary = "P";
+  let description = [{
+    Performs a matrix multiplication.
+  }];
+  let arguments = (ins TensorRankOf<[F32], [1, 2, 3, 4, 5]>:$lhs, TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4, 5]>:$rhs);
+  let results = (outs TensorRankOf<[F32], [1, 2, 3, 4, 5]>:$result);
 
   let assemblyFormat = "$lhs `,` $rhs attr-dict `:` functional-type(operands, results)";
 }
@@ -252,8 +277,8 @@ def Crt_ReshapeOp : Crt_Op<"reshape"> {
     If the `K` dimension mismatches between the operands, this op aborts the
     program.
   }];
-  let arguments = (ins TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4]>:$lhs, TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4]>:$rhs);
-  let results = (outs TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4]>:$result);
+  let arguments = (ins TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4, 5, 6]>:$lhs, TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4, 5, 6]>:$rhs);
+  let results = (outs TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4, 5, 6]>:$result);
 
   let assemblyFormat = "$lhs `,` $rhs attr-dict `:` functional-type(operands, results)";
 }
@@ -360,10 +385,10 @@ class BinaryArithmeticOp<string mnemonic, list<Trait> traits = []> :
    // let arguments = (ins AnyTensor:$lhs, AnyTensor:$rhs);
    let arguments = (
        ins
-       TensorRankOf<[F32, I32], [0, 1, 2, 3, 4]>:$lhs,
-       TensorRankOf<[F32, I32], [0, 1, 2, 3, 4]>:$rhs);
+       TensorRankOf<[F32, I32], [0, 1, 2, 3, 4, 5, 6]>:$lhs,
+       TensorRankOf<[F32, I32], [0, 1, 2, 3, 4, 5, 6]>:$rhs);
    let results = (outs
-      TensorRankOf<[F32, I32], [0, 1, 2, 3, 4]>:$result);
+      TensorRankOf<[F32, I32], [0, 1, 2, 3, 4, 5, 6]>:$result);
    // let results = (outs AnyTensor:$result);
    let assemblyFormat = "$lhs `,` $rhs attr-dict `:` functional-type(operands, results)";
 }
@@ -414,6 +439,12 @@ def Crt_MaxOp : BinaryArithmeticOp<"max", [NoSideEffect]> {
   }];
 }
 
+def Crt_UnsqueezeOp : BinaryArithmeticOp<"Crt_UnsqueezeOp", [NoSideEffect]> {
+  let summary = "binary.";
+  let description = [{
+    just a binary op
+  }];
+}
 
 #endif // #ifndef CRT_DIALECT
 
