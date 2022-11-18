@@ -256,6 +256,18 @@ LogicalResult estimateCost(func::FuncOp funcOp, MLIRContext *context) {
   return success();
 }
 
+LogicalResult verifyCostModel(func::FuncOp funcOp, MLIRContext *context) {
+  // funcOp.dump();
+  std::cout << "processing CostModel Verification" << std::endl;
+
+  onnx_mlir::CostEstimator cest;
+  assert(cest.verify().succeeded());
+
+  cest.verifyCostModel(funcOp);
+
+  return success();
+}
+
 LogicalResult singleDev(func::FuncOp funcOp, MLIRContext *context) {
   // funcOp.dump();
   std::cout << "processing single-dev-strategy" << std::endl;
@@ -663,6 +675,9 @@ struct RaptorAutoParallelPass
       } else if (std::strcmp(env_p, "single-dev") == 0) {
         // packUpEntireRegionWithPBlock(funcOp, context);
         singleDev(funcOp, context);
+      } else if (std::strcmp(env_p, "verify") == 0) {
+        // packUpEntireRegionWithPBlock(funcOp, context);
+        verifyCostModel(funcOp, context);
       } else if (std::strcmp(env_p, "hlest") == 0) {
         // packUpEntireRegionWithPBlock(funcOp, context);
         // hlestListScheduling(funcOp, context);

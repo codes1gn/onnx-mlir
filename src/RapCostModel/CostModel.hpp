@@ -92,7 +92,7 @@ public:
     } 
   }
   
-  inline float estimate_atomic_op(Operation* op) {
+  inline std::optional<float> estimate_atomic_op(Operation* op) {
     std::string query_key;
     std::string op_name_str = op->getName().stripDialect().str();
     query_key += op_name_str;
@@ -125,24 +125,24 @@ public:
     // std::cout << query_key << std::endl;
 
     if (isa<crt::ConstantOp>(op)) {
-      return 0.0;
+      return std::make_optional(0.0);
     } else if (isa<crt::AllreduceOp>(op)) {
       // TODO adjust cost;
-      return 0.53;
+      return std::make_optional(0.53);
     } else if (isa<func::ReturnOp>(op) || isa<crt::YieldOp>(op)) {
-      return 0.0;
+      return std::make_optional(0.0);
     } else if (isa<func::FuncOp>(op) || isa<crt::PhantomBlockOp>(op)) {
       assert(0 && "FuncOp cannot get atomic cost");
     } else if (isa<crt::ReshapeOp>(op)) {
-      return 0.0;
+      return std::make_optional(0.0);
     } else {
 
       if (this->atomic_cost.count(query_key) == 0) {
         std::cout << "failure in lookup cost for op #" << query_key << std::endl;
-        assert(0);
+        return std::nullopt;
       };
       float _cost = this->atomic_cost.lookup(query_key);
-      return _cost;
+      return std::make_optional(_cost);
     } 
   }
 };
@@ -206,6 +206,29 @@ public:
       if (_time < min_time || min_time < 0) min_time = _time;
     }
     return min_time;
+  }
+
+  inline void verifyCostModel(func::FuncOp funcOp) {
+    int passed = 0;
+    int failed = 0;
+    funcOp.getBody().front().walk([&](Operation* op){
+        std::optional<float> ocost = this->default_device->estimate_atomic_op(op);
+
+        if (ocost == std::nullopt) {
+          std::cout << "===================> Failure to find cost for op \n" << std::endl;
+          op->dump();
+          std::cout << "<=================== \n" << std::endl;
+          failed++;
+        } else {
+          std::cout << "===================> Success to find cost for op \n" << std::endl;
+          std::cout << op->getName().getStringRef().str() << " : cost = " << ocost.value() << " ms\n" << std::endl;
+          std::cout << "<=================== \n" << std::endl;
+          passed++;
+          
+        }
+    });
+    std::cout << "========= SUMMARY ==========\n" << " || Success op cost estimate at count = " << passed << "\n || failure op cost estimate at count = " << failed << "\n========= SUMMARY ==========\n" << std::endl;
+    return;
   }
 
   // useAllGPUs-strategy
@@ -288,7 +311,7 @@ public:
     
       } else if (isa<crt::AllreduceOp>(_op)) {
         // only dispatch pblock, other ops on cpu/host
-        float _extra_time = this->default_device->estimate_atomic_op(_op);
+        float _extra_time = this->default_device->estimate_atomic_op(_op).value();
         auto _operands = _op->getOperands();
         float _base_time = -1.0;
         for (auto _operand: _operands) {
@@ -840,7 +863,7 @@ public:
         // TODO simulate when dev is idle from busy?
       } else {
         // only dispatch pblock, other ops on cpu/host
-        _extra_cost = this->default_device->estimate_atomic_op(_op);
+        _extra_cost = this->default_device->estimate_atomic_op(_op).value();
         std::cout << _op->getName().getStringRef().str() << " _extra_cost = " << _extra_cost << std::endl;
         float complete_time = current_time + _extra_cost;
         tensor_ready_worklist.insert(std::make_pair(_op->getResult(0), complete_time));
@@ -1047,7 +1070,7 @@ public:
   }
 
   inline float estimate_atomic_op_at(Operation* op, int devat) {
-    return this->simulators[devat]->estimate_atomic_op(op);
+    return this->simulators[devat]->estimate_atomic_op(op).value();
   }
 
   inline float mock_atomic_op_at(Operation* op, int devat) {

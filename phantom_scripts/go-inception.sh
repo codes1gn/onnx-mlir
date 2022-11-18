@@ -5,7 +5,7 @@ script_realpath=`realpath $script_path`
 top_dir_path=$script_path"/.."
 top_dir_realpath=`realpath $top_dir_path`
 
-MODNAME="bert_large_squad11_384_op11_fp32"
+MODNAME="Inception-v3-op13-fp32-torchvision"
 
 cd $top_dir_realpath
 

@@ -27,6 +27,14 @@ def _maxpool(arg):
     return torch.nn.functional.max_pool2d(arg, [2, 2], [2, 2])
 _maxpool.__name__ = "maxpool" 
 
+def _maxpool3(arg):
+    return torch.nn.functional.max_pool2d(arg, [3, 3], [2, 2])
+_maxpool3.__name__ = "maxpool" 
+
+def _avgpool(arg):
+    return torch.nn.functional.avg_pool2d(arg, [3, 3], [1, 1], [1, 1])
+_avgpool.__name__ = "avgpool" 
+
 def _reducemean(arg):
     return torch.nn.functional.avg_pool2d(arg, [7, 7])
 _reducemean.__name__ = "reducemean" 
@@ -36,6 +44,7 @@ TENARY_OPS_TO_MEASURE = [
     (torch.nn.functional.linear, [1, 196], [128, 196], [128], {}),
     (torch.nn.functional.linear, [1, 128], [10, 128], [10], {}),
     (torch.nn.functional.linear, [1, 512], [1000, 512], [1000], {}),
+    (torch.nn.functional.linear, [1, 2048], [1000, 2048], [1000], {}),
     (torch.nn.functional.conv2d, [1, 3, 224, 224], [64, 3, 7, 7], [64], {"stride": [2, 2], "padding": [3, 3]}), 
     (torch.nn.functional.conv2d, [1, 64, 56, 56], [64, 64, 3, 3], [64],{"stride": [1, 1], "padding": [1, 1]}),
     (torch.nn.functional.conv2d, [1, 64, 56, 56], [128, 64, 1, 1], [128], {"stride": [2, 2], "padding": [0, 0]}),
@@ -47,17 +56,104 @@ TENARY_OPS_TO_MEASURE = [
     (torch.nn.functional.conv2d, [1, 256, 14, 14], [512, 256, 1, 1], [512], {"stride": [2, 2], "padding": [0, 0]}),
     (torch.nn.functional.conv2d, [1, 256, 14, 14], [512, 256, 3, 3], [512], {"stride": [2, 2], "padding": [1, 1]}),
     (torch.nn.functional.conv2d, [1, 512, 7, 7], [512, 512, 3, 3], [512], {"stride": [1, 1], "padding": [1, 1]}),
+
+    (torch.nn.functional.conv2d, [1, 3, 299, 299], [32, 3, 3, 3], [32], {"stride": [2, 2], "padding": [0, 0]}),
+    (torch.nn.functional.conv2d, [1, 32, 149, 149], [32, 32, 3, 3], [32], {"stride": [1, 1], "padding": [0, 0]}),
+    (torch.nn.functional.conv2d, [1, 32, 147, 147], [64, 32, 3, 3], [64], {"stride": [1, 1], "padding": [1, 1]}),
+    (torch.nn.functional.conv2d, [1, 80, 73, 73], [192, 80, 3, 3], [192], {"stride": [1, 1], "padding": [0, 0]}),
+
+    (torch.nn.functional.conv2d, [1, 48, 35, 35], [64, 48, 5, 5], [64], {"stride": [1, 1], "padding": "same"}),
+    (torch.nn.functional.conv2d, [1, 64, 35, 35], [96, 64, 3, 3], [96], {"stride": [1, 1], "padding": "same"}),
+    (torch.nn.functional.conv2d, [1, 96, 35, 35], [96, 96, 3, 3], [96], {"stride": [1, 1], "padding": "same"}),
+    (torch.nn.functional.conv2d, [1, 96, 35, 35], [96, 96, 3, 3], [96], {"stride": [2, 2], "padding": [0, 0]}),
+    (torch.nn.functional.conv2d, [1, 288, 35, 35], [384, 288, 3, 3], [384], {"stride": [2, 2], "padding": [0, 0]}),
+
+    (torch.nn.functional.conv2d, [1, 192, 17, 17], [320, 192, 3, 3], [320], {"stride": [2, 2], "padding": [0, 0]}),
+    (torch.nn.functional.conv2d, [1, 192, 17, 17], [192, 192, 3, 3], [192], {"stride": [2, 2], "padding": [0, 0]}),
+
+    (torch.nn.functional.conv2d, [1, 128, 17, 17], [128, 128, 1, 7], [128], {"stride": [1, 1], "padding": "same"}),
+    (torch.nn.functional.conv2d, [1, 128, 17, 17], [128, 128, 7, 1], [128], {"stride": [1, 1], "padding": "same"}),
+
+    (torch.nn.functional.conv2d, [1, 160, 17, 17], [160, 160, 1, 7], [160], {"stride": [1, 1], "padding": "same"}),
+    (torch.nn.functional.conv2d, [1, 160, 17, 17], [160, 160, 7, 1], [160], {"stride": [1, 1], "padding": "same"}),
+
+    (torch.nn.functional.conv2d, [1, 160, 17, 17], [192, 160, 1, 7], [192], {"stride": [1, 1], "padding": "same"}),
+    (torch.nn.functional.conv2d, [1, 160, 17, 17], [192, 160, 7, 1], [192], {"stride": [1, 1], "padding": "same"}),
+
+    (torch.nn.functional.conv2d, [1, 128, 17, 17], [192, 128, 1, 7], [192], {"stride": [1, 1], "padding": "same"}),
+    (torch.nn.functional.conv2d, [1, 128, 17, 17], [192, 128, 7, 1], [192], {"stride": [1, 1], "padding": "same"}),
+
+    (torch.nn.functional.conv2d, [1, 192, 17, 17], [192, 192, 1, 7], [192], {"stride": [1, 1], "padding": "same"}),
+    (torch.nn.functional.conv2d, [1, 192, 17, 17], [192, 192, 7, 1], [192], {"stride": [1, 1], "padding": "same"}),
+
+    (torch.nn.functional.conv2d, [1, 448, 8, 8], [384, 448, 3, 3], [192], {"stride": [1, 1], "padding": "same"}),
+    (torch.nn.functional.conv2d, [1, 384, 8, 8], [384, 384, 3, 1], [384], {"stride": [1, 1], "padding": "same"}),
+    (torch.nn.functional.conv2d, [1, 384, 8, 8], [384, 384, 1, 3], [384], {"stride": [1, 1], "padding": "same"}),
 ]
 
 BINARY_OPS_TO_MEASURE = [
-    (torch.nn.functional.linear, [1, 196], [128, 196], {}), 
-    (torch.nn.functional.linear, [1, 196], [10, 196], {}), 
+    # (torch.nn.functional.linear, [1, 196], [128, 196], {}), 
+    # (torch.nn.functional.linear, [1, 196], [10, 196], {}), 
+    (torch.nn.functional.linear, [1, 64], [64, 64, 64], {}), 
+    (torch.nn.functional.linear, [2, 64], [64, 64, 64], {}), 
+    (torch.nn.functional.linear, [3, 64], [64, 64, 64], {}), 
+    (torch.nn.functional.linear, [5, 64], [64, 64, 64], {}), 
+    (torch.nn.functional.linear, [6, 64], [64, 64, 64], {}), 
+    (torch.nn.functional.linear, [7, 64], [64, 64, 64], {}), 
+    (torch.nn.functional.linear, [1, 192], [64, 192, 64], {}), 
+    (torch.nn.functional.linear, [2, 192], [64, 192, 64], {}), 
+    (torch.nn.functional.linear, [3, 192], [64, 192, 64], {}), 
+    (torch.nn.functional.linear, [5, 192], [64, 192, 64], {}), 
+    (torch.nn.functional.linear, [6, 192], [64, 192, 64], {}), 
+    (torch.nn.functional.linear, [7, 192], [64, 192, 64], {}), 
+    (torch.nn.functional.linear, [1, 256], [64, 256, 64], {}), 
+    (torch.nn.functional.linear, [2, 256], [64, 256, 64], {}), 
+    (torch.nn.functional.linear, [3, 256], [64, 256, 64], {}), 
+    (torch.nn.functional.linear, [5, 256], [64, 256, 64], {}), 
+    (torch.nn.functional.linear, [6, 256], [64, 256, 64], {}), 
+    (torch.nn.functional.linear, [7, 256], [64, 256, 64], {}), 
+    (torch.nn.functional.linear, [1, 288], [64, 288, 64], {}), 
+    (torch.nn.functional.linear, [2, 288], [64, 288, 64], {}), 
+    (torch.nn.functional.linear, [3, 288], [64, 288, 64], {}), 
+    (torch.nn.functional.linear, [5, 288], [64, 288, 64], {}), 
+    (torch.nn.functional.linear, [6, 288], [64, 288, 64], {}), 
+    (torch.nn.functional.linear, [7, 288], [64, 288, 64], {}), 
+    (torch.nn.functional.linear, [1, 768], [64, 768, 64], {}), 
+    (torch.nn.functional.linear, [2, 768], [64, 768, 64], {}), 
+    (torch.nn.functional.linear, [3, 768], [64, 768, 64], {}), 
+    (torch.nn.functional.linear, [5, 768], [64, 768, 64], {}), 
+    (torch.nn.functional.linear, [6, 768], [64, 768, 64], {}), 
+    (torch.nn.functional.linear, [7, 768], [64, 768, 64], {}), 
+    (torch.nn.functional.linear, [1, 1280], [64, 1280, 64], {}), 
+    (torch.nn.functional.linear, [2, 1280], [64, 1280, 64], {}), 
+    (torch.nn.functional.linear, [3, 1280], [64, 1280, 64], {}), 
+    (torch.nn.functional.linear, [5, 1280], [64, 1280, 64], {}), 
+    (torch.nn.functional.linear, [6, 1280], [64, 1280, 64], {}), 
+    (torch.nn.functional.linear, [7, 1280], [64, 1280, 64], {}), 
+    (torch.nn.functional.linear, [1, 2048], [64, 2048, 64], {}), 
+    (torch.nn.functional.linear, [2, 2048], [64, 2048, 64], {}), 
+    (torch.nn.functional.linear, [3, 2048], [64, 2048, 64], {}), 
+    (torch.nn.functional.linear, [5, 2048], [64, 2048, 64], {}), 
+    (torch.nn.functional.linear, [6, 2048], [64, 2048, 64], {}), 
+    (torch.nn.functional.linear, [7, 2048], [64, 2048, 64], {}), 
     (torch.add, [1, 512, 7, 7], [1, 512, 7, 7], {}), 
     (torch.add, [1, 64, 56, 56], [1, 64, 56, 56], {}), 
     (torch.add, [1, 128, 28, 28], [1, 128, 28, 28], {}), 
     (torch.add, [1, 256, 14, 14], [1, 256, 14, 14], {}), 
     (torch.add, [1, 512, 7, 7], [1, 512, 7, 7], {}), 
-    (torch.gather, [1, 3, 299, 299], [1], {"dim":1}), 
+    (torch.add, [1, 192, 64], [1, 192, 1], {}), 
+    (torch.add, [1, 448, 64], [1, 448, 1], {}), 
+    (torch.add, [1, 384, 64], [1, 384, 1], {}), 
+    (torch.add, [1, 320, 64], [1, 320, 1], {}), 
+    (torch.add, [1, 192, 64], [1, 192, 1], {}), 
+    (torch.add, [1, 160, 64], [1, 160, 1], {}), 
+    (torch.add, [1, 128, 64], [1, 128, 1], {}), 
+    (torch.add, [1, 64, 64], [1, 64, 1], {}), 
+    (torch.add, [1, 32, 64], [1, 32, 1], {}), 
+    (torch.add, [1, 80, 64], [1, 80, 1], {}), 
+    (torch.add, [1, 1, 299, 299], [], {}), 
+    (torch.mul, [1, 1, 299, 299], [], {}), 
+    (torch.gather, [1, 3, 299, 299], [], {"dim":1}), 
 ]
 
 UNARY_OPS_TO_MEASURE = [
@@ -73,9 +169,33 @@ UNARY_OPS_TO_MEASURE = [
     (torch.relu, [1, 128, 28, 28], {}), 
     (torch.relu, [1, 256, 14, 14], {}), 
     (torch.relu, [1, 512, 7, 7], {}), 
+    (torch.relu, [1, 192, 8, 8], {}), 
+    (torch.relu, [1, 320, 8, 8], {}), 
+    (torch.relu, [1, 384, 8, 8], {}), 
+    (torch.relu, [1, 448, 8, 8], {}), 
+    (torch.relu, [1, 384, 17, 17], {}), 
+    (torch.relu, [1, 192, 17, 17], {}), 
+    (torch.relu, [1, 160, 17, 17], {}), 
+    (torch.relu, [1, 128, 17, 17], {}), 
+    (torch.relu, [1, 96, 17, 17], {}), 
+    (torch.relu, [1, 96, 35, 35], {}), 
+    (torch.relu, [1, 64, 35, 35], {}), 
+    (torch.relu, [1, 48, 35, 35], {}), 
+    (torch.relu, [1, 32, 35, 35], {}), 
+    (torch.relu, [1, 192, 71, 71], {}), 
+    (torch.relu, [1, 80, 73, 73], {}), 
+    (torch.relu, [1, 64, 147, 147], {}), 
+    (torch.relu, [1, 32, 147, 147], {}), 
+    (torch.relu, [1, 32, 149, 149], {}), 
 
     (_maxpool, [1, 1, 28, 28], {}), 
     (_maxpool, [1, 64, 112, 112], {}), 
+    (_avgpool, [1, 2048, 8, 8], {}), 
+    (_avgpool, [1, 1280, 8, 8], {}), 
+    (_avgpool, [1, 64, 147, 147], {}), 
+    (_avgpool, [1, 192, 71, 71], {}), 
+    (_avgpool, [1, 288, 35, 35], {}), 
+    (_avgpool, [1, 768, 17, 17], {}), 
     (_reducemean, [1, 512, 7, 7], {}), 
     (torch.flatten, [1, 512, 1, 1], {"start_dim": 1}), 
 
@@ -149,6 +269,9 @@ def gen_query_key_binary(operation, lhs_shape, rhs_shape, arg_dict):
     if operation.__name__ == "gather":
         _rhs = torch.randint(0, 3, lhs_shape)
 
+    _rhs_shape = rhs_shape.copy()
+    if operation.__name__ == "linear" and len(rhs_shape) == 3:
+        rhs_shape = [rhs_shape[0]*rhs_shape[2], rhs_shape[1]]
 
     # infer out shape
     lhs = tensor_gen(lhs_shape)
@@ -164,6 +287,10 @@ def gen_query_key_binary(operation, lhs_shape, rhs_shape, arg_dict):
     for dim in lhs_shape:
         lhs_shape_str += "x{}".format(dim)
 
+    if operation.__name__ == "linear" and len(_rhs_shape) == 3:
+        rhs_shape = _rhs_shape
+        out_shape = [rhs_shape[0], lhs_shape[0], rhs_shape[2]]
+
     for dim in rhs_shape:
         rhs_shape_str += "x{}".format(dim)
 
@@ -172,7 +299,7 @@ def gen_query_key_binary(operation, lhs_shape, rhs_shape, arg_dict):
 
     perf_key = op_str + "-" + lhs_shape_str[1:] + "-" + rhs_shape_str[1:] + "-" + out_shape_str[1:]
     # special process to use proper name
-    perf_key = perf_key.replace("linear", "gemm")
+    perf_key = perf_key.replace("linear", "matmul")
     return perf_key
 
 def gen_query_key_tenary(operation, lhs_shape, rhs_shape, bias_shape, arg_dict):
@@ -220,6 +347,9 @@ def gen_perf_query_entry_unary(operation, arg_shape, arg_dict):
     return (mean, std)
 
 def gen_perf_query_entry_binary(operation, lhs_shape, rhs_shape, arg_dict):
+    if operation.__name__ == "linear" and len(rhs_shape) == 3:
+        rhs_shape = [rhs_shape[0]*rhs_shape[2], rhs_shape[1]]
+
     lhs = tensor_gen(lhs_shape)
     rhs = tensor_gen(rhs_shape)
 
