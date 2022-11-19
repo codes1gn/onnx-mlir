@@ -1,0 +1,1597 @@
+module attributes {llvm.data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128", llvm.target_triple = "x86_64-unknown-linux-gnu"} {
+  func.func @main_graph(%arg0: tensor<?x3x224x224xf32>) -> tensor<?x1000xf32> attributes {input_names = ["input"], output_names = ["output"]} {
+    %0 = "onnx.NoValue"() {value} : () -> none
+    %1 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %2 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %3 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %4 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %5 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %6 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %7 = crt.constant : () -> tensor<128x256x1x1xf32>
+    %8 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %9 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %10 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %11 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %12 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %13 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %14 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %15 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %16 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %17 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %18 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %19 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %20 = crt.constant : () -> tensor<256x512x1x1xf32>
+    %21 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %22 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %23 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %24 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %25 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %26 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %27 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %28 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %29 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %30 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %31 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %32 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %33 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %34 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %35 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %36 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %37 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %38 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %39 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %40 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %41 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %42 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %43 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %44 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %45 = crt.constant : () -> tensor<512x1024x1x1xf32>
+    %46 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %47 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %48 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %49 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %50 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %51 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %52 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %53 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %54 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %55 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %56 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %57 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %58 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %59 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %60 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %61 = crt.constant : () -> tensor<32x128x3x3xf32>
+    %62 = crt.constant : () -> tensor<1000x1024xf32>
+    %63 = crt.constant : () -> tensor<1000xf32>
+    %64 = crt.constant : () -> tensor<64x3x7x7xf32>
+    %65 = crt.constant : () -> tensor<64xf32>
+    %66 = crt.constant : () -> tensor<128x64x1x1xf32>
+    %67 = crt.constant : () -> tensor<128x96x1x1xf32>
+    %68 = crt.constant : () -> tensor<128x128x1x1xf32>
+    %69 = crt.constant : () -> tensor<128x160x1x1xf32>
+    %70 = crt.constant : () -> tensor<128x192x1x1xf32>
+    %71 = crt.constant : () -> tensor<128x224x1x1xf32>
+    %72 = crt.constant : () -> tensor<128x128x1x1xf32>
+    %73 = crt.constant : () -> tensor<128x160x1x1xf32>
+    %74 = crt.constant : () -> tensor<128x192x1x1xf32>
+    %75 = crt.constant : () -> tensor<128x224x1x1xf32>
+    %76 = crt.constant : () -> tensor<128x256x1x1xf32>
+    %77 = crt.constant : () -> tensor<128x288x1x1xf32>
+    %78 = crt.constant : () -> tensor<128x320x1x1xf32>
+    %79 = crt.constant : () -> tensor<128x352x1x1xf32>
+    %80 = crt.constant : () -> tensor<128x384x1x1xf32>
+    %81 = crt.constant : () -> tensor<128x416x1x1xf32>
+    %82 = crt.constant : () -> tensor<128x448x1x1xf32>
+    %83 = crt.constant : () -> tensor<128x480x1x1xf32>
+    %84 = crt.constant : () -> tensor<128x256x1x1xf32>
+    %85 = crt.constant : () -> tensor<128x288x1x1xf32>
+    %86 = crt.constant : () -> tensor<128x320x1x1xf32>
+    %87 = crt.constant : () -> tensor<128x352x1x1xf32>
+    %88 = crt.constant : () -> tensor<128x384x1x1xf32>
+    %89 = crt.constant : () -> tensor<128x416x1x1xf32>
+    %90 = crt.constant : () -> tensor<128x448x1x1xf32>
+    %91 = crt.constant : () -> tensor<128x480x1x1xf32>
+    %92 = crt.constant : () -> tensor<128x512x1x1xf32>
+    %93 = crt.constant : () -> tensor<128x544x1x1xf32>
+    %94 = crt.constant : () -> tensor<128x576x1x1xf32>
+    %95 = crt.constant : () -> tensor<128x608x1x1xf32>
+    %96 = crt.constant : () -> tensor<128x640x1x1xf32>
+    %97 = crt.constant : () -> tensor<128x672x1x1xf32>
+    %98 = crt.constant : () -> tensor<128x704x1x1xf32>
+    %99 = crt.constant : () -> tensor<128x736x1x1xf32>
+    %100 = crt.constant : () -> tensor<128x768x1x1xf32>
+    %101 = crt.constant : () -> tensor<128x800x1x1xf32>
+    %102 = crt.constant : () -> tensor<128x832x1x1xf32>
+    %103 = crt.constant : () -> tensor<128x864x1x1xf32>
+    %104 = crt.constant : () -> tensor<128x896x1x1xf32>
+    %105 = crt.constant : () -> tensor<128x928x1x1xf32>
+    %106 = crt.constant : () -> tensor<128x960x1x1xf32>
+    %107 = crt.constant : () -> tensor<128x992x1x1xf32>
+    %108 = crt.constant : () -> tensor<128x512x1x1xf32>
+    %109 = crt.constant : () -> tensor<128x544x1x1xf32>
+    %110 = crt.constant : () -> tensor<128x576x1x1xf32>
+    %111 = crt.constant : () -> tensor<128x608x1x1xf32>
+    %112 = crt.constant : () -> tensor<128x640x1x1xf32>
+    %113 = crt.constant : () -> tensor<128x672x1x1xf32>
+    %114 = crt.constant : () -> tensor<128x704x1x1xf32>
+    %115 = crt.constant : () -> tensor<128x736x1x1xf32>
+    %116 = crt.constant : () -> tensor<128x768x1x1xf32>
+    %117 = crt.constant : () -> tensor<128x800x1x1xf32>
+    %118 = crt.constant : () -> tensor<128x832x1x1xf32>
+    %119 = crt.constant : () -> tensor<128x864x1x1xf32>
+    %120 = crt.constant : () -> tensor<128x896x1x1xf32>
+    %121 = crt.constant : () -> tensor<128x928x1x1xf32>
+    %122 = crt.constant : () -> tensor<128x960x1x1xf32>
+    %123 = crt.constant : () -> tensor<128x992x1x1xf32>
+    %124 = crt.convadd %arg0, %64, %65 : (tensor<?x3x224x224xf32>, tensor<64x3x7x7xf32>, tensor<64xf32>) -> tensor<?x64x112x112xf32>
+    %125 = crt.relu %124 : (tensor<?x64x112x112xf32>) -> tensor<?x64x112x112xf32>
+    %126 = crt.maxpool %125 : (tensor<?x64x112x112xf32>) -> tensor<?x64x56x56xf32>
+    %127 = "onnx.Concat"(%126) {axis = 1 : si64, onnx_node_name = "Concat_3"} : (tensor<?x64x56x56xf32>) -> tensor<?x64x56x56xf32>
+    %128 = crt.constant : () -> tensor<64x1x1xf32>
+    %129 = crt.mul %127, %128 : (tensor<?x64x56x56xf32>, tensor<64x1x1xf32>) -> tensor<?x64x56x56xf32>
+    %130 = crt.constant : () -> tensor<64x1x1xf32>
+    %131 = crt.add %129, %130 : (tensor<?x64x56x56xf32>, tensor<64x1x1xf32>) -> tensor<?x64x56x56xf32>
+    %132 = crt.relu %131 : (tensor<?x64x56x56xf32>) -> tensor<?x64x56x56xf32>
+    %133 = "onnx.Dim"(%132) {axis = 0 : si64} : (tensor<?x64x56x56xf32>) -> tensor<1xi64>
+    %134 = crt.constant : () -> tensor<1xi64>
+    %135 = crt.constant : () -> tensor<1xi64>
+    %136 = "onnx.Concat"(%133, %134, %135) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %137 = crt.reshape %132, %136 : (tensor<?x64x56x56xf32>, tensor<3xi64>) -> tensor<?x64x?xf32>
+    %138 = crt.constant : () -> tensor<2xi64>
+    %139 = crt.reshape %66, %138 : (tensor<128x64x1x1xf32>, tensor<2xi64>) -> tensor<128x64xf32>
+    %140 = "onnx.MatMul"(%139, %137) : (tensor<128x64xf32>, tensor<?x64x?xf32>) -> tensor<?x128x?xf32>
+    %141 = crt.constant : () -> tensor<1x128x1xf32>
+    %142 = crt.add %140, %141 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %143 = "onnx.Dim"(%132) {axis = 0 : si64} : (tensor<?x64x56x56xf32>) -> tensor<1xi64>
+    %144 = crt.constant : () -> tensor<1xi64>
+    %145 = crt.constant : () -> tensor<1xi64>
+    %146 = crt.constant : () -> tensor<1xi64>
+    %147 = "onnx.Concat"(%143, %146, %144, %145) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %148 = crt.reshape %142, %147 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x56x56xf32>
+    %149 = crt.relu %148 : (tensor<?x128x56x56xf32>) -> tensor<?x128x56x56xf32>
+    %150 = "onnx.Conv"(%149, %1, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_8", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x56x56xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x56x56xf32>
+    %151 = "onnx.Concat"(%126, %150) {axis = 1 : si64, onnx_node_name = "Concat_9"} : (tensor<?x64x56x56xf32>, tensor<?x32x56x56xf32>) -> tensor<?x96x56x56xf32>
+    %152 = crt.constant : () -> tensor<96x1x1xf32>
+    %153 = crt.mul %151, %152 : (tensor<?x96x56x56xf32>, tensor<96x1x1xf32>) -> tensor<?x96x56x56xf32>
+    %154 = crt.constant : () -> tensor<96x1x1xf32>
+    %155 = crt.add %153, %154 : (tensor<?x96x56x56xf32>, tensor<96x1x1xf32>) -> tensor<?x96x56x56xf32>
+    %156 = crt.relu %155 : (tensor<?x96x56x56xf32>) -> tensor<?x96x56x56xf32>
+    %157 = "onnx.Dim"(%156) {axis = 0 : si64} : (tensor<?x96x56x56xf32>) -> tensor<1xi64>
+    %158 = crt.constant : () -> tensor<1xi64>
+    %159 = crt.constant : () -> tensor<1xi64>
+    %160 = "onnx.Concat"(%157, %158, %159) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %161 = crt.reshape %156, %160 : (tensor<?x96x56x56xf32>, tensor<3xi64>) -> tensor<?x96x?xf32>
+    %162 = crt.constant : () -> tensor<2xi64>
+    %163 = crt.reshape %67, %162 : (tensor<128x96x1x1xf32>, tensor<2xi64>) -> tensor<128x96xf32>
+    %164 = "onnx.MatMul"(%163, %161) : (tensor<128x96xf32>, tensor<?x96x?xf32>) -> tensor<?x128x?xf32>
+    %165 = crt.constant : () -> tensor<1x128x1xf32>
+    %166 = crt.add %164, %165 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %167 = "onnx.Dim"(%156) {axis = 0 : si64} : (tensor<?x96x56x56xf32>) -> tensor<1xi64>
+    %168 = crt.constant : () -> tensor<1xi64>
+    %169 = crt.constant : () -> tensor<1xi64>
+    %170 = crt.constant : () -> tensor<1xi64>
+    %171 = "onnx.Concat"(%167, %170, %168, %169) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %172 = crt.reshape %166, %171 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x56x56xf32>
+    %173 = crt.relu %172 : (tensor<?x128x56x56xf32>) -> tensor<?x128x56x56xf32>
+    %174 = "onnx.Conv"(%173, %2, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_14", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x56x56xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x56x56xf32>
+    %175 = "onnx.Concat"(%126, %150, %174) {axis = 1 : si64, onnx_node_name = "Concat_15"} : (tensor<?x64x56x56xf32>, tensor<?x32x56x56xf32>, tensor<?x32x56x56xf32>) -> tensor<?x128x56x56xf32>
+    %176 = crt.constant : () -> tensor<128x1x1xf32>
+    %177 = crt.mul %175, %176 : (tensor<?x128x56x56xf32>, tensor<128x1x1xf32>) -> tensor<?x128x56x56xf32>
+    %178 = crt.constant : () -> tensor<128x1x1xf32>
+    %179 = crt.add %177, %178 : (tensor<?x128x56x56xf32>, tensor<128x1x1xf32>) -> tensor<?x128x56x56xf32>
+    %180 = crt.relu %179 : (tensor<?x128x56x56xf32>) -> tensor<?x128x56x56xf32>
+    %181 = "onnx.Dim"(%180) {axis = 0 : si64} : (tensor<?x128x56x56xf32>) -> tensor<1xi64>
+    %182 = crt.constant : () -> tensor<1xi64>
+    %183 = crt.constant : () -> tensor<1xi64>
+    %184 = "onnx.Concat"(%181, %182, %183) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %185 = crt.reshape %180, %184 : (tensor<?x128x56x56xf32>, tensor<3xi64>) -> tensor<?x128x?xf32>
+    %186 = crt.constant : () -> tensor<2xi64>
+    %187 = crt.reshape %68, %186 : (tensor<128x128x1x1xf32>, tensor<2xi64>) -> tensor<128x128xf32>
+    %188 = "onnx.MatMul"(%187, %185) : (tensor<128x128xf32>, tensor<?x128x?xf32>) -> tensor<?x128x?xf32>
+    %189 = crt.constant : () -> tensor<1x128x1xf32>
+    %190 = crt.add %188, %189 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %191 = "onnx.Dim"(%180) {axis = 0 : si64} : (tensor<?x128x56x56xf32>) -> tensor<1xi64>
+    %192 = crt.constant : () -> tensor<1xi64>
+    %193 = crt.constant : () -> tensor<1xi64>
+    %194 = crt.constant : () -> tensor<1xi64>
+    %195 = "onnx.Concat"(%191, %194, %192, %193) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %196 = crt.reshape %190, %195 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x56x56xf32>
+    %197 = crt.relu %196 : (tensor<?x128x56x56xf32>) -> tensor<?x128x56x56xf32>
+    %198 = "onnx.Conv"(%197, %3, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_20", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x56x56xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x56x56xf32>
+    %199 = "onnx.Concat"(%126, %150, %174, %198) {axis = 1 : si64, onnx_node_name = "Concat_21"} : (tensor<?x64x56x56xf32>, tensor<?x32x56x56xf32>, tensor<?x32x56x56xf32>, tensor<?x32x56x56xf32>) -> tensor<?x160x56x56xf32>
+    %200 = crt.constant : () -> tensor<160x1x1xf32>
+    %201 = crt.mul %199, %200 : (tensor<?x160x56x56xf32>, tensor<160x1x1xf32>) -> tensor<?x160x56x56xf32>
+    %202 = crt.constant : () -> tensor<160x1x1xf32>
+    %203 = crt.add %201, %202 : (tensor<?x160x56x56xf32>, tensor<160x1x1xf32>) -> tensor<?x160x56x56xf32>
+    %204 = crt.relu %203 : (tensor<?x160x56x56xf32>) -> tensor<?x160x56x56xf32>
+    %205 = "onnx.Dim"(%204) {axis = 0 : si64} : (tensor<?x160x56x56xf32>) -> tensor<1xi64>
+    %206 = crt.constant : () -> tensor<1xi64>
+    %207 = crt.constant : () -> tensor<1xi64>
+    %208 = "onnx.Concat"(%205, %206, %207) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %209 = crt.reshape %204, %208 : (tensor<?x160x56x56xf32>, tensor<3xi64>) -> tensor<?x160x?xf32>
+    %210 = crt.constant : () -> tensor<2xi64>
+    %211 = crt.reshape %69, %210 : (tensor<128x160x1x1xf32>, tensor<2xi64>) -> tensor<128x160xf32>
+    %212 = "onnx.MatMul"(%211, %209) : (tensor<128x160xf32>, tensor<?x160x?xf32>) -> tensor<?x128x?xf32>
+    %213 = crt.constant : () -> tensor<1x128x1xf32>
+    %214 = crt.add %212, %213 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %215 = "onnx.Dim"(%204) {axis = 0 : si64} : (tensor<?x160x56x56xf32>) -> tensor<1xi64>
+    %216 = crt.constant : () -> tensor<1xi64>
+    %217 = crt.constant : () -> tensor<1xi64>
+    %218 = crt.constant : () -> tensor<1xi64>
+    %219 = "onnx.Concat"(%215, %218, %216, %217) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %220 = crt.reshape %214, %219 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x56x56xf32>
+    %221 = crt.relu %220 : (tensor<?x128x56x56xf32>) -> tensor<?x128x56x56xf32>
+    %222 = "onnx.Conv"(%221, %4, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_26", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x56x56xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x56x56xf32>
+    %223 = "onnx.Concat"(%126, %150, %174, %198, %222) {axis = 1 : si64, onnx_node_name = "Concat_27"} : (tensor<?x64x56x56xf32>, tensor<?x32x56x56xf32>, tensor<?x32x56x56xf32>, tensor<?x32x56x56xf32>, tensor<?x32x56x56xf32>) -> tensor<?x192x56x56xf32>
+    %224 = crt.constant : () -> tensor<192x1x1xf32>
+    %225 = crt.mul %223, %224 : (tensor<?x192x56x56xf32>, tensor<192x1x1xf32>) -> tensor<?x192x56x56xf32>
+    %226 = crt.constant : () -> tensor<192x1x1xf32>
+    %227 = crt.add %225, %226 : (tensor<?x192x56x56xf32>, tensor<192x1x1xf32>) -> tensor<?x192x56x56xf32>
+    %228 = crt.relu %227 : (tensor<?x192x56x56xf32>) -> tensor<?x192x56x56xf32>
+    %229 = "onnx.Dim"(%228) {axis = 0 : si64} : (tensor<?x192x56x56xf32>) -> tensor<1xi64>
+    %230 = crt.constant : () -> tensor<1xi64>
+    %231 = crt.constant : () -> tensor<1xi64>
+    %232 = "onnx.Concat"(%229, %230, %231) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %233 = crt.reshape %228, %232 : (tensor<?x192x56x56xf32>, tensor<3xi64>) -> tensor<?x192x?xf32>
+    %234 = crt.constant : () -> tensor<2xi64>
+    %235 = crt.reshape %70, %234 : (tensor<128x192x1x1xf32>, tensor<2xi64>) -> tensor<128x192xf32>
+    %236 = "onnx.MatMul"(%235, %233) : (tensor<128x192xf32>, tensor<?x192x?xf32>) -> tensor<?x128x?xf32>
+    %237 = crt.constant : () -> tensor<1x128x1xf32>
+    %238 = crt.add %236, %237 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %239 = "onnx.Dim"(%228) {axis = 0 : si64} : (tensor<?x192x56x56xf32>) -> tensor<1xi64>
+    %240 = crt.constant : () -> tensor<1xi64>
+    %241 = crt.constant : () -> tensor<1xi64>
+    %242 = crt.constant : () -> tensor<1xi64>
+    %243 = "onnx.Concat"(%239, %242, %240, %241) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %244 = crt.reshape %238, %243 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x56x56xf32>
+    %245 = crt.relu %244 : (tensor<?x128x56x56xf32>) -> tensor<?x128x56x56xf32>
+    %246 = "onnx.Conv"(%245, %5, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_32", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x56x56xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x56x56xf32>
+    %247 = "onnx.Concat"(%126, %150, %174, %198, %222, %246) {axis = 1 : si64, onnx_node_name = "Concat_33"} : (tensor<?x64x56x56xf32>, tensor<?x32x56x56xf32>, tensor<?x32x56x56xf32>, tensor<?x32x56x56xf32>, tensor<?x32x56x56xf32>, tensor<?x32x56x56xf32>) -> tensor<?x224x56x56xf32>
+    %248 = crt.constant : () -> tensor<224x1x1xf32>
+    %249 = crt.mul %247, %248 : (tensor<?x224x56x56xf32>, tensor<224x1x1xf32>) -> tensor<?x224x56x56xf32>
+    %250 = crt.constant : () -> tensor<224x1x1xf32>
+    %251 = crt.add %249, %250 : (tensor<?x224x56x56xf32>, tensor<224x1x1xf32>) -> tensor<?x224x56x56xf32>
+    %252 = crt.relu %251 : (tensor<?x224x56x56xf32>) -> tensor<?x224x56x56xf32>
+    %253 = "onnx.Dim"(%252) {axis = 0 : si64} : (tensor<?x224x56x56xf32>) -> tensor<1xi64>
+    %254 = crt.constant : () -> tensor<1xi64>
+    %255 = crt.constant : () -> tensor<1xi64>
+    %256 = "onnx.Concat"(%253, %254, %255) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %257 = crt.reshape %252, %256 : (tensor<?x224x56x56xf32>, tensor<3xi64>) -> tensor<?x224x?xf32>
+    %258 = crt.constant : () -> tensor<2xi64>
+    %259 = crt.reshape %71, %258 : (tensor<128x224x1x1xf32>, tensor<2xi64>) -> tensor<128x224xf32>
+    %260 = "onnx.MatMul"(%259, %257) : (tensor<128x224xf32>, tensor<?x224x?xf32>) -> tensor<?x128x?xf32>
+    %261 = crt.constant : () -> tensor<1x128x1xf32>
+    %262 = crt.add %260, %261 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %263 = "onnx.Dim"(%252) {axis = 0 : si64} : (tensor<?x224x56x56xf32>) -> tensor<1xi64>
+    %264 = crt.constant : () -> tensor<1xi64>
+    %265 = crt.constant : () -> tensor<1xi64>
+    %266 = crt.constant : () -> tensor<1xi64>
+    %267 = "onnx.Concat"(%263, %266, %264, %265) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %268 = crt.reshape %262, %267 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x56x56xf32>
+    %269 = crt.relu %268 : (tensor<?x128x56x56xf32>) -> tensor<?x128x56x56xf32>
+    %270 = "onnx.Conv"(%269, %6, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_38", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x56x56xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x56x56xf32>
+    %271 = "onnx.Concat"(%126, %150, %174, %198, %222, %246, %270) {axis = 1 : si64, onnx_node_name = "Concat_39"} : (tensor<?x64x56x56xf32>, tensor<?x32x56x56xf32>, tensor<?x32x56x56xf32>, tensor<?x32x56x56xf32>, tensor<?x32x56x56xf32>, tensor<?x32x56x56xf32>, tensor<?x32x56x56xf32>) -> tensor<?x256x56x56xf32>
+    %272 = crt.constant : () -> tensor<256x1x1xf32>
+    %273 = crt.mul %271, %272 : (tensor<?x256x56x56xf32>, tensor<256x1x1xf32>) -> tensor<?x256x56x56xf32>
+    %274 = crt.constant : () -> tensor<256x1x1xf32>
+    %275 = crt.add %273, %274 : (tensor<?x256x56x56xf32>, tensor<256x1x1xf32>) -> tensor<?x256x56x56xf32>
+    %276 = crt.relu %275 : (tensor<?x256x56x56xf32>) -> tensor<?x256x56x56xf32>
+    %277 = "onnx.Dim"(%276) {axis = 0 : si64} : (tensor<?x256x56x56xf32>) -> tensor<1xi64>
+    %278 = crt.constant : () -> tensor<1xi64>
+    %279 = crt.constant : () -> tensor<1xi64>
+    %280 = "onnx.Concat"(%277, %278, %279) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %281 = crt.reshape %276, %280 : (tensor<?x256x56x56xf32>, tensor<3xi64>) -> tensor<?x256x?xf32>
+    %282 = crt.constant : () -> tensor<2xi64>
+    %283 = crt.reshape %7, %282 : (tensor<128x256x1x1xf32>, tensor<2xi64>) -> tensor<128x256xf32>
+    %284 = "onnx.MatMul"(%283, %281) : (tensor<128x256xf32>, tensor<?x256x?xf32>) -> tensor<?x128x?xf32>
+    %285 = "onnx.Dim"(%276) {axis = 0 : si64} : (tensor<?x256x56x56xf32>) -> tensor<1xi64>
+    %286 = crt.constant : () -> tensor<1xi64>
+    %287 = crt.constant : () -> tensor<1xi64>
+    %288 = crt.constant : () -> tensor<1xi64>
+    %289 = "onnx.Concat"(%285, %288, %286, %287) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %290 = crt.reshape %284, %289 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x56x56xf32>
+    %291 = "onnx.AveragePool"(%290) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [2, 2], onnx_node_name = "AveragePool_45", pads = [0, 0, 0, 0], strides = [2, 2]} : (tensor<?x128x56x56xf32>) -> tensor<?x128x28x28xf32>
+    %292 = "onnx.Concat"(%291) {axis = 1 : si64, onnx_node_name = "Concat_46"} : (tensor<?x128x28x28xf32>) -> tensor<?x128x28x28xf32>
+    %293 = crt.constant : () -> tensor<128x1x1xf32>
+    %294 = crt.mul %292, %293 : (tensor<?x128x28x28xf32>, tensor<128x1x1xf32>) -> tensor<?x128x28x28xf32>
+    %295 = crt.constant : () -> tensor<128x1x1xf32>
+    %296 = crt.add %294, %295 : (tensor<?x128x28x28xf32>, tensor<128x1x1xf32>) -> tensor<?x128x28x28xf32>
+    %297 = crt.relu %296 : (tensor<?x128x28x28xf32>) -> tensor<?x128x28x28xf32>
+    %298 = "onnx.Dim"(%297) {axis = 0 : si64} : (tensor<?x128x28x28xf32>) -> tensor<1xi64>
+    %299 = crt.constant : () -> tensor<1xi64>
+    %300 = crt.constant : () -> tensor<1xi64>
+    %301 = "onnx.Concat"(%298, %299, %300) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %302 = crt.reshape %297, %301 : (tensor<?x128x28x28xf32>, tensor<3xi64>) -> tensor<?x128x?xf32>
+    %303 = crt.constant : () -> tensor<2xi64>
+    %304 = crt.reshape %72, %303 : (tensor<128x128x1x1xf32>, tensor<2xi64>) -> tensor<128x128xf32>
+    %305 = "onnx.MatMul"(%304, %302) : (tensor<128x128xf32>, tensor<?x128x?xf32>) -> tensor<?x128x?xf32>
+    %306 = crt.constant : () -> tensor<1x128x1xf32>
+    %307 = crt.add %305, %306 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %308 = "onnx.Dim"(%297) {axis = 0 : si64} : (tensor<?x128x28x28xf32>) -> tensor<1xi64>
+    %309 = crt.constant : () -> tensor<1xi64>
+    %310 = crt.constant : () -> tensor<1xi64>
+    %311 = crt.constant : () -> tensor<1xi64>
+    %312 = "onnx.Concat"(%308, %311, %309, %310) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %313 = crt.reshape %307, %312 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x28x28xf32>
+    %314 = crt.relu %313 : (tensor<?x128x28x28xf32>) -> tensor<?x128x28x28xf32>
+    %315 = "onnx.Conv"(%314, %8, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_51", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x28x28xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x28x28xf32>
+    %316 = "onnx.Concat"(%291, %315) {axis = 1 : si64, onnx_node_name = "Concat_52"} : (tensor<?x128x28x28xf32>, tensor<?x32x28x28xf32>) -> tensor<?x160x28x28xf32>
+    %317 = crt.constant : () -> tensor<160x1x1xf32>
+    %318 = crt.mul %316, %317 : (tensor<?x160x28x28xf32>, tensor<160x1x1xf32>) -> tensor<?x160x28x28xf32>
+    %319 = crt.constant : () -> tensor<160x1x1xf32>
+    %320 = crt.add %318, %319 : (tensor<?x160x28x28xf32>, tensor<160x1x1xf32>) -> tensor<?x160x28x28xf32>
+    %321 = crt.relu %320 : (tensor<?x160x28x28xf32>) -> tensor<?x160x28x28xf32>
+    %322 = "onnx.Dim"(%321) {axis = 0 : si64} : (tensor<?x160x28x28xf32>) -> tensor<1xi64>
+    %323 = crt.constant : () -> tensor<1xi64>
+    %324 = crt.constant : () -> tensor<1xi64>
+    %325 = "onnx.Concat"(%322, %323, %324) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %326 = crt.reshape %321, %325 : (tensor<?x160x28x28xf32>, tensor<3xi64>) -> tensor<?x160x?xf32>
+    %327 = crt.constant : () -> tensor<2xi64>
+    %328 = crt.reshape %73, %327 : (tensor<128x160x1x1xf32>, tensor<2xi64>) -> tensor<128x160xf32>
+    %329 = "onnx.MatMul"(%328, %326) : (tensor<128x160xf32>, tensor<?x160x?xf32>) -> tensor<?x128x?xf32>
+    %330 = crt.constant : () -> tensor<1x128x1xf32>
+    %331 = crt.add %329, %330 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %332 = "onnx.Dim"(%321) {axis = 0 : si64} : (tensor<?x160x28x28xf32>) -> tensor<1xi64>
+    %333 = crt.constant : () -> tensor<1xi64>
+    %334 = crt.constant : () -> tensor<1xi64>
+    %335 = crt.constant : () -> tensor<1xi64>
+    %336 = "onnx.Concat"(%332, %335, %333, %334) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %337 = crt.reshape %331, %336 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x28x28xf32>
+    %338 = crt.relu %337 : (tensor<?x128x28x28xf32>) -> tensor<?x128x28x28xf32>
+    %339 = "onnx.Conv"(%338, %9, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_57", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x28x28xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x28x28xf32>
+    %340 = "onnx.Concat"(%291, %315, %339) {axis = 1 : si64, onnx_node_name = "Concat_58"} : (tensor<?x128x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>) -> tensor<?x192x28x28xf32>
+    %341 = crt.constant : () -> tensor<192x1x1xf32>
+    %342 = crt.mul %340, %341 : (tensor<?x192x28x28xf32>, tensor<192x1x1xf32>) -> tensor<?x192x28x28xf32>
+    %343 = crt.constant : () -> tensor<192x1x1xf32>
+    %344 = crt.add %342, %343 : (tensor<?x192x28x28xf32>, tensor<192x1x1xf32>) -> tensor<?x192x28x28xf32>
+    %345 = crt.relu %344 : (tensor<?x192x28x28xf32>) -> tensor<?x192x28x28xf32>
+    %346 = "onnx.Dim"(%345) {axis = 0 : si64} : (tensor<?x192x28x28xf32>) -> tensor<1xi64>
+    %347 = crt.constant : () -> tensor<1xi64>
+    %348 = crt.constant : () -> tensor<1xi64>
+    %349 = "onnx.Concat"(%346, %347, %348) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %350 = crt.reshape %345, %349 : (tensor<?x192x28x28xf32>, tensor<3xi64>) -> tensor<?x192x?xf32>
+    %351 = crt.constant : () -> tensor<2xi64>
+    %352 = crt.reshape %74, %351 : (tensor<128x192x1x1xf32>, tensor<2xi64>) -> tensor<128x192xf32>
+    %353 = "onnx.MatMul"(%352, %350) : (tensor<128x192xf32>, tensor<?x192x?xf32>) -> tensor<?x128x?xf32>
+    %354 = crt.constant : () -> tensor<1x128x1xf32>
+    %355 = crt.add %353, %354 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %356 = "onnx.Dim"(%345) {axis = 0 : si64} : (tensor<?x192x28x28xf32>) -> tensor<1xi64>
+    %357 = crt.constant : () -> tensor<1xi64>
+    %358 = crt.constant : () -> tensor<1xi64>
+    %359 = crt.constant : () -> tensor<1xi64>
+    %360 = "onnx.Concat"(%356, %359, %357, %358) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %361 = crt.reshape %355, %360 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x28x28xf32>
+    %362 = crt.relu %361 : (tensor<?x128x28x28xf32>) -> tensor<?x128x28x28xf32>
+    %363 = "onnx.Conv"(%362, %10, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_63", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x28x28xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x28x28xf32>
+    %364 = "onnx.Concat"(%291, %315, %339, %363) {axis = 1 : si64, onnx_node_name = "Concat_64"} : (tensor<?x128x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>) -> tensor<?x224x28x28xf32>
+    %365 = crt.constant : () -> tensor<224x1x1xf32>
+    %366 = crt.mul %364, %365 : (tensor<?x224x28x28xf32>, tensor<224x1x1xf32>) -> tensor<?x224x28x28xf32>
+    %367 = crt.constant : () -> tensor<224x1x1xf32>
+    %368 = crt.add %366, %367 : (tensor<?x224x28x28xf32>, tensor<224x1x1xf32>) -> tensor<?x224x28x28xf32>
+    %369 = crt.relu %368 : (tensor<?x224x28x28xf32>) -> tensor<?x224x28x28xf32>
+    %370 = "onnx.Dim"(%369) {axis = 0 : si64} : (tensor<?x224x28x28xf32>) -> tensor<1xi64>
+    %371 = crt.constant : () -> tensor<1xi64>
+    %372 = crt.constant : () -> tensor<1xi64>
+    %373 = "onnx.Concat"(%370, %371, %372) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %374 = crt.reshape %369, %373 : (tensor<?x224x28x28xf32>, tensor<3xi64>) -> tensor<?x224x?xf32>
+    %375 = crt.constant : () -> tensor<2xi64>
+    %376 = crt.reshape %75, %375 : (tensor<128x224x1x1xf32>, tensor<2xi64>) -> tensor<128x224xf32>
+    %377 = "onnx.MatMul"(%376, %374) : (tensor<128x224xf32>, tensor<?x224x?xf32>) -> tensor<?x128x?xf32>
+    %378 = crt.constant : () -> tensor<1x128x1xf32>
+    %379 = crt.add %377, %378 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %380 = "onnx.Dim"(%369) {axis = 0 : si64} : (tensor<?x224x28x28xf32>) -> tensor<1xi64>
+    %381 = crt.constant : () -> tensor<1xi64>
+    %382 = crt.constant : () -> tensor<1xi64>
+    %383 = crt.constant : () -> tensor<1xi64>
+    %384 = "onnx.Concat"(%380, %383, %381, %382) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %385 = crt.reshape %379, %384 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x28x28xf32>
+    %386 = crt.relu %385 : (tensor<?x128x28x28xf32>) -> tensor<?x128x28x28xf32>
+    %387 = "onnx.Conv"(%386, %11, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_69", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x28x28xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x28x28xf32>
+    %388 = "onnx.Concat"(%291, %315, %339, %363, %387) {axis = 1 : si64, onnx_node_name = "Concat_70"} : (tensor<?x128x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>) -> tensor<?x256x28x28xf32>
+    %389 = crt.constant : () -> tensor<256x1x1xf32>
+    %390 = crt.mul %388, %389 : (tensor<?x256x28x28xf32>, tensor<256x1x1xf32>) -> tensor<?x256x28x28xf32>
+    %391 = crt.constant : () -> tensor<256x1x1xf32>
+    %392 = crt.add %390, %391 : (tensor<?x256x28x28xf32>, tensor<256x1x1xf32>) -> tensor<?x256x28x28xf32>
+    %393 = crt.relu %392 : (tensor<?x256x28x28xf32>) -> tensor<?x256x28x28xf32>
+    %394 = "onnx.Dim"(%393) {axis = 0 : si64} : (tensor<?x256x28x28xf32>) -> tensor<1xi64>
+    %395 = crt.constant : () -> tensor<1xi64>
+    %396 = crt.constant : () -> tensor<1xi64>
+    %397 = "onnx.Concat"(%394, %395, %396) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %398 = crt.reshape %393, %397 : (tensor<?x256x28x28xf32>, tensor<3xi64>) -> tensor<?x256x?xf32>
+    %399 = crt.constant : () -> tensor<2xi64>
+    %400 = crt.reshape %76, %399 : (tensor<128x256x1x1xf32>, tensor<2xi64>) -> tensor<128x256xf32>
+    %401 = "onnx.MatMul"(%400, %398) : (tensor<128x256xf32>, tensor<?x256x?xf32>) -> tensor<?x128x?xf32>
+    %402 = crt.constant : () -> tensor<1x128x1xf32>
+    %403 = crt.add %401, %402 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %404 = "onnx.Dim"(%393) {axis = 0 : si64} : (tensor<?x256x28x28xf32>) -> tensor<1xi64>
+    %405 = crt.constant : () -> tensor<1xi64>
+    %406 = crt.constant : () -> tensor<1xi64>
+    %407 = crt.constant : () -> tensor<1xi64>
+    %408 = "onnx.Concat"(%404, %407, %405, %406) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %409 = crt.reshape %403, %408 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x28x28xf32>
+    %410 = crt.relu %409 : (tensor<?x128x28x28xf32>) -> tensor<?x128x28x28xf32>
+    %411 = "onnx.Conv"(%410, %12, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_75", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x28x28xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x28x28xf32>
+    %412 = "onnx.Concat"(%291, %315, %339, %363, %387, %411) {axis = 1 : si64, onnx_node_name = "Concat_76"} : (tensor<?x128x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>) -> tensor<?x288x28x28xf32>
+    %413 = crt.constant : () -> tensor<288x1x1xf32>
+    %414 = crt.mul %412, %413 : (tensor<?x288x28x28xf32>, tensor<288x1x1xf32>) -> tensor<?x288x28x28xf32>
+    %415 = crt.constant : () -> tensor<288x1x1xf32>
+    %416 = crt.add %414, %415 : (tensor<?x288x28x28xf32>, tensor<288x1x1xf32>) -> tensor<?x288x28x28xf32>
+    %417 = crt.relu %416 : (tensor<?x288x28x28xf32>) -> tensor<?x288x28x28xf32>
+    %418 = "onnx.Dim"(%417) {axis = 0 : si64} : (tensor<?x288x28x28xf32>) -> tensor<1xi64>
+    %419 = crt.constant : () -> tensor<1xi64>
+    %420 = crt.constant : () -> tensor<1xi64>
+    %421 = "onnx.Concat"(%418, %419, %420) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %422 = crt.reshape %417, %421 : (tensor<?x288x28x28xf32>, tensor<3xi64>) -> tensor<?x288x?xf32>
+    %423 = crt.constant : () -> tensor<2xi64>
+    %424 = crt.reshape %77, %423 : (tensor<128x288x1x1xf32>, tensor<2xi64>) -> tensor<128x288xf32>
+    %425 = "onnx.MatMul"(%424, %422) : (tensor<128x288xf32>, tensor<?x288x?xf32>) -> tensor<?x128x?xf32>
+    %426 = crt.constant : () -> tensor<1x128x1xf32>
+    %427 = crt.add %425, %426 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %428 = "onnx.Dim"(%417) {axis = 0 : si64} : (tensor<?x288x28x28xf32>) -> tensor<1xi64>
+    %429 = crt.constant : () -> tensor<1xi64>
+    %430 = crt.constant : () -> tensor<1xi64>
+    %431 = crt.constant : () -> tensor<1xi64>
+    %432 = "onnx.Concat"(%428, %431, %429, %430) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %433 = crt.reshape %427, %432 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x28x28xf32>
+    %434 = crt.relu %433 : (tensor<?x128x28x28xf32>) -> tensor<?x128x28x28xf32>
+    %435 = "onnx.Conv"(%434, %13, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_81", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x28x28xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x28x28xf32>
+    %436 = "onnx.Concat"(%291, %315, %339, %363, %387, %411, %435) {axis = 1 : si64, onnx_node_name = "Concat_82"} : (tensor<?x128x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>) -> tensor<?x320x28x28xf32>
+    %437 = crt.constant : () -> tensor<320x1x1xf32>
+    %438 = crt.mul %436, %437 : (tensor<?x320x28x28xf32>, tensor<320x1x1xf32>) -> tensor<?x320x28x28xf32>
+    %439 = crt.constant : () -> tensor<320x1x1xf32>
+    %440 = crt.add %438, %439 : (tensor<?x320x28x28xf32>, tensor<320x1x1xf32>) -> tensor<?x320x28x28xf32>
+    %441 = crt.relu %440 : (tensor<?x320x28x28xf32>) -> tensor<?x320x28x28xf32>
+    %442 = "onnx.Dim"(%441) {axis = 0 : si64} : (tensor<?x320x28x28xf32>) -> tensor<1xi64>
+    %443 = crt.constant : () -> tensor<1xi64>
+    %444 = crt.constant : () -> tensor<1xi64>
+    %445 = "onnx.Concat"(%442, %443, %444) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %446 = crt.reshape %441, %445 : (tensor<?x320x28x28xf32>, tensor<3xi64>) -> tensor<?x320x?xf32>
+    %447 = crt.constant : () -> tensor<2xi64>
+    %448 = crt.reshape %78, %447 : (tensor<128x320x1x1xf32>, tensor<2xi64>) -> tensor<128x320xf32>
+    %449 = "onnx.MatMul"(%448, %446) : (tensor<128x320xf32>, tensor<?x320x?xf32>) -> tensor<?x128x?xf32>
+    %450 = crt.constant : () -> tensor<1x128x1xf32>
+    %451 = crt.add %449, %450 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %452 = "onnx.Dim"(%441) {axis = 0 : si64} : (tensor<?x320x28x28xf32>) -> tensor<1xi64>
+    %453 = crt.constant : () -> tensor<1xi64>
+    %454 = crt.constant : () -> tensor<1xi64>
+    %455 = crt.constant : () -> tensor<1xi64>
+    %456 = "onnx.Concat"(%452, %455, %453, %454) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %457 = crt.reshape %451, %456 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x28x28xf32>
+    %458 = crt.relu %457 : (tensor<?x128x28x28xf32>) -> tensor<?x128x28x28xf32>
+    %459 = "onnx.Conv"(%458, %14, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_87", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x28x28xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x28x28xf32>
+    %460 = "onnx.Concat"(%291, %315, %339, %363, %387, %411, %435, %459) {axis = 1 : si64, onnx_node_name = "Concat_88"} : (tensor<?x128x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>) -> tensor<?x352x28x28xf32>
+    %461 = crt.constant : () -> tensor<352x1x1xf32>
+    %462 = crt.mul %460, %461 : (tensor<?x352x28x28xf32>, tensor<352x1x1xf32>) -> tensor<?x352x28x28xf32>
+    %463 = crt.constant : () -> tensor<352x1x1xf32>
+    %464 = crt.add %462, %463 : (tensor<?x352x28x28xf32>, tensor<352x1x1xf32>) -> tensor<?x352x28x28xf32>
+    %465 = crt.relu %464 : (tensor<?x352x28x28xf32>) -> tensor<?x352x28x28xf32>
+    %466 = "onnx.Dim"(%465) {axis = 0 : si64} : (tensor<?x352x28x28xf32>) -> tensor<1xi64>
+    %467 = crt.constant : () -> tensor<1xi64>
+    %468 = crt.constant : () -> tensor<1xi64>
+    %469 = "onnx.Concat"(%466, %467, %468) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %470 = crt.reshape %465, %469 : (tensor<?x352x28x28xf32>, tensor<3xi64>) -> tensor<?x352x?xf32>
+    %471 = crt.constant : () -> tensor<2xi64>
+    %472 = crt.reshape %79, %471 : (tensor<128x352x1x1xf32>, tensor<2xi64>) -> tensor<128x352xf32>
+    %473 = "onnx.MatMul"(%472, %470) : (tensor<128x352xf32>, tensor<?x352x?xf32>) -> tensor<?x128x?xf32>
+    %474 = crt.constant : () -> tensor<1x128x1xf32>
+    %475 = crt.add %473, %474 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %476 = "onnx.Dim"(%465) {axis = 0 : si64} : (tensor<?x352x28x28xf32>) -> tensor<1xi64>
+    %477 = crt.constant : () -> tensor<1xi64>
+    %478 = crt.constant : () -> tensor<1xi64>
+    %479 = crt.constant : () -> tensor<1xi64>
+    %480 = "onnx.Concat"(%476, %479, %477, %478) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %481 = crt.reshape %475, %480 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x28x28xf32>
+    %482 = crt.relu %481 : (tensor<?x128x28x28xf32>) -> tensor<?x128x28x28xf32>
+    %483 = "onnx.Conv"(%482, %15, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_93", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x28x28xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x28x28xf32>
+    %484 = "onnx.Concat"(%291, %315, %339, %363, %387, %411, %435, %459, %483) {axis = 1 : si64, onnx_node_name = "Concat_94"} : (tensor<?x128x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>) -> tensor<?x384x28x28xf32>
+    %485 = crt.constant : () -> tensor<384x1x1xf32>
+    %486 = crt.mul %484, %485 : (tensor<?x384x28x28xf32>, tensor<384x1x1xf32>) -> tensor<?x384x28x28xf32>
+    %487 = crt.constant : () -> tensor<384x1x1xf32>
+    %488 = crt.add %486, %487 : (tensor<?x384x28x28xf32>, tensor<384x1x1xf32>) -> tensor<?x384x28x28xf32>
+    %489 = crt.relu %488 : (tensor<?x384x28x28xf32>) -> tensor<?x384x28x28xf32>
+    %490 = "onnx.Dim"(%489) {axis = 0 : si64} : (tensor<?x384x28x28xf32>) -> tensor<1xi64>
+    %491 = crt.constant : () -> tensor<1xi64>
+    %492 = crt.constant : () -> tensor<1xi64>
+    %493 = "onnx.Concat"(%490, %491, %492) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %494 = crt.reshape %489, %493 : (tensor<?x384x28x28xf32>, tensor<3xi64>) -> tensor<?x384x?xf32>
+    %495 = crt.constant : () -> tensor<2xi64>
+    %496 = crt.reshape %80, %495 : (tensor<128x384x1x1xf32>, tensor<2xi64>) -> tensor<128x384xf32>
+    %497 = "onnx.MatMul"(%496, %494) : (tensor<128x384xf32>, tensor<?x384x?xf32>) -> tensor<?x128x?xf32>
+    %498 = crt.constant : () -> tensor<1x128x1xf32>
+    %499 = crt.add %497, %498 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %500 = "onnx.Dim"(%489) {axis = 0 : si64} : (tensor<?x384x28x28xf32>) -> tensor<1xi64>
+    %501 = crt.constant : () -> tensor<1xi64>
+    %502 = crt.constant : () -> tensor<1xi64>
+    %503 = crt.constant : () -> tensor<1xi64>
+    %504 = "onnx.Concat"(%500, %503, %501, %502) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %505 = crt.reshape %499, %504 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x28x28xf32>
+    %506 = crt.relu %505 : (tensor<?x128x28x28xf32>) -> tensor<?x128x28x28xf32>
+    %507 = "onnx.Conv"(%506, %16, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_99", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x28x28xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x28x28xf32>
+    %508 = "onnx.Concat"(%291, %315, %339, %363, %387, %411, %435, %459, %483, %507) {axis = 1 : si64, onnx_node_name = "Concat_100"} : (tensor<?x128x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>) -> tensor<?x416x28x28xf32>
+    %509 = crt.constant : () -> tensor<416x1x1xf32>
+    %510 = crt.mul %508, %509 : (tensor<?x416x28x28xf32>, tensor<416x1x1xf32>) -> tensor<?x416x28x28xf32>
+    %511 = crt.constant : () -> tensor<416x1x1xf32>
+    %512 = crt.add %510, %511 : (tensor<?x416x28x28xf32>, tensor<416x1x1xf32>) -> tensor<?x416x28x28xf32>
+    %513 = crt.relu %512 : (tensor<?x416x28x28xf32>) -> tensor<?x416x28x28xf32>
+    %514 = "onnx.Dim"(%513) {axis = 0 : si64} : (tensor<?x416x28x28xf32>) -> tensor<1xi64>
+    %515 = crt.constant : () -> tensor<1xi64>
+    %516 = crt.constant : () -> tensor<1xi64>
+    %517 = "onnx.Concat"(%514, %515, %516) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %518 = crt.reshape %513, %517 : (tensor<?x416x28x28xf32>, tensor<3xi64>) -> tensor<?x416x?xf32>
+    %519 = crt.constant : () -> tensor<2xi64>
+    %520 = crt.reshape %81, %519 : (tensor<128x416x1x1xf32>, tensor<2xi64>) -> tensor<128x416xf32>
+    %521 = "onnx.MatMul"(%520, %518) : (tensor<128x416xf32>, tensor<?x416x?xf32>) -> tensor<?x128x?xf32>
+    %522 = crt.constant : () -> tensor<1x128x1xf32>
+    %523 = crt.add %521, %522 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %524 = "onnx.Dim"(%513) {axis = 0 : si64} : (tensor<?x416x28x28xf32>) -> tensor<1xi64>
+    %525 = crt.constant : () -> tensor<1xi64>
+    %526 = crt.constant : () -> tensor<1xi64>
+    %527 = crt.constant : () -> tensor<1xi64>
+    %528 = "onnx.Concat"(%524, %527, %525, %526) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %529 = crt.reshape %523, %528 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x28x28xf32>
+    %530 = crt.relu %529 : (tensor<?x128x28x28xf32>) -> tensor<?x128x28x28xf32>
+    %531 = "onnx.Conv"(%530, %17, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_105", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x28x28xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x28x28xf32>
+    %532 = "onnx.Concat"(%291, %315, %339, %363, %387, %411, %435, %459, %483, %507, %531) {axis = 1 : si64, onnx_node_name = "Concat_106"} : (tensor<?x128x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>) -> tensor<?x448x28x28xf32>
+    %533 = crt.constant : () -> tensor<448x1x1xf32>
+    %534 = crt.mul %532, %533 : (tensor<?x448x28x28xf32>, tensor<448x1x1xf32>) -> tensor<?x448x28x28xf32>
+    %535 = crt.constant : () -> tensor<448x1x1xf32>
+    %536 = crt.add %534, %535 : (tensor<?x448x28x28xf32>, tensor<448x1x1xf32>) -> tensor<?x448x28x28xf32>
+    %537 = crt.relu %536 : (tensor<?x448x28x28xf32>) -> tensor<?x448x28x28xf32>
+    %538 = "onnx.Dim"(%537) {axis = 0 : si64} : (tensor<?x448x28x28xf32>) -> tensor<1xi64>
+    %539 = crt.constant : () -> tensor<1xi64>
+    %540 = crt.constant : () -> tensor<1xi64>
+    %541 = "onnx.Concat"(%538, %539, %540) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %542 = crt.reshape %537, %541 : (tensor<?x448x28x28xf32>, tensor<3xi64>) -> tensor<?x448x?xf32>
+    %543 = crt.constant : () -> tensor<2xi64>
+    %544 = crt.reshape %82, %543 : (tensor<128x448x1x1xf32>, tensor<2xi64>) -> tensor<128x448xf32>
+    %545 = "onnx.MatMul"(%544, %542) : (tensor<128x448xf32>, tensor<?x448x?xf32>) -> tensor<?x128x?xf32>
+    %546 = crt.constant : () -> tensor<1x128x1xf32>
+    %547 = crt.add %545, %546 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %548 = "onnx.Dim"(%537) {axis = 0 : si64} : (tensor<?x448x28x28xf32>) -> tensor<1xi64>
+    %549 = crt.constant : () -> tensor<1xi64>
+    %550 = crt.constant : () -> tensor<1xi64>
+    %551 = crt.constant : () -> tensor<1xi64>
+    %552 = "onnx.Concat"(%548, %551, %549, %550) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %553 = crt.reshape %547, %552 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x28x28xf32>
+    %554 = crt.relu %553 : (tensor<?x128x28x28xf32>) -> tensor<?x128x28x28xf32>
+    %555 = "onnx.Conv"(%554, %18, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_111", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x28x28xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x28x28xf32>
+    %556 = "onnx.Concat"(%291, %315, %339, %363, %387, %411, %435, %459, %483, %507, %531, %555) {axis = 1 : si64, onnx_node_name = "Concat_112"} : (tensor<?x128x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>) -> tensor<?x480x28x28xf32>
+    %557 = crt.constant : () -> tensor<480x1x1xf32>
+    %558 = crt.mul %556, %557 : (tensor<?x480x28x28xf32>, tensor<480x1x1xf32>) -> tensor<?x480x28x28xf32>
+    %559 = crt.constant : () -> tensor<480x1x1xf32>
+    %560 = crt.add %558, %559 : (tensor<?x480x28x28xf32>, tensor<480x1x1xf32>) -> tensor<?x480x28x28xf32>
+    %561 = crt.relu %560 : (tensor<?x480x28x28xf32>) -> tensor<?x480x28x28xf32>
+    %562 = "onnx.Dim"(%561) {axis = 0 : si64} : (tensor<?x480x28x28xf32>) -> tensor<1xi64>
+    %563 = crt.constant : () -> tensor<1xi64>
+    %564 = crt.constant : () -> tensor<1xi64>
+    %565 = "onnx.Concat"(%562, %563, %564) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %566 = crt.reshape %561, %565 : (tensor<?x480x28x28xf32>, tensor<3xi64>) -> tensor<?x480x?xf32>
+    %567 = crt.constant : () -> tensor<2xi64>
+    %568 = crt.reshape %83, %567 : (tensor<128x480x1x1xf32>, tensor<2xi64>) -> tensor<128x480xf32>
+    %569 = "onnx.MatMul"(%568, %566) : (tensor<128x480xf32>, tensor<?x480x?xf32>) -> tensor<?x128x?xf32>
+    %570 = crt.constant : () -> tensor<1x128x1xf32>
+    %571 = crt.add %569, %570 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %572 = "onnx.Dim"(%561) {axis = 0 : si64} : (tensor<?x480x28x28xf32>) -> tensor<1xi64>
+    %573 = crt.constant : () -> tensor<1xi64>
+    %574 = crt.constant : () -> tensor<1xi64>
+    %575 = crt.constant : () -> tensor<1xi64>
+    %576 = "onnx.Concat"(%572, %575, %573, %574) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %577 = crt.reshape %571, %576 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x28x28xf32>
+    %578 = crt.relu %577 : (tensor<?x128x28x28xf32>) -> tensor<?x128x28x28xf32>
+    %579 = "onnx.Conv"(%578, %19, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_117", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x28x28xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x28x28xf32>
+    %580 = "onnx.Concat"(%291, %315, %339, %363, %387, %411, %435, %459, %483, %507, %531, %555, %579) {axis = 1 : si64, onnx_node_name = "Concat_118"} : (tensor<?x128x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>, tensor<?x32x28x28xf32>) -> tensor<?x512x28x28xf32>
+    %581 = crt.constant : () -> tensor<512x1x1xf32>
+    %582 = crt.mul %580, %581 : (tensor<?x512x28x28xf32>, tensor<512x1x1xf32>) -> tensor<?x512x28x28xf32>
+    %583 = crt.constant : () -> tensor<512x1x1xf32>
+    %584 = crt.add %582, %583 : (tensor<?x512x28x28xf32>, tensor<512x1x1xf32>) -> tensor<?x512x28x28xf32>
+    %585 = crt.relu %584 : (tensor<?x512x28x28xf32>) -> tensor<?x512x28x28xf32>
+    %586 = "onnx.Dim"(%585) {axis = 0 : si64} : (tensor<?x512x28x28xf32>) -> tensor<1xi64>
+    %587 = crt.constant : () -> tensor<1xi64>
+    %588 = crt.constant : () -> tensor<1xi64>
+    %589 = "onnx.Concat"(%586, %587, %588) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %590 = crt.reshape %585, %589 : (tensor<?x512x28x28xf32>, tensor<3xi64>) -> tensor<?x512x?xf32>
+    %591 = crt.constant : () -> tensor<2xi64>
+    %592 = crt.reshape %20, %591 : (tensor<256x512x1x1xf32>, tensor<2xi64>) -> tensor<256x512xf32>
+    %593 = "onnx.MatMul"(%592, %590) : (tensor<256x512xf32>, tensor<?x512x?xf32>) -> tensor<?x256x?xf32>
+    %594 = "onnx.Dim"(%585) {axis = 0 : si64} : (tensor<?x512x28x28xf32>) -> tensor<1xi64>
+    %595 = crt.constant : () -> tensor<1xi64>
+    %596 = crt.constant : () -> tensor<1xi64>
+    %597 = crt.constant : () -> tensor<1xi64>
+    %598 = "onnx.Concat"(%594, %597, %595, %596) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %599 = crt.reshape %593, %598 : (tensor<?x256x?xf32>, tensor<4xi64>) -> tensor<?x256x28x28xf32>
+    %600 = "onnx.AveragePool"(%599) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [2, 2], onnx_node_name = "AveragePool_124", pads = [0, 0, 0, 0], strides = [2, 2]} : (tensor<?x256x28x28xf32>) -> tensor<?x256x14x14xf32>
+    %601 = "onnx.Concat"(%600) {axis = 1 : si64, onnx_node_name = "Concat_125"} : (tensor<?x256x14x14xf32>) -> tensor<?x256x14x14xf32>
+    %602 = crt.constant : () -> tensor<256x1x1xf32>
+    %603 = crt.mul %601, %602 : (tensor<?x256x14x14xf32>, tensor<256x1x1xf32>) -> tensor<?x256x14x14xf32>
+    %604 = crt.constant : () -> tensor<256x1x1xf32>
+    %605 = crt.add %603, %604 : (tensor<?x256x14x14xf32>, tensor<256x1x1xf32>) -> tensor<?x256x14x14xf32>
+    %606 = crt.relu %605 : (tensor<?x256x14x14xf32>) -> tensor<?x256x14x14xf32>
+    %607 = "onnx.Dim"(%606) {axis = 0 : si64} : (tensor<?x256x14x14xf32>) -> tensor<1xi64>
+    %608 = crt.constant : () -> tensor<1xi64>
+    %609 = crt.constant : () -> tensor<1xi64>
+    %610 = "onnx.Concat"(%607, %608, %609) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %611 = crt.reshape %606, %610 : (tensor<?x256x14x14xf32>, tensor<3xi64>) -> tensor<?x256x?xf32>
+    %612 = crt.constant : () -> tensor<2xi64>
+    %613 = crt.reshape %84, %612 : (tensor<128x256x1x1xf32>, tensor<2xi64>) -> tensor<128x256xf32>
+    %614 = "onnx.MatMul"(%613, %611) : (tensor<128x256xf32>, tensor<?x256x?xf32>) -> tensor<?x128x?xf32>
+    %615 = crt.constant : () -> tensor<1x128x1xf32>
+    %616 = crt.add %614, %615 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %617 = "onnx.Dim"(%606) {axis = 0 : si64} : (tensor<?x256x14x14xf32>) -> tensor<1xi64>
+    %618 = crt.constant : () -> tensor<1xi64>
+    %619 = crt.constant : () -> tensor<1xi64>
+    %620 = crt.constant : () -> tensor<1xi64>
+    %621 = "onnx.Concat"(%617, %620, %618, %619) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %622 = crt.reshape %616, %621 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %623 = crt.relu %622 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %624 = "onnx.Conv"(%623, %21, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_130", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %625 = "onnx.Concat"(%600, %624) {axis = 1 : si64, onnx_node_name = "Concat_131"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x288x14x14xf32>
+    %626 = crt.constant : () -> tensor<288x1x1xf32>
+    %627 = crt.mul %625, %626 : (tensor<?x288x14x14xf32>, tensor<288x1x1xf32>) -> tensor<?x288x14x14xf32>
+    %628 = crt.constant : () -> tensor<288x1x1xf32>
+    %629 = crt.add %627, %628 : (tensor<?x288x14x14xf32>, tensor<288x1x1xf32>) -> tensor<?x288x14x14xf32>
+    %630 = crt.relu %629 : (tensor<?x288x14x14xf32>) -> tensor<?x288x14x14xf32>
+    %631 = "onnx.Dim"(%630) {axis = 0 : si64} : (tensor<?x288x14x14xf32>) -> tensor<1xi64>
+    %632 = crt.constant : () -> tensor<1xi64>
+    %633 = crt.constant : () -> tensor<1xi64>
+    %634 = "onnx.Concat"(%631, %632, %633) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %635 = crt.reshape %630, %634 : (tensor<?x288x14x14xf32>, tensor<3xi64>) -> tensor<?x288x?xf32>
+    %636 = crt.constant : () -> tensor<2xi64>
+    %637 = crt.reshape %85, %636 : (tensor<128x288x1x1xf32>, tensor<2xi64>) -> tensor<128x288xf32>
+    %638 = "onnx.MatMul"(%637, %635) : (tensor<128x288xf32>, tensor<?x288x?xf32>) -> tensor<?x128x?xf32>
+    %639 = crt.constant : () -> tensor<1x128x1xf32>
+    %640 = crt.add %638, %639 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %641 = "onnx.Dim"(%630) {axis = 0 : si64} : (tensor<?x288x14x14xf32>) -> tensor<1xi64>
+    %642 = crt.constant : () -> tensor<1xi64>
+    %643 = crt.constant : () -> tensor<1xi64>
+    %644 = crt.constant : () -> tensor<1xi64>
+    %645 = "onnx.Concat"(%641, %644, %642, %643) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %646 = crt.reshape %640, %645 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %647 = crt.relu %646 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %648 = "onnx.Conv"(%647, %22, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_136", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %649 = "onnx.Concat"(%600, %624, %648) {axis = 1 : si64, onnx_node_name = "Concat_137"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x320x14x14xf32>
+    %650 = crt.constant : () -> tensor<320x1x1xf32>
+    %651 = crt.mul %649, %650 : (tensor<?x320x14x14xf32>, tensor<320x1x1xf32>) -> tensor<?x320x14x14xf32>
+    %652 = crt.constant : () -> tensor<320x1x1xf32>
+    %653 = crt.add %651, %652 : (tensor<?x320x14x14xf32>, tensor<320x1x1xf32>) -> tensor<?x320x14x14xf32>
+    %654 = crt.relu %653 : (tensor<?x320x14x14xf32>) -> tensor<?x320x14x14xf32>
+    %655 = "onnx.Dim"(%654) {axis = 0 : si64} : (tensor<?x320x14x14xf32>) -> tensor<1xi64>
+    %656 = crt.constant : () -> tensor<1xi64>
+    %657 = crt.constant : () -> tensor<1xi64>
+    %658 = "onnx.Concat"(%655, %656, %657) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %659 = crt.reshape %654, %658 : (tensor<?x320x14x14xf32>, tensor<3xi64>) -> tensor<?x320x?xf32>
+    %660 = crt.constant : () -> tensor<2xi64>
+    %661 = crt.reshape %86, %660 : (tensor<128x320x1x1xf32>, tensor<2xi64>) -> tensor<128x320xf32>
+    %662 = "onnx.MatMul"(%661, %659) : (tensor<128x320xf32>, tensor<?x320x?xf32>) -> tensor<?x128x?xf32>
+    %663 = crt.constant : () -> tensor<1x128x1xf32>
+    %664 = crt.add %662, %663 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %665 = "onnx.Dim"(%654) {axis = 0 : si64} : (tensor<?x320x14x14xf32>) -> tensor<1xi64>
+    %666 = crt.constant : () -> tensor<1xi64>
+    %667 = crt.constant : () -> tensor<1xi64>
+    %668 = crt.constant : () -> tensor<1xi64>
+    %669 = "onnx.Concat"(%665, %668, %666, %667) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %670 = crt.reshape %664, %669 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %671 = crt.relu %670 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %672 = "onnx.Conv"(%671, %23, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_142", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %673 = "onnx.Concat"(%600, %624, %648, %672) {axis = 1 : si64, onnx_node_name = "Concat_143"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x352x14x14xf32>
+    %674 = crt.constant : () -> tensor<352x1x1xf32>
+    %675 = crt.mul %673, %674 : (tensor<?x352x14x14xf32>, tensor<352x1x1xf32>) -> tensor<?x352x14x14xf32>
+    %676 = crt.constant : () -> tensor<352x1x1xf32>
+    %677 = crt.add %675, %676 : (tensor<?x352x14x14xf32>, tensor<352x1x1xf32>) -> tensor<?x352x14x14xf32>
+    %678 = crt.relu %677 : (tensor<?x352x14x14xf32>) -> tensor<?x352x14x14xf32>
+    %679 = "onnx.Dim"(%678) {axis = 0 : si64} : (tensor<?x352x14x14xf32>) -> tensor<1xi64>
+    %680 = crt.constant : () -> tensor<1xi64>
+    %681 = crt.constant : () -> tensor<1xi64>
+    %682 = "onnx.Concat"(%679, %680, %681) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %683 = crt.reshape %678, %682 : (tensor<?x352x14x14xf32>, tensor<3xi64>) -> tensor<?x352x?xf32>
+    %684 = crt.constant : () -> tensor<2xi64>
+    %685 = crt.reshape %87, %684 : (tensor<128x352x1x1xf32>, tensor<2xi64>) -> tensor<128x352xf32>
+    %686 = "onnx.MatMul"(%685, %683) : (tensor<128x352xf32>, tensor<?x352x?xf32>) -> tensor<?x128x?xf32>
+    %687 = crt.constant : () -> tensor<1x128x1xf32>
+    %688 = crt.add %686, %687 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %689 = "onnx.Dim"(%678) {axis = 0 : si64} : (tensor<?x352x14x14xf32>) -> tensor<1xi64>
+    %690 = crt.constant : () -> tensor<1xi64>
+    %691 = crt.constant : () -> tensor<1xi64>
+    %692 = crt.constant : () -> tensor<1xi64>
+    %693 = "onnx.Concat"(%689, %692, %690, %691) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %694 = crt.reshape %688, %693 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %695 = crt.relu %694 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %696 = "onnx.Conv"(%695, %24, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_148", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %697 = "onnx.Concat"(%600, %624, %648, %672, %696) {axis = 1 : si64, onnx_node_name = "Concat_149"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x384x14x14xf32>
+    %698 = crt.constant : () -> tensor<384x1x1xf32>
+    %699 = crt.mul %697, %698 : (tensor<?x384x14x14xf32>, tensor<384x1x1xf32>) -> tensor<?x384x14x14xf32>
+    %700 = crt.constant : () -> tensor<384x1x1xf32>
+    %701 = crt.add %699, %700 : (tensor<?x384x14x14xf32>, tensor<384x1x1xf32>) -> tensor<?x384x14x14xf32>
+    %702 = crt.relu %701 : (tensor<?x384x14x14xf32>) -> tensor<?x384x14x14xf32>
+    %703 = "onnx.Dim"(%702) {axis = 0 : si64} : (tensor<?x384x14x14xf32>) -> tensor<1xi64>
+    %704 = crt.constant : () -> tensor<1xi64>
+    %705 = crt.constant : () -> tensor<1xi64>
+    %706 = "onnx.Concat"(%703, %704, %705) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %707 = crt.reshape %702, %706 : (tensor<?x384x14x14xf32>, tensor<3xi64>) -> tensor<?x384x?xf32>
+    %708 = crt.constant : () -> tensor<2xi64>
+    %709 = crt.reshape %88, %708 : (tensor<128x384x1x1xf32>, tensor<2xi64>) -> tensor<128x384xf32>
+    %710 = "onnx.MatMul"(%709, %707) : (tensor<128x384xf32>, tensor<?x384x?xf32>) -> tensor<?x128x?xf32>
+    %711 = crt.constant : () -> tensor<1x128x1xf32>
+    %712 = crt.add %710, %711 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %713 = "onnx.Dim"(%702) {axis = 0 : si64} : (tensor<?x384x14x14xf32>) -> tensor<1xi64>
+    %714 = crt.constant : () -> tensor<1xi64>
+    %715 = crt.constant : () -> tensor<1xi64>
+    %716 = crt.constant : () -> tensor<1xi64>
+    %717 = "onnx.Concat"(%713, %716, %714, %715) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %718 = crt.reshape %712, %717 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %719 = crt.relu %718 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %720 = "onnx.Conv"(%719, %25, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_154", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %721 = "onnx.Concat"(%600, %624, %648, %672, %696, %720) {axis = 1 : si64, onnx_node_name = "Concat_155"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x416x14x14xf32>
+    %722 = crt.constant : () -> tensor<416x1x1xf32>
+    %723 = crt.mul %721, %722 : (tensor<?x416x14x14xf32>, tensor<416x1x1xf32>) -> tensor<?x416x14x14xf32>
+    %724 = crt.constant : () -> tensor<416x1x1xf32>
+    %725 = crt.add %723, %724 : (tensor<?x416x14x14xf32>, tensor<416x1x1xf32>) -> tensor<?x416x14x14xf32>
+    %726 = crt.relu %725 : (tensor<?x416x14x14xf32>) -> tensor<?x416x14x14xf32>
+    %727 = "onnx.Dim"(%726) {axis = 0 : si64} : (tensor<?x416x14x14xf32>) -> tensor<1xi64>
+    %728 = crt.constant : () -> tensor<1xi64>
+    %729 = crt.constant : () -> tensor<1xi64>
+    %730 = "onnx.Concat"(%727, %728, %729) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %731 = crt.reshape %726, %730 : (tensor<?x416x14x14xf32>, tensor<3xi64>) -> tensor<?x416x?xf32>
+    %732 = crt.constant : () -> tensor<2xi64>
+    %733 = crt.reshape %89, %732 : (tensor<128x416x1x1xf32>, tensor<2xi64>) -> tensor<128x416xf32>
+    %734 = "onnx.MatMul"(%733, %731) : (tensor<128x416xf32>, tensor<?x416x?xf32>) -> tensor<?x128x?xf32>
+    %735 = crt.constant : () -> tensor<1x128x1xf32>
+    %736 = crt.add %734, %735 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %737 = "onnx.Dim"(%726) {axis = 0 : si64} : (tensor<?x416x14x14xf32>) -> tensor<1xi64>
+    %738 = crt.constant : () -> tensor<1xi64>
+    %739 = crt.constant : () -> tensor<1xi64>
+    %740 = crt.constant : () -> tensor<1xi64>
+    %741 = "onnx.Concat"(%737, %740, %738, %739) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %742 = crt.reshape %736, %741 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %743 = crt.relu %742 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %744 = "onnx.Conv"(%743, %26, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_160", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %745 = "onnx.Concat"(%600, %624, %648, %672, %696, %720, %744) {axis = 1 : si64, onnx_node_name = "Concat_161"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x448x14x14xf32>
+    %746 = crt.constant : () -> tensor<448x1x1xf32>
+    %747 = crt.mul %745, %746 : (tensor<?x448x14x14xf32>, tensor<448x1x1xf32>) -> tensor<?x448x14x14xf32>
+    %748 = crt.constant : () -> tensor<448x1x1xf32>
+    %749 = crt.add %747, %748 : (tensor<?x448x14x14xf32>, tensor<448x1x1xf32>) -> tensor<?x448x14x14xf32>
+    %750 = crt.relu %749 : (tensor<?x448x14x14xf32>) -> tensor<?x448x14x14xf32>
+    %751 = "onnx.Dim"(%750) {axis = 0 : si64} : (tensor<?x448x14x14xf32>) -> tensor<1xi64>
+    %752 = crt.constant : () -> tensor<1xi64>
+    %753 = crt.constant : () -> tensor<1xi64>
+    %754 = "onnx.Concat"(%751, %752, %753) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %755 = crt.reshape %750, %754 : (tensor<?x448x14x14xf32>, tensor<3xi64>) -> tensor<?x448x?xf32>
+    %756 = crt.constant : () -> tensor<2xi64>
+    %757 = crt.reshape %90, %756 : (tensor<128x448x1x1xf32>, tensor<2xi64>) -> tensor<128x448xf32>
+    %758 = "onnx.MatMul"(%757, %755) : (tensor<128x448xf32>, tensor<?x448x?xf32>) -> tensor<?x128x?xf32>
+    %759 = crt.constant : () -> tensor<1x128x1xf32>
+    %760 = crt.add %758, %759 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %761 = "onnx.Dim"(%750) {axis = 0 : si64} : (tensor<?x448x14x14xf32>) -> tensor<1xi64>
+    %762 = crt.constant : () -> tensor<1xi64>
+    %763 = crt.constant : () -> tensor<1xi64>
+    %764 = crt.constant : () -> tensor<1xi64>
+    %765 = "onnx.Concat"(%761, %764, %762, %763) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %766 = crt.reshape %760, %765 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %767 = crt.relu %766 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %768 = "onnx.Conv"(%767, %27, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_166", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %769 = "onnx.Concat"(%600, %624, %648, %672, %696, %720, %744, %768) {axis = 1 : si64, onnx_node_name = "Concat_167"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x480x14x14xf32>
+    %770 = crt.constant : () -> tensor<480x1x1xf32>
+    %771 = crt.mul %769, %770 : (tensor<?x480x14x14xf32>, tensor<480x1x1xf32>) -> tensor<?x480x14x14xf32>
+    %772 = crt.constant : () -> tensor<480x1x1xf32>
+    %773 = crt.add %771, %772 : (tensor<?x480x14x14xf32>, tensor<480x1x1xf32>) -> tensor<?x480x14x14xf32>
+    %774 = crt.relu %773 : (tensor<?x480x14x14xf32>) -> tensor<?x480x14x14xf32>
+    %775 = "onnx.Dim"(%774) {axis = 0 : si64} : (tensor<?x480x14x14xf32>) -> tensor<1xi64>
+    %776 = crt.constant : () -> tensor<1xi64>
+    %777 = crt.constant : () -> tensor<1xi64>
+    %778 = "onnx.Concat"(%775, %776, %777) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %779 = crt.reshape %774, %778 : (tensor<?x480x14x14xf32>, tensor<3xi64>) -> tensor<?x480x?xf32>
+    %780 = crt.constant : () -> tensor<2xi64>
+    %781 = crt.reshape %91, %780 : (tensor<128x480x1x1xf32>, tensor<2xi64>) -> tensor<128x480xf32>
+    %782 = "onnx.MatMul"(%781, %779) : (tensor<128x480xf32>, tensor<?x480x?xf32>) -> tensor<?x128x?xf32>
+    %783 = crt.constant : () -> tensor<1x128x1xf32>
+    %784 = crt.add %782, %783 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %785 = "onnx.Dim"(%774) {axis = 0 : si64} : (tensor<?x480x14x14xf32>) -> tensor<1xi64>
+    %786 = crt.constant : () -> tensor<1xi64>
+    %787 = crt.constant : () -> tensor<1xi64>
+    %788 = crt.constant : () -> tensor<1xi64>
+    %789 = "onnx.Concat"(%785, %788, %786, %787) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %790 = crt.reshape %784, %789 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %791 = crt.relu %790 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %792 = "onnx.Conv"(%791, %28, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_172", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %793 = "onnx.Concat"(%600, %624, %648, %672, %696, %720, %744, %768, %792) {axis = 1 : si64, onnx_node_name = "Concat_173"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x512x14x14xf32>
+    %794 = crt.constant : () -> tensor<512x1x1xf32>
+    %795 = crt.mul %793, %794 : (tensor<?x512x14x14xf32>, tensor<512x1x1xf32>) -> tensor<?x512x14x14xf32>
+    %796 = crt.constant : () -> tensor<512x1x1xf32>
+    %797 = crt.add %795, %796 : (tensor<?x512x14x14xf32>, tensor<512x1x1xf32>) -> tensor<?x512x14x14xf32>
+    %798 = crt.relu %797 : (tensor<?x512x14x14xf32>) -> tensor<?x512x14x14xf32>
+    %799 = "onnx.Dim"(%798) {axis = 0 : si64} : (tensor<?x512x14x14xf32>) -> tensor<1xi64>
+    %800 = crt.constant : () -> tensor<1xi64>
+    %801 = crt.constant : () -> tensor<1xi64>
+    %802 = "onnx.Concat"(%799, %800, %801) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %803 = crt.reshape %798, %802 : (tensor<?x512x14x14xf32>, tensor<3xi64>) -> tensor<?x512x?xf32>
+    %804 = crt.constant : () -> tensor<2xi64>
+    %805 = crt.reshape %92, %804 : (tensor<128x512x1x1xf32>, tensor<2xi64>) -> tensor<128x512xf32>
+    %806 = "onnx.MatMul"(%805, %803) : (tensor<128x512xf32>, tensor<?x512x?xf32>) -> tensor<?x128x?xf32>
+    %807 = crt.constant : () -> tensor<1x128x1xf32>
+    %808 = crt.add %806, %807 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %809 = "onnx.Dim"(%798) {axis = 0 : si64} : (tensor<?x512x14x14xf32>) -> tensor<1xi64>
+    %810 = crt.constant : () -> tensor<1xi64>
+    %811 = crt.constant : () -> tensor<1xi64>
+    %812 = crt.constant : () -> tensor<1xi64>
+    %813 = "onnx.Concat"(%809, %812, %810, %811) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %814 = crt.reshape %808, %813 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %815 = crt.relu %814 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %816 = "onnx.Conv"(%815, %29, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_178", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %817 = "onnx.Concat"(%600, %624, %648, %672, %696, %720, %744, %768, %792, %816) {axis = 1 : si64, onnx_node_name = "Concat_179"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x544x14x14xf32>
+    %818 = crt.constant : () -> tensor<544x1x1xf32>
+    %819 = crt.mul %817, %818 : (tensor<?x544x14x14xf32>, tensor<544x1x1xf32>) -> tensor<?x544x14x14xf32>
+    %820 = crt.constant : () -> tensor<544x1x1xf32>
+    %821 = crt.add %819, %820 : (tensor<?x544x14x14xf32>, tensor<544x1x1xf32>) -> tensor<?x544x14x14xf32>
+    %822 = crt.relu %821 : (tensor<?x544x14x14xf32>) -> tensor<?x544x14x14xf32>
+    %823 = "onnx.Dim"(%822) {axis = 0 : si64} : (tensor<?x544x14x14xf32>) -> tensor<1xi64>
+    %824 = crt.constant : () -> tensor<1xi64>
+    %825 = crt.constant : () -> tensor<1xi64>
+    %826 = "onnx.Concat"(%823, %824, %825) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %827 = crt.reshape %822, %826 : (tensor<?x544x14x14xf32>, tensor<3xi64>) -> tensor<?x544x?xf32>
+    %828 = crt.constant : () -> tensor<2xi64>
+    %829 = crt.reshape %93, %828 : (tensor<128x544x1x1xf32>, tensor<2xi64>) -> tensor<128x544xf32>
+    %830 = "onnx.MatMul"(%829, %827) : (tensor<128x544xf32>, tensor<?x544x?xf32>) -> tensor<?x128x?xf32>
+    %831 = crt.constant : () -> tensor<1x128x1xf32>
+    %832 = crt.add %830, %831 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %833 = "onnx.Dim"(%822) {axis = 0 : si64} : (tensor<?x544x14x14xf32>) -> tensor<1xi64>
+    %834 = crt.constant : () -> tensor<1xi64>
+    %835 = crt.constant : () -> tensor<1xi64>
+    %836 = crt.constant : () -> tensor<1xi64>
+    %837 = "onnx.Concat"(%833, %836, %834, %835) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %838 = crt.reshape %832, %837 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %839 = crt.relu %838 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %840 = "onnx.Conv"(%839, %30, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_184", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %841 = "onnx.Concat"(%600, %624, %648, %672, %696, %720, %744, %768, %792, %816, %840) {axis = 1 : si64, onnx_node_name = "Concat_185"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x576x14x14xf32>
+    %842 = crt.constant : () -> tensor<576x1x1xf32>
+    %843 = crt.mul %841, %842 : (tensor<?x576x14x14xf32>, tensor<576x1x1xf32>) -> tensor<?x576x14x14xf32>
+    %844 = crt.constant : () -> tensor<576x1x1xf32>
+    %845 = crt.add %843, %844 : (tensor<?x576x14x14xf32>, tensor<576x1x1xf32>) -> tensor<?x576x14x14xf32>
+    %846 = crt.relu %845 : (tensor<?x576x14x14xf32>) -> tensor<?x576x14x14xf32>
+    %847 = "onnx.Dim"(%846) {axis = 0 : si64} : (tensor<?x576x14x14xf32>) -> tensor<1xi64>
+    %848 = crt.constant : () -> tensor<1xi64>
+    %849 = crt.constant : () -> tensor<1xi64>
+    %850 = "onnx.Concat"(%847, %848, %849) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %851 = crt.reshape %846, %850 : (tensor<?x576x14x14xf32>, tensor<3xi64>) -> tensor<?x576x?xf32>
+    %852 = crt.constant : () -> tensor<2xi64>
+    %853 = crt.reshape %94, %852 : (tensor<128x576x1x1xf32>, tensor<2xi64>) -> tensor<128x576xf32>
+    %854 = "onnx.MatMul"(%853, %851) : (tensor<128x576xf32>, tensor<?x576x?xf32>) -> tensor<?x128x?xf32>
+    %855 = crt.constant : () -> tensor<1x128x1xf32>
+    %856 = crt.add %854, %855 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %857 = "onnx.Dim"(%846) {axis = 0 : si64} : (tensor<?x576x14x14xf32>) -> tensor<1xi64>
+    %858 = crt.constant : () -> tensor<1xi64>
+    %859 = crt.constant : () -> tensor<1xi64>
+    %860 = crt.constant : () -> tensor<1xi64>
+    %861 = "onnx.Concat"(%857, %860, %858, %859) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %862 = crt.reshape %856, %861 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %863 = crt.relu %862 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %864 = "onnx.Conv"(%863, %31, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_190", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %865 = "onnx.Concat"(%600, %624, %648, %672, %696, %720, %744, %768, %792, %816, %840, %864) {axis = 1 : si64, onnx_node_name = "Concat_191"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x608x14x14xf32>
+    %866 = crt.constant : () -> tensor<608x1x1xf32>
+    %867 = crt.mul %865, %866 : (tensor<?x608x14x14xf32>, tensor<608x1x1xf32>) -> tensor<?x608x14x14xf32>
+    %868 = crt.constant : () -> tensor<608x1x1xf32>
+    %869 = crt.add %867, %868 : (tensor<?x608x14x14xf32>, tensor<608x1x1xf32>) -> tensor<?x608x14x14xf32>
+    %870 = crt.relu %869 : (tensor<?x608x14x14xf32>) -> tensor<?x608x14x14xf32>
+    %871 = "onnx.Dim"(%870) {axis = 0 : si64} : (tensor<?x608x14x14xf32>) -> tensor<1xi64>
+    %872 = crt.constant : () -> tensor<1xi64>
+    %873 = crt.constant : () -> tensor<1xi64>
+    %874 = "onnx.Concat"(%871, %872, %873) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %875 = crt.reshape %870, %874 : (tensor<?x608x14x14xf32>, tensor<3xi64>) -> tensor<?x608x?xf32>
+    %876 = crt.constant : () -> tensor<2xi64>
+    %877 = crt.reshape %95, %876 : (tensor<128x608x1x1xf32>, tensor<2xi64>) -> tensor<128x608xf32>
+    %878 = "onnx.MatMul"(%877, %875) : (tensor<128x608xf32>, tensor<?x608x?xf32>) -> tensor<?x128x?xf32>
+    %879 = crt.constant : () -> tensor<1x128x1xf32>
+    %880 = crt.add %878, %879 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %881 = "onnx.Dim"(%870) {axis = 0 : si64} : (tensor<?x608x14x14xf32>) -> tensor<1xi64>
+    %882 = crt.constant : () -> tensor<1xi64>
+    %883 = crt.constant : () -> tensor<1xi64>
+    %884 = crt.constant : () -> tensor<1xi64>
+    %885 = "onnx.Concat"(%881, %884, %882, %883) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %886 = crt.reshape %880, %885 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %887 = crt.relu %886 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %888 = "onnx.Conv"(%887, %32, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_196", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %889 = "onnx.Concat"(%600, %624, %648, %672, %696, %720, %744, %768, %792, %816, %840, %864, %888) {axis = 1 : si64, onnx_node_name = "Concat_197"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x640x14x14xf32>
+    %890 = crt.constant : () -> tensor<640x1x1xf32>
+    %891 = crt.mul %889, %890 : (tensor<?x640x14x14xf32>, tensor<640x1x1xf32>) -> tensor<?x640x14x14xf32>
+    %892 = crt.constant : () -> tensor<640x1x1xf32>
+    %893 = crt.add %891, %892 : (tensor<?x640x14x14xf32>, tensor<640x1x1xf32>) -> tensor<?x640x14x14xf32>
+    %894 = crt.relu %893 : (tensor<?x640x14x14xf32>) -> tensor<?x640x14x14xf32>
+    %895 = "onnx.Dim"(%894) {axis = 0 : si64} : (tensor<?x640x14x14xf32>) -> tensor<1xi64>
+    %896 = crt.constant : () -> tensor<1xi64>
+    %897 = crt.constant : () -> tensor<1xi64>
+    %898 = "onnx.Concat"(%895, %896, %897) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %899 = crt.reshape %894, %898 : (tensor<?x640x14x14xf32>, tensor<3xi64>) -> tensor<?x640x?xf32>
+    %900 = crt.constant : () -> tensor<2xi64>
+    %901 = crt.reshape %96, %900 : (tensor<128x640x1x1xf32>, tensor<2xi64>) -> tensor<128x640xf32>
+    %902 = "onnx.MatMul"(%901, %899) : (tensor<128x640xf32>, tensor<?x640x?xf32>) -> tensor<?x128x?xf32>
+    %903 = crt.constant : () -> tensor<1x128x1xf32>
+    %904 = crt.add %902, %903 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %905 = "onnx.Dim"(%894) {axis = 0 : si64} : (tensor<?x640x14x14xf32>) -> tensor<1xi64>
+    %906 = crt.constant : () -> tensor<1xi64>
+    %907 = crt.constant : () -> tensor<1xi64>
+    %908 = crt.constant : () -> tensor<1xi64>
+    %909 = "onnx.Concat"(%905, %908, %906, %907) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %910 = crt.reshape %904, %909 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %911 = crt.relu %910 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %912 = "onnx.Conv"(%911, %33, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_202", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %913 = "onnx.Concat"(%600, %624, %648, %672, %696, %720, %744, %768, %792, %816, %840, %864, %888, %912) {axis = 1 : si64, onnx_node_name = "Concat_203"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x672x14x14xf32>
+    %914 = crt.constant : () -> tensor<672x1x1xf32>
+    %915 = crt.mul %913, %914 : (tensor<?x672x14x14xf32>, tensor<672x1x1xf32>) -> tensor<?x672x14x14xf32>
+    %916 = crt.constant : () -> tensor<672x1x1xf32>
+    %917 = crt.add %915, %916 : (tensor<?x672x14x14xf32>, tensor<672x1x1xf32>) -> tensor<?x672x14x14xf32>
+    %918 = crt.relu %917 : (tensor<?x672x14x14xf32>) -> tensor<?x672x14x14xf32>
+    %919 = "onnx.Dim"(%918) {axis = 0 : si64} : (tensor<?x672x14x14xf32>) -> tensor<1xi64>
+    %920 = crt.constant : () -> tensor<1xi64>
+    %921 = crt.constant : () -> tensor<1xi64>
+    %922 = "onnx.Concat"(%919, %920, %921) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %923 = crt.reshape %918, %922 : (tensor<?x672x14x14xf32>, tensor<3xi64>) -> tensor<?x672x?xf32>
+    %924 = crt.constant : () -> tensor<2xi64>
+    %925 = crt.reshape %97, %924 : (tensor<128x672x1x1xf32>, tensor<2xi64>) -> tensor<128x672xf32>
+    %926 = "onnx.MatMul"(%925, %923) : (tensor<128x672xf32>, tensor<?x672x?xf32>) -> tensor<?x128x?xf32>
+    %927 = crt.constant : () -> tensor<1x128x1xf32>
+    %928 = crt.add %926, %927 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %929 = "onnx.Dim"(%918) {axis = 0 : si64} : (tensor<?x672x14x14xf32>) -> tensor<1xi64>
+    %930 = crt.constant : () -> tensor<1xi64>
+    %931 = crt.constant : () -> tensor<1xi64>
+    %932 = crt.constant : () -> tensor<1xi64>
+    %933 = "onnx.Concat"(%929, %932, %930, %931) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %934 = crt.reshape %928, %933 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %935 = crt.relu %934 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %936 = "onnx.Conv"(%935, %34, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_208", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %937 = "onnx.Concat"(%600, %624, %648, %672, %696, %720, %744, %768, %792, %816, %840, %864, %888, %912, %936) {axis = 1 : si64, onnx_node_name = "Concat_209"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x704x14x14xf32>
+    %938 = crt.constant : () -> tensor<704x1x1xf32>
+    %939 = crt.mul %937, %938 : (tensor<?x704x14x14xf32>, tensor<704x1x1xf32>) -> tensor<?x704x14x14xf32>
+    %940 = crt.constant : () -> tensor<704x1x1xf32>
+    %941 = crt.add %939, %940 : (tensor<?x704x14x14xf32>, tensor<704x1x1xf32>) -> tensor<?x704x14x14xf32>
+    %942 = crt.relu %941 : (tensor<?x704x14x14xf32>) -> tensor<?x704x14x14xf32>
+    %943 = "onnx.Dim"(%942) {axis = 0 : si64} : (tensor<?x704x14x14xf32>) -> tensor<1xi64>
+    %944 = crt.constant : () -> tensor<1xi64>
+    %945 = crt.constant : () -> tensor<1xi64>
+    %946 = "onnx.Concat"(%943, %944, %945) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %947 = crt.reshape %942, %946 : (tensor<?x704x14x14xf32>, tensor<3xi64>) -> tensor<?x704x?xf32>
+    %948 = crt.constant : () -> tensor<2xi64>
+    %949 = crt.reshape %98, %948 : (tensor<128x704x1x1xf32>, tensor<2xi64>) -> tensor<128x704xf32>
+    %950 = "onnx.MatMul"(%949, %947) : (tensor<128x704xf32>, tensor<?x704x?xf32>) -> tensor<?x128x?xf32>
+    %951 = crt.constant : () -> tensor<1x128x1xf32>
+    %952 = crt.add %950, %951 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %953 = "onnx.Dim"(%942) {axis = 0 : si64} : (tensor<?x704x14x14xf32>) -> tensor<1xi64>
+    %954 = crt.constant : () -> tensor<1xi64>
+    %955 = crt.constant : () -> tensor<1xi64>
+    %956 = crt.constant : () -> tensor<1xi64>
+    %957 = "onnx.Concat"(%953, %956, %954, %955) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %958 = crt.reshape %952, %957 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %959 = crt.relu %958 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %960 = "onnx.Conv"(%959, %35, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_214", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %961 = "onnx.Concat"(%600, %624, %648, %672, %696, %720, %744, %768, %792, %816, %840, %864, %888, %912, %936, %960) {axis = 1 : si64, onnx_node_name = "Concat_215"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x736x14x14xf32>
+    %962 = crt.constant : () -> tensor<736x1x1xf32>
+    %963 = crt.mul %961, %962 : (tensor<?x736x14x14xf32>, tensor<736x1x1xf32>) -> tensor<?x736x14x14xf32>
+    %964 = crt.constant : () -> tensor<736x1x1xf32>
+    %965 = crt.add %963, %964 : (tensor<?x736x14x14xf32>, tensor<736x1x1xf32>) -> tensor<?x736x14x14xf32>
+    %966 = crt.relu %965 : (tensor<?x736x14x14xf32>) -> tensor<?x736x14x14xf32>
+    %967 = "onnx.Dim"(%966) {axis = 0 : si64} : (tensor<?x736x14x14xf32>) -> tensor<1xi64>
+    %968 = crt.constant : () -> tensor<1xi64>
+    %969 = crt.constant : () -> tensor<1xi64>
+    %970 = "onnx.Concat"(%967, %968, %969) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %971 = crt.reshape %966, %970 : (tensor<?x736x14x14xf32>, tensor<3xi64>) -> tensor<?x736x?xf32>
+    %972 = crt.constant : () -> tensor<2xi64>
+    %973 = crt.reshape %99, %972 : (tensor<128x736x1x1xf32>, tensor<2xi64>) -> tensor<128x736xf32>
+    %974 = "onnx.MatMul"(%973, %971) : (tensor<128x736xf32>, tensor<?x736x?xf32>) -> tensor<?x128x?xf32>
+    %975 = crt.constant : () -> tensor<1x128x1xf32>
+    %976 = crt.add %974, %975 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %977 = "onnx.Dim"(%966) {axis = 0 : si64} : (tensor<?x736x14x14xf32>) -> tensor<1xi64>
+    %978 = crt.constant : () -> tensor<1xi64>
+    %979 = crt.constant : () -> tensor<1xi64>
+    %980 = crt.constant : () -> tensor<1xi64>
+    %981 = "onnx.Concat"(%977, %980, %978, %979) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %982 = crt.reshape %976, %981 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %983 = crt.relu %982 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %984 = "onnx.Conv"(%983, %36, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_220", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %985 = "onnx.Concat"(%600, %624, %648, %672, %696, %720, %744, %768, %792, %816, %840, %864, %888, %912, %936, %960, %984) {axis = 1 : si64, onnx_node_name = "Concat_221"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x768x14x14xf32>
+    %986 = crt.constant : () -> tensor<768x1x1xf32>
+    %987 = crt.mul %985, %986 : (tensor<?x768x14x14xf32>, tensor<768x1x1xf32>) -> tensor<?x768x14x14xf32>
+    %988 = crt.constant : () -> tensor<768x1x1xf32>
+    %989 = crt.add %987, %988 : (tensor<?x768x14x14xf32>, tensor<768x1x1xf32>) -> tensor<?x768x14x14xf32>
+    %990 = crt.relu %989 : (tensor<?x768x14x14xf32>) -> tensor<?x768x14x14xf32>
+    %991 = "onnx.Dim"(%990) {axis = 0 : si64} : (tensor<?x768x14x14xf32>) -> tensor<1xi64>
+    %992 = crt.constant : () -> tensor<1xi64>
+    %993 = crt.constant : () -> tensor<1xi64>
+    %994 = "onnx.Concat"(%991, %992, %993) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %995 = crt.reshape %990, %994 : (tensor<?x768x14x14xf32>, tensor<3xi64>) -> tensor<?x768x?xf32>
+    %996 = crt.constant : () -> tensor<2xi64>
+    %997 = crt.reshape %100, %996 : (tensor<128x768x1x1xf32>, tensor<2xi64>) -> tensor<128x768xf32>
+    %998 = "onnx.MatMul"(%997, %995) : (tensor<128x768xf32>, tensor<?x768x?xf32>) -> tensor<?x128x?xf32>
+    %999 = crt.constant : () -> tensor<1x128x1xf32>
+    %1000 = crt.add %998, %999 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1001 = "onnx.Dim"(%990) {axis = 0 : si64} : (tensor<?x768x14x14xf32>) -> tensor<1xi64>
+    %1002 = crt.constant : () -> tensor<1xi64>
+    %1003 = crt.constant : () -> tensor<1xi64>
+    %1004 = crt.constant : () -> tensor<1xi64>
+    %1005 = "onnx.Concat"(%1001, %1004, %1002, %1003) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1006 = crt.reshape %1000, %1005 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %1007 = crt.relu %1006 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %1008 = "onnx.Conv"(%1007, %37, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_226", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %1009 = "onnx.Concat"(%600, %624, %648, %672, %696, %720, %744, %768, %792, %816, %840, %864, %888, %912, %936, %960, %984, %1008) {axis = 1 : si64, onnx_node_name = "Concat_227"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x800x14x14xf32>
+    %1010 = crt.constant : () -> tensor<800x1x1xf32>
+    %1011 = crt.mul %1009, %1010 : (tensor<?x800x14x14xf32>, tensor<800x1x1xf32>) -> tensor<?x800x14x14xf32>
+    %1012 = crt.constant : () -> tensor<800x1x1xf32>
+    %1013 = crt.add %1011, %1012 : (tensor<?x800x14x14xf32>, tensor<800x1x1xf32>) -> tensor<?x800x14x14xf32>
+    %1014 = crt.relu %1013 : (tensor<?x800x14x14xf32>) -> tensor<?x800x14x14xf32>
+    %1015 = "onnx.Dim"(%1014) {axis = 0 : si64} : (tensor<?x800x14x14xf32>) -> tensor<1xi64>
+    %1016 = crt.constant : () -> tensor<1xi64>
+    %1017 = crt.constant : () -> tensor<1xi64>
+    %1018 = "onnx.Concat"(%1015, %1016, %1017) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1019 = crt.reshape %1014, %1018 : (tensor<?x800x14x14xf32>, tensor<3xi64>) -> tensor<?x800x?xf32>
+    %1020 = crt.constant : () -> tensor<2xi64>
+    %1021 = crt.reshape %101, %1020 : (tensor<128x800x1x1xf32>, tensor<2xi64>) -> tensor<128x800xf32>
+    %1022 = "onnx.MatMul"(%1021, %1019) : (tensor<128x800xf32>, tensor<?x800x?xf32>) -> tensor<?x128x?xf32>
+    %1023 = crt.constant : () -> tensor<1x128x1xf32>
+    %1024 = crt.add %1022, %1023 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1025 = "onnx.Dim"(%1014) {axis = 0 : si64} : (tensor<?x800x14x14xf32>) -> tensor<1xi64>
+    %1026 = crt.constant : () -> tensor<1xi64>
+    %1027 = crt.constant : () -> tensor<1xi64>
+    %1028 = crt.constant : () -> tensor<1xi64>
+    %1029 = "onnx.Concat"(%1025, %1028, %1026, %1027) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1030 = crt.reshape %1024, %1029 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %1031 = crt.relu %1030 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %1032 = "onnx.Conv"(%1031, %38, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_232", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %1033 = "onnx.Concat"(%600, %624, %648, %672, %696, %720, %744, %768, %792, %816, %840, %864, %888, %912, %936, %960, %984, %1008, %1032) {axis = 1 : si64, onnx_node_name = "Concat_233"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x832x14x14xf32>
+    %1034 = crt.constant : () -> tensor<832x1x1xf32>
+    %1035 = crt.mul %1033, %1034 : (tensor<?x832x14x14xf32>, tensor<832x1x1xf32>) -> tensor<?x832x14x14xf32>
+    %1036 = crt.constant : () -> tensor<832x1x1xf32>
+    %1037 = crt.add %1035, %1036 : (tensor<?x832x14x14xf32>, tensor<832x1x1xf32>) -> tensor<?x832x14x14xf32>
+    %1038 = crt.relu %1037 : (tensor<?x832x14x14xf32>) -> tensor<?x832x14x14xf32>
+    %1039 = "onnx.Dim"(%1038) {axis = 0 : si64} : (tensor<?x832x14x14xf32>) -> tensor<1xi64>
+    %1040 = crt.constant : () -> tensor<1xi64>
+    %1041 = crt.constant : () -> tensor<1xi64>
+    %1042 = "onnx.Concat"(%1039, %1040, %1041) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1043 = crt.reshape %1038, %1042 : (tensor<?x832x14x14xf32>, tensor<3xi64>) -> tensor<?x832x?xf32>
+    %1044 = crt.constant : () -> tensor<2xi64>
+    %1045 = crt.reshape %102, %1044 : (tensor<128x832x1x1xf32>, tensor<2xi64>) -> tensor<128x832xf32>
+    %1046 = "onnx.MatMul"(%1045, %1043) : (tensor<128x832xf32>, tensor<?x832x?xf32>) -> tensor<?x128x?xf32>
+    %1047 = crt.constant : () -> tensor<1x128x1xf32>
+    %1048 = crt.add %1046, %1047 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1049 = "onnx.Dim"(%1038) {axis = 0 : si64} : (tensor<?x832x14x14xf32>) -> tensor<1xi64>
+    %1050 = crt.constant : () -> tensor<1xi64>
+    %1051 = crt.constant : () -> tensor<1xi64>
+    %1052 = crt.constant : () -> tensor<1xi64>
+    %1053 = "onnx.Concat"(%1049, %1052, %1050, %1051) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1054 = crt.reshape %1048, %1053 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %1055 = crt.relu %1054 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %1056 = "onnx.Conv"(%1055, %39, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_238", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %1057 = "onnx.Concat"(%600, %624, %648, %672, %696, %720, %744, %768, %792, %816, %840, %864, %888, %912, %936, %960, %984, %1008, %1032, %1056) {axis = 1 : si64, onnx_node_name = "Concat_239"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x864x14x14xf32>
+    %1058 = crt.constant : () -> tensor<864x1x1xf32>
+    %1059 = crt.mul %1057, %1058 : (tensor<?x864x14x14xf32>, tensor<864x1x1xf32>) -> tensor<?x864x14x14xf32>
+    %1060 = crt.constant : () -> tensor<864x1x1xf32>
+    %1061 = crt.add %1059, %1060 : (tensor<?x864x14x14xf32>, tensor<864x1x1xf32>) -> tensor<?x864x14x14xf32>
+    %1062 = crt.relu %1061 : (tensor<?x864x14x14xf32>) -> tensor<?x864x14x14xf32>
+    %1063 = "onnx.Dim"(%1062) {axis = 0 : si64} : (tensor<?x864x14x14xf32>) -> tensor<1xi64>
+    %1064 = crt.constant : () -> tensor<1xi64>
+    %1065 = crt.constant : () -> tensor<1xi64>
+    %1066 = "onnx.Concat"(%1063, %1064, %1065) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1067 = crt.reshape %1062, %1066 : (tensor<?x864x14x14xf32>, tensor<3xi64>) -> tensor<?x864x?xf32>
+    %1068 = crt.constant : () -> tensor<2xi64>
+    %1069 = crt.reshape %103, %1068 : (tensor<128x864x1x1xf32>, tensor<2xi64>) -> tensor<128x864xf32>
+    %1070 = "onnx.MatMul"(%1069, %1067) : (tensor<128x864xf32>, tensor<?x864x?xf32>) -> tensor<?x128x?xf32>
+    %1071 = crt.constant : () -> tensor<1x128x1xf32>
+    %1072 = crt.add %1070, %1071 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1073 = "onnx.Dim"(%1062) {axis = 0 : si64} : (tensor<?x864x14x14xf32>) -> tensor<1xi64>
+    %1074 = crt.constant : () -> tensor<1xi64>
+    %1075 = crt.constant : () -> tensor<1xi64>
+    %1076 = crt.constant : () -> tensor<1xi64>
+    %1077 = "onnx.Concat"(%1073, %1076, %1074, %1075) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1078 = crt.reshape %1072, %1077 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %1079 = crt.relu %1078 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %1080 = "onnx.Conv"(%1079, %40, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_244", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %1081 = "onnx.Concat"(%600, %624, %648, %672, %696, %720, %744, %768, %792, %816, %840, %864, %888, %912, %936, %960, %984, %1008, %1032, %1056, %1080) {axis = 1 : si64, onnx_node_name = "Concat_245"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x896x14x14xf32>
+    %1082 = crt.constant : () -> tensor<896x1x1xf32>
+    %1083 = crt.mul %1081, %1082 : (tensor<?x896x14x14xf32>, tensor<896x1x1xf32>) -> tensor<?x896x14x14xf32>
+    %1084 = crt.constant : () -> tensor<896x1x1xf32>
+    %1085 = crt.add %1083, %1084 : (tensor<?x896x14x14xf32>, tensor<896x1x1xf32>) -> tensor<?x896x14x14xf32>
+    %1086 = crt.relu %1085 : (tensor<?x896x14x14xf32>) -> tensor<?x896x14x14xf32>
+    %1087 = "onnx.Dim"(%1086) {axis = 0 : si64} : (tensor<?x896x14x14xf32>) -> tensor<1xi64>
+    %1088 = crt.constant : () -> tensor<1xi64>
+    %1089 = crt.constant : () -> tensor<1xi64>
+    %1090 = "onnx.Concat"(%1087, %1088, %1089) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1091 = crt.reshape %1086, %1090 : (tensor<?x896x14x14xf32>, tensor<3xi64>) -> tensor<?x896x?xf32>
+    %1092 = crt.constant : () -> tensor<2xi64>
+    %1093 = crt.reshape %104, %1092 : (tensor<128x896x1x1xf32>, tensor<2xi64>) -> tensor<128x896xf32>
+    %1094 = "onnx.MatMul"(%1093, %1091) : (tensor<128x896xf32>, tensor<?x896x?xf32>) -> tensor<?x128x?xf32>
+    %1095 = crt.constant : () -> tensor<1x128x1xf32>
+    %1096 = crt.add %1094, %1095 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1097 = "onnx.Dim"(%1086) {axis = 0 : si64} : (tensor<?x896x14x14xf32>) -> tensor<1xi64>
+    %1098 = crt.constant : () -> tensor<1xi64>
+    %1099 = crt.constant : () -> tensor<1xi64>
+    %1100 = crt.constant : () -> tensor<1xi64>
+    %1101 = "onnx.Concat"(%1097, %1100, %1098, %1099) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1102 = crt.reshape %1096, %1101 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %1103 = crt.relu %1102 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %1104 = "onnx.Conv"(%1103, %41, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_250", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %1105 = "onnx.Concat"(%600, %624, %648, %672, %696, %720, %744, %768, %792, %816, %840, %864, %888, %912, %936, %960, %984, %1008, %1032, %1056, %1080, %1104) {axis = 1 : si64, onnx_node_name = "Concat_251"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x928x14x14xf32>
+    %1106 = crt.constant : () -> tensor<928x1x1xf32>
+    %1107 = crt.mul %1105, %1106 : (tensor<?x928x14x14xf32>, tensor<928x1x1xf32>) -> tensor<?x928x14x14xf32>
+    %1108 = crt.constant : () -> tensor<928x1x1xf32>
+    %1109 = crt.add %1107, %1108 : (tensor<?x928x14x14xf32>, tensor<928x1x1xf32>) -> tensor<?x928x14x14xf32>
+    %1110 = crt.relu %1109 : (tensor<?x928x14x14xf32>) -> tensor<?x928x14x14xf32>
+    %1111 = "onnx.Dim"(%1110) {axis = 0 : si64} : (tensor<?x928x14x14xf32>) -> tensor<1xi64>
+    %1112 = crt.constant : () -> tensor<1xi64>
+    %1113 = crt.constant : () -> tensor<1xi64>
+    %1114 = "onnx.Concat"(%1111, %1112, %1113) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1115 = crt.reshape %1110, %1114 : (tensor<?x928x14x14xf32>, tensor<3xi64>) -> tensor<?x928x?xf32>
+    %1116 = crt.constant : () -> tensor<2xi64>
+    %1117 = crt.reshape %105, %1116 : (tensor<128x928x1x1xf32>, tensor<2xi64>) -> tensor<128x928xf32>
+    %1118 = "onnx.MatMul"(%1117, %1115) : (tensor<128x928xf32>, tensor<?x928x?xf32>) -> tensor<?x128x?xf32>
+    %1119 = crt.constant : () -> tensor<1x128x1xf32>
+    %1120 = crt.add %1118, %1119 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1121 = "onnx.Dim"(%1110) {axis = 0 : si64} : (tensor<?x928x14x14xf32>) -> tensor<1xi64>
+    %1122 = crt.constant : () -> tensor<1xi64>
+    %1123 = crt.constant : () -> tensor<1xi64>
+    %1124 = crt.constant : () -> tensor<1xi64>
+    %1125 = "onnx.Concat"(%1121, %1124, %1122, %1123) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1126 = crt.reshape %1120, %1125 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %1127 = crt.relu %1126 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %1128 = "onnx.Conv"(%1127, %42, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_256", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %1129 = "onnx.Concat"(%600, %624, %648, %672, %696, %720, %744, %768, %792, %816, %840, %864, %888, %912, %936, %960, %984, %1008, %1032, %1056, %1080, %1104, %1128) {axis = 1 : si64, onnx_node_name = "Concat_257"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x960x14x14xf32>
+    %1130 = crt.constant : () -> tensor<960x1x1xf32>
+    %1131 = crt.mul %1129, %1130 : (tensor<?x960x14x14xf32>, tensor<960x1x1xf32>) -> tensor<?x960x14x14xf32>
+    %1132 = crt.constant : () -> tensor<960x1x1xf32>
+    %1133 = crt.add %1131, %1132 : (tensor<?x960x14x14xf32>, tensor<960x1x1xf32>) -> tensor<?x960x14x14xf32>
+    %1134 = crt.relu %1133 : (tensor<?x960x14x14xf32>) -> tensor<?x960x14x14xf32>
+    %1135 = "onnx.Dim"(%1134) {axis = 0 : si64} : (tensor<?x960x14x14xf32>) -> tensor<1xi64>
+    %1136 = crt.constant : () -> tensor<1xi64>
+    %1137 = crt.constant : () -> tensor<1xi64>
+    %1138 = "onnx.Concat"(%1135, %1136, %1137) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1139 = crt.reshape %1134, %1138 : (tensor<?x960x14x14xf32>, tensor<3xi64>) -> tensor<?x960x?xf32>
+    %1140 = crt.constant : () -> tensor<2xi64>
+    %1141 = crt.reshape %106, %1140 : (tensor<128x960x1x1xf32>, tensor<2xi64>) -> tensor<128x960xf32>
+    %1142 = "onnx.MatMul"(%1141, %1139) : (tensor<128x960xf32>, tensor<?x960x?xf32>) -> tensor<?x128x?xf32>
+    %1143 = crt.constant : () -> tensor<1x128x1xf32>
+    %1144 = crt.add %1142, %1143 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1145 = "onnx.Dim"(%1134) {axis = 0 : si64} : (tensor<?x960x14x14xf32>) -> tensor<1xi64>
+    %1146 = crt.constant : () -> tensor<1xi64>
+    %1147 = crt.constant : () -> tensor<1xi64>
+    %1148 = crt.constant : () -> tensor<1xi64>
+    %1149 = "onnx.Concat"(%1145, %1148, %1146, %1147) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1150 = crt.reshape %1144, %1149 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %1151 = crt.relu %1150 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %1152 = "onnx.Conv"(%1151, %43, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_262", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %1153 = "onnx.Concat"(%600, %624, %648, %672, %696, %720, %744, %768, %792, %816, %840, %864, %888, %912, %936, %960, %984, %1008, %1032, %1056, %1080, %1104, %1128, %1152) {axis = 1 : si64, onnx_node_name = "Concat_263"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x992x14x14xf32>
+    %1154 = crt.constant : () -> tensor<992x1x1xf32>
+    %1155 = crt.mul %1153, %1154 : (tensor<?x992x14x14xf32>, tensor<992x1x1xf32>) -> tensor<?x992x14x14xf32>
+    %1156 = crt.constant : () -> tensor<992x1x1xf32>
+    %1157 = crt.add %1155, %1156 : (tensor<?x992x14x14xf32>, tensor<992x1x1xf32>) -> tensor<?x992x14x14xf32>
+    %1158 = crt.relu %1157 : (tensor<?x992x14x14xf32>) -> tensor<?x992x14x14xf32>
+    %1159 = "onnx.Dim"(%1158) {axis = 0 : si64} : (tensor<?x992x14x14xf32>) -> tensor<1xi64>
+    %1160 = crt.constant : () -> tensor<1xi64>
+    %1161 = crt.constant : () -> tensor<1xi64>
+    %1162 = "onnx.Concat"(%1159, %1160, %1161) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1163 = crt.reshape %1158, %1162 : (tensor<?x992x14x14xf32>, tensor<3xi64>) -> tensor<?x992x?xf32>
+    %1164 = crt.constant : () -> tensor<2xi64>
+    %1165 = crt.reshape %107, %1164 : (tensor<128x992x1x1xf32>, tensor<2xi64>) -> tensor<128x992xf32>
+    %1166 = "onnx.MatMul"(%1165, %1163) : (tensor<128x992xf32>, tensor<?x992x?xf32>) -> tensor<?x128x?xf32>
+    %1167 = crt.constant : () -> tensor<1x128x1xf32>
+    %1168 = crt.add %1166, %1167 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1169 = "onnx.Dim"(%1158) {axis = 0 : si64} : (tensor<?x992x14x14xf32>) -> tensor<1xi64>
+    %1170 = crt.constant : () -> tensor<1xi64>
+    %1171 = crt.constant : () -> tensor<1xi64>
+    %1172 = crt.constant : () -> tensor<1xi64>
+    %1173 = "onnx.Concat"(%1169, %1172, %1170, %1171) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1174 = crt.reshape %1168, %1173 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x14x14xf32>
+    %1175 = crt.relu %1174 : (tensor<?x128x14x14xf32>) -> tensor<?x128x14x14xf32>
+    %1176 = "onnx.Conv"(%1175, %44, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_268", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x14x14xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x14x14xf32>
+    %1177 = "onnx.Concat"(%600, %624, %648, %672, %696, %720, %744, %768, %792, %816, %840, %864, %888, %912, %936, %960, %984, %1008, %1032, %1056, %1080, %1104, %1128, %1152, %1176) {axis = 1 : si64, onnx_node_name = "Concat_269"} : (tensor<?x256x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>, tensor<?x32x14x14xf32>) -> tensor<?x1024x14x14xf32>
+    %1178 = crt.constant : () -> tensor<1024x1x1xf32>
+    %1179 = crt.mul %1177, %1178 : (tensor<?x1024x14x14xf32>, tensor<1024x1x1xf32>) -> tensor<?x1024x14x14xf32>
+    %1180 = crt.constant : () -> tensor<1024x1x1xf32>
+    %1181 = crt.add %1179, %1180 : (tensor<?x1024x14x14xf32>, tensor<1024x1x1xf32>) -> tensor<?x1024x14x14xf32>
+    %1182 = crt.relu %1181 : (tensor<?x1024x14x14xf32>) -> tensor<?x1024x14x14xf32>
+    %1183 = "onnx.Dim"(%1182) {axis = 0 : si64} : (tensor<?x1024x14x14xf32>) -> tensor<1xi64>
+    %1184 = crt.constant : () -> tensor<1xi64>
+    %1185 = crt.constant : () -> tensor<1xi64>
+    %1186 = "onnx.Concat"(%1183, %1184, %1185) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1187 = crt.reshape %1182, %1186 : (tensor<?x1024x14x14xf32>, tensor<3xi64>) -> tensor<?x1024x?xf32>
+    %1188 = crt.constant : () -> tensor<2xi64>
+    %1189 = crt.reshape %45, %1188 : (tensor<512x1024x1x1xf32>, tensor<2xi64>) -> tensor<512x1024xf32>
+    %1190 = "onnx.MatMul"(%1189, %1187) : (tensor<512x1024xf32>, tensor<?x1024x?xf32>) -> tensor<?x512x?xf32>
+    %1191 = "onnx.Dim"(%1182) {axis = 0 : si64} : (tensor<?x1024x14x14xf32>) -> tensor<1xi64>
+    %1192 = crt.constant : () -> tensor<1xi64>
+    %1193 = crt.constant : () -> tensor<1xi64>
+    %1194 = crt.constant : () -> tensor<1xi64>
+    %1195 = "onnx.Concat"(%1191, %1194, %1192, %1193) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1196 = crt.reshape %1190, %1195 : (tensor<?x512x?xf32>, tensor<4xi64>) -> tensor<?x512x14x14xf32>
+    %1197 = "onnx.AveragePool"(%1196) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [2, 2], onnx_node_name = "AveragePool_275", pads = [0, 0, 0, 0], strides = [2, 2]} : (tensor<?x512x14x14xf32>) -> tensor<?x512x7x7xf32>
+    %1198 = "onnx.Concat"(%1197) {axis = 1 : si64, onnx_node_name = "Concat_276"} : (tensor<?x512x7x7xf32>) -> tensor<?x512x7x7xf32>
+    %1199 = crt.constant : () -> tensor<512x1x1xf32>
+    %1200 = crt.mul %1198, %1199 : (tensor<?x512x7x7xf32>, tensor<512x1x1xf32>) -> tensor<?x512x7x7xf32>
+    %1201 = crt.constant : () -> tensor<512x1x1xf32>
+    %1202 = crt.add %1200, %1201 : (tensor<?x512x7x7xf32>, tensor<512x1x1xf32>) -> tensor<?x512x7x7xf32>
+    %1203 = crt.relu %1202 : (tensor<?x512x7x7xf32>) -> tensor<?x512x7x7xf32>
+    %1204 = "onnx.Dim"(%1203) {axis = 0 : si64} : (tensor<?x512x7x7xf32>) -> tensor<1xi64>
+    %1205 = crt.constant : () -> tensor<1xi64>
+    %1206 = crt.constant : () -> tensor<1xi64>
+    %1207 = "onnx.Concat"(%1204, %1205, %1206) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1208 = crt.reshape %1203, %1207 : (tensor<?x512x7x7xf32>, tensor<3xi64>) -> tensor<?x512x?xf32>
+    %1209 = crt.constant : () -> tensor<2xi64>
+    %1210 = crt.reshape %108, %1209 : (tensor<128x512x1x1xf32>, tensor<2xi64>) -> tensor<128x512xf32>
+    %1211 = "onnx.MatMul"(%1210, %1208) : (tensor<128x512xf32>, tensor<?x512x?xf32>) -> tensor<?x128x?xf32>
+    %1212 = crt.constant : () -> tensor<1x128x1xf32>
+    %1213 = crt.add %1211, %1212 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1214 = "onnx.Dim"(%1203) {axis = 0 : si64} : (tensor<?x512x7x7xf32>) -> tensor<1xi64>
+    %1215 = crt.constant : () -> tensor<1xi64>
+    %1216 = crt.constant : () -> tensor<1xi64>
+    %1217 = crt.constant : () -> tensor<1xi64>
+    %1218 = "onnx.Concat"(%1214, %1217, %1215, %1216) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1219 = crt.reshape %1213, %1218 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x7x7xf32>
+    %1220 = crt.relu %1219 : (tensor<?x128x7x7xf32>) -> tensor<?x128x7x7xf32>
+    %1221 = "onnx.Conv"(%1220, %46, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_281", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x7x7xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x7x7xf32>
+    %1222 = "onnx.Concat"(%1197, %1221) {axis = 1 : si64, onnx_node_name = "Concat_282"} : (tensor<?x512x7x7xf32>, tensor<?x32x7x7xf32>) -> tensor<?x544x7x7xf32>
+    %1223 = crt.constant : () -> tensor<544x1x1xf32>
+    %1224 = crt.mul %1222, %1223 : (tensor<?x544x7x7xf32>, tensor<544x1x1xf32>) -> tensor<?x544x7x7xf32>
+    %1225 = crt.constant : () -> tensor<544x1x1xf32>
+    %1226 = crt.add %1224, %1225 : (tensor<?x544x7x7xf32>, tensor<544x1x1xf32>) -> tensor<?x544x7x7xf32>
+    %1227 = crt.relu %1226 : (tensor<?x544x7x7xf32>) -> tensor<?x544x7x7xf32>
+    %1228 = "onnx.Dim"(%1227) {axis = 0 : si64} : (tensor<?x544x7x7xf32>) -> tensor<1xi64>
+    %1229 = crt.constant : () -> tensor<1xi64>
+    %1230 = crt.constant : () -> tensor<1xi64>
+    %1231 = "onnx.Concat"(%1228, %1229, %1230) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1232 = crt.reshape %1227, %1231 : (tensor<?x544x7x7xf32>, tensor<3xi64>) -> tensor<?x544x?xf32>
+    %1233 = crt.constant : () -> tensor<2xi64>
+    %1234 = crt.reshape %109, %1233 : (tensor<128x544x1x1xf32>, tensor<2xi64>) -> tensor<128x544xf32>
+    %1235 = "onnx.MatMul"(%1234, %1232) : (tensor<128x544xf32>, tensor<?x544x?xf32>) -> tensor<?x128x?xf32>
+    %1236 = crt.constant : () -> tensor<1x128x1xf32>
+    %1237 = crt.add %1235, %1236 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1238 = "onnx.Dim"(%1227) {axis = 0 : si64} : (tensor<?x544x7x7xf32>) -> tensor<1xi64>
+    %1239 = crt.constant : () -> tensor<1xi64>
+    %1240 = crt.constant : () -> tensor<1xi64>
+    %1241 = crt.constant : () -> tensor<1xi64>
+    %1242 = "onnx.Concat"(%1238, %1241, %1239, %1240) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1243 = crt.reshape %1237, %1242 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x7x7xf32>
+    %1244 = crt.relu %1243 : (tensor<?x128x7x7xf32>) -> tensor<?x128x7x7xf32>
+    %1245 = "onnx.Conv"(%1244, %47, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_287", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x7x7xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x7x7xf32>
+    %1246 = "onnx.Concat"(%1197, %1221, %1245) {axis = 1 : si64, onnx_node_name = "Concat_288"} : (tensor<?x512x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>) -> tensor<?x576x7x7xf32>
+    %1247 = crt.constant : () -> tensor<576x1x1xf32>
+    %1248 = crt.mul %1246, %1247 : (tensor<?x576x7x7xf32>, tensor<576x1x1xf32>) -> tensor<?x576x7x7xf32>
+    %1249 = crt.constant : () -> tensor<576x1x1xf32>
+    %1250 = crt.add %1248, %1249 : (tensor<?x576x7x7xf32>, tensor<576x1x1xf32>) -> tensor<?x576x7x7xf32>
+    %1251 = crt.relu %1250 : (tensor<?x576x7x7xf32>) -> tensor<?x576x7x7xf32>
+    %1252 = "onnx.Dim"(%1251) {axis = 0 : si64} : (tensor<?x576x7x7xf32>) -> tensor<1xi64>
+    %1253 = crt.constant : () -> tensor<1xi64>
+    %1254 = crt.constant : () -> tensor<1xi64>
+    %1255 = "onnx.Concat"(%1252, %1253, %1254) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1256 = crt.reshape %1251, %1255 : (tensor<?x576x7x7xf32>, tensor<3xi64>) -> tensor<?x576x?xf32>
+    %1257 = crt.constant : () -> tensor<2xi64>
+    %1258 = crt.reshape %110, %1257 : (tensor<128x576x1x1xf32>, tensor<2xi64>) -> tensor<128x576xf32>
+    %1259 = "onnx.MatMul"(%1258, %1256) : (tensor<128x576xf32>, tensor<?x576x?xf32>) -> tensor<?x128x?xf32>
+    %1260 = crt.constant : () -> tensor<1x128x1xf32>
+    %1261 = crt.add %1259, %1260 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1262 = "onnx.Dim"(%1251) {axis = 0 : si64} : (tensor<?x576x7x7xf32>) -> tensor<1xi64>
+    %1263 = crt.constant : () -> tensor<1xi64>
+    %1264 = crt.constant : () -> tensor<1xi64>
+    %1265 = crt.constant : () -> tensor<1xi64>
+    %1266 = "onnx.Concat"(%1262, %1265, %1263, %1264) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1267 = crt.reshape %1261, %1266 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x7x7xf32>
+    %1268 = crt.relu %1267 : (tensor<?x128x7x7xf32>) -> tensor<?x128x7x7xf32>
+    %1269 = "onnx.Conv"(%1268, %48, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_293", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x7x7xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x7x7xf32>
+    %1270 = "onnx.Concat"(%1197, %1221, %1245, %1269) {axis = 1 : si64, onnx_node_name = "Concat_294"} : (tensor<?x512x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>) -> tensor<?x608x7x7xf32>
+    %1271 = crt.constant : () -> tensor<608x1x1xf32>
+    %1272 = crt.mul %1270, %1271 : (tensor<?x608x7x7xf32>, tensor<608x1x1xf32>) -> tensor<?x608x7x7xf32>
+    %1273 = crt.constant : () -> tensor<608x1x1xf32>
+    %1274 = crt.add %1272, %1273 : (tensor<?x608x7x7xf32>, tensor<608x1x1xf32>) -> tensor<?x608x7x7xf32>
+    %1275 = crt.relu %1274 : (tensor<?x608x7x7xf32>) -> tensor<?x608x7x7xf32>
+    %1276 = "onnx.Dim"(%1275) {axis = 0 : si64} : (tensor<?x608x7x7xf32>) -> tensor<1xi64>
+    %1277 = crt.constant : () -> tensor<1xi64>
+    %1278 = crt.constant : () -> tensor<1xi64>
+    %1279 = "onnx.Concat"(%1276, %1277, %1278) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1280 = crt.reshape %1275, %1279 : (tensor<?x608x7x7xf32>, tensor<3xi64>) -> tensor<?x608x?xf32>
+    %1281 = crt.constant : () -> tensor<2xi64>
+    %1282 = crt.reshape %111, %1281 : (tensor<128x608x1x1xf32>, tensor<2xi64>) -> tensor<128x608xf32>
+    %1283 = "onnx.MatMul"(%1282, %1280) : (tensor<128x608xf32>, tensor<?x608x?xf32>) -> tensor<?x128x?xf32>
+    %1284 = crt.constant : () -> tensor<1x128x1xf32>
+    %1285 = crt.add %1283, %1284 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1286 = "onnx.Dim"(%1275) {axis = 0 : si64} : (tensor<?x608x7x7xf32>) -> tensor<1xi64>
+    %1287 = crt.constant : () -> tensor<1xi64>
+    %1288 = crt.constant : () -> tensor<1xi64>
+    %1289 = crt.constant : () -> tensor<1xi64>
+    %1290 = "onnx.Concat"(%1286, %1289, %1287, %1288) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1291 = crt.reshape %1285, %1290 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x7x7xf32>
+    %1292 = crt.relu %1291 : (tensor<?x128x7x7xf32>) -> tensor<?x128x7x7xf32>
+    %1293 = "onnx.Conv"(%1292, %49, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_299", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x7x7xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x7x7xf32>
+    %1294 = "onnx.Concat"(%1197, %1221, %1245, %1269, %1293) {axis = 1 : si64, onnx_node_name = "Concat_300"} : (tensor<?x512x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>) -> tensor<?x640x7x7xf32>
+    %1295 = crt.constant : () -> tensor<640x1x1xf32>
+    %1296 = crt.mul %1294, %1295 : (tensor<?x640x7x7xf32>, tensor<640x1x1xf32>) -> tensor<?x640x7x7xf32>
+    %1297 = crt.constant : () -> tensor<640x1x1xf32>
+    %1298 = crt.add %1296, %1297 : (tensor<?x640x7x7xf32>, tensor<640x1x1xf32>) -> tensor<?x640x7x7xf32>
+    %1299 = crt.relu %1298 : (tensor<?x640x7x7xf32>) -> tensor<?x640x7x7xf32>
+    %1300 = "onnx.Dim"(%1299) {axis = 0 : si64} : (tensor<?x640x7x7xf32>) -> tensor<1xi64>
+    %1301 = crt.constant : () -> tensor<1xi64>
+    %1302 = crt.constant : () -> tensor<1xi64>
+    %1303 = "onnx.Concat"(%1300, %1301, %1302) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1304 = crt.reshape %1299, %1303 : (tensor<?x640x7x7xf32>, tensor<3xi64>) -> tensor<?x640x?xf32>
+    %1305 = crt.constant : () -> tensor<2xi64>
+    %1306 = crt.reshape %112, %1305 : (tensor<128x640x1x1xf32>, tensor<2xi64>) -> tensor<128x640xf32>
+    %1307 = "onnx.MatMul"(%1306, %1304) : (tensor<128x640xf32>, tensor<?x640x?xf32>) -> tensor<?x128x?xf32>
+    %1308 = crt.constant : () -> tensor<1x128x1xf32>
+    %1309 = crt.add %1307, %1308 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1310 = "onnx.Dim"(%1299) {axis = 0 : si64} : (tensor<?x640x7x7xf32>) -> tensor<1xi64>
+    %1311 = crt.constant : () -> tensor<1xi64>
+    %1312 = crt.constant : () -> tensor<1xi64>
+    %1313 = crt.constant : () -> tensor<1xi64>
+    %1314 = "onnx.Concat"(%1310, %1313, %1311, %1312) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1315 = crt.reshape %1309, %1314 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x7x7xf32>
+    %1316 = crt.relu %1315 : (tensor<?x128x7x7xf32>) -> tensor<?x128x7x7xf32>
+    %1317 = "onnx.Conv"(%1316, %50, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_305", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x7x7xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x7x7xf32>
+    %1318 = "onnx.Concat"(%1197, %1221, %1245, %1269, %1293, %1317) {axis = 1 : si64, onnx_node_name = "Concat_306"} : (tensor<?x512x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>) -> tensor<?x672x7x7xf32>
+    %1319 = crt.constant : () -> tensor<672x1x1xf32>
+    %1320 = crt.mul %1318, %1319 : (tensor<?x672x7x7xf32>, tensor<672x1x1xf32>) -> tensor<?x672x7x7xf32>
+    %1321 = crt.constant : () -> tensor<672x1x1xf32>
+    %1322 = crt.add %1320, %1321 : (tensor<?x672x7x7xf32>, tensor<672x1x1xf32>) -> tensor<?x672x7x7xf32>
+    %1323 = crt.relu %1322 : (tensor<?x672x7x7xf32>) -> tensor<?x672x7x7xf32>
+    %1324 = "onnx.Dim"(%1323) {axis = 0 : si64} : (tensor<?x672x7x7xf32>) -> tensor<1xi64>
+    %1325 = crt.constant : () -> tensor<1xi64>
+    %1326 = crt.constant : () -> tensor<1xi64>
+    %1327 = "onnx.Concat"(%1324, %1325, %1326) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1328 = crt.reshape %1323, %1327 : (tensor<?x672x7x7xf32>, tensor<3xi64>) -> tensor<?x672x?xf32>
+    %1329 = crt.constant : () -> tensor<2xi64>
+    %1330 = crt.reshape %113, %1329 : (tensor<128x672x1x1xf32>, tensor<2xi64>) -> tensor<128x672xf32>
+    %1331 = "onnx.MatMul"(%1330, %1328) : (tensor<128x672xf32>, tensor<?x672x?xf32>) -> tensor<?x128x?xf32>
+    %1332 = crt.constant : () -> tensor<1x128x1xf32>
+    %1333 = crt.add %1331, %1332 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1334 = "onnx.Dim"(%1323) {axis = 0 : si64} : (tensor<?x672x7x7xf32>) -> tensor<1xi64>
+    %1335 = crt.constant : () -> tensor<1xi64>
+    %1336 = crt.constant : () -> tensor<1xi64>
+    %1337 = crt.constant : () -> tensor<1xi64>
+    %1338 = "onnx.Concat"(%1334, %1337, %1335, %1336) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1339 = crt.reshape %1333, %1338 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x7x7xf32>
+    %1340 = crt.relu %1339 : (tensor<?x128x7x7xf32>) -> tensor<?x128x7x7xf32>
+    %1341 = "onnx.Conv"(%1340, %51, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_311", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x7x7xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x7x7xf32>
+    %1342 = "onnx.Concat"(%1197, %1221, %1245, %1269, %1293, %1317, %1341) {axis = 1 : si64, onnx_node_name = "Concat_312"} : (tensor<?x512x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>) -> tensor<?x704x7x7xf32>
+    %1343 = crt.constant : () -> tensor<704x1x1xf32>
+    %1344 = crt.mul %1342, %1343 : (tensor<?x704x7x7xf32>, tensor<704x1x1xf32>) -> tensor<?x704x7x7xf32>
+    %1345 = crt.constant : () -> tensor<704x1x1xf32>
+    %1346 = crt.add %1344, %1345 : (tensor<?x704x7x7xf32>, tensor<704x1x1xf32>) -> tensor<?x704x7x7xf32>
+    %1347 = crt.relu %1346 : (tensor<?x704x7x7xf32>) -> tensor<?x704x7x7xf32>
+    %1348 = "onnx.Dim"(%1347) {axis = 0 : si64} : (tensor<?x704x7x7xf32>) -> tensor<1xi64>
+    %1349 = crt.constant : () -> tensor<1xi64>
+    %1350 = crt.constant : () -> tensor<1xi64>
+    %1351 = "onnx.Concat"(%1348, %1349, %1350) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1352 = crt.reshape %1347, %1351 : (tensor<?x704x7x7xf32>, tensor<3xi64>) -> tensor<?x704x?xf32>
+    %1353 = crt.constant : () -> tensor<2xi64>
+    %1354 = crt.reshape %114, %1353 : (tensor<128x704x1x1xf32>, tensor<2xi64>) -> tensor<128x704xf32>
+    %1355 = "onnx.MatMul"(%1354, %1352) : (tensor<128x704xf32>, tensor<?x704x?xf32>) -> tensor<?x128x?xf32>
+    %1356 = crt.constant : () -> tensor<1x128x1xf32>
+    %1357 = crt.add %1355, %1356 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1358 = "onnx.Dim"(%1347) {axis = 0 : si64} : (tensor<?x704x7x7xf32>) -> tensor<1xi64>
+    %1359 = crt.constant : () -> tensor<1xi64>
+    %1360 = crt.constant : () -> tensor<1xi64>
+    %1361 = crt.constant : () -> tensor<1xi64>
+    %1362 = "onnx.Concat"(%1358, %1361, %1359, %1360) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1363 = crt.reshape %1357, %1362 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x7x7xf32>
+    %1364 = crt.relu %1363 : (tensor<?x128x7x7xf32>) -> tensor<?x128x7x7xf32>
+    %1365 = "onnx.Conv"(%1364, %52, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_317", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x7x7xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x7x7xf32>
+    %1366 = "onnx.Concat"(%1197, %1221, %1245, %1269, %1293, %1317, %1341, %1365) {axis = 1 : si64, onnx_node_name = "Concat_318"} : (tensor<?x512x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>) -> tensor<?x736x7x7xf32>
+    %1367 = crt.constant : () -> tensor<736x1x1xf32>
+    %1368 = crt.mul %1366, %1367 : (tensor<?x736x7x7xf32>, tensor<736x1x1xf32>) -> tensor<?x736x7x7xf32>
+    %1369 = crt.constant : () -> tensor<736x1x1xf32>
+    %1370 = crt.add %1368, %1369 : (tensor<?x736x7x7xf32>, tensor<736x1x1xf32>) -> tensor<?x736x7x7xf32>
+    %1371 = crt.relu %1370 : (tensor<?x736x7x7xf32>) -> tensor<?x736x7x7xf32>
+    %1372 = "onnx.Dim"(%1371) {axis = 0 : si64} : (tensor<?x736x7x7xf32>) -> tensor<1xi64>
+    %1373 = crt.constant : () -> tensor<1xi64>
+    %1374 = crt.constant : () -> tensor<1xi64>
+    %1375 = "onnx.Concat"(%1372, %1373, %1374) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1376 = crt.reshape %1371, %1375 : (tensor<?x736x7x7xf32>, tensor<3xi64>) -> tensor<?x736x?xf32>
+    %1377 = crt.constant : () -> tensor<2xi64>
+    %1378 = crt.reshape %115, %1377 : (tensor<128x736x1x1xf32>, tensor<2xi64>) -> tensor<128x736xf32>
+    %1379 = "onnx.MatMul"(%1378, %1376) : (tensor<128x736xf32>, tensor<?x736x?xf32>) -> tensor<?x128x?xf32>
+    %1380 = crt.constant : () -> tensor<1x128x1xf32>
+    %1381 = crt.add %1379, %1380 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1382 = "onnx.Dim"(%1371) {axis = 0 : si64} : (tensor<?x736x7x7xf32>) -> tensor<1xi64>
+    %1383 = crt.constant : () -> tensor<1xi64>
+    %1384 = crt.constant : () -> tensor<1xi64>
+    %1385 = crt.constant : () -> tensor<1xi64>
+    %1386 = "onnx.Concat"(%1382, %1385, %1383, %1384) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1387 = crt.reshape %1381, %1386 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x7x7xf32>
+    %1388 = crt.relu %1387 : (tensor<?x128x7x7xf32>) -> tensor<?x128x7x7xf32>
+    %1389 = "onnx.Conv"(%1388, %53, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_323", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x7x7xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x7x7xf32>
+    %1390 = "onnx.Concat"(%1197, %1221, %1245, %1269, %1293, %1317, %1341, %1365, %1389) {axis = 1 : si64, onnx_node_name = "Concat_324"} : (tensor<?x512x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>) -> tensor<?x768x7x7xf32>
+    %1391 = crt.constant : () -> tensor<768x1x1xf32>
+    %1392 = crt.mul %1390, %1391 : (tensor<?x768x7x7xf32>, tensor<768x1x1xf32>) -> tensor<?x768x7x7xf32>
+    %1393 = crt.constant : () -> tensor<768x1x1xf32>
+    %1394 = crt.add %1392, %1393 : (tensor<?x768x7x7xf32>, tensor<768x1x1xf32>) -> tensor<?x768x7x7xf32>
+    %1395 = crt.relu %1394 : (tensor<?x768x7x7xf32>) -> tensor<?x768x7x7xf32>
+    %1396 = "onnx.Dim"(%1395) {axis = 0 : si64} : (tensor<?x768x7x7xf32>) -> tensor<1xi64>
+    %1397 = crt.constant : () -> tensor<1xi64>
+    %1398 = crt.constant : () -> tensor<1xi64>
+    %1399 = "onnx.Concat"(%1396, %1397, %1398) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1400 = crt.reshape %1395, %1399 : (tensor<?x768x7x7xf32>, tensor<3xi64>) -> tensor<?x768x?xf32>
+    %1401 = crt.constant : () -> tensor<2xi64>
+    %1402 = crt.reshape %116, %1401 : (tensor<128x768x1x1xf32>, tensor<2xi64>) -> tensor<128x768xf32>
+    %1403 = "onnx.MatMul"(%1402, %1400) : (tensor<128x768xf32>, tensor<?x768x?xf32>) -> tensor<?x128x?xf32>
+    %1404 = crt.constant : () -> tensor<1x128x1xf32>
+    %1405 = crt.add %1403, %1404 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1406 = "onnx.Dim"(%1395) {axis = 0 : si64} : (tensor<?x768x7x7xf32>) -> tensor<1xi64>
+    %1407 = crt.constant : () -> tensor<1xi64>
+    %1408 = crt.constant : () -> tensor<1xi64>
+    %1409 = crt.constant : () -> tensor<1xi64>
+    %1410 = "onnx.Concat"(%1406, %1409, %1407, %1408) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1411 = crt.reshape %1405, %1410 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x7x7xf32>
+    %1412 = crt.relu %1411 : (tensor<?x128x7x7xf32>) -> tensor<?x128x7x7xf32>
+    %1413 = "onnx.Conv"(%1412, %54, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_329", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x7x7xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x7x7xf32>
+    %1414 = "onnx.Concat"(%1197, %1221, %1245, %1269, %1293, %1317, %1341, %1365, %1389, %1413) {axis = 1 : si64, onnx_node_name = "Concat_330"} : (tensor<?x512x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>) -> tensor<?x800x7x7xf32>
+    %1415 = crt.constant : () -> tensor<800x1x1xf32>
+    %1416 = crt.mul %1414, %1415 : (tensor<?x800x7x7xf32>, tensor<800x1x1xf32>) -> tensor<?x800x7x7xf32>
+    %1417 = crt.constant : () -> tensor<800x1x1xf32>
+    %1418 = crt.add %1416, %1417 : (tensor<?x800x7x7xf32>, tensor<800x1x1xf32>) -> tensor<?x800x7x7xf32>
+    %1419 = crt.relu %1418 : (tensor<?x800x7x7xf32>) -> tensor<?x800x7x7xf32>
+    %1420 = "onnx.Dim"(%1419) {axis = 0 : si64} : (tensor<?x800x7x7xf32>) -> tensor<1xi64>
+    %1421 = crt.constant : () -> tensor<1xi64>
+    %1422 = crt.constant : () -> tensor<1xi64>
+    %1423 = "onnx.Concat"(%1420, %1421, %1422) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1424 = crt.reshape %1419, %1423 : (tensor<?x800x7x7xf32>, tensor<3xi64>) -> tensor<?x800x?xf32>
+    %1425 = crt.constant : () -> tensor<2xi64>
+    %1426 = crt.reshape %117, %1425 : (tensor<128x800x1x1xf32>, tensor<2xi64>) -> tensor<128x800xf32>
+    %1427 = "onnx.MatMul"(%1426, %1424) : (tensor<128x800xf32>, tensor<?x800x?xf32>) -> tensor<?x128x?xf32>
+    %1428 = crt.constant : () -> tensor<1x128x1xf32>
+    %1429 = crt.add %1427, %1428 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1430 = "onnx.Dim"(%1419) {axis = 0 : si64} : (tensor<?x800x7x7xf32>) -> tensor<1xi64>
+    %1431 = crt.constant : () -> tensor<1xi64>
+    %1432 = crt.constant : () -> tensor<1xi64>
+    %1433 = crt.constant : () -> tensor<1xi64>
+    %1434 = "onnx.Concat"(%1430, %1433, %1431, %1432) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1435 = crt.reshape %1429, %1434 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x7x7xf32>
+    %1436 = crt.relu %1435 : (tensor<?x128x7x7xf32>) -> tensor<?x128x7x7xf32>
+    %1437 = "onnx.Conv"(%1436, %55, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_335", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x7x7xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x7x7xf32>
+    %1438 = "onnx.Concat"(%1197, %1221, %1245, %1269, %1293, %1317, %1341, %1365, %1389, %1413, %1437) {axis = 1 : si64, onnx_node_name = "Concat_336"} : (tensor<?x512x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>) -> tensor<?x832x7x7xf32>
+    %1439 = crt.constant : () -> tensor<832x1x1xf32>
+    %1440 = crt.mul %1438, %1439 : (tensor<?x832x7x7xf32>, tensor<832x1x1xf32>) -> tensor<?x832x7x7xf32>
+    %1441 = crt.constant : () -> tensor<832x1x1xf32>
+    %1442 = crt.add %1440, %1441 : (tensor<?x832x7x7xf32>, tensor<832x1x1xf32>) -> tensor<?x832x7x7xf32>
+    %1443 = crt.relu %1442 : (tensor<?x832x7x7xf32>) -> tensor<?x832x7x7xf32>
+    %1444 = "onnx.Dim"(%1443) {axis = 0 : si64} : (tensor<?x832x7x7xf32>) -> tensor<1xi64>
+    %1445 = crt.constant : () -> tensor<1xi64>
+    %1446 = crt.constant : () -> tensor<1xi64>
+    %1447 = "onnx.Concat"(%1444, %1445, %1446) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1448 = crt.reshape %1443, %1447 : (tensor<?x832x7x7xf32>, tensor<3xi64>) -> tensor<?x832x?xf32>
+    %1449 = crt.constant : () -> tensor<2xi64>
+    %1450 = crt.reshape %118, %1449 : (tensor<128x832x1x1xf32>, tensor<2xi64>) -> tensor<128x832xf32>
+    %1451 = "onnx.MatMul"(%1450, %1448) : (tensor<128x832xf32>, tensor<?x832x?xf32>) -> tensor<?x128x?xf32>
+    %1452 = crt.constant : () -> tensor<1x128x1xf32>
+    %1453 = crt.add %1451, %1452 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1454 = "onnx.Dim"(%1443) {axis = 0 : si64} : (tensor<?x832x7x7xf32>) -> tensor<1xi64>
+    %1455 = crt.constant : () -> tensor<1xi64>
+    %1456 = crt.constant : () -> tensor<1xi64>
+    %1457 = crt.constant : () -> tensor<1xi64>
+    %1458 = "onnx.Concat"(%1454, %1457, %1455, %1456) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1459 = crt.reshape %1453, %1458 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x7x7xf32>
+    %1460 = crt.relu %1459 : (tensor<?x128x7x7xf32>) -> tensor<?x128x7x7xf32>
+    %1461 = "onnx.Conv"(%1460, %56, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_341", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x7x7xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x7x7xf32>
+    %1462 = "onnx.Concat"(%1197, %1221, %1245, %1269, %1293, %1317, %1341, %1365, %1389, %1413, %1437, %1461) {axis = 1 : si64, onnx_node_name = "Concat_342"} : (tensor<?x512x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>) -> tensor<?x864x7x7xf32>
+    %1463 = crt.constant : () -> tensor<864x1x1xf32>
+    %1464 = crt.mul %1462, %1463 : (tensor<?x864x7x7xf32>, tensor<864x1x1xf32>) -> tensor<?x864x7x7xf32>
+    %1465 = crt.constant : () -> tensor<864x1x1xf32>
+    %1466 = crt.add %1464, %1465 : (tensor<?x864x7x7xf32>, tensor<864x1x1xf32>) -> tensor<?x864x7x7xf32>
+    %1467 = crt.relu %1466 : (tensor<?x864x7x7xf32>) -> tensor<?x864x7x7xf32>
+    %1468 = "onnx.Dim"(%1467) {axis = 0 : si64} : (tensor<?x864x7x7xf32>) -> tensor<1xi64>
+    %1469 = crt.constant : () -> tensor<1xi64>
+    %1470 = crt.constant : () -> tensor<1xi64>
+    %1471 = "onnx.Concat"(%1468, %1469, %1470) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1472 = crt.reshape %1467, %1471 : (tensor<?x864x7x7xf32>, tensor<3xi64>) -> tensor<?x864x?xf32>
+    %1473 = crt.constant : () -> tensor<2xi64>
+    %1474 = crt.reshape %119, %1473 : (tensor<128x864x1x1xf32>, tensor<2xi64>) -> tensor<128x864xf32>
+    %1475 = "onnx.MatMul"(%1474, %1472) : (tensor<128x864xf32>, tensor<?x864x?xf32>) -> tensor<?x128x?xf32>
+    %1476 = crt.constant : () -> tensor<1x128x1xf32>
+    %1477 = crt.add %1475, %1476 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1478 = "onnx.Dim"(%1467) {axis = 0 : si64} : (tensor<?x864x7x7xf32>) -> tensor<1xi64>
+    %1479 = crt.constant : () -> tensor<1xi64>
+    %1480 = crt.constant : () -> tensor<1xi64>
+    %1481 = crt.constant : () -> tensor<1xi64>
+    %1482 = "onnx.Concat"(%1478, %1481, %1479, %1480) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1483 = crt.reshape %1477, %1482 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x7x7xf32>
+    %1484 = crt.relu %1483 : (tensor<?x128x7x7xf32>) -> tensor<?x128x7x7xf32>
+    %1485 = "onnx.Conv"(%1484, %57, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_347", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x7x7xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x7x7xf32>
+    %1486 = "onnx.Concat"(%1197, %1221, %1245, %1269, %1293, %1317, %1341, %1365, %1389, %1413, %1437, %1461, %1485) {axis = 1 : si64, onnx_node_name = "Concat_348"} : (tensor<?x512x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>) -> tensor<?x896x7x7xf32>
+    %1487 = crt.constant : () -> tensor<896x1x1xf32>
+    %1488 = crt.mul %1486, %1487 : (tensor<?x896x7x7xf32>, tensor<896x1x1xf32>) -> tensor<?x896x7x7xf32>
+    %1489 = crt.constant : () -> tensor<896x1x1xf32>
+    %1490 = crt.add %1488, %1489 : (tensor<?x896x7x7xf32>, tensor<896x1x1xf32>) -> tensor<?x896x7x7xf32>
+    %1491 = crt.relu %1490 : (tensor<?x896x7x7xf32>) -> tensor<?x896x7x7xf32>
+    %1492 = "onnx.Dim"(%1491) {axis = 0 : si64} : (tensor<?x896x7x7xf32>) -> tensor<1xi64>
+    %1493 = crt.constant : () -> tensor<1xi64>
+    %1494 = crt.constant : () -> tensor<1xi64>
+    %1495 = "onnx.Concat"(%1492, %1493, %1494) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1496 = crt.reshape %1491, %1495 : (tensor<?x896x7x7xf32>, tensor<3xi64>) -> tensor<?x896x?xf32>
+    %1497 = crt.constant : () -> tensor<2xi64>
+    %1498 = crt.reshape %120, %1497 : (tensor<128x896x1x1xf32>, tensor<2xi64>) -> tensor<128x896xf32>
+    %1499 = "onnx.MatMul"(%1498, %1496) : (tensor<128x896xf32>, tensor<?x896x?xf32>) -> tensor<?x128x?xf32>
+    %1500 = crt.constant : () -> tensor<1x128x1xf32>
+    %1501 = crt.add %1499, %1500 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1502 = "onnx.Dim"(%1491) {axis = 0 : si64} : (tensor<?x896x7x7xf32>) -> tensor<1xi64>
+    %1503 = crt.constant : () -> tensor<1xi64>
+    %1504 = crt.constant : () -> tensor<1xi64>
+    %1505 = crt.constant : () -> tensor<1xi64>
+    %1506 = "onnx.Concat"(%1502, %1505, %1503, %1504) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1507 = crt.reshape %1501, %1506 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x7x7xf32>
+    %1508 = crt.relu %1507 : (tensor<?x128x7x7xf32>) -> tensor<?x128x7x7xf32>
+    %1509 = "onnx.Conv"(%1508, %58, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_353", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x7x7xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x7x7xf32>
+    %1510 = "onnx.Concat"(%1197, %1221, %1245, %1269, %1293, %1317, %1341, %1365, %1389, %1413, %1437, %1461, %1485, %1509) {axis = 1 : si64, onnx_node_name = "Concat_354"} : (tensor<?x512x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>) -> tensor<?x928x7x7xf32>
+    %1511 = crt.constant : () -> tensor<928x1x1xf32>
+    %1512 = crt.mul %1510, %1511 : (tensor<?x928x7x7xf32>, tensor<928x1x1xf32>) -> tensor<?x928x7x7xf32>
+    %1513 = crt.constant : () -> tensor<928x1x1xf32>
+    %1514 = crt.add %1512, %1513 : (tensor<?x928x7x7xf32>, tensor<928x1x1xf32>) -> tensor<?x928x7x7xf32>
+    %1515 = crt.relu %1514 : (tensor<?x928x7x7xf32>) -> tensor<?x928x7x7xf32>
+    %1516 = "onnx.Dim"(%1515) {axis = 0 : si64} : (tensor<?x928x7x7xf32>) -> tensor<1xi64>
+    %1517 = crt.constant : () -> tensor<1xi64>
+    %1518 = crt.constant : () -> tensor<1xi64>
+    %1519 = "onnx.Concat"(%1516, %1517, %1518) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1520 = crt.reshape %1515, %1519 : (tensor<?x928x7x7xf32>, tensor<3xi64>) -> tensor<?x928x?xf32>
+    %1521 = crt.constant : () -> tensor<2xi64>
+    %1522 = crt.reshape %121, %1521 : (tensor<128x928x1x1xf32>, tensor<2xi64>) -> tensor<128x928xf32>
+    %1523 = "onnx.MatMul"(%1522, %1520) : (tensor<128x928xf32>, tensor<?x928x?xf32>) -> tensor<?x128x?xf32>
+    %1524 = crt.constant : () -> tensor<1x128x1xf32>
+    %1525 = crt.add %1523, %1524 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1526 = "onnx.Dim"(%1515) {axis = 0 : si64} : (tensor<?x928x7x7xf32>) -> tensor<1xi64>
+    %1527 = crt.constant : () -> tensor<1xi64>
+    %1528 = crt.constant : () -> tensor<1xi64>
+    %1529 = crt.constant : () -> tensor<1xi64>
+    %1530 = "onnx.Concat"(%1526, %1529, %1527, %1528) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1531 = crt.reshape %1525, %1530 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x7x7xf32>
+    %1532 = crt.relu %1531 : (tensor<?x128x7x7xf32>) -> tensor<?x128x7x7xf32>
+    %1533 = "onnx.Conv"(%1532, %59, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_359", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x7x7xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x7x7xf32>
+    %1534 = "onnx.Concat"(%1197, %1221, %1245, %1269, %1293, %1317, %1341, %1365, %1389, %1413, %1437, %1461, %1485, %1509, %1533) {axis = 1 : si64, onnx_node_name = "Concat_360"} : (tensor<?x512x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>) -> tensor<?x960x7x7xf32>
+    %1535 = crt.constant : () -> tensor<960x1x1xf32>
+    %1536 = crt.mul %1534, %1535 : (tensor<?x960x7x7xf32>, tensor<960x1x1xf32>) -> tensor<?x960x7x7xf32>
+    %1537 = crt.constant : () -> tensor<960x1x1xf32>
+    %1538 = crt.add %1536, %1537 : (tensor<?x960x7x7xf32>, tensor<960x1x1xf32>) -> tensor<?x960x7x7xf32>
+    %1539 = crt.relu %1538 : (tensor<?x960x7x7xf32>) -> tensor<?x960x7x7xf32>
+    %1540 = "onnx.Dim"(%1539) {axis = 0 : si64} : (tensor<?x960x7x7xf32>) -> tensor<1xi64>
+    %1541 = crt.constant : () -> tensor<1xi64>
+    %1542 = crt.constant : () -> tensor<1xi64>
+    %1543 = "onnx.Concat"(%1540, %1541, %1542) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1544 = crt.reshape %1539, %1543 : (tensor<?x960x7x7xf32>, tensor<3xi64>) -> tensor<?x960x?xf32>
+    %1545 = crt.constant : () -> tensor<2xi64>
+    %1546 = crt.reshape %122, %1545 : (tensor<128x960x1x1xf32>, tensor<2xi64>) -> tensor<128x960xf32>
+    %1547 = "onnx.MatMul"(%1546, %1544) : (tensor<128x960xf32>, tensor<?x960x?xf32>) -> tensor<?x128x?xf32>
+    %1548 = crt.constant : () -> tensor<1x128x1xf32>
+    %1549 = crt.add %1547, %1548 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1550 = "onnx.Dim"(%1539) {axis = 0 : si64} : (tensor<?x960x7x7xf32>) -> tensor<1xi64>
+    %1551 = crt.constant : () -> tensor<1xi64>
+    %1552 = crt.constant : () -> tensor<1xi64>
+    %1553 = crt.constant : () -> tensor<1xi64>
+    %1554 = "onnx.Concat"(%1550, %1553, %1551, %1552) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1555 = crt.reshape %1549, %1554 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x7x7xf32>
+    %1556 = crt.relu %1555 : (tensor<?x128x7x7xf32>) -> tensor<?x128x7x7xf32>
+    %1557 = "onnx.Conv"(%1556, %60, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_365", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x7x7xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x7x7xf32>
+    %1558 = "onnx.Concat"(%1197, %1221, %1245, %1269, %1293, %1317, %1341, %1365, %1389, %1413, %1437, %1461, %1485, %1509, %1533, %1557) {axis = 1 : si64, onnx_node_name = "Concat_366"} : (tensor<?x512x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>) -> tensor<?x992x7x7xf32>
+    %1559 = crt.constant : () -> tensor<992x1x1xf32>
+    %1560 = crt.mul %1558, %1559 : (tensor<?x992x7x7xf32>, tensor<992x1x1xf32>) -> tensor<?x992x7x7xf32>
+    %1561 = crt.constant : () -> tensor<992x1x1xf32>
+    %1562 = crt.add %1560, %1561 : (tensor<?x992x7x7xf32>, tensor<992x1x1xf32>) -> tensor<?x992x7x7xf32>
+    %1563 = crt.relu %1562 : (tensor<?x992x7x7xf32>) -> tensor<?x992x7x7xf32>
+    %1564 = "onnx.Dim"(%1563) {axis = 0 : si64} : (tensor<?x992x7x7xf32>) -> tensor<1xi64>
+    %1565 = crt.constant : () -> tensor<1xi64>
+    %1566 = crt.constant : () -> tensor<1xi64>
+    %1567 = "onnx.Concat"(%1564, %1565, %1566) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1568 = crt.reshape %1563, %1567 : (tensor<?x992x7x7xf32>, tensor<3xi64>) -> tensor<?x992x?xf32>
+    %1569 = crt.constant : () -> tensor<2xi64>
+    %1570 = crt.reshape %123, %1569 : (tensor<128x992x1x1xf32>, tensor<2xi64>) -> tensor<128x992xf32>
+    %1571 = "onnx.MatMul"(%1570, %1568) : (tensor<128x992xf32>, tensor<?x992x?xf32>) -> tensor<?x128x?xf32>
+    %1572 = crt.constant : () -> tensor<1x128x1xf32>
+    %1573 = crt.add %1571, %1572 : (tensor<?x128x?xf32>, tensor<1x128x1xf32>) -> tensor<?x128x?xf32>
+    %1574 = "onnx.Dim"(%1563) {axis = 0 : si64} : (tensor<?x992x7x7xf32>) -> tensor<1xi64>
+    %1575 = crt.constant : () -> tensor<1xi64>
+    %1576 = crt.constant : () -> tensor<1xi64>
+    %1577 = crt.constant : () -> tensor<1xi64>
+    %1578 = "onnx.Concat"(%1574, %1577, %1575, %1576) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1579 = crt.reshape %1573, %1578 : (tensor<?x128x?xf32>, tensor<4xi64>) -> tensor<?x128x7x7xf32>
+    %1580 = crt.relu %1579 : (tensor<?x128x7x7xf32>) -> tensor<?x128x7x7xf32>
+    %1581 = "onnx.Conv"(%1580, %61, %0) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_371", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<?x128x7x7xf32>, tensor<32x128x3x3xf32>, none) -> tensor<?x32x7x7xf32>
+    %1582 = "onnx.Concat"(%1197, %1221, %1245, %1269, %1293, %1317, %1341, %1365, %1389, %1413, %1437, %1461, %1485, %1509, %1533, %1557, %1581) {axis = 1 : si64, onnx_node_name = "Concat_372"} : (tensor<?x512x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>, tensor<?x32x7x7xf32>) -> tensor<?x1024x7x7xf32>
+    %1583 = crt.constant : () -> tensor<1024x1x1xf32>
+    %1584 = crt.mul %1582, %1583 : (tensor<?x1024x7x7xf32>, tensor<1024x1x1xf32>) -> tensor<?x1024x7x7xf32>
+    %1585 = crt.constant : () -> tensor<1024x1x1xf32>
+    %1586 = crt.add %1584, %1585 : (tensor<?x1024x7x7xf32>, tensor<1024x1x1xf32>) -> tensor<?x1024x7x7xf32>
+    %1587 = crt.relu %1586 : (tensor<?x1024x7x7xf32>) -> tensor<?x1024x7x7xf32>
+    %1588 = crt.reducemean %1587 : (tensor<?x1024x7x7xf32>) -> tensor<?x1024x1x1xf32>
+    %1589 = crt.flatten %1588 : (tensor<?x1024x1x1xf32>) -> tensor<?x1024xf32>
+    %1590 = crt.gemm %1589, %62, %63 : (tensor<?x1024xf32>, tensor<1000x1024xf32>, tensor<1000xf32>) -> tensor<?x1000xf32>
+    return %1590 : tensor<?x1000xf32>
+  }
+  "onnx.EntryPoint"() {func = @main_graph} : () -> ()
+}

@@ -1,0 +1,1491 @@
+module attributes {llvm.data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128", llvm.target_triple = "x86_64-unknown-linux-gnu"} {
+  func.func @main_graph(%arg0: tensor<?x?xi64>, %arg1: tensor<?x?xi64>, %arg2: tensor<12x2x?x12x?x64xf32>) -> (tensor<?x?x50257xf32>, tensor<12x2x?x12x?x64xf32>) attributes {input_names = ["input_ids", "attention_mask", "past_key_values"], output_names = ["logits", "past_key_values_array"]} {
+    %0 = crt.constant : () -> tensor<50257x768xf32>
+    %1 = crt.constant : () -> tensor<1024x768xf32>
+    %2 = crt.constant : () -> tensor<768xf32>
+    %3 = crt.constant : () -> tensor<768xf32>
+    %4 = crt.constant : () -> tensor<1x1x1024x1024xf32>
+    %5 = crt.constant : () -> tensor<768x2304xf32>
+    %6 = crt.constant : () -> tensor<2304xf32>
+    %7 = crt.constant : () -> tensor<768x768xf32>
+    %8 = crt.constant : () -> tensor<768xf32>
+    %9 = crt.constant : () -> tensor<768xf32>
+    %10 = crt.constant : () -> tensor<768xf32>
+    %11 = crt.constant : () -> tensor<768x3072xf32>
+    %12 = crt.constant : () -> tensor<3072xf32>
+    %13 = crt.constant : () -> tensor<3072x768xf32>
+    %14 = crt.constant : () -> tensor<768xf32>
+    %15 = crt.constant : () -> tensor<768xf32>
+    %16 = crt.constant : () -> tensor<768xf32>
+    %17 = crt.constant : () -> tensor<768x2304xf32>
+    %18 = crt.constant : () -> tensor<2304xf32>
+    %19 = crt.constant : () -> tensor<768x768xf32>
+    %20 = crt.constant : () -> tensor<768xf32>
+    %21 = crt.constant : () -> tensor<768xf32>
+    %22 = crt.constant : () -> tensor<768xf32>
+    %23 = crt.constant : () -> tensor<768x3072xf32>
+    %24 = crt.constant : () -> tensor<3072xf32>
+    %25 = crt.constant : () -> tensor<3072x768xf32>
+    %26 = crt.constant : () -> tensor<768xf32>
+    %27 = crt.constant : () -> tensor<768xf32>
+    %28 = crt.constant : () -> tensor<768xf32>
+    %29 = crt.constant : () -> tensor<768x2304xf32>
+    %30 = crt.constant : () -> tensor<2304xf32>
+    %31 = crt.constant : () -> tensor<768x768xf32>
+    %32 = crt.constant : () -> tensor<768xf32>
+    %33 = crt.constant : () -> tensor<768xf32>
+    %34 = crt.constant : () -> tensor<768xf32>
+    %35 = crt.constant : () -> tensor<768x3072xf32>
+    %36 = crt.constant : () -> tensor<3072xf32>
+    %37 = crt.constant : () -> tensor<3072x768xf32>
+    %38 = crt.constant : () -> tensor<768xf32>
+    %39 = crt.constant : () -> tensor<768xf32>
+    %40 = crt.constant : () -> tensor<768xf32>
+    %41 = crt.constant : () -> tensor<768x2304xf32>
+    %42 = crt.constant : () -> tensor<2304xf32>
+    %43 = crt.constant : () -> tensor<768x768xf32>
+    %44 = crt.constant : () -> tensor<768xf32>
+    %45 = crt.constant : () -> tensor<768xf32>
+    %46 = crt.constant : () -> tensor<768xf32>
+    %47 = crt.constant : () -> tensor<768x3072xf32>
+    %48 = crt.constant : () -> tensor<3072xf32>
+    %49 = crt.constant : () -> tensor<3072x768xf32>
+    %50 = crt.constant : () -> tensor<768xf32>
+    %51 = crt.constant : () -> tensor<768xf32>
+    %52 = crt.constant : () -> tensor<768xf32>
+    %53 = crt.constant : () -> tensor<768x2304xf32>
+    %54 = crt.constant : () -> tensor<2304xf32>
+    %55 = crt.constant : () -> tensor<768x768xf32>
+    %56 = crt.constant : () -> tensor<768xf32>
+    %57 = crt.constant : () -> tensor<768xf32>
+    %58 = crt.constant : () -> tensor<768xf32>
+    %59 = crt.constant : () -> tensor<768x3072xf32>
+    %60 = crt.constant : () -> tensor<3072xf32>
+    %61 = crt.constant : () -> tensor<3072x768xf32>
+    %62 = crt.constant : () -> tensor<768xf32>
+    %63 = crt.constant : () -> tensor<768xf32>
+    %64 = crt.constant : () -> tensor<768xf32>
+    %65 = crt.constant : () -> tensor<768x2304xf32>
+    %66 = crt.constant : () -> tensor<2304xf32>
+    %67 = crt.constant : () -> tensor<768x768xf32>
+    %68 = crt.constant : () -> tensor<768xf32>
+    %69 = crt.constant : () -> tensor<768xf32>
+    %70 = crt.constant : () -> tensor<768xf32>
+    %71 = crt.constant : () -> tensor<768x3072xf32>
+    %72 = crt.constant : () -> tensor<3072xf32>
+    %73 = crt.constant : () -> tensor<3072x768xf32>
+    %74 = crt.constant : () -> tensor<768xf32>
+    %75 = crt.constant : () -> tensor<768xf32>
+    %76 = crt.constant : () -> tensor<768xf32>
+    %77 = crt.constant : () -> tensor<768x2304xf32>
+    %78 = crt.constant : () -> tensor<2304xf32>
+    %79 = crt.constant : () -> tensor<768x768xf32>
+    %80 = crt.constant : () -> tensor<768xf32>
+    %81 = crt.constant : () -> tensor<768xf32>
+    %82 = crt.constant : () -> tensor<768xf32>
+    %83 = crt.constant : () -> tensor<768x3072xf32>
+    %84 = crt.constant : () -> tensor<3072xf32>
+    %85 = crt.constant : () -> tensor<3072x768xf32>
+    %86 = crt.constant : () -> tensor<768xf32>
+    %87 = crt.constant : () -> tensor<768xf32>
+    %88 = crt.constant : () -> tensor<768xf32>
+    %89 = crt.constant : () -> tensor<768x2304xf32>
+    %90 = crt.constant : () -> tensor<2304xf32>
+    %91 = crt.constant : () -> tensor<768x768xf32>
+    %92 = crt.constant : () -> tensor<768xf32>
+    %93 = crt.constant : () -> tensor<768xf32>
+    %94 = crt.constant : () -> tensor<768xf32>
+    %95 = crt.constant : () -> tensor<768x3072xf32>
+    %96 = crt.constant : () -> tensor<3072xf32>
+    %97 = crt.constant : () -> tensor<3072x768xf32>
+    %98 = crt.constant : () -> tensor<768xf32>
+    %99 = crt.constant : () -> tensor<768xf32>
+    %100 = crt.constant : () -> tensor<768xf32>
+    %101 = crt.constant : () -> tensor<768x2304xf32>
+    %102 = crt.constant : () -> tensor<2304xf32>
+    %103 = crt.constant : () -> tensor<768x768xf32>
+    %104 = crt.constant : () -> tensor<768xf32>
+    %105 = crt.constant : () -> tensor<768xf32>
+    %106 = crt.constant : () -> tensor<768xf32>
+    %107 = crt.constant : () -> tensor<768x3072xf32>
+    %108 = crt.constant : () -> tensor<3072xf32>
+    %109 = crt.constant : () -> tensor<3072x768xf32>
+    %110 = crt.constant : () -> tensor<768xf32>
+    %111 = crt.constant : () -> tensor<768xf32>
+    %112 = crt.constant : () -> tensor<768xf32>
+    %113 = crt.constant : () -> tensor<768x2304xf32>
+    %114 = crt.constant : () -> tensor<2304xf32>
+    %115 = crt.constant : () -> tensor<768x768xf32>
+    %116 = crt.constant : () -> tensor<768xf32>
+    %117 = crt.constant : () -> tensor<768xf32>
+    %118 = crt.constant : () -> tensor<768xf32>
+    %119 = crt.constant : () -> tensor<768x3072xf32>
+    %120 = crt.constant : () -> tensor<3072xf32>
+    %121 = crt.constant : () -> tensor<3072x768xf32>
+    %122 = crt.constant : () -> tensor<768xf32>
+    %123 = crt.constant : () -> tensor<768xf32>
+    %124 = crt.constant : () -> tensor<768xf32>
+    %125 = crt.constant : () -> tensor<768x2304xf32>
+    %126 = crt.constant : () -> tensor<2304xf32>
+    %127 = crt.constant : () -> tensor<768x768xf32>
+    %128 = crt.constant : () -> tensor<768xf32>
+    %129 = crt.constant : () -> tensor<768xf32>
+    %130 = crt.constant : () -> tensor<768xf32>
+    %131 = crt.constant : () -> tensor<768x3072xf32>
+    %132 = crt.constant : () -> tensor<3072xf32>
+    %133 = crt.constant : () -> tensor<3072x768xf32>
+    %134 = crt.constant : () -> tensor<768xf32>
+    %135 = crt.constant : () -> tensor<768xf32>
+    %136 = crt.constant : () -> tensor<768xf32>
+    %137 = crt.constant : () -> tensor<768x2304xf32>
+    %138 = crt.constant : () -> tensor<2304xf32>
+    %139 = crt.constant : () -> tensor<768x768xf32>
+    %140 = crt.constant : () -> tensor<768xf32>
+    %141 = crt.constant : () -> tensor<768xf32>
+    %142 = crt.constant : () -> tensor<768xf32>
+    %143 = crt.constant : () -> tensor<768x3072xf32>
+    %144 = crt.constant : () -> tensor<3072xf32>
+    %145 = crt.constant : () -> tensor<3072x768xf32>
+    %146 = crt.constant : () -> tensor<768xf32>
+    %147 = crt.constant : () -> tensor<768xf32>
+    %148 = crt.constant : () -> tensor<768xf32>
+    %149 = crt.constant : () -> tensor<1xi64>
+    %150 = crt.constant : () -> tensor<i64>
+    %151 = crt.constant : () -> tensor<1xi64>
+    %152 = crt.constant : () -> tensor<1xi64>
+    %153 = crt.constant : () -> tensor<1xi64>
+    %154 = crt.constant : () -> tensor<1xi64>
+    %155 = crt.constant : () -> tensor<1xi64>
+    %156 = crt.constant : () -> tensor<1xi64>
+    %157 = crt.constant : () -> tensor<f32>
+    %158 = crt.constant : () -> tensor<1xi64>
+    %159 = crt.constant : () -> tensor<1xi64>
+    %160 = crt.constant : () -> tensor<768x50257xf32>
+    %161 = crt.constant : () -> tensor<1x1x1024x1024xf32>
+    %162 = crt.constant : () -> tensor<1x1x1024x1024xf32>
+    %163 = crt.constant : () -> tensor<1x1x1024x1024xf32>
+    %164 = crt.constant : () -> tensor<1x1x1024x1024xf32>
+    %165 = crt.constant : () -> tensor<1x1x1024x1024xf32>
+    %166 = crt.constant : () -> tensor<1x1x1024x1024xf32>
+    %167 = crt.constant : () -> tensor<1x1x1024x1024xf32>
+    %168 = crt.constant : () -> tensor<1x1x1024x1024xf32>
+    %169 = crt.constant : () -> tensor<1x1x1024x1024xf32>
+    %170 = crt.constant : () -> tensor<1x1x1024x1024xf32>
+    %171 = crt.constant : () -> tensor<1x1x1024x1024xf32>
+    %172 = crt.constant : () -> tensor<i64>
+    %173 = crt.constant : () -> tensor<1xi64>
+    %174 = crt.constant : () -> tensor<f32>
+    %175 = crt.constant : () -> tensor<12xi64>
+    %176 = crt.constant : () -> tensor<f32>
+    %177 = crt.constant : () -> tensor<f32>
+    %178 = crt.constant : () -> tensor<3xi64>
+    %179 = crt.constant : () -> tensor<2xi64>
+    %180 = crt.constant : () -> tensor<f32>
+    %181 = crt.constant : () -> tensor<f32>
+    %182 = crt.constant : () -> tensor<f32>
+    %183 = crt.constant : () -> tensor<f32>
+    %184 = "onnx.Dim"(%arg0) {axis = 0 : si64} : (tensor<?x?xi64>) -> tensor<1xi64>
+    %185 = "onnx.Dim"(%arg0) {axis = 1 : si64} : (tensor<?x?xi64>) -> tensor<1xi64>
+    %186 = crt.constant : () -> tensor<1xi64>
+    %187 = "onnx.Squeeze"(%185, %186) : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %188 = "onnx.Concat"(%149, %185) {axis = 0 : si64, onnx_node_name = "Concat_240"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<2xi64>
+    %189 = crt.reshape %arg0, %188 : (tensor<?x?xi64>, tensor<2xi64>) -> tensor<?x?xi64>
+    %190 = "onnx.Dim"(%189) {axis = 0 : si64} : (tensor<?x?xi64>) -> tensor<1xi64>
+    %191 = "onnx.Gather"(%arg2, %172) {axis = 0 : si64, onnx_node_name = "Gather_246"} : (tensor<12x2x?x12x?x64xf32>, tensor<i64>) -> tensor<2x?x12x?x64xf32>
+    %192 = "onnx.Gather"(%191, %172) {axis = 0 : si64, onnx_node_name = "Gather_248"} : (tensor<2x?x12x?x64xf32>, tensor<i64>) -> tensor<?x12x?x64xf32>
+    %193 = "onnx.Dim"(%192) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %194 = "onnx.Squeeze"(%193, %155) {onnx_node_name = "Squeeze_255"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %195 = "onnx.Add"(%187, %194) {onnx_node_name = "Add_256"} : (tensor<i64>, tensor<i64>) -> tensor<i64>
+    %196 = "onnx.Range"(%194, %195, %150) {onnx_node_name = "Range_259"} : (tensor<i64>, tensor<i64>, tensor<i64>) -> tensor<?xi64>
+    %197 = "onnx.Unsqueeze"(%196, %155) {onnx_node_name = "Unsqueeze_261"} : (tensor<?xi64>, tensor<1xi64>) -> tensor<1x?xi64>
+    %198 = "onnx.Concat"(%149, %185) {axis = 0 : si64, onnx_node_name = "Concat_264"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<2xi64>
+    %199 = crt.reshape %197, %198 : (tensor<1x?xi64>, tensor<2xi64>) -> tensor<?x?xi64>
+    %200 = "onnx.Concat"(%190, %149) {axis = 0 : si64, onnx_node_name = "Concat_268"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<2xi64>
+    %201 = crt.reshape %arg1, %200 : (tensor<?x?xi64>, tensor<2xi64>) -> tensor<?x?xi64>
+    %202 = "onnx.Unsqueeze"(%201, %173) {onnx_node_name = "Unsqueeze_271"} : (tensor<?x?xi64>, tensor<1xi64>) -> tensor<?x1x?xi64>
+    %203 = "onnx.Unsqueeze"(%202, %154) {onnx_node_name = "Unsqueeze_273"} : (tensor<?x1x?xi64>, tensor<1xi64>) -> tensor<?x1x1x?xi64>
+    %204 = "onnx.Cast"(%203) {onnx_node_name = "Cast_274", to = f32} : (tensor<?x1x1x?xi64>) -> tensor<?x1x1x?xf32>
+    %205 = crt.sub %174, %204 : (tensor<f32>, tensor<?x1x1x?xf32>) -> tensor<?x1x1x?xf32>
+    %206 = crt.mul %205, %157 : (tensor<?x1x1x?xf32>, tensor<f32>) -> tensor<?x1x1x?xf32>
+    %207 = "onnx.Gather"(%0, %189) {axis = 0 : si64, onnx_node_name = "Gather_279"} : (tensor<50257x768xf32>, tensor<?x?xi64>) -> tensor<?x?x768xf32>
+    %208 = "onnx.Gather"(%1, %199) {axis = 0 : si64, onnx_node_name = "Gather_280"} : (tensor<1024x768xf32>, tensor<?x?xi64>) -> tensor<?x?x768xf32>
+    %209 = crt.add %207, %208 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %210 = crt.constant : () -> tensor<1xi64>
+    %211:12 = "onnx.Split"(%arg2, %175) {axis = 0 : si64, onnx_node_name = "Split_290"} : (tensor<12x2x?x12x?x64xf32>, tensor<12xi64>) -> (tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>)
+    %212 = "onnx.Squeeze"(%211#0, %155) {onnx_node_name = "Squeeze_292"} : (tensor<1x2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<2x?x12x?x64xf32>
+    %213 = "onnx.Squeeze"(%211#1, %155) {onnx_node_name = "Squeeze_294"} : (tensor<1x2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<2x?x12x?x64xf32>
+    %214 = "onnx.Squeeze"(%211#2, %155) {onnx_node_name = "Squeeze_296"} : (tensor<1x2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<2x?x12x?x64xf32>
+    %215 = "onnx.Squeeze"(%211#3, %155) {onnx_node_name = "Squeeze_298"} : (tensor<1x2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<2x?x12x?x64xf32>
+    %216 = "onnx.Squeeze"(%211#4, %155) {onnx_node_name = "Squeeze_300"} : (tensor<1x2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<2x?x12x?x64xf32>
+    %217 = "onnx.Squeeze"(%211#5, %155) {onnx_node_name = "Squeeze_302"} : (tensor<1x2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<2x?x12x?x64xf32>
+    %218 = "onnx.Squeeze"(%211#6, %155) {onnx_node_name = "Squeeze_304"} : (tensor<1x2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<2x?x12x?x64xf32>
+    %219 = "onnx.Squeeze"(%211#7, %155) {onnx_node_name = "Squeeze_306"} : (tensor<1x2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<2x?x12x?x64xf32>
+    %220 = "onnx.Squeeze"(%211#8, %155) {onnx_node_name = "Squeeze_308"} : (tensor<1x2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<2x?x12x?x64xf32>
+    %221 = "onnx.Squeeze"(%211#9, %155) {onnx_node_name = "Squeeze_310"} : (tensor<1x2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<2x?x12x?x64xf32>
+    %222 = "onnx.Squeeze"(%211#10, %155) {onnx_node_name = "Squeeze_312"} : (tensor<1x2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<2x?x12x?x64xf32>
+    %223 = "onnx.Squeeze"(%211#11, %155) {onnx_node_name = "Squeeze_314"} : (tensor<1x2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<2x?x12x?x64xf32>
+    %224 = crt.reducemean %209 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %225 = crt.sub %209, %224 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %226 = "onnx.Pow"(%225, %176) {onnx_node_name = "Pow_318"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %227 = crt.reducemean %226 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %228 = crt.add %227, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %229 = "onnx.Sqrt"(%228) {onnx_node_name = "Sqrt_322"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %230 = crt.div %225, %229 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %231 = crt.mul %230, %2 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %232 = crt.add %231, %3 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %233 = "onnx.Dim"(%232) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %234 = "onnx.Dim"(%232) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %235 = crt.constant : () -> tensor<2xi64>
+    %236 = crt.reshape %232, %235 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %237 = crt.gemm %236, %5, %6 : (tensor<?x768xf32>, tensor<768x2304xf32>, tensor<2304xf32>) -> tensor<?x2304xf32>
+    %238 = "onnx.Concat"(%233, %234, %151) {axis = 0 : si64, onnx_node_name = "Concat_348"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %239 = crt.reshape %237, %238 : (tensor<?x2304xf32>, tensor<3xi64>) -> tensor<?x?x2304xf32>
+    %240:3 = "onnx.Split"(%239, %178) {axis = 2 : si64, onnx_node_name = "Split_351"} : (tensor<?x?x2304xf32>, tensor<3xi64>) -> (tensor<?x?x768xf32>, tensor<?x?x768xf32>, tensor<?x?x768xf32>)
+    %241 = "onnx.Dim"(%240#0) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %242 = "onnx.Dim"(%240#0) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %243 = "onnx.Concat"(%241, %242, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_362"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %244 = crt.reshape %240#0, %243 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %245 = "onnx.Transpose"(%244) {onnx_node_name = "Transpose_364", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %246 = "onnx.Dim"(%240#1) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %247 = "onnx.Dim"(%240#1) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %248 = "onnx.Concat"(%246, %247, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_375"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %249 = crt.reshape %240#1, %248 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %250 = "onnx.Transpose"(%249) {onnx_node_name = "Transpose_377", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %251 = "onnx.Dim"(%240#2) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %252 = "onnx.Dim"(%240#2) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %253 = "onnx.Concat"(%251, %252, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_388"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %254 = crt.reshape %240#2, %253 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %255 = "onnx.Transpose"(%254) {onnx_node_name = "Transpose_390", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %256:2 = "onnx.Split"(%212, %179) {axis = 0 : si64, onnx_node_name = "Split_392"} : (tensor<2x?x12x?x64xf32>, tensor<2xi64>) -> (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>)
+    %257 = "onnx.Squeeze"(%256#0, %155) {onnx_node_name = "Squeeze_394"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %258 = "onnx.Squeeze"(%256#1, %155) {onnx_node_name = "Squeeze_396"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %259 = "onnx.Concat"(%257, %250) {axis = 2 : si64, onnx_node_name = "Concat_397"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %260 = "onnx.Concat"(%258, %255) {axis = 2 : si64, onnx_node_name = "Concat_398"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %261 = "onnx.Transpose"(%259) {onnx_node_name = "Transpose_399", perm = [0, 1, 3, 2]} : (tensor<?x12x?x64xf32>) -> tensor<?x12x64x?xf32>
+    %262 = "onnx.MatMul"(%245, %261) {onnx_node_name = "MatMul_400"} : (tensor<?x12x?x64xf32>, tensor<?x12x64x?xf32>) -> tensor<?x12x?x?xf32>
+    %263 = crt.constant : () -> tensor<f32>
+    %264 = "onnx.Pow"(%263, %180) {onnx_node_name = "Pow_410"} : (tensor<f32>, tensor<f32>) -> tensor<f32>
+    %265 = crt.div %262, %264 : (tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %266 = "onnx.Dim"(%245) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %267 = "onnx.Squeeze"(%266, %155) {onnx_node_name = "Squeeze_418"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %268 = "onnx.Dim"(%259) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %269 = "onnx.Squeeze"(%268, %155) {onnx_node_name = "Squeeze_425"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %270 = "onnx.Sub"(%269, %267) {onnx_node_name = "Sub_426"} : (tensor<i64>, tensor<i64>) -> tensor<i64>
+    %271 = "onnx.Unsqueeze"(%270, %155) {onnx_node_name = "Unsqueeze_428"} : (tensor<i64>, tensor<1xi64>) -> tensor<1xi64>
+    %272 = "onnx.Slice"(%4, %271, %268, %154, %173) {onnx_node_name = "Slice_432"} : (tensor<1x1x1024x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x1024xf32>
+    %273 = "onnx.Slice"(%272, %155, %268, %156, %173) {onnx_node_name = "Slice_436"} : (tensor<1x1x?x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x?xf32>
+    %274 = "onnx.Cast"(%273) {onnx_node_name = "Cast_437", to = i1} : (tensor<1x1x?x?xf32>) -> tensor<1x1x?x?xi1>
+    %275 = "onnx.Where"(%274, %265, %157) {onnx_node_name = "Where_438"} : (tensor<1x1x?x?xi1>, tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %276 = crt.add %275, %206 : (tensor<?x12x?x?xf32>, tensor<?x1x1x?xf32>) -> tensor<?x12x?x?xf32>
+    %277 = crt.softmax %276 : (tensor<?x12x?x?xf32>) -> tensor<?x12x?x?xf32>
+    %278 = "onnx.MatMul"(%277, %260) {onnx_node_name = "MatMul_442"} : (tensor<?x12x?x?xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %279 = "onnx.Transpose"(%278) {onnx_node_name = "Transpose_443", perm = [0, 2, 1, 3]} : (tensor<?x12x?x64xf32>) -> tensor<?x?x12x64xf32>
+    %280 = "onnx.Dim"(%279) {axis = 0 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %281 = "onnx.Dim"(%279) {axis = 1 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %282 = "onnx.Concat"(%280, %281, %158) {axis = 0 : si64, onnx_node_name = "Concat_454"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %283 = crt.reshape %279, %282 : (tensor<?x?x12x64xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %284 = "onnx.Dim"(%283) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %285 = "onnx.Dim"(%283) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %286 = crt.constant : () -> tensor<2xi64>
+    %287 = crt.reshape %279, %286 : (tensor<?x?x12x64xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %288 = crt.gemm %287, %7, %8 : (tensor<?x768xf32>, tensor<768x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %289 = "onnx.Concat"(%284, %285, %158) {axis = 0 : si64, onnx_node_name = "Concat_478"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %290 = crt.reshape %288, %289 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %291 = crt.add %290, %209 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %292 = crt.reducemean %291 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %293 = crt.sub %291, %292 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %294 = "onnx.Pow"(%293, %176) {onnx_node_name = "Pow_484"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %295 = crt.reducemean %294 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %296 = crt.add %295, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %297 = "onnx.Sqrt"(%296) {onnx_node_name = "Sqrt_488"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %298 = crt.div %293, %297 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %299 = crt.mul %298, %9 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %300 = crt.add %299, %10 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %301 = "onnx.Dim"(%300) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %302 = "onnx.Dim"(%300) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %303 = crt.constant : () -> tensor<2xi64>
+    %304 = crt.reshape %300, %303 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %305 = crt.gemm %304, %11, %12 : (tensor<?x768xf32>, tensor<768x3072xf32>, tensor<3072xf32>) -> tensor<?x3072xf32>
+    %306 = "onnx.Concat"(%301, %302, %159) {axis = 0 : si64, onnx_node_name = "Concat_514"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %307 = crt.reshape %305, %306 : (tensor<?x3072xf32>, tensor<3xi64>) -> tensor<?x?x3072xf32>
+    %308 = "onnx.Pow"(%307, %181) {onnx_node_name = "Pow_519"} : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %309 = crt.mul %308, %182 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %310 = crt.add %307, %309 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %311 = crt.mul %310, %183 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %312 = "onnx.Tanh"(%311) {onnx_node_name = "Tanh_525"} : (tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %313 = crt.add %312, %174 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %314 = crt.mul %307, %313 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %315 = crt.mul %314, %180 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %316 = "onnx.Dim"(%315) {axis = 0 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %317 = "onnx.Dim"(%315) {axis = 1 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %318 = crt.constant : () -> tensor<2xi64>
+    %319 = crt.reshape %315, %318 : (tensor<?x?x3072xf32>, tensor<2xi64>) -> tensor<?x3072xf32>
+    %320 = crt.gemm %319, %13, %14 : (tensor<?x3072xf32>, tensor<3072x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %321 = "onnx.Concat"(%316, %317, %158) {axis = 0 : si64, onnx_node_name = "Concat_551"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %322 = crt.reshape %320, %321 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %323 = crt.add %291, %322 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %324 = crt.reducemean %323 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %325 = crt.sub %323, %324 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %326 = "onnx.Pow"(%325, %176) {onnx_node_name = "Pow_557"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %327 = crt.reducemean %326 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %328 = crt.add %327, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %329 = "onnx.Sqrt"(%328) {onnx_node_name = "Sqrt_561"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %330 = crt.div %325, %329 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %331 = crt.mul %330, %15 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %332 = crt.add %331, %16 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %333 = "onnx.Dim"(%332) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %334 = "onnx.Dim"(%332) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %335 = crt.constant : () -> tensor<2xi64>
+    %336 = crt.reshape %332, %335 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %337 = crt.gemm %336, %17, %18 : (tensor<?x768xf32>, tensor<768x2304xf32>, tensor<2304xf32>) -> tensor<?x2304xf32>
+    %338 = "onnx.Concat"(%333, %334, %151) {axis = 0 : si64, onnx_node_name = "Concat_587"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %339 = crt.reshape %337, %338 : (tensor<?x2304xf32>, tensor<3xi64>) -> tensor<?x?x2304xf32>
+    %340:3 = "onnx.Split"(%339, %178) {axis = 2 : si64, onnx_node_name = "Split_590"} : (tensor<?x?x2304xf32>, tensor<3xi64>) -> (tensor<?x?x768xf32>, tensor<?x?x768xf32>, tensor<?x?x768xf32>)
+    %341 = "onnx.Dim"(%340#0) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %342 = "onnx.Dim"(%340#0) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %343 = "onnx.Concat"(%341, %342, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_601"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %344 = crt.reshape %340#0, %343 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %345 = "onnx.Transpose"(%344) {onnx_node_name = "Transpose_603", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %346 = "onnx.Dim"(%340#1) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %347 = "onnx.Dim"(%340#1) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %348 = "onnx.Concat"(%346, %347, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_614"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %349 = crt.reshape %340#1, %348 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %350 = "onnx.Transpose"(%349) {onnx_node_name = "Transpose_616", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %351 = "onnx.Dim"(%340#2) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %352 = "onnx.Dim"(%340#2) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %353 = "onnx.Concat"(%351, %352, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_627"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %354 = crt.reshape %340#2, %353 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %355 = "onnx.Transpose"(%354) {onnx_node_name = "Transpose_629", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %356:2 = "onnx.Split"(%213, %179) {axis = 0 : si64, onnx_node_name = "Split_631"} : (tensor<2x?x12x?x64xf32>, tensor<2xi64>) -> (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>)
+    %357 = "onnx.Squeeze"(%356#0, %155) {onnx_node_name = "Squeeze_633"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %358 = "onnx.Squeeze"(%356#1, %155) {onnx_node_name = "Squeeze_635"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %359 = "onnx.Concat"(%357, %350) {axis = 2 : si64, onnx_node_name = "Concat_636"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %360 = "onnx.Concat"(%358, %355) {axis = 2 : si64, onnx_node_name = "Concat_637"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %361 = "onnx.Transpose"(%359) {onnx_node_name = "Transpose_638", perm = [0, 1, 3, 2]} : (tensor<?x12x?x64xf32>) -> tensor<?x12x64x?xf32>
+    %362 = "onnx.MatMul"(%345, %361) {onnx_node_name = "MatMul_639"} : (tensor<?x12x?x64xf32>, tensor<?x12x64x?xf32>) -> tensor<?x12x?x?xf32>
+    %363 = crt.constant : () -> tensor<f32>
+    %364 = "onnx.Pow"(%363, %180) {onnx_node_name = "Pow_649"} : (tensor<f32>, tensor<f32>) -> tensor<f32>
+    %365 = crt.div %362, %364 : (tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %366 = "onnx.Dim"(%345) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %367 = "onnx.Squeeze"(%366, %155) {onnx_node_name = "Squeeze_657"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %368 = "onnx.Dim"(%359) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %369 = "onnx.Squeeze"(%368, %155) {onnx_node_name = "Squeeze_664"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %370 = "onnx.Sub"(%369, %367) {onnx_node_name = "Sub_665"} : (tensor<i64>, tensor<i64>) -> tensor<i64>
+    %371 = "onnx.Unsqueeze"(%370, %155) {onnx_node_name = "Unsqueeze_667"} : (tensor<i64>, tensor<1xi64>) -> tensor<1xi64>
+    %372 = "onnx.Slice"(%171, %371, %368, %154, %173) {onnx_node_name = "Slice_671"} : (tensor<1x1x1024x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x1024xf32>
+    %373 = "onnx.Slice"(%372, %155, %368, %156, %173) {onnx_node_name = "Slice_675"} : (tensor<1x1x?x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x?xf32>
+    %374 = "onnx.Cast"(%373) {onnx_node_name = "Cast_676", to = i1} : (tensor<1x1x?x?xf32>) -> tensor<1x1x?x?xi1>
+    %375 = "onnx.Where"(%374, %365, %157) {onnx_node_name = "Where_677"} : (tensor<1x1x?x?xi1>, tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %376 = crt.add %375, %206 : (tensor<?x12x?x?xf32>, tensor<?x1x1x?xf32>) -> tensor<?x12x?x?xf32>
+    %377 = crt.softmax %376 : (tensor<?x12x?x?xf32>) -> tensor<?x12x?x?xf32>
+    %378 = "onnx.MatMul"(%377, %360) {onnx_node_name = "MatMul_681"} : (tensor<?x12x?x?xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %379 = "onnx.Transpose"(%378) {onnx_node_name = "Transpose_682", perm = [0, 2, 1, 3]} : (tensor<?x12x?x64xf32>) -> tensor<?x?x12x64xf32>
+    %380 = "onnx.Dim"(%379) {axis = 0 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %381 = "onnx.Dim"(%379) {axis = 1 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %382 = "onnx.Concat"(%380, %381, %158) {axis = 0 : si64, onnx_node_name = "Concat_693"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %383 = crt.reshape %379, %382 : (tensor<?x?x12x64xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %384 = "onnx.Dim"(%383) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %385 = "onnx.Dim"(%383) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %386 = crt.constant : () -> tensor<2xi64>
+    %387 = crt.reshape %379, %386 : (tensor<?x?x12x64xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %388 = crt.gemm %387, %19, %20 : (tensor<?x768xf32>, tensor<768x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %389 = "onnx.Concat"(%384, %385, %158) {axis = 0 : si64, onnx_node_name = "Concat_717"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %390 = crt.reshape %388, %389 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %391 = crt.add %390, %323 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %392 = crt.reducemean %391 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %393 = crt.sub %391, %392 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %394 = "onnx.Pow"(%393, %176) {onnx_node_name = "Pow_723"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %395 = crt.reducemean %394 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %396 = crt.add %395, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %397 = "onnx.Sqrt"(%396) {onnx_node_name = "Sqrt_727"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %398 = crt.div %393, %397 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %399 = crt.mul %398, %21 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %400 = crt.add %399, %22 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %401 = "onnx.Dim"(%400) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %402 = "onnx.Dim"(%400) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %403 = crt.constant : () -> tensor<2xi64>
+    %404 = crt.reshape %400, %403 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %405 = crt.gemm %404, %23, %24 : (tensor<?x768xf32>, tensor<768x3072xf32>, tensor<3072xf32>) -> tensor<?x3072xf32>
+    %406 = "onnx.Concat"(%401, %402, %159) {axis = 0 : si64, onnx_node_name = "Concat_753"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %407 = crt.reshape %405, %406 : (tensor<?x3072xf32>, tensor<3xi64>) -> tensor<?x?x3072xf32>
+    %408 = "onnx.Pow"(%407, %181) {onnx_node_name = "Pow_758"} : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %409 = crt.mul %408, %182 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %410 = crt.add %407, %409 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %411 = crt.mul %410, %183 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %412 = "onnx.Tanh"(%411) {onnx_node_name = "Tanh_764"} : (tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %413 = crt.add %412, %174 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %414 = crt.mul %407, %413 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %415 = crt.mul %414, %180 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %416 = "onnx.Dim"(%415) {axis = 0 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %417 = "onnx.Dim"(%415) {axis = 1 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %418 = crt.constant : () -> tensor<2xi64>
+    %419 = crt.reshape %415, %418 : (tensor<?x?x3072xf32>, tensor<2xi64>) -> tensor<?x3072xf32>
+    %420 = crt.gemm %419, %25, %26 : (tensor<?x3072xf32>, tensor<3072x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %421 = "onnx.Concat"(%416, %417, %158) {axis = 0 : si64, onnx_node_name = "Concat_790"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %422 = crt.reshape %420, %421 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %423 = crt.add %391, %422 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %424 = crt.reducemean %423 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %425 = crt.sub %423, %424 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %426 = "onnx.Pow"(%425, %176) {onnx_node_name = "Pow_796"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %427 = crt.reducemean %426 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %428 = crt.add %427, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %429 = "onnx.Sqrt"(%428) {onnx_node_name = "Sqrt_800"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %430 = crt.div %425, %429 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %431 = crt.mul %430, %27 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %432 = crt.add %431, %28 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %433 = "onnx.Dim"(%432) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %434 = "onnx.Dim"(%432) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %435 = crt.constant : () -> tensor<2xi64>
+    %436 = crt.reshape %432, %435 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %437 = crt.gemm %436, %29, %30 : (tensor<?x768xf32>, tensor<768x2304xf32>, tensor<2304xf32>) -> tensor<?x2304xf32>
+    %438 = "onnx.Concat"(%433, %434, %151) {axis = 0 : si64, onnx_node_name = "Concat_826"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %439 = crt.reshape %437, %438 : (tensor<?x2304xf32>, tensor<3xi64>) -> tensor<?x?x2304xf32>
+    %440:3 = "onnx.Split"(%439, %178) {axis = 2 : si64, onnx_node_name = "Split_829"} : (tensor<?x?x2304xf32>, tensor<3xi64>) -> (tensor<?x?x768xf32>, tensor<?x?x768xf32>, tensor<?x?x768xf32>)
+    %441 = "onnx.Dim"(%440#0) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %442 = "onnx.Dim"(%440#0) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %443 = "onnx.Concat"(%441, %442, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_840"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %444 = crt.reshape %440#0, %443 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %445 = "onnx.Transpose"(%444) {onnx_node_name = "Transpose_842", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %446 = "onnx.Dim"(%440#1) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %447 = "onnx.Dim"(%440#1) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %448 = "onnx.Concat"(%446, %447, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_853"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %449 = crt.reshape %440#1, %448 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %450 = "onnx.Transpose"(%449) {onnx_node_name = "Transpose_855", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %451 = "onnx.Dim"(%440#2) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %452 = "onnx.Dim"(%440#2) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %453 = "onnx.Concat"(%451, %452, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_866"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %454 = crt.reshape %440#2, %453 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %455 = "onnx.Transpose"(%454) {onnx_node_name = "Transpose_868", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %456:2 = "onnx.Split"(%214, %179) {axis = 0 : si64, onnx_node_name = "Split_870"} : (tensor<2x?x12x?x64xf32>, tensor<2xi64>) -> (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>)
+    %457 = "onnx.Squeeze"(%456#0, %155) {onnx_node_name = "Squeeze_872"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %458 = "onnx.Squeeze"(%456#1, %155) {onnx_node_name = "Squeeze_874"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %459 = "onnx.Concat"(%457, %450) {axis = 2 : si64, onnx_node_name = "Concat_875"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %460 = "onnx.Concat"(%458, %455) {axis = 2 : si64, onnx_node_name = "Concat_876"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %461 = "onnx.Transpose"(%459) {onnx_node_name = "Transpose_877", perm = [0, 1, 3, 2]} : (tensor<?x12x?x64xf32>) -> tensor<?x12x64x?xf32>
+    %462 = "onnx.MatMul"(%445, %461) {onnx_node_name = "MatMul_878"} : (tensor<?x12x?x64xf32>, tensor<?x12x64x?xf32>) -> tensor<?x12x?x?xf32>
+    %463 = crt.constant : () -> tensor<f32>
+    %464 = "onnx.Pow"(%463, %180) {onnx_node_name = "Pow_888"} : (tensor<f32>, tensor<f32>) -> tensor<f32>
+    %465 = crt.div %462, %464 : (tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %466 = "onnx.Dim"(%445) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %467 = "onnx.Squeeze"(%466, %155) {onnx_node_name = "Squeeze_896"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %468 = "onnx.Dim"(%459) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %469 = "onnx.Squeeze"(%468, %155) {onnx_node_name = "Squeeze_903"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %470 = "onnx.Sub"(%469, %467) {onnx_node_name = "Sub_904"} : (tensor<i64>, tensor<i64>) -> tensor<i64>
+    %471 = "onnx.Unsqueeze"(%470, %155) {onnx_node_name = "Unsqueeze_906"} : (tensor<i64>, tensor<1xi64>) -> tensor<1xi64>
+    %472 = "onnx.Slice"(%170, %471, %468, %154, %173) {onnx_node_name = "Slice_910"} : (tensor<1x1x1024x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x1024xf32>
+    %473 = "onnx.Slice"(%472, %155, %468, %156, %173) {onnx_node_name = "Slice_914"} : (tensor<1x1x?x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x?xf32>
+    %474 = "onnx.Cast"(%473) {onnx_node_name = "Cast_915", to = i1} : (tensor<1x1x?x?xf32>) -> tensor<1x1x?x?xi1>
+    %475 = "onnx.Where"(%474, %465, %157) {onnx_node_name = "Where_916"} : (tensor<1x1x?x?xi1>, tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %476 = crt.add %475, %206 : (tensor<?x12x?x?xf32>, tensor<?x1x1x?xf32>) -> tensor<?x12x?x?xf32>
+    %477 = crt.softmax %476 : (tensor<?x12x?x?xf32>) -> tensor<?x12x?x?xf32>
+    %478 = "onnx.MatMul"(%477, %460) {onnx_node_name = "MatMul_920"} : (tensor<?x12x?x?xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %479 = "onnx.Transpose"(%478) {onnx_node_name = "Transpose_921", perm = [0, 2, 1, 3]} : (tensor<?x12x?x64xf32>) -> tensor<?x?x12x64xf32>
+    %480 = "onnx.Dim"(%479) {axis = 0 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %481 = "onnx.Dim"(%479) {axis = 1 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %482 = "onnx.Concat"(%480, %481, %158) {axis = 0 : si64, onnx_node_name = "Concat_932"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %483 = crt.reshape %479, %482 : (tensor<?x?x12x64xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %484 = "onnx.Dim"(%483) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %485 = "onnx.Dim"(%483) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %486 = crt.constant : () -> tensor<2xi64>
+    %487 = crt.reshape %479, %486 : (tensor<?x?x12x64xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %488 = crt.gemm %487, %31, %32 : (tensor<?x768xf32>, tensor<768x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %489 = "onnx.Concat"(%484, %485, %158) {axis = 0 : si64, onnx_node_name = "Concat_956"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %490 = crt.reshape %488, %489 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %491 = crt.add %490, %423 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %492 = crt.reducemean %491 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %493 = crt.sub %491, %492 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %494 = "onnx.Pow"(%493, %176) {onnx_node_name = "Pow_962"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %495 = crt.reducemean %494 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %496 = crt.add %495, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %497 = "onnx.Sqrt"(%496) {onnx_node_name = "Sqrt_966"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %498 = crt.div %493, %497 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %499 = crt.mul %498, %33 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %500 = crt.add %499, %34 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %501 = "onnx.Dim"(%500) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %502 = "onnx.Dim"(%500) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %503 = crt.constant : () -> tensor<2xi64>
+    %504 = crt.reshape %500, %503 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %505 = crt.gemm %504, %35, %36 : (tensor<?x768xf32>, tensor<768x3072xf32>, tensor<3072xf32>) -> tensor<?x3072xf32>
+    %506 = "onnx.Concat"(%501, %502, %159) {axis = 0 : si64, onnx_node_name = "Concat_992"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %507 = crt.reshape %505, %506 : (tensor<?x3072xf32>, tensor<3xi64>) -> tensor<?x?x3072xf32>
+    %508 = "onnx.Pow"(%507, %181) {onnx_node_name = "Pow_997"} : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %509 = crt.mul %508, %182 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %510 = crt.add %507, %509 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %511 = crt.mul %510, %183 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %512 = "onnx.Tanh"(%511) {onnx_node_name = "Tanh_1003"} : (tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %513 = crt.add %512, %174 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %514 = crt.mul %507, %513 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %515 = crt.mul %514, %180 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %516 = "onnx.Dim"(%515) {axis = 0 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %517 = "onnx.Dim"(%515) {axis = 1 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %518 = crt.constant : () -> tensor<2xi64>
+    %519 = crt.reshape %515, %518 : (tensor<?x?x3072xf32>, tensor<2xi64>) -> tensor<?x3072xf32>
+    %520 = crt.gemm %519, %37, %38 : (tensor<?x3072xf32>, tensor<3072x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %521 = "onnx.Concat"(%516, %517, %158) {axis = 0 : si64, onnx_node_name = "Concat_1029"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %522 = crt.reshape %520, %521 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %523 = crt.add %491, %522 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %524 = crt.reducemean %523 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %525 = crt.sub %523, %524 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %526 = "onnx.Pow"(%525, %176) {onnx_node_name = "Pow_1035"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %527 = crt.reducemean %526 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %528 = crt.add %527, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %529 = "onnx.Sqrt"(%528) {onnx_node_name = "Sqrt_1039"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %530 = crt.div %525, %529 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %531 = crt.mul %530, %39 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %532 = crt.add %531, %40 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %533 = "onnx.Dim"(%532) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %534 = "onnx.Dim"(%532) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %535 = crt.constant : () -> tensor<2xi64>
+    %536 = crt.reshape %532, %535 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %537 = crt.gemm %536, %41, %42 : (tensor<?x768xf32>, tensor<768x2304xf32>, tensor<2304xf32>) -> tensor<?x2304xf32>
+    %538 = "onnx.Concat"(%533, %534, %151) {axis = 0 : si64, onnx_node_name = "Concat_1065"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %539 = crt.reshape %537, %538 : (tensor<?x2304xf32>, tensor<3xi64>) -> tensor<?x?x2304xf32>
+    %540:3 = "onnx.Split"(%539, %178) {axis = 2 : si64, onnx_node_name = "Split_1068"} : (tensor<?x?x2304xf32>, tensor<3xi64>) -> (tensor<?x?x768xf32>, tensor<?x?x768xf32>, tensor<?x?x768xf32>)
+    %541 = "onnx.Dim"(%540#0) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %542 = "onnx.Dim"(%540#0) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %543 = "onnx.Concat"(%541, %542, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_1079"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %544 = crt.reshape %540#0, %543 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %545 = "onnx.Transpose"(%544) {onnx_node_name = "Transpose_1081", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %546 = "onnx.Dim"(%540#1) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %547 = "onnx.Dim"(%540#1) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %548 = "onnx.Concat"(%546, %547, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_1092"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %549 = crt.reshape %540#1, %548 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %550 = "onnx.Transpose"(%549) {onnx_node_name = "Transpose_1094", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %551 = "onnx.Dim"(%540#2) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %552 = "onnx.Dim"(%540#2) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %553 = "onnx.Concat"(%551, %552, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_1105"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %554 = crt.reshape %540#2, %553 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %555 = "onnx.Transpose"(%554) {onnx_node_name = "Transpose_1107", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %556:2 = "onnx.Split"(%215, %179) {axis = 0 : si64, onnx_node_name = "Split_1109"} : (tensor<2x?x12x?x64xf32>, tensor<2xi64>) -> (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>)
+    %557 = "onnx.Squeeze"(%556#0, %155) {onnx_node_name = "Squeeze_1111"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %558 = "onnx.Squeeze"(%556#1, %155) {onnx_node_name = "Squeeze_1113"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %559 = "onnx.Concat"(%557, %550) {axis = 2 : si64, onnx_node_name = "Concat_1114"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %560 = "onnx.Concat"(%558, %555) {axis = 2 : si64, onnx_node_name = "Concat_1115"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %561 = "onnx.Transpose"(%559) {onnx_node_name = "Transpose_1116", perm = [0, 1, 3, 2]} : (tensor<?x12x?x64xf32>) -> tensor<?x12x64x?xf32>
+    %562 = "onnx.MatMul"(%545, %561) {onnx_node_name = "MatMul_1117"} : (tensor<?x12x?x64xf32>, tensor<?x12x64x?xf32>) -> tensor<?x12x?x?xf32>
+    %563 = crt.constant : () -> tensor<f32>
+    %564 = "onnx.Pow"(%563, %180) {onnx_node_name = "Pow_1127"} : (tensor<f32>, tensor<f32>) -> tensor<f32>
+    %565 = crt.div %562, %564 : (tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %566 = "onnx.Dim"(%545) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %567 = "onnx.Squeeze"(%566, %155) {onnx_node_name = "Squeeze_1135"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %568 = "onnx.Dim"(%559) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %569 = "onnx.Squeeze"(%568, %155) {onnx_node_name = "Squeeze_1142"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %570 = "onnx.Sub"(%569, %567) {onnx_node_name = "Sub_1143"} : (tensor<i64>, tensor<i64>) -> tensor<i64>
+    %571 = "onnx.Unsqueeze"(%570, %155) {onnx_node_name = "Unsqueeze_1145"} : (tensor<i64>, tensor<1xi64>) -> tensor<1xi64>
+    %572 = "onnx.Slice"(%169, %571, %568, %154, %173) {onnx_node_name = "Slice_1149"} : (tensor<1x1x1024x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x1024xf32>
+    %573 = "onnx.Slice"(%572, %155, %568, %156, %173) {onnx_node_name = "Slice_1153"} : (tensor<1x1x?x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x?xf32>
+    %574 = "onnx.Cast"(%573) {onnx_node_name = "Cast_1154", to = i1} : (tensor<1x1x?x?xf32>) -> tensor<1x1x?x?xi1>
+    %575 = "onnx.Where"(%574, %565, %157) {onnx_node_name = "Where_1155"} : (tensor<1x1x?x?xi1>, tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %576 = crt.add %575, %206 : (tensor<?x12x?x?xf32>, tensor<?x1x1x?xf32>) -> tensor<?x12x?x?xf32>
+    %577 = crt.softmax %576 : (tensor<?x12x?x?xf32>) -> tensor<?x12x?x?xf32>
+    %578 = "onnx.MatMul"(%577, %560) {onnx_node_name = "MatMul_1159"} : (tensor<?x12x?x?xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %579 = "onnx.Transpose"(%578) {onnx_node_name = "Transpose_1160", perm = [0, 2, 1, 3]} : (tensor<?x12x?x64xf32>) -> tensor<?x?x12x64xf32>
+    %580 = "onnx.Dim"(%579) {axis = 0 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %581 = "onnx.Dim"(%579) {axis = 1 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %582 = "onnx.Concat"(%580, %581, %158) {axis = 0 : si64, onnx_node_name = "Concat_1171"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %583 = crt.reshape %579, %582 : (tensor<?x?x12x64xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %584 = "onnx.Dim"(%583) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %585 = "onnx.Dim"(%583) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %586 = crt.constant : () -> tensor<2xi64>
+    %587 = crt.reshape %579, %586 : (tensor<?x?x12x64xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %588 = crt.gemm %587, %43, %44 : (tensor<?x768xf32>, tensor<768x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %589 = "onnx.Concat"(%584, %585, %158) {axis = 0 : si64, onnx_node_name = "Concat_1195"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %590 = crt.reshape %588, %589 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %591 = crt.add %590, %523 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %592 = crt.reducemean %591 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %593 = crt.sub %591, %592 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %594 = "onnx.Pow"(%593, %176) {onnx_node_name = "Pow_1201"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %595 = crt.reducemean %594 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %596 = crt.add %595, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %597 = "onnx.Sqrt"(%596) {onnx_node_name = "Sqrt_1205"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %598 = crt.div %593, %597 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %599 = crt.mul %598, %45 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %600 = crt.add %599, %46 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %601 = "onnx.Dim"(%600) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %602 = "onnx.Dim"(%600) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %603 = crt.constant : () -> tensor<2xi64>
+    %604 = crt.reshape %600, %603 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %605 = crt.gemm %604, %47, %48 : (tensor<?x768xf32>, tensor<768x3072xf32>, tensor<3072xf32>) -> tensor<?x3072xf32>
+    %606 = "onnx.Concat"(%601, %602, %159) {axis = 0 : si64, onnx_node_name = "Concat_1231"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %607 = crt.reshape %605, %606 : (tensor<?x3072xf32>, tensor<3xi64>) -> tensor<?x?x3072xf32>
+    %608 = "onnx.Pow"(%607, %181) {onnx_node_name = "Pow_1236"} : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %609 = crt.mul %608, %182 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %610 = crt.add %607, %609 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %611 = crt.mul %610, %183 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %612 = "onnx.Tanh"(%611) {onnx_node_name = "Tanh_1242"} : (tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %613 = crt.add %612, %174 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %614 = crt.mul %607, %613 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %615 = crt.mul %614, %180 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %616 = "onnx.Dim"(%615) {axis = 0 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %617 = "onnx.Dim"(%615) {axis = 1 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %618 = crt.constant : () -> tensor<2xi64>
+    %619 = crt.reshape %615, %618 : (tensor<?x?x3072xf32>, tensor<2xi64>) -> tensor<?x3072xf32>
+    %620 = crt.gemm %619, %49, %50 : (tensor<?x3072xf32>, tensor<3072x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %621 = "onnx.Concat"(%616, %617, %158) {axis = 0 : si64, onnx_node_name = "Concat_1268"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %622 = crt.reshape %620, %621 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %623 = crt.add %591, %622 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %624 = crt.reducemean %623 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %625 = crt.sub %623, %624 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %626 = "onnx.Pow"(%625, %176) {onnx_node_name = "Pow_1274"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %627 = crt.reducemean %626 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %628 = crt.add %627, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %629 = "onnx.Sqrt"(%628) {onnx_node_name = "Sqrt_1278"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %630 = crt.div %625, %629 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %631 = crt.mul %630, %51 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %632 = crt.add %631, %52 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %633 = "onnx.Dim"(%632) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %634 = "onnx.Dim"(%632) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %635 = crt.constant : () -> tensor<2xi64>
+    %636 = crt.reshape %632, %635 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %637 = crt.gemm %636, %53, %54 : (tensor<?x768xf32>, tensor<768x2304xf32>, tensor<2304xf32>) -> tensor<?x2304xf32>
+    %638 = "onnx.Concat"(%633, %634, %151) {axis = 0 : si64, onnx_node_name = "Concat_1304"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %639 = crt.reshape %637, %638 : (tensor<?x2304xf32>, tensor<3xi64>) -> tensor<?x?x2304xf32>
+    %640:3 = "onnx.Split"(%639, %178) {axis = 2 : si64, onnx_node_name = "Split_1307"} : (tensor<?x?x2304xf32>, tensor<3xi64>) -> (tensor<?x?x768xf32>, tensor<?x?x768xf32>, tensor<?x?x768xf32>)
+    %641 = "onnx.Dim"(%640#0) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %642 = "onnx.Dim"(%640#0) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %643 = "onnx.Concat"(%641, %642, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_1318"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %644 = crt.reshape %640#0, %643 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %645 = "onnx.Transpose"(%644) {onnx_node_name = "Transpose_1320", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %646 = "onnx.Dim"(%640#1) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %647 = "onnx.Dim"(%640#1) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %648 = "onnx.Concat"(%646, %647, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_1331"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %649 = crt.reshape %640#1, %648 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %650 = "onnx.Transpose"(%649) {onnx_node_name = "Transpose_1333", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %651 = "onnx.Dim"(%640#2) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %652 = "onnx.Dim"(%640#2) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %653 = "onnx.Concat"(%651, %652, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_1344"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %654 = crt.reshape %640#2, %653 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %655 = "onnx.Transpose"(%654) {onnx_node_name = "Transpose_1346", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %656:2 = "onnx.Split"(%216, %179) {axis = 0 : si64, onnx_node_name = "Split_1348"} : (tensor<2x?x12x?x64xf32>, tensor<2xi64>) -> (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>)
+    %657 = "onnx.Squeeze"(%656#0, %155) {onnx_node_name = "Squeeze_1350"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %658 = "onnx.Squeeze"(%656#1, %155) {onnx_node_name = "Squeeze_1352"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %659 = "onnx.Concat"(%657, %650) {axis = 2 : si64, onnx_node_name = "Concat_1353"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %660 = "onnx.Concat"(%658, %655) {axis = 2 : si64, onnx_node_name = "Concat_1354"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %661 = "onnx.Transpose"(%659) {onnx_node_name = "Transpose_1355", perm = [0, 1, 3, 2]} : (tensor<?x12x?x64xf32>) -> tensor<?x12x64x?xf32>
+    %662 = "onnx.MatMul"(%645, %661) {onnx_node_name = "MatMul_1356"} : (tensor<?x12x?x64xf32>, tensor<?x12x64x?xf32>) -> tensor<?x12x?x?xf32>
+    %663 = crt.constant : () -> tensor<f32>
+    %664 = "onnx.Pow"(%663, %180) {onnx_node_name = "Pow_1366"} : (tensor<f32>, tensor<f32>) -> tensor<f32>
+    %665 = crt.div %662, %664 : (tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %666 = "onnx.Dim"(%645) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %667 = "onnx.Squeeze"(%666, %155) {onnx_node_name = "Squeeze_1374"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %668 = "onnx.Dim"(%659) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %669 = "onnx.Squeeze"(%668, %155) {onnx_node_name = "Squeeze_1381"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %670 = "onnx.Sub"(%669, %667) {onnx_node_name = "Sub_1382"} : (tensor<i64>, tensor<i64>) -> tensor<i64>
+    %671 = "onnx.Unsqueeze"(%670, %155) {onnx_node_name = "Unsqueeze_1384"} : (tensor<i64>, tensor<1xi64>) -> tensor<1xi64>
+    %672 = "onnx.Slice"(%168, %671, %668, %154, %173) {onnx_node_name = "Slice_1388"} : (tensor<1x1x1024x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x1024xf32>
+    %673 = "onnx.Slice"(%672, %155, %668, %156, %173) {onnx_node_name = "Slice_1392"} : (tensor<1x1x?x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x?xf32>
+    %674 = "onnx.Cast"(%673) {onnx_node_name = "Cast_1393", to = i1} : (tensor<1x1x?x?xf32>) -> tensor<1x1x?x?xi1>
+    %675 = "onnx.Where"(%674, %665, %157) {onnx_node_name = "Where_1394"} : (tensor<1x1x?x?xi1>, tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %676 = crt.add %675, %206 : (tensor<?x12x?x?xf32>, tensor<?x1x1x?xf32>) -> tensor<?x12x?x?xf32>
+    %677 = crt.softmax %676 : (tensor<?x12x?x?xf32>) -> tensor<?x12x?x?xf32>
+    %678 = "onnx.MatMul"(%677, %660) {onnx_node_name = "MatMul_1398"} : (tensor<?x12x?x?xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %679 = "onnx.Transpose"(%678) {onnx_node_name = "Transpose_1399", perm = [0, 2, 1, 3]} : (tensor<?x12x?x64xf32>) -> tensor<?x?x12x64xf32>
+    %680 = "onnx.Dim"(%679) {axis = 0 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %681 = "onnx.Dim"(%679) {axis = 1 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %682 = "onnx.Concat"(%680, %681, %158) {axis = 0 : si64, onnx_node_name = "Concat_1410"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %683 = crt.reshape %679, %682 : (tensor<?x?x12x64xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %684 = "onnx.Dim"(%683) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %685 = "onnx.Dim"(%683) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %686 = crt.constant : () -> tensor<2xi64>
+    %687 = crt.reshape %679, %686 : (tensor<?x?x12x64xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %688 = crt.gemm %687, %55, %56 : (tensor<?x768xf32>, tensor<768x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %689 = "onnx.Concat"(%684, %685, %158) {axis = 0 : si64, onnx_node_name = "Concat_1434"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %690 = crt.reshape %688, %689 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %691 = crt.add %690, %623 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %692 = crt.reducemean %691 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %693 = crt.sub %691, %692 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %694 = "onnx.Pow"(%693, %176) {onnx_node_name = "Pow_1440"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %695 = crt.reducemean %694 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %696 = crt.add %695, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %697 = "onnx.Sqrt"(%696) {onnx_node_name = "Sqrt_1444"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %698 = crt.div %693, %697 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %699 = crt.mul %698, %57 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %700 = crt.add %699, %58 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %701 = "onnx.Dim"(%700) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %702 = "onnx.Dim"(%700) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %703 = crt.constant : () -> tensor<2xi64>
+    %704 = crt.reshape %700, %703 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %705 = crt.gemm %704, %59, %60 : (tensor<?x768xf32>, tensor<768x3072xf32>, tensor<3072xf32>) -> tensor<?x3072xf32>
+    %706 = "onnx.Concat"(%701, %702, %159) {axis = 0 : si64, onnx_node_name = "Concat_1470"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %707 = crt.reshape %705, %706 : (tensor<?x3072xf32>, tensor<3xi64>) -> tensor<?x?x3072xf32>
+    %708 = "onnx.Pow"(%707, %181) {onnx_node_name = "Pow_1475"} : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %709 = crt.mul %708, %182 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %710 = crt.add %707, %709 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %711 = crt.mul %710, %183 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %712 = "onnx.Tanh"(%711) {onnx_node_name = "Tanh_1481"} : (tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %713 = crt.add %712, %174 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %714 = crt.mul %707, %713 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %715 = crt.mul %714, %180 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %716 = "onnx.Dim"(%715) {axis = 0 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %717 = "onnx.Dim"(%715) {axis = 1 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %718 = crt.constant : () -> tensor<2xi64>
+    %719 = crt.reshape %715, %718 : (tensor<?x?x3072xf32>, tensor<2xi64>) -> tensor<?x3072xf32>
+    %720 = crt.gemm %719, %61, %62 : (tensor<?x3072xf32>, tensor<3072x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %721 = "onnx.Concat"(%716, %717, %158) {axis = 0 : si64, onnx_node_name = "Concat_1507"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %722 = crt.reshape %720, %721 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %723 = crt.add %691, %722 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %724 = crt.reducemean %723 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %725 = crt.sub %723, %724 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %726 = "onnx.Pow"(%725, %176) {onnx_node_name = "Pow_1513"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %727 = crt.reducemean %726 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %728 = crt.add %727, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %729 = "onnx.Sqrt"(%728) {onnx_node_name = "Sqrt_1517"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %730 = crt.div %725, %729 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %731 = crt.mul %730, %63 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %732 = crt.add %731, %64 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %733 = "onnx.Dim"(%732) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %734 = "onnx.Dim"(%732) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %735 = crt.constant : () -> tensor<2xi64>
+    %736 = crt.reshape %732, %735 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %737 = crt.gemm %736, %65, %66 : (tensor<?x768xf32>, tensor<768x2304xf32>, tensor<2304xf32>) -> tensor<?x2304xf32>
+    %738 = "onnx.Concat"(%733, %734, %151) {axis = 0 : si64, onnx_node_name = "Concat_1543"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %739 = crt.reshape %737, %738 : (tensor<?x2304xf32>, tensor<3xi64>) -> tensor<?x?x2304xf32>
+    %740:3 = "onnx.Split"(%739, %178) {axis = 2 : si64, onnx_node_name = "Split_1546"} : (tensor<?x?x2304xf32>, tensor<3xi64>) -> (tensor<?x?x768xf32>, tensor<?x?x768xf32>, tensor<?x?x768xf32>)
+    %741 = "onnx.Dim"(%740#0) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %742 = "onnx.Dim"(%740#0) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %743 = "onnx.Concat"(%741, %742, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_1557"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %744 = crt.reshape %740#0, %743 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %745 = "onnx.Transpose"(%744) {onnx_node_name = "Transpose_1559", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %746 = "onnx.Dim"(%740#1) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %747 = "onnx.Dim"(%740#1) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %748 = "onnx.Concat"(%746, %747, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_1570"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %749 = crt.reshape %740#1, %748 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %750 = "onnx.Transpose"(%749) {onnx_node_name = "Transpose_1572", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %751 = "onnx.Dim"(%740#2) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %752 = "onnx.Dim"(%740#2) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %753 = "onnx.Concat"(%751, %752, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_1583"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %754 = crt.reshape %740#2, %753 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %755 = "onnx.Transpose"(%754) {onnx_node_name = "Transpose_1585", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %756:2 = "onnx.Split"(%217, %179) {axis = 0 : si64, onnx_node_name = "Split_1587"} : (tensor<2x?x12x?x64xf32>, tensor<2xi64>) -> (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>)
+    %757 = "onnx.Squeeze"(%756#0, %155) {onnx_node_name = "Squeeze_1589"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %758 = "onnx.Squeeze"(%756#1, %155) {onnx_node_name = "Squeeze_1591"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %759 = "onnx.Concat"(%757, %750) {axis = 2 : si64, onnx_node_name = "Concat_1592"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %760 = "onnx.Concat"(%758, %755) {axis = 2 : si64, onnx_node_name = "Concat_1593"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %761 = "onnx.Transpose"(%759) {onnx_node_name = "Transpose_1594", perm = [0, 1, 3, 2]} : (tensor<?x12x?x64xf32>) -> tensor<?x12x64x?xf32>
+    %762 = "onnx.MatMul"(%745, %761) {onnx_node_name = "MatMul_1595"} : (tensor<?x12x?x64xf32>, tensor<?x12x64x?xf32>) -> tensor<?x12x?x?xf32>
+    %763 = crt.constant : () -> tensor<f32>
+    %764 = "onnx.Pow"(%763, %180) {onnx_node_name = "Pow_1605"} : (tensor<f32>, tensor<f32>) -> tensor<f32>
+    %765 = crt.div %762, %764 : (tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %766 = "onnx.Dim"(%745) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %767 = "onnx.Squeeze"(%766, %155) {onnx_node_name = "Squeeze_1613"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %768 = "onnx.Dim"(%759) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %769 = "onnx.Squeeze"(%768, %155) {onnx_node_name = "Squeeze_1620"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %770 = "onnx.Sub"(%769, %767) {onnx_node_name = "Sub_1621"} : (tensor<i64>, tensor<i64>) -> tensor<i64>
+    %771 = "onnx.Unsqueeze"(%770, %155) {onnx_node_name = "Unsqueeze_1623"} : (tensor<i64>, tensor<1xi64>) -> tensor<1xi64>
+    %772 = "onnx.Slice"(%167, %771, %768, %154, %173) {onnx_node_name = "Slice_1627"} : (tensor<1x1x1024x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x1024xf32>
+    %773 = "onnx.Slice"(%772, %155, %768, %156, %173) {onnx_node_name = "Slice_1631"} : (tensor<1x1x?x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x?xf32>
+    %774 = "onnx.Cast"(%773) {onnx_node_name = "Cast_1632", to = i1} : (tensor<1x1x?x?xf32>) -> tensor<1x1x?x?xi1>
+    %775 = "onnx.Where"(%774, %765, %157) {onnx_node_name = "Where_1633"} : (tensor<1x1x?x?xi1>, tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %776 = crt.add %775, %206 : (tensor<?x12x?x?xf32>, tensor<?x1x1x?xf32>) -> tensor<?x12x?x?xf32>
+    %777 = crt.softmax %776 : (tensor<?x12x?x?xf32>) -> tensor<?x12x?x?xf32>
+    %778 = "onnx.MatMul"(%777, %760) {onnx_node_name = "MatMul_1637"} : (tensor<?x12x?x?xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %779 = "onnx.Transpose"(%778) {onnx_node_name = "Transpose_1638", perm = [0, 2, 1, 3]} : (tensor<?x12x?x64xf32>) -> tensor<?x?x12x64xf32>
+    %780 = "onnx.Dim"(%779) {axis = 0 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %781 = "onnx.Dim"(%779) {axis = 1 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %782 = "onnx.Concat"(%780, %781, %158) {axis = 0 : si64, onnx_node_name = "Concat_1649"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %783 = crt.reshape %779, %782 : (tensor<?x?x12x64xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %784 = "onnx.Dim"(%783) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %785 = "onnx.Dim"(%783) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %786 = crt.constant : () -> tensor<2xi64>
+    %787 = crt.reshape %779, %786 : (tensor<?x?x12x64xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %788 = crt.gemm %787, %67, %68 : (tensor<?x768xf32>, tensor<768x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %789 = "onnx.Concat"(%784, %785, %158) {axis = 0 : si64, onnx_node_name = "Concat_1673"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %790 = crt.reshape %788, %789 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %791 = crt.add %790, %723 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %792 = crt.reducemean %791 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %793 = crt.sub %791, %792 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %794 = "onnx.Pow"(%793, %176) {onnx_node_name = "Pow_1679"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %795 = crt.reducemean %794 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %796 = crt.add %795, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %797 = "onnx.Sqrt"(%796) {onnx_node_name = "Sqrt_1683"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %798 = crt.div %793, %797 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %799 = crt.mul %798, %69 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %800 = crt.add %799, %70 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %801 = "onnx.Dim"(%800) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %802 = "onnx.Dim"(%800) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %803 = crt.constant : () -> tensor<2xi64>
+    %804 = crt.reshape %800, %803 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %805 = crt.gemm %804, %71, %72 : (tensor<?x768xf32>, tensor<768x3072xf32>, tensor<3072xf32>) -> tensor<?x3072xf32>
+    %806 = "onnx.Concat"(%801, %802, %159) {axis = 0 : si64, onnx_node_name = "Concat_1709"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %807 = crt.reshape %805, %806 : (tensor<?x3072xf32>, tensor<3xi64>) -> tensor<?x?x3072xf32>
+    %808 = "onnx.Pow"(%807, %181) {onnx_node_name = "Pow_1714"} : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %809 = crt.mul %808, %182 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %810 = crt.add %807, %809 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %811 = crt.mul %810, %183 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %812 = "onnx.Tanh"(%811) {onnx_node_name = "Tanh_1720"} : (tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %813 = crt.add %812, %174 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %814 = crt.mul %807, %813 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %815 = crt.mul %814, %180 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %816 = "onnx.Dim"(%815) {axis = 0 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %817 = "onnx.Dim"(%815) {axis = 1 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %818 = crt.constant : () -> tensor<2xi64>
+    %819 = crt.reshape %815, %818 : (tensor<?x?x3072xf32>, tensor<2xi64>) -> tensor<?x3072xf32>
+    %820 = crt.gemm %819, %73, %74 : (tensor<?x3072xf32>, tensor<3072x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %821 = "onnx.Concat"(%816, %817, %158) {axis = 0 : si64, onnx_node_name = "Concat_1746"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %822 = crt.reshape %820, %821 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %823 = crt.add %791, %822 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %824 = crt.reducemean %823 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %825 = crt.sub %823, %824 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %826 = "onnx.Pow"(%825, %176) {onnx_node_name = "Pow_1752"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %827 = crt.reducemean %826 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %828 = crt.add %827, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %829 = "onnx.Sqrt"(%828) {onnx_node_name = "Sqrt_1756"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %830 = crt.div %825, %829 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %831 = crt.mul %830, %75 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %832 = crt.add %831, %76 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %833 = "onnx.Dim"(%832) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %834 = "onnx.Dim"(%832) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %835 = crt.constant : () -> tensor<2xi64>
+    %836 = crt.reshape %832, %835 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %837 = crt.gemm %836, %77, %78 : (tensor<?x768xf32>, tensor<768x2304xf32>, tensor<2304xf32>) -> tensor<?x2304xf32>
+    %838 = "onnx.Concat"(%833, %834, %151) {axis = 0 : si64, onnx_node_name = "Concat_1782"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %839 = crt.reshape %837, %838 : (tensor<?x2304xf32>, tensor<3xi64>) -> tensor<?x?x2304xf32>
+    %840:3 = "onnx.Split"(%839, %178) {axis = 2 : si64, onnx_node_name = "Split_1785"} : (tensor<?x?x2304xf32>, tensor<3xi64>) -> (tensor<?x?x768xf32>, tensor<?x?x768xf32>, tensor<?x?x768xf32>)
+    %841 = "onnx.Dim"(%840#0) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %842 = "onnx.Dim"(%840#0) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %843 = "onnx.Concat"(%841, %842, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_1796"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %844 = crt.reshape %840#0, %843 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %845 = "onnx.Transpose"(%844) {onnx_node_name = "Transpose_1798", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %846 = "onnx.Dim"(%840#1) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %847 = "onnx.Dim"(%840#1) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %848 = "onnx.Concat"(%846, %847, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_1809"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %849 = crt.reshape %840#1, %848 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %850 = "onnx.Transpose"(%849) {onnx_node_name = "Transpose_1811", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %851 = "onnx.Dim"(%840#2) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %852 = "onnx.Dim"(%840#2) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %853 = "onnx.Concat"(%851, %852, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_1822"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %854 = crt.reshape %840#2, %853 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %855 = "onnx.Transpose"(%854) {onnx_node_name = "Transpose_1824", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %856:2 = "onnx.Split"(%218, %179) {axis = 0 : si64, onnx_node_name = "Split_1826"} : (tensor<2x?x12x?x64xf32>, tensor<2xi64>) -> (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>)
+    %857 = "onnx.Squeeze"(%856#0, %155) {onnx_node_name = "Squeeze_1828"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %858 = "onnx.Squeeze"(%856#1, %155) {onnx_node_name = "Squeeze_1830"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %859 = "onnx.Concat"(%857, %850) {axis = 2 : si64, onnx_node_name = "Concat_1831"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %860 = "onnx.Concat"(%858, %855) {axis = 2 : si64, onnx_node_name = "Concat_1832"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %861 = "onnx.Transpose"(%859) {onnx_node_name = "Transpose_1833", perm = [0, 1, 3, 2]} : (tensor<?x12x?x64xf32>) -> tensor<?x12x64x?xf32>
+    %862 = "onnx.MatMul"(%845, %861) {onnx_node_name = "MatMul_1834"} : (tensor<?x12x?x64xf32>, tensor<?x12x64x?xf32>) -> tensor<?x12x?x?xf32>
+    %863 = crt.constant : () -> tensor<f32>
+    %864 = "onnx.Pow"(%863, %180) {onnx_node_name = "Pow_1844"} : (tensor<f32>, tensor<f32>) -> tensor<f32>
+    %865 = crt.div %862, %864 : (tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %866 = "onnx.Dim"(%845) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %867 = "onnx.Squeeze"(%866, %155) {onnx_node_name = "Squeeze_1852"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %868 = "onnx.Dim"(%859) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %869 = "onnx.Squeeze"(%868, %155) {onnx_node_name = "Squeeze_1859"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %870 = "onnx.Sub"(%869, %867) {onnx_node_name = "Sub_1860"} : (tensor<i64>, tensor<i64>) -> tensor<i64>
+    %871 = "onnx.Unsqueeze"(%870, %155) {onnx_node_name = "Unsqueeze_1862"} : (tensor<i64>, tensor<1xi64>) -> tensor<1xi64>
+    %872 = "onnx.Slice"(%166, %871, %868, %154, %173) {onnx_node_name = "Slice_1866"} : (tensor<1x1x1024x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x1024xf32>
+    %873 = "onnx.Slice"(%872, %155, %868, %156, %173) {onnx_node_name = "Slice_1870"} : (tensor<1x1x?x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x?xf32>
+    %874 = "onnx.Cast"(%873) {onnx_node_name = "Cast_1871", to = i1} : (tensor<1x1x?x?xf32>) -> tensor<1x1x?x?xi1>
+    %875 = "onnx.Where"(%874, %865, %157) {onnx_node_name = "Where_1872"} : (tensor<1x1x?x?xi1>, tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %876 = crt.add %875, %206 : (tensor<?x12x?x?xf32>, tensor<?x1x1x?xf32>) -> tensor<?x12x?x?xf32>
+    %877 = crt.softmax %876 : (tensor<?x12x?x?xf32>) -> tensor<?x12x?x?xf32>
+    %878 = "onnx.MatMul"(%877, %860) {onnx_node_name = "MatMul_1876"} : (tensor<?x12x?x?xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %879 = "onnx.Transpose"(%878) {onnx_node_name = "Transpose_1877", perm = [0, 2, 1, 3]} : (tensor<?x12x?x64xf32>) -> tensor<?x?x12x64xf32>
+    %880 = "onnx.Dim"(%879) {axis = 0 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %881 = "onnx.Dim"(%879) {axis = 1 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %882 = "onnx.Concat"(%880, %881, %158) {axis = 0 : si64, onnx_node_name = "Concat_1888"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %883 = crt.reshape %879, %882 : (tensor<?x?x12x64xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %884 = "onnx.Dim"(%883) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %885 = "onnx.Dim"(%883) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %886 = crt.constant : () -> tensor<2xi64>
+    %887 = crt.reshape %879, %886 : (tensor<?x?x12x64xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %888 = crt.gemm %887, %79, %80 : (tensor<?x768xf32>, tensor<768x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %889 = "onnx.Concat"(%884, %885, %158) {axis = 0 : si64, onnx_node_name = "Concat_1912"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %890 = crt.reshape %888, %889 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %891 = crt.add %890, %823 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %892 = crt.reducemean %891 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %893 = crt.sub %891, %892 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %894 = "onnx.Pow"(%893, %176) {onnx_node_name = "Pow_1918"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %895 = crt.reducemean %894 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %896 = crt.add %895, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %897 = "onnx.Sqrt"(%896) {onnx_node_name = "Sqrt_1922"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %898 = crt.div %893, %897 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %899 = crt.mul %898, %81 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %900 = crt.add %899, %82 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %901 = "onnx.Dim"(%900) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %902 = "onnx.Dim"(%900) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %903 = crt.constant : () -> tensor<2xi64>
+    %904 = crt.reshape %900, %903 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %905 = crt.gemm %904, %83, %84 : (tensor<?x768xf32>, tensor<768x3072xf32>, tensor<3072xf32>) -> tensor<?x3072xf32>
+    %906 = "onnx.Concat"(%901, %902, %159) {axis = 0 : si64, onnx_node_name = "Concat_1948"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %907 = crt.reshape %905, %906 : (tensor<?x3072xf32>, tensor<3xi64>) -> tensor<?x?x3072xf32>
+    %908 = "onnx.Pow"(%907, %181) {onnx_node_name = "Pow_1953"} : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %909 = crt.mul %908, %182 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %910 = crt.add %907, %909 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %911 = crt.mul %910, %183 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %912 = "onnx.Tanh"(%911) {onnx_node_name = "Tanh_1959"} : (tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %913 = crt.add %912, %174 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %914 = crt.mul %907, %913 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %915 = crt.mul %914, %180 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %916 = "onnx.Dim"(%915) {axis = 0 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %917 = "onnx.Dim"(%915) {axis = 1 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %918 = crt.constant : () -> tensor<2xi64>
+    %919 = crt.reshape %915, %918 : (tensor<?x?x3072xf32>, tensor<2xi64>) -> tensor<?x3072xf32>
+    %920 = crt.gemm %919, %85, %86 : (tensor<?x3072xf32>, tensor<3072x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %921 = "onnx.Concat"(%916, %917, %158) {axis = 0 : si64, onnx_node_name = "Concat_1985"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %922 = crt.reshape %920, %921 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %923 = crt.add %891, %922 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %924 = crt.reducemean %923 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %925 = crt.sub %923, %924 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %926 = "onnx.Pow"(%925, %176) {onnx_node_name = "Pow_1991"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %927 = crt.reducemean %926 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %928 = crt.add %927, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %929 = "onnx.Sqrt"(%928) {onnx_node_name = "Sqrt_1995"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %930 = crt.div %925, %929 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %931 = crt.mul %930, %87 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %932 = crt.add %931, %88 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %933 = "onnx.Dim"(%932) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %934 = "onnx.Dim"(%932) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %935 = crt.constant : () -> tensor<2xi64>
+    %936 = crt.reshape %932, %935 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %937 = crt.gemm %936, %89, %90 : (tensor<?x768xf32>, tensor<768x2304xf32>, tensor<2304xf32>) -> tensor<?x2304xf32>
+    %938 = "onnx.Concat"(%933, %934, %151) {axis = 0 : si64, onnx_node_name = "Concat_2021"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %939 = crt.reshape %937, %938 : (tensor<?x2304xf32>, tensor<3xi64>) -> tensor<?x?x2304xf32>
+    %940:3 = "onnx.Split"(%939, %178) {axis = 2 : si64, onnx_node_name = "Split_2024"} : (tensor<?x?x2304xf32>, tensor<3xi64>) -> (tensor<?x?x768xf32>, tensor<?x?x768xf32>, tensor<?x?x768xf32>)
+    %941 = "onnx.Dim"(%940#0) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %942 = "onnx.Dim"(%940#0) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %943 = "onnx.Concat"(%941, %942, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_2035"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %944 = crt.reshape %940#0, %943 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %945 = "onnx.Transpose"(%944) {onnx_node_name = "Transpose_2037", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %946 = "onnx.Dim"(%940#1) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %947 = "onnx.Dim"(%940#1) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %948 = "onnx.Concat"(%946, %947, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_2048"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %949 = crt.reshape %940#1, %948 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %950 = "onnx.Transpose"(%949) {onnx_node_name = "Transpose_2050", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %951 = "onnx.Dim"(%940#2) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %952 = "onnx.Dim"(%940#2) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %953 = "onnx.Concat"(%951, %952, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_2061"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %954 = crt.reshape %940#2, %953 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %955 = "onnx.Transpose"(%954) {onnx_node_name = "Transpose_2063", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %956:2 = "onnx.Split"(%219, %179) {axis = 0 : si64, onnx_node_name = "Split_2065"} : (tensor<2x?x12x?x64xf32>, tensor<2xi64>) -> (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>)
+    %957 = "onnx.Squeeze"(%956#0, %155) {onnx_node_name = "Squeeze_2067"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %958 = "onnx.Squeeze"(%956#1, %155) {onnx_node_name = "Squeeze_2069"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %959 = "onnx.Concat"(%957, %950) {axis = 2 : si64, onnx_node_name = "Concat_2070"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %960 = "onnx.Concat"(%958, %955) {axis = 2 : si64, onnx_node_name = "Concat_2071"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %961 = "onnx.Transpose"(%959) {onnx_node_name = "Transpose_2072", perm = [0, 1, 3, 2]} : (tensor<?x12x?x64xf32>) -> tensor<?x12x64x?xf32>
+    %962 = "onnx.MatMul"(%945, %961) {onnx_node_name = "MatMul_2073"} : (tensor<?x12x?x64xf32>, tensor<?x12x64x?xf32>) -> tensor<?x12x?x?xf32>
+    %963 = crt.constant : () -> tensor<f32>
+    %964 = "onnx.Pow"(%963, %180) {onnx_node_name = "Pow_2083"} : (tensor<f32>, tensor<f32>) -> tensor<f32>
+    %965 = crt.div %962, %964 : (tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %966 = "onnx.Dim"(%945) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %967 = "onnx.Squeeze"(%966, %155) {onnx_node_name = "Squeeze_2091"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %968 = "onnx.Dim"(%959) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %969 = "onnx.Squeeze"(%968, %155) {onnx_node_name = "Squeeze_2098"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %970 = "onnx.Sub"(%969, %967) {onnx_node_name = "Sub_2099"} : (tensor<i64>, tensor<i64>) -> tensor<i64>
+    %971 = "onnx.Unsqueeze"(%970, %155) {onnx_node_name = "Unsqueeze_2101"} : (tensor<i64>, tensor<1xi64>) -> tensor<1xi64>
+    %972 = "onnx.Slice"(%165, %971, %968, %154, %173) {onnx_node_name = "Slice_2105"} : (tensor<1x1x1024x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x1024xf32>
+    %973 = "onnx.Slice"(%972, %155, %968, %156, %173) {onnx_node_name = "Slice_2109"} : (tensor<1x1x?x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x?xf32>
+    %974 = "onnx.Cast"(%973) {onnx_node_name = "Cast_2110", to = i1} : (tensor<1x1x?x?xf32>) -> tensor<1x1x?x?xi1>
+    %975 = "onnx.Where"(%974, %965, %157) {onnx_node_name = "Where_2111"} : (tensor<1x1x?x?xi1>, tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %976 = crt.add %975, %206 : (tensor<?x12x?x?xf32>, tensor<?x1x1x?xf32>) -> tensor<?x12x?x?xf32>
+    %977 = crt.softmax %976 : (tensor<?x12x?x?xf32>) -> tensor<?x12x?x?xf32>
+    %978 = "onnx.MatMul"(%977, %960) {onnx_node_name = "MatMul_2115"} : (tensor<?x12x?x?xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %979 = "onnx.Transpose"(%978) {onnx_node_name = "Transpose_2116", perm = [0, 2, 1, 3]} : (tensor<?x12x?x64xf32>) -> tensor<?x?x12x64xf32>
+    %980 = "onnx.Dim"(%979) {axis = 0 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %981 = "onnx.Dim"(%979) {axis = 1 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %982 = "onnx.Concat"(%980, %981, %158) {axis = 0 : si64, onnx_node_name = "Concat_2127"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %983 = crt.reshape %979, %982 : (tensor<?x?x12x64xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %984 = "onnx.Dim"(%983) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %985 = "onnx.Dim"(%983) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %986 = crt.constant : () -> tensor<2xi64>
+    %987 = crt.reshape %979, %986 : (tensor<?x?x12x64xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %988 = crt.gemm %987, %91, %92 : (tensor<?x768xf32>, tensor<768x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %989 = "onnx.Concat"(%984, %985, %158) {axis = 0 : si64, onnx_node_name = "Concat_2151"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %990 = crt.reshape %988, %989 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %991 = crt.add %990, %923 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %992 = crt.reducemean %991 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %993 = crt.sub %991, %992 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %994 = "onnx.Pow"(%993, %176) {onnx_node_name = "Pow_2157"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %995 = crt.reducemean %994 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %996 = crt.add %995, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %997 = "onnx.Sqrt"(%996) {onnx_node_name = "Sqrt_2161"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %998 = crt.div %993, %997 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %999 = crt.mul %998, %93 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1000 = crt.add %999, %94 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1001 = "onnx.Dim"(%1000) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1002 = "onnx.Dim"(%1000) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1003 = crt.constant : () -> tensor<2xi64>
+    %1004 = crt.reshape %1000, %1003 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %1005 = crt.gemm %1004, %95, %96 : (tensor<?x768xf32>, tensor<768x3072xf32>, tensor<3072xf32>) -> tensor<?x3072xf32>
+    %1006 = "onnx.Concat"(%1001, %1002, %159) {axis = 0 : si64, onnx_node_name = "Concat_2187"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1007 = crt.reshape %1005, %1006 : (tensor<?x3072xf32>, tensor<3xi64>) -> tensor<?x?x3072xf32>
+    %1008 = "onnx.Pow"(%1007, %181) {onnx_node_name = "Pow_2192"} : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1009 = crt.mul %1008, %182 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1010 = crt.add %1007, %1009 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %1011 = crt.mul %1010, %183 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1012 = "onnx.Tanh"(%1011) {onnx_node_name = "Tanh_2198"} : (tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %1013 = crt.add %1012, %174 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1014 = crt.mul %1007, %1013 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %1015 = crt.mul %1014, %180 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1016 = "onnx.Dim"(%1015) {axis = 0 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %1017 = "onnx.Dim"(%1015) {axis = 1 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %1018 = crt.constant : () -> tensor<2xi64>
+    %1019 = crt.reshape %1015, %1018 : (tensor<?x?x3072xf32>, tensor<2xi64>) -> tensor<?x3072xf32>
+    %1020 = crt.gemm %1019, %97, %98 : (tensor<?x3072xf32>, tensor<3072x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %1021 = "onnx.Concat"(%1016, %1017, %158) {axis = 0 : si64, onnx_node_name = "Concat_2224"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1022 = crt.reshape %1020, %1021 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %1023 = crt.add %991, %1022 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %1024 = crt.reducemean %1023 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %1025 = crt.sub %1023, %1024 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %1026 = "onnx.Pow"(%1025, %176) {onnx_node_name = "Pow_2230"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %1027 = crt.reducemean %1026 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %1028 = crt.add %1027, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %1029 = "onnx.Sqrt"(%1028) {onnx_node_name = "Sqrt_2234"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %1030 = crt.div %1025, %1029 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %1031 = crt.mul %1030, %99 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1032 = crt.add %1031, %100 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1033 = "onnx.Dim"(%1032) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1034 = "onnx.Dim"(%1032) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1035 = crt.constant : () -> tensor<2xi64>
+    %1036 = crt.reshape %1032, %1035 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %1037 = crt.gemm %1036, %101, %102 : (tensor<?x768xf32>, tensor<768x2304xf32>, tensor<2304xf32>) -> tensor<?x2304xf32>
+    %1038 = "onnx.Concat"(%1033, %1034, %151) {axis = 0 : si64, onnx_node_name = "Concat_2260"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1039 = crt.reshape %1037, %1038 : (tensor<?x2304xf32>, tensor<3xi64>) -> tensor<?x?x2304xf32>
+    %1040:3 = "onnx.Split"(%1039, %178) {axis = 2 : si64, onnx_node_name = "Split_2263"} : (tensor<?x?x2304xf32>, tensor<3xi64>) -> (tensor<?x?x768xf32>, tensor<?x?x768xf32>, tensor<?x?x768xf32>)
+    %1041 = "onnx.Dim"(%1040#0) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1042 = "onnx.Dim"(%1040#0) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1043 = "onnx.Concat"(%1041, %1042, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_2274"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1044 = crt.reshape %1040#0, %1043 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %1045 = "onnx.Transpose"(%1044) {onnx_node_name = "Transpose_2276", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %1046 = "onnx.Dim"(%1040#1) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1047 = "onnx.Dim"(%1040#1) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1048 = "onnx.Concat"(%1046, %1047, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_2287"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1049 = crt.reshape %1040#1, %1048 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %1050 = "onnx.Transpose"(%1049) {onnx_node_name = "Transpose_2289", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %1051 = "onnx.Dim"(%1040#2) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1052 = "onnx.Dim"(%1040#2) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1053 = "onnx.Concat"(%1051, %1052, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_2300"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1054 = crt.reshape %1040#2, %1053 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %1055 = "onnx.Transpose"(%1054) {onnx_node_name = "Transpose_2302", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %1056:2 = "onnx.Split"(%220, %179) {axis = 0 : si64, onnx_node_name = "Split_2304"} : (tensor<2x?x12x?x64xf32>, tensor<2xi64>) -> (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>)
+    %1057 = "onnx.Squeeze"(%1056#0, %155) {onnx_node_name = "Squeeze_2306"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %1058 = "onnx.Squeeze"(%1056#1, %155) {onnx_node_name = "Squeeze_2308"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %1059 = "onnx.Concat"(%1057, %1050) {axis = 2 : si64, onnx_node_name = "Concat_2309"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %1060 = "onnx.Concat"(%1058, %1055) {axis = 2 : si64, onnx_node_name = "Concat_2310"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %1061 = "onnx.Transpose"(%1059) {onnx_node_name = "Transpose_2311", perm = [0, 1, 3, 2]} : (tensor<?x12x?x64xf32>) -> tensor<?x12x64x?xf32>
+    %1062 = "onnx.MatMul"(%1045, %1061) {onnx_node_name = "MatMul_2312"} : (tensor<?x12x?x64xf32>, tensor<?x12x64x?xf32>) -> tensor<?x12x?x?xf32>
+    %1063 = crt.constant : () -> tensor<f32>
+    %1064 = "onnx.Pow"(%1063, %180) {onnx_node_name = "Pow_2322"} : (tensor<f32>, tensor<f32>) -> tensor<f32>
+    %1065 = crt.div %1062, %1064 : (tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %1066 = "onnx.Dim"(%1045) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %1067 = "onnx.Squeeze"(%1066, %155) {onnx_node_name = "Squeeze_2330"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %1068 = "onnx.Dim"(%1059) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %1069 = "onnx.Squeeze"(%1068, %155) {onnx_node_name = "Squeeze_2337"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %1070 = "onnx.Sub"(%1069, %1067) {onnx_node_name = "Sub_2338"} : (tensor<i64>, tensor<i64>) -> tensor<i64>
+    %1071 = "onnx.Unsqueeze"(%1070, %155) {onnx_node_name = "Unsqueeze_2340"} : (tensor<i64>, tensor<1xi64>) -> tensor<1xi64>
+    %1072 = "onnx.Slice"(%164, %1071, %1068, %154, %173) {onnx_node_name = "Slice_2344"} : (tensor<1x1x1024x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x1024xf32>
+    %1073 = "onnx.Slice"(%1072, %155, %1068, %156, %173) {onnx_node_name = "Slice_2348"} : (tensor<1x1x?x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x?xf32>
+    %1074 = "onnx.Cast"(%1073) {onnx_node_name = "Cast_2349", to = i1} : (tensor<1x1x?x?xf32>) -> tensor<1x1x?x?xi1>
+    %1075 = "onnx.Where"(%1074, %1065, %157) {onnx_node_name = "Where_2350"} : (tensor<1x1x?x?xi1>, tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %1076 = crt.add %1075, %206 : (tensor<?x12x?x?xf32>, tensor<?x1x1x?xf32>) -> tensor<?x12x?x?xf32>
+    %1077 = crt.softmax %1076 : (tensor<?x12x?x?xf32>) -> tensor<?x12x?x?xf32>
+    %1078 = "onnx.MatMul"(%1077, %1060) {onnx_node_name = "MatMul_2354"} : (tensor<?x12x?x?xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %1079 = "onnx.Transpose"(%1078) {onnx_node_name = "Transpose_2355", perm = [0, 2, 1, 3]} : (tensor<?x12x?x64xf32>) -> tensor<?x?x12x64xf32>
+    %1080 = "onnx.Dim"(%1079) {axis = 0 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %1081 = "onnx.Dim"(%1079) {axis = 1 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %1082 = "onnx.Concat"(%1080, %1081, %158) {axis = 0 : si64, onnx_node_name = "Concat_2366"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1083 = crt.reshape %1079, %1082 : (tensor<?x?x12x64xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %1084 = "onnx.Dim"(%1083) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1085 = "onnx.Dim"(%1083) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1086 = crt.constant : () -> tensor<2xi64>
+    %1087 = crt.reshape %1079, %1086 : (tensor<?x?x12x64xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %1088 = crt.gemm %1087, %103, %104 : (tensor<?x768xf32>, tensor<768x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %1089 = "onnx.Concat"(%1084, %1085, %158) {axis = 0 : si64, onnx_node_name = "Concat_2390"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1090 = crt.reshape %1088, %1089 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %1091 = crt.add %1090, %1023 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %1092 = crt.reducemean %1091 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %1093 = crt.sub %1091, %1092 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %1094 = "onnx.Pow"(%1093, %176) {onnx_node_name = "Pow_2396"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %1095 = crt.reducemean %1094 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %1096 = crt.add %1095, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %1097 = "onnx.Sqrt"(%1096) {onnx_node_name = "Sqrt_2400"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %1098 = crt.div %1093, %1097 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %1099 = crt.mul %1098, %105 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1100 = crt.add %1099, %106 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1101 = "onnx.Dim"(%1100) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1102 = "onnx.Dim"(%1100) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1103 = crt.constant : () -> tensor<2xi64>
+    %1104 = crt.reshape %1100, %1103 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %1105 = crt.gemm %1104, %107, %108 : (tensor<?x768xf32>, tensor<768x3072xf32>, tensor<3072xf32>) -> tensor<?x3072xf32>
+    %1106 = "onnx.Concat"(%1101, %1102, %159) {axis = 0 : si64, onnx_node_name = "Concat_2426"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1107 = crt.reshape %1105, %1106 : (tensor<?x3072xf32>, tensor<3xi64>) -> tensor<?x?x3072xf32>
+    %1108 = "onnx.Pow"(%1107, %181) {onnx_node_name = "Pow_2431"} : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1109 = crt.mul %1108, %182 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1110 = crt.add %1107, %1109 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %1111 = crt.mul %1110, %183 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1112 = "onnx.Tanh"(%1111) {onnx_node_name = "Tanh_2437"} : (tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %1113 = crt.add %1112, %174 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1114 = crt.mul %1107, %1113 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %1115 = crt.mul %1114, %180 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1116 = "onnx.Dim"(%1115) {axis = 0 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %1117 = "onnx.Dim"(%1115) {axis = 1 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %1118 = crt.constant : () -> tensor<2xi64>
+    %1119 = crt.reshape %1115, %1118 : (tensor<?x?x3072xf32>, tensor<2xi64>) -> tensor<?x3072xf32>
+    %1120 = crt.gemm %1119, %109, %110 : (tensor<?x3072xf32>, tensor<3072x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %1121 = "onnx.Concat"(%1116, %1117, %158) {axis = 0 : si64, onnx_node_name = "Concat_2463"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1122 = crt.reshape %1120, %1121 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %1123 = crt.add %1091, %1122 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %1124 = crt.reducemean %1123 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %1125 = crt.sub %1123, %1124 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %1126 = "onnx.Pow"(%1125, %176) {onnx_node_name = "Pow_2469"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %1127 = crt.reducemean %1126 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %1128 = crt.add %1127, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %1129 = "onnx.Sqrt"(%1128) {onnx_node_name = "Sqrt_2473"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %1130 = crt.div %1125, %1129 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %1131 = crt.mul %1130, %111 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1132 = crt.add %1131, %112 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1133 = "onnx.Dim"(%1132) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1134 = "onnx.Dim"(%1132) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1135 = crt.constant : () -> tensor<2xi64>
+    %1136 = crt.reshape %1132, %1135 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %1137 = crt.gemm %1136, %113, %114 : (tensor<?x768xf32>, tensor<768x2304xf32>, tensor<2304xf32>) -> tensor<?x2304xf32>
+    %1138 = "onnx.Concat"(%1133, %1134, %151) {axis = 0 : si64, onnx_node_name = "Concat_2499"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1139 = crt.reshape %1137, %1138 : (tensor<?x2304xf32>, tensor<3xi64>) -> tensor<?x?x2304xf32>
+    %1140:3 = "onnx.Split"(%1139, %178) {axis = 2 : si64, onnx_node_name = "Split_2502"} : (tensor<?x?x2304xf32>, tensor<3xi64>) -> (tensor<?x?x768xf32>, tensor<?x?x768xf32>, tensor<?x?x768xf32>)
+    %1141 = "onnx.Dim"(%1140#0) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1142 = "onnx.Dim"(%1140#0) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1143 = "onnx.Concat"(%1141, %1142, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_2513"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1144 = crt.reshape %1140#0, %1143 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %1145 = "onnx.Transpose"(%1144) {onnx_node_name = "Transpose_2515", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %1146 = "onnx.Dim"(%1140#1) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1147 = "onnx.Dim"(%1140#1) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1148 = "onnx.Concat"(%1146, %1147, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_2526"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1149 = crt.reshape %1140#1, %1148 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %1150 = "onnx.Transpose"(%1149) {onnx_node_name = "Transpose_2528", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %1151 = "onnx.Dim"(%1140#2) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1152 = "onnx.Dim"(%1140#2) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1153 = "onnx.Concat"(%1151, %1152, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_2539"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1154 = crt.reshape %1140#2, %1153 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %1155 = "onnx.Transpose"(%1154) {onnx_node_name = "Transpose_2541", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %1156:2 = "onnx.Split"(%221, %179) {axis = 0 : si64, onnx_node_name = "Split_2543"} : (tensor<2x?x12x?x64xf32>, tensor<2xi64>) -> (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>)
+    %1157 = "onnx.Squeeze"(%1156#0, %155) {onnx_node_name = "Squeeze_2545"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %1158 = "onnx.Squeeze"(%1156#1, %155) {onnx_node_name = "Squeeze_2547"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %1159 = "onnx.Concat"(%1157, %1150) {axis = 2 : si64, onnx_node_name = "Concat_2548"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %1160 = "onnx.Concat"(%1158, %1155) {axis = 2 : si64, onnx_node_name = "Concat_2549"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %1161 = "onnx.Transpose"(%1159) {onnx_node_name = "Transpose_2550", perm = [0, 1, 3, 2]} : (tensor<?x12x?x64xf32>) -> tensor<?x12x64x?xf32>
+    %1162 = "onnx.MatMul"(%1145, %1161) {onnx_node_name = "MatMul_2551"} : (tensor<?x12x?x64xf32>, tensor<?x12x64x?xf32>) -> tensor<?x12x?x?xf32>
+    %1163 = crt.constant : () -> tensor<f32>
+    %1164 = "onnx.Pow"(%1163, %180) {onnx_node_name = "Pow_2561"} : (tensor<f32>, tensor<f32>) -> tensor<f32>
+    %1165 = crt.div %1162, %1164 : (tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %1166 = "onnx.Dim"(%1145) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %1167 = "onnx.Squeeze"(%1166, %155) {onnx_node_name = "Squeeze_2569"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %1168 = "onnx.Dim"(%1159) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %1169 = "onnx.Squeeze"(%1168, %155) {onnx_node_name = "Squeeze_2576"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %1170 = "onnx.Sub"(%1169, %1167) {onnx_node_name = "Sub_2577"} : (tensor<i64>, tensor<i64>) -> tensor<i64>
+    %1171 = "onnx.Unsqueeze"(%1170, %155) {onnx_node_name = "Unsqueeze_2579"} : (tensor<i64>, tensor<1xi64>) -> tensor<1xi64>
+    %1172 = "onnx.Slice"(%163, %1171, %1168, %154, %173) {onnx_node_name = "Slice_2583"} : (tensor<1x1x1024x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x1024xf32>
+    %1173 = "onnx.Slice"(%1172, %155, %1168, %156, %173) {onnx_node_name = "Slice_2587"} : (tensor<1x1x?x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x?xf32>
+    %1174 = "onnx.Cast"(%1173) {onnx_node_name = "Cast_2588", to = i1} : (tensor<1x1x?x?xf32>) -> tensor<1x1x?x?xi1>
+    %1175 = "onnx.Where"(%1174, %1165, %157) {onnx_node_name = "Where_2589"} : (tensor<1x1x?x?xi1>, tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %1176 = crt.add %1175, %206 : (tensor<?x12x?x?xf32>, tensor<?x1x1x?xf32>) -> tensor<?x12x?x?xf32>
+    %1177 = crt.softmax %1176 : (tensor<?x12x?x?xf32>) -> tensor<?x12x?x?xf32>
+    %1178 = "onnx.MatMul"(%1177, %1160) {onnx_node_name = "MatMul_2593"} : (tensor<?x12x?x?xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %1179 = "onnx.Transpose"(%1178) {onnx_node_name = "Transpose_2594", perm = [0, 2, 1, 3]} : (tensor<?x12x?x64xf32>) -> tensor<?x?x12x64xf32>
+    %1180 = "onnx.Dim"(%1179) {axis = 0 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %1181 = "onnx.Dim"(%1179) {axis = 1 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %1182 = "onnx.Concat"(%1180, %1181, %158) {axis = 0 : si64, onnx_node_name = "Concat_2605"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1183 = crt.reshape %1179, %1182 : (tensor<?x?x12x64xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %1184 = "onnx.Dim"(%1183) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1185 = "onnx.Dim"(%1183) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1186 = crt.constant : () -> tensor<2xi64>
+    %1187 = crt.reshape %1179, %1186 : (tensor<?x?x12x64xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %1188 = crt.gemm %1187, %115, %116 : (tensor<?x768xf32>, tensor<768x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %1189 = "onnx.Concat"(%1184, %1185, %158) {axis = 0 : si64, onnx_node_name = "Concat_2629"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1190 = crt.reshape %1188, %1189 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %1191 = crt.add %1190, %1123 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %1192 = crt.reducemean %1191 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %1193 = crt.sub %1191, %1192 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %1194 = "onnx.Pow"(%1193, %176) {onnx_node_name = "Pow_2635"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %1195 = crt.reducemean %1194 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %1196 = crt.add %1195, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %1197 = "onnx.Sqrt"(%1196) {onnx_node_name = "Sqrt_2639"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %1198 = crt.div %1193, %1197 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %1199 = crt.mul %1198, %117 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1200 = crt.add %1199, %118 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1201 = "onnx.Dim"(%1200) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1202 = "onnx.Dim"(%1200) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1203 = crt.constant : () -> tensor<2xi64>
+    %1204 = crt.reshape %1200, %1203 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %1205 = crt.gemm %1204, %119, %120 : (tensor<?x768xf32>, tensor<768x3072xf32>, tensor<3072xf32>) -> tensor<?x3072xf32>
+    %1206 = "onnx.Concat"(%1201, %1202, %159) {axis = 0 : si64, onnx_node_name = "Concat_2665"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1207 = crt.reshape %1205, %1206 : (tensor<?x3072xf32>, tensor<3xi64>) -> tensor<?x?x3072xf32>
+    %1208 = "onnx.Pow"(%1207, %181) {onnx_node_name = "Pow_2670"} : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1209 = crt.mul %1208, %182 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1210 = crt.add %1207, %1209 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %1211 = crt.mul %1210, %183 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1212 = "onnx.Tanh"(%1211) {onnx_node_name = "Tanh_2676"} : (tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %1213 = crt.add %1212, %174 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1214 = crt.mul %1207, %1213 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %1215 = crt.mul %1214, %180 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1216 = "onnx.Dim"(%1215) {axis = 0 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %1217 = "onnx.Dim"(%1215) {axis = 1 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %1218 = crt.constant : () -> tensor<2xi64>
+    %1219 = crt.reshape %1215, %1218 : (tensor<?x?x3072xf32>, tensor<2xi64>) -> tensor<?x3072xf32>
+    %1220 = crt.gemm %1219, %121, %122 : (tensor<?x3072xf32>, tensor<3072x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %1221 = "onnx.Concat"(%1216, %1217, %158) {axis = 0 : si64, onnx_node_name = "Concat_2702"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1222 = crt.reshape %1220, %1221 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %1223 = crt.add %1191, %1222 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %1224 = crt.reducemean %1223 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %1225 = crt.sub %1223, %1224 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %1226 = "onnx.Pow"(%1225, %176) {onnx_node_name = "Pow_2708"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %1227 = crt.reducemean %1226 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %1228 = crt.add %1227, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %1229 = "onnx.Sqrt"(%1228) {onnx_node_name = "Sqrt_2712"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %1230 = crt.div %1225, %1229 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %1231 = crt.mul %1230, %123 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1232 = crt.add %1231, %124 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1233 = "onnx.Dim"(%1232) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1234 = "onnx.Dim"(%1232) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1235 = crt.constant : () -> tensor<2xi64>
+    %1236 = crt.reshape %1232, %1235 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %1237 = crt.gemm %1236, %125, %126 : (tensor<?x768xf32>, tensor<768x2304xf32>, tensor<2304xf32>) -> tensor<?x2304xf32>
+    %1238 = "onnx.Concat"(%1233, %1234, %151) {axis = 0 : si64, onnx_node_name = "Concat_2738"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1239 = crt.reshape %1237, %1238 : (tensor<?x2304xf32>, tensor<3xi64>) -> tensor<?x?x2304xf32>
+    %1240:3 = "onnx.Split"(%1239, %178) {axis = 2 : si64, onnx_node_name = "Split_2741"} : (tensor<?x?x2304xf32>, tensor<3xi64>) -> (tensor<?x?x768xf32>, tensor<?x?x768xf32>, tensor<?x?x768xf32>)
+    %1241 = "onnx.Dim"(%1240#0) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1242 = "onnx.Dim"(%1240#0) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1243 = "onnx.Concat"(%1241, %1242, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_2752"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1244 = crt.reshape %1240#0, %1243 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %1245 = "onnx.Transpose"(%1244) {onnx_node_name = "Transpose_2754", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %1246 = "onnx.Dim"(%1240#1) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1247 = "onnx.Dim"(%1240#1) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1248 = "onnx.Concat"(%1246, %1247, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_2765"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1249 = crt.reshape %1240#1, %1248 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %1250 = "onnx.Transpose"(%1249) {onnx_node_name = "Transpose_2767", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %1251 = "onnx.Dim"(%1240#2) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1252 = "onnx.Dim"(%1240#2) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1253 = "onnx.Concat"(%1251, %1252, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_2778"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1254 = crt.reshape %1240#2, %1253 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %1255 = "onnx.Transpose"(%1254) {onnx_node_name = "Transpose_2780", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %1256:2 = "onnx.Split"(%222, %179) {axis = 0 : si64, onnx_node_name = "Split_2782"} : (tensor<2x?x12x?x64xf32>, tensor<2xi64>) -> (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>)
+    %1257 = "onnx.Squeeze"(%1256#0, %155) {onnx_node_name = "Squeeze_2784"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %1258 = "onnx.Squeeze"(%1256#1, %155) {onnx_node_name = "Squeeze_2786"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %1259 = "onnx.Concat"(%1257, %1250) {axis = 2 : si64, onnx_node_name = "Concat_2787"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %1260 = "onnx.Concat"(%1258, %1255) {axis = 2 : si64, onnx_node_name = "Concat_2788"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %1261 = "onnx.Transpose"(%1259) {onnx_node_name = "Transpose_2789", perm = [0, 1, 3, 2]} : (tensor<?x12x?x64xf32>) -> tensor<?x12x64x?xf32>
+    %1262 = "onnx.MatMul"(%1245, %1261) {onnx_node_name = "MatMul_2790"} : (tensor<?x12x?x64xf32>, tensor<?x12x64x?xf32>) -> tensor<?x12x?x?xf32>
+    %1263 = crt.constant : () -> tensor<f32>
+    %1264 = "onnx.Pow"(%1263, %180) {onnx_node_name = "Pow_2800"} : (tensor<f32>, tensor<f32>) -> tensor<f32>
+    %1265 = crt.div %1262, %1264 : (tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %1266 = "onnx.Dim"(%1245) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %1267 = "onnx.Squeeze"(%1266, %155) {onnx_node_name = "Squeeze_2808"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %1268 = "onnx.Dim"(%1259) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %1269 = "onnx.Squeeze"(%1268, %155) {onnx_node_name = "Squeeze_2815"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %1270 = "onnx.Sub"(%1269, %1267) {onnx_node_name = "Sub_2816"} : (tensor<i64>, tensor<i64>) -> tensor<i64>
+    %1271 = "onnx.Unsqueeze"(%1270, %155) {onnx_node_name = "Unsqueeze_2818"} : (tensor<i64>, tensor<1xi64>) -> tensor<1xi64>
+    %1272 = "onnx.Slice"(%162, %1271, %1268, %154, %173) {onnx_node_name = "Slice_2822"} : (tensor<1x1x1024x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x1024xf32>
+    %1273 = "onnx.Slice"(%1272, %155, %1268, %156, %173) {onnx_node_name = "Slice_2826"} : (tensor<1x1x?x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x?xf32>
+    %1274 = "onnx.Cast"(%1273) {onnx_node_name = "Cast_2827", to = i1} : (tensor<1x1x?x?xf32>) -> tensor<1x1x?x?xi1>
+    %1275 = "onnx.Where"(%1274, %1265, %157) {onnx_node_name = "Where_2828"} : (tensor<1x1x?x?xi1>, tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %1276 = crt.add %1275, %206 : (tensor<?x12x?x?xf32>, tensor<?x1x1x?xf32>) -> tensor<?x12x?x?xf32>
+    %1277 = crt.softmax %1276 : (tensor<?x12x?x?xf32>) -> tensor<?x12x?x?xf32>
+    %1278 = "onnx.MatMul"(%1277, %1260) {onnx_node_name = "MatMul_2832"} : (tensor<?x12x?x?xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %1279 = "onnx.Transpose"(%1278) {onnx_node_name = "Transpose_2833", perm = [0, 2, 1, 3]} : (tensor<?x12x?x64xf32>) -> tensor<?x?x12x64xf32>
+    %1280 = "onnx.Dim"(%1279) {axis = 0 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %1281 = "onnx.Dim"(%1279) {axis = 1 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %1282 = "onnx.Concat"(%1280, %1281, %158) {axis = 0 : si64, onnx_node_name = "Concat_2844"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1283 = crt.reshape %1279, %1282 : (tensor<?x?x12x64xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %1284 = "onnx.Dim"(%1283) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1285 = "onnx.Dim"(%1283) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1286 = crt.constant : () -> tensor<2xi64>
+    %1287 = crt.reshape %1279, %1286 : (tensor<?x?x12x64xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %1288 = crt.gemm %1287, %127, %128 : (tensor<?x768xf32>, tensor<768x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %1289 = "onnx.Concat"(%1284, %1285, %158) {axis = 0 : si64, onnx_node_name = "Concat_2868"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1290 = crt.reshape %1288, %1289 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %1291 = crt.add %1290, %1223 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %1292 = crt.reducemean %1291 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %1293 = crt.sub %1291, %1292 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %1294 = "onnx.Pow"(%1293, %176) {onnx_node_name = "Pow_2874"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %1295 = crt.reducemean %1294 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %1296 = crt.add %1295, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %1297 = "onnx.Sqrt"(%1296) {onnx_node_name = "Sqrt_2878"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %1298 = crt.div %1293, %1297 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %1299 = crt.mul %1298, %129 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1300 = crt.add %1299, %130 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1301 = "onnx.Dim"(%1300) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1302 = "onnx.Dim"(%1300) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1303 = crt.constant : () -> tensor<2xi64>
+    %1304 = crt.reshape %1300, %1303 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %1305 = crt.gemm %1304, %131, %132 : (tensor<?x768xf32>, tensor<768x3072xf32>, tensor<3072xf32>) -> tensor<?x3072xf32>
+    %1306 = "onnx.Concat"(%1301, %1302, %159) {axis = 0 : si64, onnx_node_name = "Concat_2904"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1307 = crt.reshape %1305, %1306 : (tensor<?x3072xf32>, tensor<3xi64>) -> tensor<?x?x3072xf32>
+    %1308 = "onnx.Pow"(%1307, %181) {onnx_node_name = "Pow_2909"} : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1309 = crt.mul %1308, %182 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1310 = crt.add %1307, %1309 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %1311 = crt.mul %1310, %183 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1312 = "onnx.Tanh"(%1311) {onnx_node_name = "Tanh_2915"} : (tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %1313 = crt.add %1312, %174 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1314 = crt.mul %1307, %1313 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %1315 = crt.mul %1314, %180 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1316 = "onnx.Dim"(%1315) {axis = 0 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %1317 = "onnx.Dim"(%1315) {axis = 1 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %1318 = crt.constant : () -> tensor<2xi64>
+    %1319 = crt.reshape %1315, %1318 : (tensor<?x?x3072xf32>, tensor<2xi64>) -> tensor<?x3072xf32>
+    %1320 = crt.gemm %1319, %133, %134 : (tensor<?x3072xf32>, tensor<3072x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %1321 = "onnx.Concat"(%1316, %1317, %158) {axis = 0 : si64, onnx_node_name = "Concat_2941"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1322 = crt.reshape %1320, %1321 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %1323 = crt.add %1291, %1322 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %1324 = crt.reducemean %1323 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %1325 = crt.sub %1323, %1324 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %1326 = "onnx.Pow"(%1325, %176) {onnx_node_name = "Pow_2947"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %1327 = crt.reducemean %1326 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %1328 = crt.add %1327, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %1329 = "onnx.Sqrt"(%1328) {onnx_node_name = "Sqrt_2951"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %1330 = crt.div %1325, %1329 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %1331 = crt.mul %1330, %135 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1332 = crt.add %1331, %136 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1333 = "onnx.Dim"(%1332) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1334 = "onnx.Dim"(%1332) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1335 = crt.constant : () -> tensor<2xi64>
+    %1336 = crt.reshape %1332, %1335 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %1337 = crt.gemm %1336, %137, %138 : (tensor<?x768xf32>, tensor<768x2304xf32>, tensor<2304xf32>) -> tensor<?x2304xf32>
+    %1338 = "onnx.Concat"(%1333, %1334, %151) {axis = 0 : si64, onnx_node_name = "Concat_2977"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1339 = crt.reshape %1337, %1338 : (tensor<?x2304xf32>, tensor<3xi64>) -> tensor<?x?x2304xf32>
+    %1340:3 = "onnx.Split"(%1339, %178) {axis = 2 : si64, onnx_node_name = "Split_2980"} : (tensor<?x?x2304xf32>, tensor<3xi64>) -> (tensor<?x?x768xf32>, tensor<?x?x768xf32>, tensor<?x?x768xf32>)
+    %1341 = "onnx.Dim"(%1340#0) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1342 = "onnx.Dim"(%1340#0) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1343 = "onnx.Concat"(%1341, %1342, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_2991"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1344 = crt.reshape %1340#0, %1343 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %1345 = "onnx.Transpose"(%1344) {onnx_node_name = "Transpose_2993", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %1346 = "onnx.Dim"(%1340#1) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1347 = "onnx.Dim"(%1340#1) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1348 = "onnx.Concat"(%1346, %1347, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_3004"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1349 = crt.reshape %1340#1, %1348 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %1350 = "onnx.Transpose"(%1349) {onnx_node_name = "Transpose_3006", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %1351 = "onnx.Dim"(%1340#2) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1352 = "onnx.Dim"(%1340#2) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1353 = "onnx.Concat"(%1351, %1352, %152, %153) {axis = 0 : si64, onnx_node_name = "Concat_3017"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
+    %1354 = crt.reshape %1340#2, %1353 : (tensor<?x?x768xf32>, tensor<4xi64>) -> tensor<?x?x12x64xf32>
+    %1355 = "onnx.Transpose"(%1354) {onnx_node_name = "Transpose_3019", perm = [0, 2, 1, 3]} : (tensor<?x?x12x64xf32>) -> tensor<?x12x?x64xf32>
+    %1356:2 = "onnx.Split"(%223, %179) {axis = 0 : si64, onnx_node_name = "Split_3021"} : (tensor<2x?x12x?x64xf32>, tensor<2xi64>) -> (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>)
+    %1357 = "onnx.Squeeze"(%1356#0, %155) {onnx_node_name = "Squeeze_3023"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %1358 = "onnx.Squeeze"(%1356#1, %155) {onnx_node_name = "Squeeze_3025"} : (tensor<1x?x12x?x64xf32>, tensor<1xi64>) -> tensor<?x12x?x64xf32>
+    %1359 = "onnx.Concat"(%1357, %1350) {axis = 2 : si64, onnx_node_name = "Concat_3026"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %1360 = "onnx.Concat"(%1358, %1355) {axis = 2 : si64, onnx_node_name = "Concat_3027"} : (tensor<?x12x?x64xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %1361 = "onnx.Transpose"(%1359) {onnx_node_name = "Transpose_3028", perm = [0, 1, 3, 2]} : (tensor<?x12x?x64xf32>) -> tensor<?x12x64x?xf32>
+    %1362 = "onnx.MatMul"(%1345, %1361) {onnx_node_name = "MatMul_3029"} : (tensor<?x12x?x64xf32>, tensor<?x12x64x?xf32>) -> tensor<?x12x?x?xf32>
+    %1363 = crt.constant : () -> tensor<f32>
+    %1364 = "onnx.Pow"(%1363, %180) {onnx_node_name = "Pow_3039"} : (tensor<f32>, tensor<f32>) -> tensor<f32>
+    %1365 = crt.div %1362, %1364 : (tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %1366 = "onnx.Dim"(%1345) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %1367 = "onnx.Squeeze"(%1366, %155) {onnx_node_name = "Squeeze_3047"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %1368 = "onnx.Dim"(%1359) {axis = 2 : si64} : (tensor<?x12x?x64xf32>) -> tensor<1xi64>
+    %1369 = "onnx.Squeeze"(%1368, %155) {onnx_node_name = "Squeeze_3054"} : (tensor<1xi64>, tensor<1xi64>) -> tensor<i64>
+    %1370 = "onnx.Sub"(%1369, %1367) {onnx_node_name = "Sub_3055"} : (tensor<i64>, tensor<i64>) -> tensor<i64>
+    %1371 = "onnx.Unsqueeze"(%1370, %155) {onnx_node_name = "Unsqueeze_3057"} : (tensor<i64>, tensor<1xi64>) -> tensor<1xi64>
+    %1372 = "onnx.Slice"(%161, %1371, %1368, %154, %173) {onnx_node_name = "Slice_3061"} : (tensor<1x1x1024x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x1024xf32>
+    %1373 = "onnx.Slice"(%1372, %155, %1368, %156, %173) {onnx_node_name = "Slice_3065"} : (tensor<1x1x?x1024xf32>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<1x1x?x?xf32>
+    %1374 = "onnx.Cast"(%1373) {onnx_node_name = "Cast_3066", to = i1} : (tensor<1x1x?x?xf32>) -> tensor<1x1x?x?xi1>
+    %1375 = "onnx.Where"(%1374, %1365, %157) {onnx_node_name = "Where_3067"} : (tensor<1x1x?x?xi1>, tensor<?x12x?x?xf32>, tensor<f32>) -> tensor<?x12x?x?xf32>
+    %1376 = crt.add %1375, %206 : (tensor<?x12x?x?xf32>, tensor<?x1x1x?xf32>) -> tensor<?x12x?x?xf32>
+    %1377 = crt.softmax %1376 : (tensor<?x12x?x?xf32>) -> tensor<?x12x?x?xf32>
+    %1378 = "onnx.MatMul"(%1377, %1360) {onnx_node_name = "MatMul_3071"} : (tensor<?x12x?x?xf32>, tensor<?x12x?x64xf32>) -> tensor<?x12x?x64xf32>
+    %1379 = "onnx.Transpose"(%1378) {onnx_node_name = "Transpose_3072", perm = [0, 2, 1, 3]} : (tensor<?x12x?x64xf32>) -> tensor<?x?x12x64xf32>
+    %1380 = "onnx.Dim"(%1379) {axis = 0 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %1381 = "onnx.Dim"(%1379) {axis = 1 : si64} : (tensor<?x?x12x64xf32>) -> tensor<1xi64>
+    %1382 = "onnx.Concat"(%1380, %1381, %158) {axis = 0 : si64, onnx_node_name = "Concat_3083"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1383 = crt.reshape %1379, %1382 : (tensor<?x?x12x64xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %1384 = "onnx.Dim"(%1383) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1385 = "onnx.Dim"(%1383) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1386 = crt.constant : () -> tensor<2xi64>
+    %1387 = crt.reshape %1379, %1386 : (tensor<?x?x12x64xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %1388 = crt.gemm %1387, %139, %140 : (tensor<?x768xf32>, tensor<768x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %1389 = "onnx.Concat"(%1384, %1385, %158) {axis = 0 : si64, onnx_node_name = "Concat_3107"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1390 = crt.reshape %1388, %1389 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %1391 = crt.add %1390, %1323 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %1392 = crt.reducemean %1391 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %1393 = crt.sub %1391, %1392 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %1394 = "onnx.Pow"(%1393, %176) {onnx_node_name = "Pow_3113"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %1395 = crt.reducemean %1394 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %1396 = crt.add %1395, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %1397 = "onnx.Sqrt"(%1396) {onnx_node_name = "Sqrt_3117"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %1398 = crt.div %1393, %1397 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %1399 = crt.mul %1398, %141 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1400 = crt.add %1399, %142 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1401 = "onnx.Dim"(%1400) {axis = 0 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1402 = "onnx.Dim"(%1400) {axis = 1 : si64} : (tensor<?x?x768xf32>) -> tensor<1xi64>
+    %1403 = crt.constant : () -> tensor<2xi64>
+    %1404 = crt.reshape %1400, %1403 : (tensor<?x?x768xf32>, tensor<2xi64>) -> tensor<?x768xf32>
+    %1405 = crt.gemm %1404, %143, %144 : (tensor<?x768xf32>, tensor<768x3072xf32>, tensor<3072xf32>) -> tensor<?x3072xf32>
+    %1406 = "onnx.Concat"(%1401, %1402, %159) {axis = 0 : si64, onnx_node_name = "Concat_3143"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1407 = crt.reshape %1405, %1406 : (tensor<?x3072xf32>, tensor<3xi64>) -> tensor<?x?x3072xf32>
+    %1408 = "onnx.Pow"(%1407, %181) {onnx_node_name = "Pow_3148"} : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1409 = crt.mul %1408, %182 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1410 = crt.add %1407, %1409 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %1411 = crt.mul %1410, %183 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1412 = "onnx.Tanh"(%1411) {onnx_node_name = "Tanh_3154"} : (tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %1413 = crt.add %1412, %174 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1414 = crt.mul %1407, %1413 : (tensor<?x?x3072xf32>, tensor<?x?x3072xf32>) -> tensor<?x?x3072xf32>
+    %1415 = crt.mul %1414, %180 : (tensor<?x?x3072xf32>, tensor<f32>) -> tensor<?x?x3072xf32>
+    %1416 = "onnx.Dim"(%1415) {axis = 0 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %1417 = "onnx.Dim"(%1415) {axis = 1 : si64} : (tensor<?x?x3072xf32>) -> tensor<1xi64>
+    %1418 = crt.constant : () -> tensor<2xi64>
+    %1419 = crt.reshape %1415, %1418 : (tensor<?x?x3072xf32>, tensor<2xi64>) -> tensor<?x3072xf32>
+    %1420 = crt.gemm %1419, %145, %146 : (tensor<?x3072xf32>, tensor<3072x768xf32>, tensor<768xf32>) -> tensor<?x768xf32>
+    %1421 = "onnx.Concat"(%1416, %1417, %158) {axis = 0 : si64, onnx_node_name = "Concat_3180"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1422 = crt.reshape %1420, %1421 : (tensor<?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %1423 = crt.add %1391, %1422 : (tensor<?x?x768xf32>, tensor<?x?x768xf32>) -> tensor<?x?x768xf32>
+    %1424 = crt.reducemean %1423 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %1425 = crt.sub %1423, %1424 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %1426 = "onnx.Pow"(%1425, %176) {onnx_node_name = "Pow_3186"} : (tensor<?x?x768xf32>, tensor<f32>) -> tensor<?x?x768xf32>
+    %1427 = crt.reducemean %1426 : (tensor<?x?x768xf32>) -> tensor<?x?x1xf32>
+    %1428 = crt.add %1427, %177 : (tensor<?x?x1xf32>, tensor<f32>) -> tensor<?x?x1xf32>
+    %1429 = "onnx.Sqrt"(%1428) {onnx_node_name = "Sqrt_3190"} : (tensor<?x?x1xf32>) -> tensor<?x?x1xf32>
+    %1430 = crt.div %1425, %1429 : (tensor<?x?x768xf32>, tensor<?x?x1xf32>) -> tensor<?x?x768xf32>
+    %1431 = crt.mul %1430, %147 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1432 = crt.add %1431, %148 : (tensor<?x?x768xf32>, tensor<768xf32>) -> tensor<?x?x768xf32>
+    %1433 = "onnx.Concat"(%184, %185, %210) {axis = 0 : si64, onnx_node_name = "Concat_3200"} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
+    %1434 = crt.reshape %1432, %1433 : (tensor<?x?x768xf32>, tensor<3xi64>) -> tensor<?x?x768xf32>
+    %1435 = "onnx.MatMul"(%1434, %160) {onnx_node_name = "MatMul_3202"} : (tensor<?x?x768xf32>, tensor<768x50257xf32>) -> tensor<?x?x50257xf32>
+    %1436 = "onnx.Unsqueeze"(%259, %155) {onnx_node_name = "Unsqueeze_3204"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1437 = "onnx.Unsqueeze"(%260, %155) {onnx_node_name = "Unsqueeze_3206"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1438 = "onnx.Concat"(%1436, %1437) {axis = 0 : si64, onnx_node_name = "Concat_3207"} : (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>) -> tensor<2x?x12x?x64xf32>
+    %1439 = "onnx.Unsqueeze"(%359, %155) {onnx_node_name = "Unsqueeze_3209"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1440 = "onnx.Unsqueeze"(%360, %155) {onnx_node_name = "Unsqueeze_3211"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1441 = "onnx.Concat"(%1439, %1440) {axis = 0 : si64, onnx_node_name = "Concat_3212"} : (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>) -> tensor<2x?x12x?x64xf32>
+    %1442 = "onnx.Unsqueeze"(%459, %155) {onnx_node_name = "Unsqueeze_3214"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1443 = "onnx.Unsqueeze"(%460, %155) {onnx_node_name = "Unsqueeze_3216"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1444 = "onnx.Concat"(%1442, %1443) {axis = 0 : si64, onnx_node_name = "Concat_3217"} : (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>) -> tensor<2x?x12x?x64xf32>
+    %1445 = "onnx.Unsqueeze"(%559, %155) {onnx_node_name = "Unsqueeze_3219"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1446 = "onnx.Unsqueeze"(%560, %155) {onnx_node_name = "Unsqueeze_3221"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1447 = "onnx.Concat"(%1445, %1446) {axis = 0 : si64, onnx_node_name = "Concat_3222"} : (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>) -> tensor<2x?x12x?x64xf32>
+    %1448 = "onnx.Unsqueeze"(%659, %155) {onnx_node_name = "Unsqueeze_3224"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1449 = "onnx.Unsqueeze"(%660, %155) {onnx_node_name = "Unsqueeze_3226"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1450 = "onnx.Concat"(%1448, %1449) {axis = 0 : si64, onnx_node_name = "Concat_3227"} : (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>) -> tensor<2x?x12x?x64xf32>
+    %1451 = "onnx.Unsqueeze"(%759, %155) {onnx_node_name = "Unsqueeze_3229"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1452 = "onnx.Unsqueeze"(%760, %155) {onnx_node_name = "Unsqueeze_3231"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1453 = "onnx.Concat"(%1451, %1452) {axis = 0 : si64, onnx_node_name = "Concat_3232"} : (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>) -> tensor<2x?x12x?x64xf32>
+    %1454 = "onnx.Unsqueeze"(%859, %155) {onnx_node_name = "Unsqueeze_3234"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1455 = "onnx.Unsqueeze"(%860, %155) {onnx_node_name = "Unsqueeze_3236"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1456 = "onnx.Concat"(%1454, %1455) {axis = 0 : si64, onnx_node_name = "Concat_3237"} : (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>) -> tensor<2x?x12x?x64xf32>
+    %1457 = "onnx.Unsqueeze"(%959, %155) {onnx_node_name = "Unsqueeze_3239"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1458 = "onnx.Unsqueeze"(%960, %155) {onnx_node_name = "Unsqueeze_3241"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1459 = "onnx.Concat"(%1457, %1458) {axis = 0 : si64, onnx_node_name = "Concat_3242"} : (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>) -> tensor<2x?x12x?x64xf32>
+    %1460 = "onnx.Unsqueeze"(%1059, %155) {onnx_node_name = "Unsqueeze_3244"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1461 = "onnx.Unsqueeze"(%1060, %155) {onnx_node_name = "Unsqueeze_3246"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1462 = "onnx.Concat"(%1460, %1461) {axis = 0 : si64, onnx_node_name = "Concat_3247"} : (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>) -> tensor<2x?x12x?x64xf32>
+    %1463 = "onnx.Unsqueeze"(%1159, %155) {onnx_node_name = "Unsqueeze_3249"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1464 = "onnx.Unsqueeze"(%1160, %155) {onnx_node_name = "Unsqueeze_3251"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1465 = "onnx.Concat"(%1463, %1464) {axis = 0 : si64, onnx_node_name = "Concat_3252"} : (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>) -> tensor<2x?x12x?x64xf32>
+    %1466 = "onnx.Unsqueeze"(%1259, %155) {onnx_node_name = "Unsqueeze_3254"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1467 = "onnx.Unsqueeze"(%1260, %155) {onnx_node_name = "Unsqueeze_3256"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1468 = "onnx.Concat"(%1466, %1467) {axis = 0 : si64, onnx_node_name = "Concat_3257"} : (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>) -> tensor<2x?x12x?x64xf32>
+    %1469 = "onnx.Unsqueeze"(%1359, %155) {onnx_node_name = "Unsqueeze_3259"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1470 = "onnx.Unsqueeze"(%1360, %155) {onnx_node_name = "Unsqueeze_3261"} : (tensor<?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x?x12x?x64xf32>
+    %1471 = "onnx.Concat"(%1469, %1470) {axis = 0 : si64, onnx_node_name = "Concat_3262"} : (tensor<1x?x12x?x64xf32>, tensor<1x?x12x?x64xf32>) -> tensor<2x?x12x?x64xf32>
+    %1472 = "onnx.Unsqueeze"(%1438, %155) {onnx_node_name = "Unsqueeze_3264"} : (tensor<2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x2x?x12x?x64xf32>
+    %1473 = "onnx.Unsqueeze"(%1441, %155) {onnx_node_name = "Unsqueeze_3266"} : (tensor<2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x2x?x12x?x64xf32>
+    %1474 = "onnx.Unsqueeze"(%1444, %155) {onnx_node_name = "Unsqueeze_3268"} : (tensor<2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x2x?x12x?x64xf32>
+    %1475 = "onnx.Unsqueeze"(%1447, %155) {onnx_node_name = "Unsqueeze_3270"} : (tensor<2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x2x?x12x?x64xf32>
+    %1476 = "onnx.Unsqueeze"(%1450, %155) {onnx_node_name = "Unsqueeze_3272"} : (tensor<2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x2x?x12x?x64xf32>
+    %1477 = "onnx.Unsqueeze"(%1453, %155) {onnx_node_name = "Unsqueeze_3274"} : (tensor<2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x2x?x12x?x64xf32>
+    %1478 = "onnx.Unsqueeze"(%1456, %155) {onnx_node_name = "Unsqueeze_3276"} : (tensor<2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x2x?x12x?x64xf32>
+    %1479 = "onnx.Unsqueeze"(%1459, %155) {onnx_node_name = "Unsqueeze_3278"} : (tensor<2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x2x?x12x?x64xf32>
+    %1480 = "onnx.Unsqueeze"(%1462, %155) {onnx_node_name = "Unsqueeze_3280"} : (tensor<2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x2x?x12x?x64xf32>
+    %1481 = "onnx.Unsqueeze"(%1465, %155) {onnx_node_name = "Unsqueeze_3282"} : (tensor<2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x2x?x12x?x64xf32>
+    %1482 = "onnx.Unsqueeze"(%1468, %155) {onnx_node_name = "Unsqueeze_3284"} : (tensor<2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x2x?x12x?x64xf32>
+    %1483 = "onnx.Unsqueeze"(%1471, %155) {onnx_node_name = "Unsqueeze_3286"} : (tensor<2x?x12x?x64xf32>, tensor<1xi64>) -> tensor<1x2x?x12x?x64xf32>
+    %1484 = "onnx.Concat"(%1472, %1473, %1474, %1475, %1476, %1477, %1478, %1479, %1480, %1481, %1482, %1483) {axis = 0 : si64, onnx_node_name = "Concat_3287"} : (tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>, tensor<1x2x?x12x?x64xf32>) -> tensor<12x2x?x12x?x64xf32>
+    return %1435, %1484 : tensor<?x?x50257xf32>, tensor<12x2x?x12x?x64xf32>
+  }
+  "onnx.EntryPoint"() {func = @main_graph} : () -> ()
+}

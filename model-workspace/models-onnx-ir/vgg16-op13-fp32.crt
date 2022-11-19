@@ -1,0 +1,76 @@
+module attributes {llvm.data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128", llvm.target_triple = "x86_64-unknown-linux-gnu"} {
+  func.func @main_graph(%arg0: tensor<1x3x224x224xf32>) -> tensor<1x1000xf32> attributes {input_names = ["input"], output_names = ["output"]} {
+    %0 = crt.constant : () -> tensor<64x3x3x3xf32>
+    %1 = crt.constant : () -> tensor<64xf32>
+    %2 = crt.constant : () -> tensor<64x64x3x3xf32>
+    %3 = crt.constant : () -> tensor<64xf32>
+    %4 = crt.constant : () -> tensor<128x64x3x3xf32>
+    %5 = crt.constant : () -> tensor<128xf32>
+    %6 = crt.constant : () -> tensor<128x128x3x3xf32>
+    %7 = crt.constant : () -> tensor<128xf32>
+    %8 = crt.constant : () -> tensor<256x128x3x3xf32>
+    %9 = crt.constant : () -> tensor<256xf32>
+    %10 = crt.constant : () -> tensor<256x256x3x3xf32>
+    %11 = crt.constant : () -> tensor<256xf32>
+    %12 = crt.constant : () -> tensor<256x256x3x3xf32>
+    %13 = crt.constant : () -> tensor<256xf32>
+    %14 = crt.constant : () -> tensor<512x256x3x3xf32>
+    %15 = crt.constant : () -> tensor<512xf32>
+    %16 = crt.constant : () -> tensor<512x512x3x3xf32>
+    %17 = crt.constant : () -> tensor<512xf32>
+    %18 = crt.constant : () -> tensor<512x512x3x3xf32>
+    %19 = crt.constant : () -> tensor<512xf32>
+    %20 = crt.constant : () -> tensor<512x512x3x3xf32>
+    %21 = crt.constant : () -> tensor<512xf32>
+    %22 = crt.constant : () -> tensor<512x512x3x3xf32>
+    %23 = crt.constant : () -> tensor<512xf32>
+    %24 = crt.constant : () -> tensor<512x512x3x3xf32>
+    %25 = crt.constant : () -> tensor<512xf32>
+    %26 = crt.constant : () -> tensor<4096x25088xf32>
+    %27 = crt.constant : () -> tensor<4096xf32>
+    %28 = crt.constant : () -> tensor<4096x4096xf32>
+    %29 = crt.constant : () -> tensor<4096xf32>
+    %30 = crt.constant : () -> tensor<1000x4096xf32>
+    %31 = crt.constant : () -> tensor<1000xf32>
+    %32 = crt.convadd %arg0, %0, %1 : (tensor<1x3x224x224xf32>, tensor<64x3x3x3xf32>, tensor<64xf32>) -> tensor<1x64x224x224xf32>
+    %33 = crt.relu %32 : (tensor<1x64x224x224xf32>) -> tensor<1x64x224x224xf32>
+    %34 = crt.convadd %33, %2, %3 : (tensor<1x64x224x224xf32>, tensor<64x64x3x3xf32>, tensor<64xf32>) -> tensor<1x64x224x224xf32>
+    %35 = crt.relu %34 : (tensor<1x64x224x224xf32>) -> tensor<1x64x224x224xf32>
+    %36 = crt.maxpool %35 : (tensor<1x64x224x224xf32>) -> tensor<1x64x112x112xf32>
+    %37 = crt.convadd %36, %4, %5 : (tensor<1x64x112x112xf32>, tensor<128x64x3x3xf32>, tensor<128xf32>) -> tensor<1x128x112x112xf32>
+    %38 = crt.relu %37 : (tensor<1x128x112x112xf32>) -> tensor<1x128x112x112xf32>
+    %39 = crt.convadd %38, %6, %7 : (tensor<1x128x112x112xf32>, tensor<128x128x3x3xf32>, tensor<128xf32>) -> tensor<1x128x112x112xf32>
+    %40 = crt.relu %39 : (tensor<1x128x112x112xf32>) -> tensor<1x128x112x112xf32>
+    %41 = crt.maxpool %40 : (tensor<1x128x112x112xf32>) -> tensor<1x128x56x56xf32>
+    %42 = crt.convadd %41, %8, %9 : (tensor<1x128x56x56xf32>, tensor<256x128x3x3xf32>, tensor<256xf32>) -> tensor<1x256x56x56xf32>
+    %43 = crt.relu %42 : (tensor<1x256x56x56xf32>) -> tensor<1x256x56x56xf32>
+    %44 = crt.convadd %43, %10, %11 : (tensor<1x256x56x56xf32>, tensor<256x256x3x3xf32>, tensor<256xf32>) -> tensor<1x256x56x56xf32>
+    %45 = crt.relu %44 : (tensor<1x256x56x56xf32>) -> tensor<1x256x56x56xf32>
+    %46 = crt.convadd %45, %12, %13 : (tensor<1x256x56x56xf32>, tensor<256x256x3x3xf32>, tensor<256xf32>) -> tensor<1x256x56x56xf32>
+    %47 = crt.relu %46 : (tensor<1x256x56x56xf32>) -> tensor<1x256x56x56xf32>
+    %48 = crt.maxpool %47 : (tensor<1x256x56x56xf32>) -> tensor<1x256x28x28xf32>
+    %49 = crt.convadd %48, %14, %15 : (tensor<1x256x28x28xf32>, tensor<512x256x3x3xf32>, tensor<512xf32>) -> tensor<1x512x28x28xf32>
+    %50 = crt.relu %49 : (tensor<1x512x28x28xf32>) -> tensor<1x512x28x28xf32>
+    %51 = crt.convadd %50, %16, %17 : (tensor<1x512x28x28xf32>, tensor<512x512x3x3xf32>, tensor<512xf32>) -> tensor<1x512x28x28xf32>
+    %52 = crt.relu %51 : (tensor<1x512x28x28xf32>) -> tensor<1x512x28x28xf32>
+    %53 = crt.convadd %52, %18, %19 : (tensor<1x512x28x28xf32>, tensor<512x512x3x3xf32>, tensor<512xf32>) -> tensor<1x512x28x28xf32>
+    %54 = crt.relu %53 : (tensor<1x512x28x28xf32>) -> tensor<1x512x28x28xf32>
+    %55 = crt.maxpool %54 : (tensor<1x512x28x28xf32>) -> tensor<1x512x14x14xf32>
+    %56 = crt.convadd %55, %20, %21 : (tensor<1x512x14x14xf32>, tensor<512x512x3x3xf32>, tensor<512xf32>) -> tensor<1x512x14x14xf32>
+    %57 = crt.relu %56 : (tensor<1x512x14x14xf32>) -> tensor<1x512x14x14xf32>
+    %58 = crt.convadd %57, %22, %23 : (tensor<1x512x14x14xf32>, tensor<512x512x3x3xf32>, tensor<512xf32>) -> tensor<1x512x14x14xf32>
+    %59 = crt.relu %58 : (tensor<1x512x14x14xf32>) -> tensor<1x512x14x14xf32>
+    %60 = crt.convadd %59, %24, %25 : (tensor<1x512x14x14xf32>, tensor<512x512x3x3xf32>, tensor<512xf32>) -> tensor<1x512x14x14xf32>
+    %61 = crt.relu %60 : (tensor<1x512x14x14xf32>) -> tensor<1x512x14x14xf32>
+    %62 = crt.maxpool %61 : (tensor<1x512x14x14xf32>) -> tensor<1x512x7x7xf32>
+    %63 = "onnx.AveragePool"(%62) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [1, 1], onnx_node_name = "AveragePool_31", strides = [1, 1]} : (tensor<1x512x7x7xf32>) -> tensor<1x512x7x7xf32>
+    %64 = crt.flatten %63 : (tensor<1x512x7x7xf32>) -> tensor<1x25088xf32>
+    %65 = crt.gemm %64, %26, %27 : (tensor<1x25088xf32>, tensor<4096x25088xf32>, tensor<4096xf32>) -> tensor<1x4096xf32>
+    %66 = crt.relu %65 : (tensor<1x4096xf32>) -> tensor<1x4096xf32>
+    %67 = crt.gemm %66, %28, %29 : (tensor<1x4096xf32>, tensor<4096x4096xf32>, tensor<4096xf32>) -> tensor<1x4096xf32>
+    %68 = crt.relu %67 : (tensor<1x4096xf32>) -> tensor<1x4096xf32>
+    %69 = crt.gemm %68, %30, %31 : (tensor<1x4096xf32>, tensor<1000x4096xf32>, tensor<1000xf32>) -> tensor<1x1000xf32>
+    return %69 : tensor<1x1000xf32>
+  }
+  "onnx.EntryPoint"() {func = @main_graph} : () -> ()
+}

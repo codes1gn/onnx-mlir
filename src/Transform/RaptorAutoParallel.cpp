@@ -293,14 +293,14 @@ LogicalResult useAllGPUs(func::FuncOp funcOp, MLIRContext *context) {
   return success();
 }
 
-LogicalResult mpmdSchedule(func::FuncOp funcOp, MLIRContext *context, SmallVector<int32_t> to_devs) {
+LogicalResult mpmdSchedule(func::FuncOp funcOp, MLIRContext *context, SmallVector<int32_t> to_devs, bool is_uncertain) {
   std::cout << "processing mpmdSchedule with HEFT" << std::endl;
 
   onnx_mlir::CostEstimator cest;
   assert(cest.verify().succeeded());
 
-  float total_cost = cest.mpmdSchedule(funcOp, to_devs);
-  std::cout << "======> dispatch-to-all-GPUs-strategy <Estimated Wall-Time in ms> = " << total_cost << "(ms) <======" << std::endl;
+  float total_cost = cest.mpmdSchedule(funcOp, to_devs, is_uncertain);
+  std::cout << "======> mpmd-strategy <Estimated Wall-Time in us> = " << total_cost << "(us) <======" << std::endl;
 
   return success();
 }
@@ -698,7 +698,11 @@ struct RaptorAutoParallelPass
       } else if (std::strcmp(env_p, "mpmd") == 0) {
         packUpEntireRegionWithPBlock(funcOp, context);
         SmallVector<int32_t> to_devs{0, 1, 2, 3, 4};
-        mpmdSchedule(funcOp, context, to_devs);
+        mpmdSchedule(funcOp, context, to_devs, true);
+      } else if (std::strcmp(env_p, "mpmd-ideal") == 0) {
+        packUpEntireRegionWithPBlock(funcOp, context);
+        SmallVector<int32_t> to_devs{0, 1, 2, 3, 4};
+        mpmdSchedule(funcOp, context, to_devs, false);
       } else {
         std::cout << env_p << "\n";
         std::cout << "no matching mode for RAP envs";
