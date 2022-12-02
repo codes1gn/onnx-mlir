@@ -1,0 +1,1 @@
+OUT=rn18.log BS=64 REP=16,48 DEVSET=1,3:0,2,4 /root/fun/onnx-mlir/onnx-build/Debug/bin/onnx-mlir-opt /root/fun/onnx-mlir/model-workspace/models-onnx-ir/resnet18-v1-op13-fp32-onnxzoo.crt --raptor-auto-parallel

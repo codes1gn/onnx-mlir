@@ -1,5 +1,5 @@
 module attributes {llvm.data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128", llvm.target_triple = "x86_64-unknown-linux-gnu"} {
-  func.func @main_graph(%arg0: tensor<64x3x299x299xf32>) -> tensor<64x1000xf32> attributes {input_names = ["input"], output_names = ["output"]} {
+  func.func @main_graph(%arg0: tensor<8x3x299x299xf32>) -> tensor<8x1000xf32> attributes {input_names = ["input"], output_names = ["output"]} {
     %0 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1000x2048xf32>} : () -> tensor<1000x2048xf32>
     %1 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1000xf32>} : () -> tensor<1000xf32>
     %2 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<32x3x3x3xf32>} : () -> tensor<32x3x3x3xf32>
@@ -160,835 +160,835 @@ module attributes {llvm.data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i6
     %157 = "onnx.Constant"() {value = dense<2> : tensor<i64>} : () -> tensor<i64>
     %158 = "onnx.Constant"() {value = dense<4.500000e-01> : tensor<f32>} : () -> tensor<f32>
     %159 = "onnx.Constant"() {value = dense<-1.880000e-01> : tensor<f32>} : () -> tensor<f32>
-    %160 = "onnx.Gather"(%arg0, %150) {axis = 1 : si64, onnx_node_name = "Gather_1"} : (tensor<64x3x299x299xf32>, tensor<i64>) -> tensor<64x299x299xf32>
-    %161 = "onnx.Unsqueeze"(%160, %151) {onnx_node_name = "Unsqueeze_3"} : (tensor<64x299x299xf32>, tensor<1xi64>) -> tensor<64x1x299x299xf32>
-    %162 = "onnx.Mul"(%161, %152) {onnx_node_name = "Mul_5"} : (tensor<64x1x299x299xf32>, tensor<f32>) -> tensor<64x1x299x299xf32>
-    %163 = "onnx.Add"(%162, %153) {onnx_node_name = "Add_7"} : (tensor<64x1x299x299xf32>, tensor<f32>) -> tensor<64x1x299x299xf32>
-    %164 = "onnx.Gather"(%arg0, %154) {axis = 1 : si64, onnx_node_name = "Gather_9"} : (tensor<64x3x299x299xf32>, tensor<i64>) -> tensor<64x299x299xf32>
-    %165 = "onnx.Unsqueeze"(%164, %151) {onnx_node_name = "Unsqueeze_11"} : (tensor<64x299x299xf32>, tensor<1xi64>) -> tensor<64x1x299x299xf32>
-    %166 = "onnx.Mul"(%165, %155) {onnx_node_name = "Mul_13"} : (tensor<64x1x299x299xf32>, tensor<f32>) -> tensor<64x1x299x299xf32>
-    %167 = "onnx.Add"(%166, %156) {onnx_node_name = "Add_15"} : (tensor<64x1x299x299xf32>, tensor<f32>) -> tensor<64x1x299x299xf32>
-    %168 = "onnx.Gather"(%arg0, %157) {axis = 1 : si64, onnx_node_name = "Gather_17"} : (tensor<64x3x299x299xf32>, tensor<i64>) -> tensor<64x299x299xf32>
-    %169 = "onnx.Unsqueeze"(%168, %151) {onnx_node_name = "Unsqueeze_19"} : (tensor<64x299x299xf32>, tensor<1xi64>) -> tensor<64x1x299x299xf32>
-    %170 = "onnx.Mul"(%169, %158) {onnx_node_name = "Mul_21"} : (tensor<64x1x299x299xf32>, tensor<f32>) -> tensor<64x1x299x299xf32>
-    %171 = "onnx.Add"(%170, %159) {onnx_node_name = "Add_23"} : (tensor<64x1x299x299xf32>, tensor<f32>) -> tensor<64x1x299x299xf32>
-    %172 = "onnx.Concat"(%163, %167, %171) {axis = 1 : si64, onnx_node_name = "Concat_24"} : (tensor<64x1x299x299xf32>, tensor<64x1x299x299xf32>, tensor<64x1x299x299xf32>) -> tensor<64x3x299x299xf32>
-    %173 = "onnx.Conv"(%172, %2, %3) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_25", pads = [0, 0, 0, 0], strides = [2, 2]} : (tensor<64x3x299x299xf32>, tensor<32x3x3x3xf32>, tensor<32xf32>) -> tensor<64x32x149x149xf32>
-    %174 = "onnx.Relu"(%173) {onnx_node_name = "Relu_26"} : (tensor<64x32x149x149xf32>) -> tensor<64x32x149x149xf32>
-    %175 = "onnx.Conv"(%174, %4, %5) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_27", pads = [0, 0, 0, 0], strides = [1, 1]} : (tensor<64x32x149x149xf32>, tensor<32x32x3x3xf32>, tensor<32xf32>) -> tensor<64x32x147x147xf32>
-    %176 = "onnx.Relu"(%175) {onnx_node_name = "Relu_28"} : (tensor<64x32x147x147xf32>) -> tensor<64x32x147x147xf32>
-    %177 = "onnx.Conv"(%176, %6, %7) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_29", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<64x32x147x147xf32>, tensor<64x32x3x3xf32>, tensor<64xf32>) -> tensor<64x64x147x147xf32>
-    %178 = "onnx.Relu"(%177) {onnx_node_name = "Relu_30"} : (tensor<64x64x147x147xf32>) -> tensor<64x64x147x147xf32>
-    %179 = "onnx.MaxPoolSingleOut"(%178) {auto_pad = "NOTSET", ceil_mode = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "MaxPool_31", pads = [0, 0, 0, 0], storage_order = 0 : si64, strides = [2, 2]} : (tensor<64x64x147x147xf32>) -> tensor<64x64x73x73xf32>
-    %180 = "onnx.Dim"(%179) {axis = 0 : si64} : (tensor<64x64x73x73xf32>) -> tensor<1xi64>
+    %160 = "onnx.Gather"(%arg0, %150) {axis = 1 : si64, onnx_node_name = "Gather_1"} : (tensor<8x3x299x299xf32>, tensor<i64>) -> tensor<8x299x299xf32>
+    %161 = "onnx.Unsqueeze"(%160, %151) {onnx_node_name = "Unsqueeze_3"} : (tensor<8x299x299xf32>, tensor<1xi64>) -> tensor<8x1x299x299xf32>
+    %162 = "onnx.Mul"(%161, %152) {onnx_node_name = "Mul_5"} : (tensor<8x1x299x299xf32>, tensor<f32>) -> tensor<8x1x299x299xf32>
+    %163 = "onnx.Add"(%162, %153) {onnx_node_name = "Add_7"} : (tensor<8x1x299x299xf32>, tensor<f32>) -> tensor<8x1x299x299xf32>
+    %164 = "onnx.Gather"(%arg0, %154) {axis = 1 : si64, onnx_node_name = "Gather_9"} : (tensor<8x3x299x299xf32>, tensor<i64>) -> tensor<8x299x299xf32>
+    %165 = "onnx.Unsqueeze"(%164, %151) {onnx_node_name = "Unsqueeze_11"} : (tensor<8x299x299xf32>, tensor<1xi64>) -> tensor<8x1x299x299xf32>
+    %166 = "onnx.Mul"(%165, %155) {onnx_node_name = "Mul_13"} : (tensor<8x1x299x299xf32>, tensor<f32>) -> tensor<8x1x299x299xf32>
+    %167 = "onnx.Add"(%166, %156) {onnx_node_name = "Add_15"} : (tensor<8x1x299x299xf32>, tensor<f32>) -> tensor<8x1x299x299xf32>
+    %168 = "onnx.Gather"(%arg0, %157) {axis = 1 : si64, onnx_node_name = "Gather_17"} : (tensor<8x3x299x299xf32>, tensor<i64>) -> tensor<8x299x299xf32>
+    %169 = "onnx.Unsqueeze"(%168, %151) {onnx_node_name = "Unsqueeze_19"} : (tensor<8x299x299xf32>, tensor<1xi64>) -> tensor<8x1x299x299xf32>
+    %170 = "onnx.Mul"(%169, %158) {onnx_node_name = "Mul_21"} : (tensor<8x1x299x299xf32>, tensor<f32>) -> tensor<8x1x299x299xf32>
+    %171 = "onnx.Add"(%170, %159) {onnx_node_name = "Add_23"} : (tensor<8x1x299x299xf32>, tensor<f32>) -> tensor<8x1x299x299xf32>
+    %172 = "onnx.Concat"(%163, %167, %171) {axis = 1 : si64, onnx_node_name = "Concat_24"} : (tensor<8x1x299x299xf32>, tensor<8x1x299x299xf32>, tensor<8x1x299x299xf32>) -> tensor<8x3x299x299xf32>
+    %173 = "onnx.Conv"(%172, %2, %3) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_25", pads = [0, 0, 0, 0], strides = [2, 2]} : (tensor<8x3x299x299xf32>, tensor<32x3x3x3xf32>, tensor<32xf32>) -> tensor<8x32x149x149xf32>
+    %174 = "onnx.Relu"(%173) {onnx_node_name = "Relu_26"} : (tensor<8x32x149x149xf32>) -> tensor<8x32x149x149xf32>
+    %175 = "onnx.Conv"(%174, %4, %5) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_27", pads = [0, 0, 0, 0], strides = [1, 1]} : (tensor<8x32x149x149xf32>, tensor<32x32x3x3xf32>, tensor<32xf32>) -> tensor<8x32x147x147xf32>
+    %176 = "onnx.Relu"(%175) {onnx_node_name = "Relu_28"} : (tensor<8x32x147x147xf32>) -> tensor<8x32x147x147xf32>
+    %177 = "onnx.Conv"(%176, %6, %7) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_29", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<8x32x147x147xf32>, tensor<64x32x3x3xf32>, tensor<64xf32>) -> tensor<8x64x147x147xf32>
+    %178 = "onnx.Relu"(%177) {onnx_node_name = "Relu_30"} : (tensor<8x64x147x147xf32>) -> tensor<8x64x147x147xf32>
+    %179 = "onnx.MaxPoolSingleOut"(%178) {auto_pad = "NOTSET", ceil_mode = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "MaxPool_31", pads = [0, 0, 0, 0], storage_order = 0 : si64, strides = [2, 2]} : (tensor<8x64x147x147xf32>) -> tensor<8x64x73x73xf32>
+    %180 = "onnx.Dim"(%179) {axis = 0 : si64} : (tensor<8x64x73x73xf32>) -> tensor<1xi64>
     %181 = "onnx.Constant"() {value = dense<64> : tensor<1xi64>} : () -> tensor<1xi64>
     %182 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %183 = "onnx.Concat"(%180, %181, %182) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %184 = "onnx.Reshape"(%179, %183) {allowzero = 0 : si64} : (tensor<64x64x73x73xf32>, tensor<3xi64>) -> tensor<64x64x64xf32>
+    %184 = "onnx.Reshape"(%179, %183) {allowzero = 0 : si64} : (tensor<8x64x73x73xf32>, tensor<3xi64>) -> tensor<8x64x?xf32>
     %185 = "onnx.Constant"() {value = dense<[80, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %186 = "onnx.Reshape"(%8, %185) {allowzero = 0 : si64} : (tensor<80x64x1x1xf32>, tensor<2xi64>) -> tensor<80x64xf32>
-    %187 = "onnx.MatMul"(%186, %184) : (tensor<80x64xf32>, tensor<64x64x64xf32>) -> tensor<64x80x64xf32>
+    %187 = "onnx.MatMul"(%186, %184) : (tensor<80x64xf32>, tensor<8x64x?xf32>) -> tensor<8x80x?xf32>
     %188 = "onnx.Constant"() {value = dense<[[[1.62182713], [0.331476659], [2.42558432], [0.319705069], [-0.055840224], [1.3874476], [0.5352121], [1.26708078], [-0.327045679], [0.792273461], [0.066691868], [-0.419697404], [0.427504659], [0.369316339], [1.34301889], [0.353310466], [-0.472540736], [1.33799458], [-0.81397134], [0.870808243], [-0.320680052], [1.56707358], [0.827443957], [0.373333514], [0.883009314], [1.92633355], [-0.022809267], [7.09427595], [0.479305714], [-1.35269499], [2.5512743], [1.64944506], [-0.170414984], [5.158100e-01], [0.489479363], [1.05981445], [0.751492679], [0.952932596], [1.21953583], [-0.219568402], [0.875948786], [7.114660e-01], [0.585584879], [0.671708822], [1.03909051], [0.455926895], [0.567795098], [-1.63945973], [1.43552554], [0.461382419], [0.590962231], [0.476914704], [0.719803392], [0.811679482], [1.13617229], [1.91536975], [1.85937333], [-1.26549876], [1.24667799], [1.59474647], [1.77241158], [2.10194516], [-0.147631645], [3.00030136], [0.327178329], [0.727802693], [1.41014588], [0.641742945], [1.14226937], [1.84649241], [0.0881471335], [0.344209194], [1.56948221], [1.87531328], [1.12316668], [1.77829421], [1.67879367], [-0.620910167], [0.842626452], [0.859189629]]]> : tensor<1x80x1xf32>} : () -> tensor<1x80x1xf32>
-    %189 = "onnx.Add"(%187, %188) : (tensor<64x80x64xf32>, tensor<1x80x1xf32>) -> tensor<64x80x64xf32>
-    %190 = "onnx.Dim"(%179) {axis = 0 : si64} : (tensor<64x64x73x73xf32>) -> tensor<1xi64>
+    %189 = "onnx.Add"(%187, %188) : (tensor<8x80x?xf32>, tensor<1x80x1xf32>) -> tensor<8x80x?xf32>
+    %190 = "onnx.Dim"(%179) {axis = 0 : si64} : (tensor<8x64x73x73xf32>) -> tensor<1xi64>
     %191 = "onnx.Constant"() {value = dense<73> : tensor<1xi64>} : () -> tensor<1xi64>
     %192 = "onnx.Constant"() {value = dense<73> : tensor<1xi64>} : () -> tensor<1xi64>
     %193 = "onnx.Constant"() {value = dense<80> : tensor<1xi64>} : () -> tensor<1xi64>
     %194 = "onnx.Concat"(%190, %193, %191, %192) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %195 = "onnx.Reshape"(%189, %194) {allowzero = 0 : si64} : (tensor<64x80x64xf32>, tensor<4xi64>) -> tensor<64x80x73x73xf32>
-    %196 = "onnx.Relu"(%195) {onnx_node_name = "Relu_33"} : (tensor<64x80x73x73xf32>) -> tensor<64x80x73x73xf32>
-    %197 = "onnx.Conv"(%196, %9, %10) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_34", pads = [0, 0, 0, 0], strides = [1, 1]} : (tensor<64x80x73x73xf32>, tensor<192x80x3x3xf32>, tensor<192xf32>) -> tensor<64x192x71x71xf32>
-    %198 = "onnx.Relu"(%197) {onnx_node_name = "Relu_35"} : (tensor<64x192x71x71xf32>) -> tensor<64x192x71x71xf32>
-    %199 = "onnx.MaxPoolSingleOut"(%198) {auto_pad = "NOTSET", ceil_mode = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "MaxPool_36", pads = [0, 0, 0, 0], storage_order = 0 : si64, strides = [2, 2]} : (tensor<64x192x71x71xf32>) -> tensor<64x192x35x35xf32>
-    %200 = "onnx.Dim"(%199) {axis = 0 : si64} : (tensor<64x192x35x35xf32>) -> tensor<1xi64>
+    %195 = "onnx.Reshape"(%189, %194) {allowzero = 0 : si64} : (tensor<8x80x?xf32>, tensor<4xi64>) -> tensor<8x80x73x73xf32>
+    %196 = "onnx.Relu"(%195) {onnx_node_name = "Relu_33"} : (tensor<8x80x73x73xf32>) -> tensor<8x80x73x73xf32>
+    %197 = "onnx.Conv"(%196, %9, %10) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_34", pads = [0, 0, 0, 0], strides = [1, 1]} : (tensor<8x80x73x73xf32>, tensor<192x80x3x3xf32>, tensor<192xf32>) -> tensor<8x192x71x71xf32>
+    %198 = "onnx.Relu"(%197) {onnx_node_name = "Relu_35"} : (tensor<8x192x71x71xf32>) -> tensor<8x192x71x71xf32>
+    %199 = "onnx.MaxPoolSingleOut"(%198) {auto_pad = "NOTSET", ceil_mode = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "MaxPool_36", pads = [0, 0, 0, 0], storage_order = 0 : si64, strides = [2, 2]} : (tensor<8x192x71x71xf32>) -> tensor<8x192x35x35xf32>
+    %200 = "onnx.Dim"(%199) {axis = 0 : si64} : (tensor<8x192x35x35xf32>) -> tensor<1xi64>
     %201 = "onnx.Constant"() {value = dense<192> : tensor<1xi64>} : () -> tensor<1xi64>
     %202 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %203 = "onnx.Concat"(%200, %201, %202) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %204 = "onnx.Reshape"(%199, %203) {allowzero = 0 : si64} : (tensor<64x192x35x35xf32>, tensor<3xi64>) -> tensor<64x192x64xf32>
+    %204 = "onnx.Reshape"(%199, %203) {allowzero = 0 : si64} : (tensor<8x192x35x35xf32>, tensor<3xi64>) -> tensor<8x192x?xf32>
     %205 = "onnx.Constant"() {value = dense<[64, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %206 = "onnx.Reshape"(%11, %205) {allowzero = 0 : si64} : (tensor<64x192x1x1xf32>, tensor<2xi64>) -> tensor<64x192xf32>
-    %207 = "onnx.MatMul"(%206, %204) : (tensor<64x192xf32>, tensor<64x192x64xf32>) -> tensor<64x64x64xf32>
+    %207 = "onnx.MatMul"(%206, %204) : (tensor<64x192xf32>, tensor<8x192x?xf32>) -> tensor<8x64x?xf32>
     %208 = "onnx.Constant"() {value = dense<[[[2.47409964], [0.812396168], [2.88219047], [-0.884943902], [0.854157328], [-1.04618406], [0.563140333], [0.799774408], [-1.16820943], [2.11915588], [0.453628778], [3.76920629], [0.0539682359], [-0.809173107], [0.928968727], [-0.791933775], [6.45884799], [0.714466989], [0.678208947], [1.41840267], [-0.377066135], [-0.780958712], [1.28073621], [1.23796058], [1.21306312], [0.0144810081], [3.85336661], [1.21709824], [0.934184551], [4.34414244], [1.41909814], [-0.394063652], [0.382966071], [0.186001644], [1.85149026], [0.207187325], [1.25456417], [-1.2320888], [1.05634379], [3.39291072], [2.13185716], [0.710793614], [0.0655832365], [4.22081804], [1.79543412], [4.87892818], [1.0303359], [2.69201541], [1.15307021], [-0.0683204085], [0.473672599], [-0.598802865], [0.732116938], [3.05133891], [-1.07980824], [0.891098856], [0.0848412811], [0.791018068], [2.281760e-01], [-0.454246283], [0.380819201], [0.949371039], [1.62996769], [-0.0590492785]]]> : tensor<1x64x1xf32>} : () -> tensor<1x64x1xf32>
-    %209 = "onnx.Add"(%207, %208) : (tensor<64x64x64xf32>, tensor<1x64x1xf32>) -> tensor<64x64x64xf32>
-    %210 = "onnx.Dim"(%199) {axis = 0 : si64} : (tensor<64x192x35x35xf32>) -> tensor<1xi64>
+    %209 = "onnx.Add"(%207, %208) : (tensor<8x64x?xf32>, tensor<1x64x1xf32>) -> tensor<8x64x?xf32>
+    %210 = "onnx.Dim"(%199) {axis = 0 : si64} : (tensor<8x192x35x35xf32>) -> tensor<1xi64>
     %211 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %212 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %213 = "onnx.Constant"() {value = dense<64> : tensor<1xi64>} : () -> tensor<1xi64>
     %214 = "onnx.Concat"(%210, %213, %211, %212) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %215 = "onnx.Reshape"(%209, %214) {allowzero = 0 : si64} : (tensor<64x64x64xf32>, tensor<4xi64>) -> tensor<64x64x35x35xf32>
-    %216 = "onnx.Relu"(%215) {onnx_node_name = "Relu_38"} : (tensor<64x64x35x35xf32>) -> tensor<64x64x35x35xf32>
-    %217 = "onnx.Dim"(%199) {axis = 0 : si64} : (tensor<64x192x35x35xf32>) -> tensor<1xi64>
+    %215 = "onnx.Reshape"(%209, %214) {allowzero = 0 : si64} : (tensor<8x64x?xf32>, tensor<4xi64>) -> tensor<8x64x35x35xf32>
+    %216 = "onnx.Relu"(%215) {onnx_node_name = "Relu_38"} : (tensor<8x64x35x35xf32>) -> tensor<8x64x35x35xf32>
+    %217 = "onnx.Dim"(%199) {axis = 0 : si64} : (tensor<8x192x35x35xf32>) -> tensor<1xi64>
     %218 = "onnx.Constant"() {value = dense<192> : tensor<1xi64>} : () -> tensor<1xi64>
     %219 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %220 = "onnx.Concat"(%217, %218, %219) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %221 = "onnx.Reshape"(%199, %220) {allowzero = 0 : si64} : (tensor<64x192x35x35xf32>, tensor<3xi64>) -> tensor<64x192x64xf32>
+    %221 = "onnx.Reshape"(%199, %220) {allowzero = 0 : si64} : (tensor<8x192x35x35xf32>, tensor<3xi64>) -> tensor<8x192x?xf32>
     %222 = "onnx.Constant"() {value = dense<[48, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %223 = "onnx.Reshape"(%12, %222) {allowzero = 0 : si64} : (tensor<48x192x1x1xf32>, tensor<2xi64>) -> tensor<48x192xf32>
-    %224 = "onnx.MatMul"(%223, %221) : (tensor<48x192xf32>, tensor<64x192x64xf32>) -> tensor<64x48x64xf32>
+    %224 = "onnx.MatMul"(%223, %221) : (tensor<48x192xf32>, tensor<8x192x?xf32>) -> tensor<8x48x?xf32>
     %225 = "onnx.Constant"() {value = dense<[[[0.974860966], [1.20391393], [-0.49561888], [-0.676321864], [2.00021338], [0.739598333], [2.54109502], [1.25898397], [1.22258008], [-0.67711836], [1.6076082], [-0.523333311], [-0.531137466], [-2.50531673], [3.07801533], [0.690322458], [1.98215055], [2.32952571], [2.5445416], [2.16799355], [0.870536208], [-0.155818835], [-1.00884438], [-2.57240248], [0.436115623], [-0.747257292], [1.12877166], [1.96898186], [-0.606758237], [0.107576787], [1.06831014], [0.851003944], [-1.22254169], [0.205656052], [-1.66324496], [-1.87313294], [-1.0842514], [-0.458331645], [-1.10918832], [2.06008053], [1.03811693], [0.338729382], [1.55859637], [-0.195445314], [0.405283123], [1.28172827], [1.17992377], [1.324940e+00]]]> : tensor<1x48x1xf32>} : () -> tensor<1x48x1xf32>
-    %226 = "onnx.Add"(%224, %225) : (tensor<64x48x64xf32>, tensor<1x48x1xf32>) -> tensor<64x48x64xf32>
-    %227 = "onnx.Dim"(%199) {axis = 0 : si64} : (tensor<64x192x35x35xf32>) -> tensor<1xi64>
+    %226 = "onnx.Add"(%224, %225) : (tensor<8x48x?xf32>, tensor<1x48x1xf32>) -> tensor<8x48x?xf32>
+    %227 = "onnx.Dim"(%199) {axis = 0 : si64} : (tensor<8x192x35x35xf32>) -> tensor<1xi64>
     %228 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %229 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %230 = "onnx.Constant"() {value = dense<48> : tensor<1xi64>} : () -> tensor<1xi64>
     %231 = "onnx.Concat"(%227, %230, %228, %229) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %232 = "onnx.Reshape"(%226, %231) {allowzero = 0 : si64} : (tensor<64x48x64xf32>, tensor<4xi64>) -> tensor<64x48x35x35xf32>
-    %233 = "onnx.Relu"(%232) {onnx_node_name = "Relu_40"} : (tensor<64x48x35x35xf32>) -> tensor<64x48x35x35xf32>
-    %234 = "onnx.Conv"(%233, %13, %14) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [5, 5], onnx_node_name = "Conv_41", pads = [2, 2, 2, 2], strides = [1, 1]} : (tensor<64x48x35x35xf32>, tensor<64x48x5x5xf32>, tensor<64xf32>) -> tensor<64x64x35x35xf32>
-    %235 = "onnx.Relu"(%234) {onnx_node_name = "Relu_42"} : (tensor<64x64x35x35xf32>) -> tensor<64x64x35x35xf32>
-    %236 = "onnx.Dim"(%199) {axis = 0 : si64} : (tensor<64x192x35x35xf32>) -> tensor<1xi64>
+    %232 = "onnx.Reshape"(%226, %231) {allowzero = 0 : si64} : (tensor<8x48x?xf32>, tensor<4xi64>) -> tensor<8x48x35x35xf32>
+    %233 = "onnx.Relu"(%232) {onnx_node_name = "Relu_40"} : (tensor<8x48x35x35xf32>) -> tensor<8x48x35x35xf32>
+    %234 = "onnx.Conv"(%233, %13, %14) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [5, 5], onnx_node_name = "Conv_41", pads = [2, 2, 2, 2], strides = [1, 1]} : (tensor<8x48x35x35xf32>, tensor<64x48x5x5xf32>, tensor<64xf32>) -> tensor<8x64x35x35xf32>
+    %235 = "onnx.Relu"(%234) {onnx_node_name = "Relu_42"} : (tensor<8x64x35x35xf32>) -> tensor<8x64x35x35xf32>
+    %236 = "onnx.Dim"(%199) {axis = 0 : si64} : (tensor<8x192x35x35xf32>) -> tensor<1xi64>
     %237 = "onnx.Constant"() {value = dense<192> : tensor<1xi64>} : () -> tensor<1xi64>
     %238 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %239 = "onnx.Concat"(%236, %237, %238) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %240 = "onnx.Reshape"(%199, %239) {allowzero = 0 : si64} : (tensor<64x192x35x35xf32>, tensor<3xi64>) -> tensor<64x192x64xf32>
+    %240 = "onnx.Reshape"(%199, %239) {allowzero = 0 : si64} : (tensor<8x192x35x35xf32>, tensor<3xi64>) -> tensor<8x192x?xf32>
     %241 = "onnx.Constant"() {value = dense<[64, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %242 = "onnx.Reshape"(%15, %241) {allowzero = 0 : si64} : (tensor<64x192x1x1xf32>, tensor<2xi64>) -> tensor<64x192xf32>
-    %243 = "onnx.MatMul"(%242, %240) : (tensor<64x192xf32>, tensor<64x192x64xf32>) -> tensor<64x64x64xf32>
+    %243 = "onnx.MatMul"(%242, %240) : (tensor<64x192xf32>, tensor<8x192x?xf32>) -> tensor<8x64x?xf32>
     %244 = "onnx.Constant"() {value = dense<[[[1.35396767], [1.76322103], [0.717256605], [-1.78992856], [0.878991246], [0.521338761], [-2.43833375], [-0.219435498], [4.261780e+00], [-0.414131016], [-0.334563613], [0.494288504], [0.372784078], [0.443707824], [0.237550825], [-0.587251306], [-0.302847534], [1.03955293], [1.3913883], [0.981180846], [1.86086059], [-1.20488536], [1.57321227], [0.977301776], [-0.797907471], [0.0491741896], [1.41355145], [2.34313154], [-1.584530e+00], [-0.160839885], [-1.1241833], [0.883625507], [-3.96097565], [-0.629445791], [-2.3752768], [2.207920e-01], [-0.580424368], [-0.230235577], [2.06635451], [1.32859302], [9.032430e-01], [-0.155427054], [1.25591373], [-0.683592498], [-0.41268754], [1.61118579], [3.37655258], [0.485042125], [-2.90267944], [1.26462841], [1.14362383], [-1.98294079], [0.603621542], [3.26489687], [-0.753049731], [-1.11768425], [-0.0760581493], [0.898364305], [2.6217165], [-2.12300634], [0.220463693], [5.67396736], [7.99188899], [-0.167055637]]]> : tensor<1x64x1xf32>} : () -> tensor<1x64x1xf32>
-    %245 = "onnx.Add"(%243, %244) : (tensor<64x64x64xf32>, tensor<1x64x1xf32>) -> tensor<64x64x64xf32>
-    %246 = "onnx.Dim"(%199) {axis = 0 : si64} : (tensor<64x192x35x35xf32>) -> tensor<1xi64>
+    %245 = "onnx.Add"(%243, %244) : (tensor<8x64x?xf32>, tensor<1x64x1xf32>) -> tensor<8x64x?xf32>
+    %246 = "onnx.Dim"(%199) {axis = 0 : si64} : (tensor<8x192x35x35xf32>) -> tensor<1xi64>
     %247 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %248 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %249 = "onnx.Constant"() {value = dense<64> : tensor<1xi64>} : () -> tensor<1xi64>
     %250 = "onnx.Concat"(%246, %249, %247, %248) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %251 = "onnx.Reshape"(%245, %250) {allowzero = 0 : si64} : (tensor<64x64x64xf32>, tensor<4xi64>) -> tensor<64x64x35x35xf32>
-    %252 = "onnx.Relu"(%251) {onnx_node_name = "Relu_44"} : (tensor<64x64x35x35xf32>) -> tensor<64x64x35x35xf32>
-    %253 = "onnx.Conv"(%252, %16, %17) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_45", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<64x64x35x35xf32>, tensor<96x64x3x3xf32>, tensor<96xf32>) -> tensor<64x96x35x35xf32>
-    %254 = "onnx.Relu"(%253) {onnx_node_name = "Relu_46"} : (tensor<64x96x35x35xf32>) -> tensor<64x96x35x35xf32>
-    %255 = "onnx.Conv"(%254, %18, %19) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_47", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<64x96x35x35xf32>, tensor<96x96x3x3xf32>, tensor<96xf32>) -> tensor<64x96x35x35xf32>
-    %256 = "onnx.Relu"(%255) {onnx_node_name = "Relu_48"} : (tensor<64x96x35x35xf32>) -> tensor<64x96x35x35xf32>
-    %257 = "onnx.AveragePool"(%199) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "AveragePool_51", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<64x192x35x35xf32>) -> tensor<64x192x35x35xf32>
-    %258 = "onnx.Dim"(%257) {axis = 0 : si64} : (tensor<64x192x35x35xf32>) -> tensor<1xi64>
+    %251 = "onnx.Reshape"(%245, %250) {allowzero = 0 : si64} : (tensor<8x64x?xf32>, tensor<4xi64>) -> tensor<8x64x35x35xf32>
+    %252 = "onnx.Relu"(%251) {onnx_node_name = "Relu_44"} : (tensor<8x64x35x35xf32>) -> tensor<8x64x35x35xf32>
+    %253 = "onnx.Conv"(%252, %16, %17) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_45", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<8x64x35x35xf32>, tensor<96x64x3x3xf32>, tensor<96xf32>) -> tensor<8x96x35x35xf32>
+    %254 = "onnx.Relu"(%253) {onnx_node_name = "Relu_46"} : (tensor<8x96x35x35xf32>) -> tensor<8x96x35x35xf32>
+    %255 = "onnx.Conv"(%254, %18, %19) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_47", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<8x96x35x35xf32>, tensor<96x96x3x3xf32>, tensor<96xf32>) -> tensor<8x96x35x35xf32>
+    %256 = "onnx.Relu"(%255) {onnx_node_name = "Relu_48"} : (tensor<8x96x35x35xf32>) -> tensor<8x96x35x35xf32>
+    %257 = "onnx.AveragePool"(%199) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "AveragePool_51", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<8x192x35x35xf32>) -> tensor<8x192x35x35xf32>
+    %258 = "onnx.Dim"(%257) {axis = 0 : si64} : (tensor<8x192x35x35xf32>) -> tensor<1xi64>
     %259 = "onnx.Constant"() {value = dense<192> : tensor<1xi64>} : () -> tensor<1xi64>
     %260 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %261 = "onnx.Concat"(%258, %259, %260) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %262 = "onnx.Reshape"(%257, %261) {allowzero = 0 : si64} : (tensor<64x192x35x35xf32>, tensor<3xi64>) -> tensor<64x192x64xf32>
+    %262 = "onnx.Reshape"(%257, %261) {allowzero = 0 : si64} : (tensor<8x192x35x35xf32>, tensor<3xi64>) -> tensor<8x192x?xf32>
     %263 = "onnx.Constant"() {value = dense<[32, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %264 = "onnx.Reshape"(%20, %263) {allowzero = 0 : si64} : (tensor<32x192x1x1xf32>, tensor<2xi64>) -> tensor<32x192xf32>
-    %265 = "onnx.MatMul"(%264, %262) : (tensor<32x192xf32>, tensor<64x192x64xf32>) -> tensor<64x32x64xf32>
+    %265 = "onnx.MatMul"(%264, %262) : (tensor<32x192xf32>, tensor<8x192x?xf32>) -> tensor<8x32x?xf32>
     %266 = "onnx.Constant"() {value = dense<[[[-3.04400396], [3.30362511], [1.24675226], [-6.07493544], [-1.44434679], [2.25040197], [2.53251433], [1.05669832], [0.409422576], [-1.65254247], [-2.8895092], [0.0664495826], [1.99757242], [1.46062112], [-0.245225936], [-3.7368834], [2.12868309], [1.26740432], [-0.710075438], [1.82249212], [0.535727203], [-1.54994345], [1.15923703], [0.977044463], [-1.95018971], [-0.984163045], [2.14129448], [1.09211862], [-6.6556735], [-0.785356283], [-5.59510612], [-0.590590417]]]> : tensor<1x32x1xf32>} : () -> tensor<1x32x1xf32>
-    %267 = "onnx.Add"(%265, %266) : (tensor<64x32x64xf32>, tensor<1x32x1xf32>) -> tensor<64x32x64xf32>
-    %268 = "onnx.Dim"(%257) {axis = 0 : si64} : (tensor<64x192x35x35xf32>) -> tensor<1xi64>
+    %267 = "onnx.Add"(%265, %266) : (tensor<8x32x?xf32>, tensor<1x32x1xf32>) -> tensor<8x32x?xf32>
+    %268 = "onnx.Dim"(%257) {axis = 0 : si64} : (tensor<8x192x35x35xf32>) -> tensor<1xi64>
     %269 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %270 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %271 = "onnx.Constant"() {value = dense<32> : tensor<1xi64>} : () -> tensor<1xi64>
     %272 = "onnx.Concat"(%268, %271, %269, %270) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %273 = "onnx.Reshape"(%267, %272) {allowzero = 0 : si64} : (tensor<64x32x64xf32>, tensor<4xi64>) -> tensor<64x32x35x35xf32>
-    %274 = "onnx.Relu"(%273) {onnx_node_name = "Relu_53"} : (tensor<64x32x35x35xf32>) -> tensor<64x32x35x35xf32>
-    %275 = "onnx.Concat"(%216, %235, %256, %274) {axis = 1 : si64, onnx_node_name = "Concat_54"} : (tensor<64x64x35x35xf32>, tensor<64x64x35x35xf32>, tensor<64x96x35x35xf32>, tensor<64x32x35x35xf32>) -> tensor<64x256x35x35xf32>
-    %276 = "onnx.Dim"(%275) {axis = 0 : si64} : (tensor<64x256x35x35xf32>) -> tensor<1xi64>
+    %273 = "onnx.Reshape"(%267, %272) {allowzero = 0 : si64} : (tensor<8x32x?xf32>, tensor<4xi64>) -> tensor<8x32x35x35xf32>
+    %274 = "onnx.Relu"(%273) {onnx_node_name = "Relu_53"} : (tensor<8x32x35x35xf32>) -> tensor<8x32x35x35xf32>
+    %275 = "onnx.Concat"(%216, %235, %256, %274) {axis = 1 : si64, onnx_node_name = "Concat_54"} : (tensor<8x64x35x35xf32>, tensor<8x64x35x35xf32>, tensor<8x96x35x35xf32>, tensor<8x32x35x35xf32>) -> tensor<8x256x35x35xf32>
+    %276 = "onnx.Dim"(%275) {axis = 0 : si64} : (tensor<8x256x35x35xf32>) -> tensor<1xi64>
     %277 = "onnx.Constant"() {value = dense<256> : tensor<1xi64>} : () -> tensor<1xi64>
     %278 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %279 = "onnx.Concat"(%276, %277, %278) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %280 = "onnx.Reshape"(%275, %279) {allowzero = 0 : si64} : (tensor<64x256x35x35xf32>, tensor<3xi64>) -> tensor<64x256x64xf32>
+    %280 = "onnx.Reshape"(%275, %279) {allowzero = 0 : si64} : (tensor<8x256x35x35xf32>, tensor<3xi64>) -> tensor<8x256x?xf32>
     %281 = "onnx.Constant"() {value = dense<[64, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %282 = "onnx.Reshape"(%21, %281) {allowzero = 0 : si64} : (tensor<64x256x1x1xf32>, tensor<2xi64>) -> tensor<64x256xf32>
-    %283 = "onnx.MatMul"(%282, %280) : (tensor<64x256xf32>, tensor<64x256x64xf32>) -> tensor<64x64x64xf32>
+    %283 = "onnx.MatMul"(%282, %280) : (tensor<64x256xf32>, tensor<8x256x?xf32>) -> tensor<8x64x?xf32>
     %284 = "onnx.Constant"() {value = dense<[[[1.95083857], [-2.8270905], [0.768231749], [-0.0567318797], [2.07600737], [-1.08183765], [1.8844974], [0.358507395], [-0.835405409], [1.91280162], [0.887853264], [-0.56034863], [1.15786648], [2.36700654], [-1.52509129], [-2.90776038], [-0.0990378856], [0.183828861], [0.372289598], [-0.352392644], [-1.16483021], [-2.42530632], [-0.409353852], [1.70251942], [2.88583207], [1.33910143], [0.176012218], [1.52652657], [-0.910334527], [2.51297045], [-0.58423388], [-2.1156671], [-0.1677742], [-2.84306788], [-0.325358868], [4.26453114], [2.8186245], [2.70501041], [3.32680964], [1.96100879], [0.0209723115], [1.41099775], [-3.83104706], [-1.58703232], [-0.514218092], [1.27428508], [1.15225708], [2.99889326], [2.81074381], [-0.833198249], [-2.75361466], [4.13094378], [1.09338117], [-0.687917768], [-1.55651784], [3.23885846], [-0.481988639], [3.13916254], [0.550518036], [-0.93884927], [2.95940447], [2.2893281], [0.889361381], [-3.3757751]]]> : tensor<1x64x1xf32>} : () -> tensor<1x64x1xf32>
-    %285 = "onnx.Add"(%283, %284) : (tensor<64x64x64xf32>, tensor<1x64x1xf32>) -> tensor<64x64x64xf32>
-    %286 = "onnx.Dim"(%275) {axis = 0 : si64} : (tensor<64x256x35x35xf32>) -> tensor<1xi64>
+    %285 = "onnx.Add"(%283, %284) : (tensor<8x64x?xf32>, tensor<1x64x1xf32>) -> tensor<8x64x?xf32>
+    %286 = "onnx.Dim"(%275) {axis = 0 : si64} : (tensor<8x256x35x35xf32>) -> tensor<1xi64>
     %287 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %288 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %289 = "onnx.Constant"() {value = dense<64> : tensor<1xi64>} : () -> tensor<1xi64>
     %290 = "onnx.Concat"(%286, %289, %287, %288) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %291 = "onnx.Reshape"(%285, %290) {allowzero = 0 : si64} : (tensor<64x64x64xf32>, tensor<4xi64>) -> tensor<64x64x35x35xf32>
-    %292 = "onnx.Relu"(%291) {onnx_node_name = "Relu_56"} : (tensor<64x64x35x35xf32>) -> tensor<64x64x35x35xf32>
-    %293 = "onnx.Dim"(%275) {axis = 0 : si64} : (tensor<64x256x35x35xf32>) -> tensor<1xi64>
+    %291 = "onnx.Reshape"(%285, %290) {allowzero = 0 : si64} : (tensor<8x64x?xf32>, tensor<4xi64>) -> tensor<8x64x35x35xf32>
+    %292 = "onnx.Relu"(%291) {onnx_node_name = "Relu_56"} : (tensor<8x64x35x35xf32>) -> tensor<8x64x35x35xf32>
+    %293 = "onnx.Dim"(%275) {axis = 0 : si64} : (tensor<8x256x35x35xf32>) -> tensor<1xi64>
     %294 = "onnx.Constant"() {value = dense<256> : tensor<1xi64>} : () -> tensor<1xi64>
     %295 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %296 = "onnx.Concat"(%293, %294, %295) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %297 = "onnx.Reshape"(%275, %296) {allowzero = 0 : si64} : (tensor<64x256x35x35xf32>, tensor<3xi64>) -> tensor<64x256x64xf32>
+    %297 = "onnx.Reshape"(%275, %296) {allowzero = 0 : si64} : (tensor<8x256x35x35xf32>, tensor<3xi64>) -> tensor<8x256x?xf32>
     %298 = "onnx.Constant"() {value = dense<[48, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %299 = "onnx.Reshape"(%22, %298) {allowzero = 0 : si64} : (tensor<48x256x1x1xf32>, tensor<2xi64>) -> tensor<48x256xf32>
-    %300 = "onnx.MatMul"(%299, %297) : (tensor<48x256xf32>, tensor<64x256x64xf32>) -> tensor<64x48x64xf32>
+    %300 = "onnx.MatMul"(%299, %297) : (tensor<48x256xf32>, tensor<8x256x?xf32>) -> tensor<8x48x?xf32>
     %301 = "onnx.Constant"() {value = dense<[[[-0.524870694], [-2.37384653], [-1.83883142], [2.17789459], [2.38037658], [0.945978879], [1.14072156], [0.946388185], [1.88445485], [-2.49969125], [6.93032932], [1.20489407], [-0.307582617], [-0.960338711], [0.346163601], [-2.07072282], [-2.24080682], [-0.369881094], [2.34112597], [-2.20017433], [0.226732075], [1.6557014], [1.55244172], [0.808309376], [-0.12473774], [0.47511223], [1.6274116], [3.00727415], [-3.04806662], [-3.24748564], [-4.624300e+00], [2.73300266], [1.03717971], [1.77159917], [-0.228521138], [-0.511634827], [2.77980208], [-0.196950406], [1.03535974], [0.773471355], [1.60737765], [1.19744468], [0.815968155], [0.0837807804], [-1.31264317], [-0.459449232], [-0.144266427], [-0.986380815]]]> : tensor<1x48x1xf32>} : () -> tensor<1x48x1xf32>
-    %302 = "onnx.Add"(%300, %301) : (tensor<64x48x64xf32>, tensor<1x48x1xf32>) -> tensor<64x48x64xf32>
-    %303 = "onnx.Dim"(%275) {axis = 0 : si64} : (tensor<64x256x35x35xf32>) -> tensor<1xi64>
+    %302 = "onnx.Add"(%300, %301) : (tensor<8x48x?xf32>, tensor<1x48x1xf32>) -> tensor<8x48x?xf32>
+    %303 = "onnx.Dim"(%275) {axis = 0 : si64} : (tensor<8x256x35x35xf32>) -> tensor<1xi64>
     %304 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %305 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %306 = "onnx.Constant"() {value = dense<48> : tensor<1xi64>} : () -> tensor<1xi64>
     %307 = "onnx.Concat"(%303, %306, %304, %305) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %308 = "onnx.Reshape"(%302, %307) {allowzero = 0 : si64} : (tensor<64x48x64xf32>, tensor<4xi64>) -> tensor<64x48x35x35xf32>
-    %309 = "onnx.Relu"(%308) {onnx_node_name = "Relu_58"} : (tensor<64x48x35x35xf32>) -> tensor<64x48x35x35xf32>
-    %310 = "onnx.Conv"(%309, %23, %24) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [5, 5], onnx_node_name = "Conv_59", pads = [2, 2, 2, 2], strides = [1, 1]} : (tensor<64x48x35x35xf32>, tensor<64x48x5x5xf32>, tensor<64xf32>) -> tensor<64x64x35x35xf32>
-    %311 = "onnx.Relu"(%310) {onnx_node_name = "Relu_60"} : (tensor<64x64x35x35xf32>) -> tensor<64x64x35x35xf32>
-    %312 = "onnx.Dim"(%275) {axis = 0 : si64} : (tensor<64x256x35x35xf32>) -> tensor<1xi64>
+    %308 = "onnx.Reshape"(%302, %307) {allowzero = 0 : si64} : (tensor<8x48x?xf32>, tensor<4xi64>) -> tensor<8x48x35x35xf32>
+    %309 = "onnx.Relu"(%308) {onnx_node_name = "Relu_58"} : (tensor<8x48x35x35xf32>) -> tensor<8x48x35x35xf32>
+    %310 = "onnx.Conv"(%309, %23, %24) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [5, 5], onnx_node_name = "Conv_59", pads = [2, 2, 2, 2], strides = [1, 1]} : (tensor<8x48x35x35xf32>, tensor<64x48x5x5xf32>, tensor<64xf32>) -> tensor<8x64x35x35xf32>
+    %311 = "onnx.Relu"(%310) {onnx_node_name = "Relu_60"} : (tensor<8x64x35x35xf32>) -> tensor<8x64x35x35xf32>
+    %312 = "onnx.Dim"(%275) {axis = 0 : si64} : (tensor<8x256x35x35xf32>) -> tensor<1xi64>
     %313 = "onnx.Constant"() {value = dense<256> : tensor<1xi64>} : () -> tensor<1xi64>
     %314 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %315 = "onnx.Concat"(%312, %313, %314) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %316 = "onnx.Reshape"(%275, %315) {allowzero = 0 : si64} : (tensor<64x256x35x35xf32>, tensor<3xi64>) -> tensor<64x256x64xf32>
+    %316 = "onnx.Reshape"(%275, %315) {allowzero = 0 : si64} : (tensor<8x256x35x35xf32>, tensor<3xi64>) -> tensor<8x256x?xf32>
     %317 = "onnx.Constant"() {value = dense<[64, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %318 = "onnx.Reshape"(%25, %317) {allowzero = 0 : si64} : (tensor<64x256x1x1xf32>, tensor<2xi64>) -> tensor<64x256xf32>
-    %319 = "onnx.MatMul"(%318, %316) : (tensor<64x256xf32>, tensor<64x256x64xf32>) -> tensor<64x64x64xf32>
+    %319 = "onnx.MatMul"(%318, %316) : (tensor<64x256xf32>, tensor<8x256x?xf32>) -> tensor<8x64x?xf32>
     %320 = "onnx.Constant"() {value = dense<[[[-1.43373668], [0.701793611], [-0.163198411], [-1.4040556], [-0.613909602], [1.03238773], [-0.00866587832], [3.67513132], [-1.09396672], [4.44237614], [1.54866743], [0.974932432], [-2.97735262], [1.40394545], [-1.01657915], [2.12865162], [3.66933775], [1.29142857], [2.29024148], [-1.14127159], [0.0652350783], [-1.05579388], [2.47852612], [-3.323500e+00], [0.576807678], [0.0926924422], [-0.314152718], [1.81472135], [-1.12042642], [0.977774858], [3.22511292], [-2.17503548], [-1.83832991], [2.27132964], [0.986103057], [-1.35839534], [0.986265778], [3.07133651], [0.250334501], [-6.888210e-01], [-0.35262984], [2.51311207], [2.68315363], [2.12152195], [-1.29788494], [3.04218721], [-1.8982029], [2.16380835], [0.809595704], [-1.17999482], [1.32528806], [1.16155708], [0.393943071], [3.58890533], [-0.51684612], [-3.06969213], [0.524297595], [-5.231710e+00], [-1.32293296], [0.346992254], [-0.281227738], [-0.775620222], [-1.22925758], [0.550854743]]]> : tensor<1x64x1xf32>} : () -> tensor<1x64x1xf32>
-    %321 = "onnx.Add"(%319, %320) : (tensor<64x64x64xf32>, tensor<1x64x1xf32>) -> tensor<64x64x64xf32>
-    %322 = "onnx.Dim"(%275) {axis = 0 : si64} : (tensor<64x256x35x35xf32>) -> tensor<1xi64>
+    %321 = "onnx.Add"(%319, %320) : (tensor<8x64x?xf32>, tensor<1x64x1xf32>) -> tensor<8x64x?xf32>
+    %322 = "onnx.Dim"(%275) {axis = 0 : si64} : (tensor<8x256x35x35xf32>) -> tensor<1xi64>
     %323 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %324 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %325 = "onnx.Constant"() {value = dense<64> : tensor<1xi64>} : () -> tensor<1xi64>
     %326 = "onnx.Concat"(%322, %325, %323, %324) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %327 = "onnx.Reshape"(%321, %326) {allowzero = 0 : si64} : (tensor<64x64x64xf32>, tensor<4xi64>) -> tensor<64x64x35x35xf32>
-    %328 = "onnx.Relu"(%327) {onnx_node_name = "Relu_62"} : (tensor<64x64x35x35xf32>) -> tensor<64x64x35x35xf32>
-    %329 = "onnx.Conv"(%328, %26, %27) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_63", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<64x64x35x35xf32>, tensor<96x64x3x3xf32>, tensor<96xf32>) -> tensor<64x96x35x35xf32>
-    %330 = "onnx.Relu"(%329) {onnx_node_name = "Relu_64"} : (tensor<64x96x35x35xf32>) -> tensor<64x96x35x35xf32>
-    %331 = "onnx.Conv"(%330, %28, %29) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_65", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<64x96x35x35xf32>, tensor<96x96x3x3xf32>, tensor<96xf32>) -> tensor<64x96x35x35xf32>
-    %332 = "onnx.Relu"(%331) {onnx_node_name = "Relu_66"} : (tensor<64x96x35x35xf32>) -> tensor<64x96x35x35xf32>
-    %333 = "onnx.AveragePool"(%275) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "AveragePool_69", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<64x256x35x35xf32>) -> tensor<64x256x35x35xf32>
-    %334 = "onnx.Dim"(%333) {axis = 0 : si64} : (tensor<64x256x35x35xf32>) -> tensor<1xi64>
+    %327 = "onnx.Reshape"(%321, %326) {allowzero = 0 : si64} : (tensor<8x64x?xf32>, tensor<4xi64>) -> tensor<8x64x35x35xf32>
+    %328 = "onnx.Relu"(%327) {onnx_node_name = "Relu_62"} : (tensor<8x64x35x35xf32>) -> tensor<8x64x35x35xf32>
+    %329 = "onnx.Conv"(%328, %26, %27) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_63", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<8x64x35x35xf32>, tensor<96x64x3x3xf32>, tensor<96xf32>) -> tensor<8x96x35x35xf32>
+    %330 = "onnx.Relu"(%329) {onnx_node_name = "Relu_64"} : (tensor<8x96x35x35xf32>) -> tensor<8x96x35x35xf32>
+    %331 = "onnx.Conv"(%330, %28, %29) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_65", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<8x96x35x35xf32>, tensor<96x96x3x3xf32>, tensor<96xf32>) -> tensor<8x96x35x35xf32>
+    %332 = "onnx.Relu"(%331) {onnx_node_name = "Relu_66"} : (tensor<8x96x35x35xf32>) -> tensor<8x96x35x35xf32>
+    %333 = "onnx.AveragePool"(%275) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "AveragePool_69", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<8x256x35x35xf32>) -> tensor<8x256x35x35xf32>
+    %334 = "onnx.Dim"(%333) {axis = 0 : si64} : (tensor<8x256x35x35xf32>) -> tensor<1xi64>
     %335 = "onnx.Constant"() {value = dense<256> : tensor<1xi64>} : () -> tensor<1xi64>
     %336 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %337 = "onnx.Concat"(%334, %335, %336) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %338 = "onnx.Reshape"(%333, %337) {allowzero = 0 : si64} : (tensor<64x256x35x35xf32>, tensor<3xi64>) -> tensor<64x256x64xf32>
+    %338 = "onnx.Reshape"(%333, %337) {allowzero = 0 : si64} : (tensor<8x256x35x35xf32>, tensor<3xi64>) -> tensor<8x256x?xf32>
     %339 = "onnx.Constant"() {value = dense<[64, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %340 = "onnx.Reshape"(%30, %339) {allowzero = 0 : si64} : (tensor<64x256x1x1xf32>, tensor<2xi64>) -> tensor<64x256xf32>
-    %341 = "onnx.MatMul"(%340, %338) : (tensor<64x256xf32>, tensor<64x256x64xf32>) -> tensor<64x64x64xf32>
+    %341 = "onnx.MatMul"(%340, %338) : (tensor<64x256xf32>, tensor<8x256x?xf32>) -> tensor<8x64x?xf32>
     %342 = "onnx.Constant"() {value = dense<[[[-0.264323711], [4.41687393], [0.322549582], [4.31044436], [2.0715239], [1.01743019], [0.089721024], [3.0462265], [-3.45316887], [2.22231746], [-3.53680205], [0.863870859], [0.174234062], [-0.938692629], [-0.992606818], [0.581918538], [-0.120945215], [-4.092890e+00], [-0.187948555], [0.75053668], [1.30423355], [0.901359915], [1.93197322], [3.93627262], [-0.252012849], [2.3096242], [3.99776936], [3.12586427], [-0.875489234], [3.58922243], [-3.00712109], [-1.38161588], [3.07666183], [-0.748174429], [1.2188518], [0.85160011], [-1.76237369], [0.315428257], [-3.47845459], [2.7358911], [-1.5423727], [0.255971432], [-0.752405763], [2.19922113], [2.45454526], [4.25946426], [-4.662500e-01], [-3.437500e+00], [0.204859316], [1.13226366], [1.13294411], [1.91332507], [0.585991919], [1.2905519], [1.06380773], [-0.333001435], [-0.841067433], [2.116660e+00], [-1.13012934], [1.70603442], [-1.76046836], [0.699772357], [-0.426680744], [-0.974404811]]]> : tensor<1x64x1xf32>} : () -> tensor<1x64x1xf32>
-    %343 = "onnx.Add"(%341, %342) : (tensor<64x64x64xf32>, tensor<1x64x1xf32>) -> tensor<64x64x64xf32>
-    %344 = "onnx.Dim"(%333) {axis = 0 : si64} : (tensor<64x256x35x35xf32>) -> tensor<1xi64>
+    %343 = "onnx.Add"(%341, %342) : (tensor<8x64x?xf32>, tensor<1x64x1xf32>) -> tensor<8x64x?xf32>
+    %344 = "onnx.Dim"(%333) {axis = 0 : si64} : (tensor<8x256x35x35xf32>) -> tensor<1xi64>
     %345 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %346 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %347 = "onnx.Constant"() {value = dense<64> : tensor<1xi64>} : () -> tensor<1xi64>
     %348 = "onnx.Concat"(%344, %347, %345, %346) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %349 = "onnx.Reshape"(%343, %348) {allowzero = 0 : si64} : (tensor<64x64x64xf32>, tensor<4xi64>) -> tensor<64x64x35x35xf32>
-    %350 = "onnx.Relu"(%349) {onnx_node_name = "Relu_71"} : (tensor<64x64x35x35xf32>) -> tensor<64x64x35x35xf32>
-    %351 = "onnx.Concat"(%292, %311, %332, %350) {axis = 1 : si64, onnx_node_name = "Concat_72"} : (tensor<64x64x35x35xf32>, tensor<64x64x35x35xf32>, tensor<64x96x35x35xf32>, tensor<64x64x35x35xf32>) -> tensor<64x288x35x35xf32>
-    %352 = "onnx.Dim"(%351) {axis = 0 : si64} : (tensor<64x288x35x35xf32>) -> tensor<1xi64>
+    %349 = "onnx.Reshape"(%343, %348) {allowzero = 0 : si64} : (tensor<8x64x?xf32>, tensor<4xi64>) -> tensor<8x64x35x35xf32>
+    %350 = "onnx.Relu"(%349) {onnx_node_name = "Relu_71"} : (tensor<8x64x35x35xf32>) -> tensor<8x64x35x35xf32>
+    %351 = "onnx.Concat"(%292, %311, %332, %350) {axis = 1 : si64, onnx_node_name = "Concat_72"} : (tensor<8x64x35x35xf32>, tensor<8x64x35x35xf32>, tensor<8x96x35x35xf32>, tensor<8x64x35x35xf32>) -> tensor<8x288x35x35xf32>
+    %352 = "onnx.Dim"(%351) {axis = 0 : si64} : (tensor<8x288x35x35xf32>) -> tensor<1xi64>
     %353 = "onnx.Constant"() {value = dense<288> : tensor<1xi64>} : () -> tensor<1xi64>
     %354 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %355 = "onnx.Concat"(%352, %353, %354) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %356 = "onnx.Reshape"(%351, %355) {allowzero = 0 : si64} : (tensor<64x288x35x35xf32>, tensor<3xi64>) -> tensor<64x288x64xf32>
+    %356 = "onnx.Reshape"(%351, %355) {allowzero = 0 : si64} : (tensor<8x288x35x35xf32>, tensor<3xi64>) -> tensor<8x288x?xf32>
     %357 = "onnx.Constant"() {value = dense<[64, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %358 = "onnx.Reshape"(%31, %357) {allowzero = 0 : si64} : (tensor<64x288x1x1xf32>, tensor<2xi64>) -> tensor<64x288xf32>
-    %359 = "onnx.MatMul"(%358, %356) : (tensor<64x288xf32>, tensor<64x288x64xf32>) -> tensor<64x64x64xf32>
+    %359 = "onnx.MatMul"(%358, %356) : (tensor<64x288xf32>, tensor<8x288x?xf32>) -> tensor<8x64x?xf32>
     %360 = "onnx.Constant"() {value = dense<[[[1.83216107], [-0.927242041], [0.0279891677], [-2.91937733], [-0.353359759], [1.27674294], [-0.423970282], [-0.475790977], [-2.945858], [0.63374418], [0.371654928], [0.743366897], [0.183821306], [0.186399072], [-0.0406382978], [0.573420823], [-1.26372981], [1.4210881], [-2.98135233], [-0.516083479], [4.30072403], [0.63870269], [-0.145317093], [-1.40024734], [-0.00697618723], [-1.25636744], [2.26893878], [-0.295635343], [0.5971421], [1.07621789], [-0.0493945479], [-1.49773765], [-0.56029129], [0.828828573], [0.155177325], [2.38060474], [1.00696111], [1.17845166], [3.58708644], [-1.89515495], [0.397680223], [0.638139426], [1.07958603], [-0.558215857], [-1.48407578], [-0.193568826], [1.33926439], [1.98307514], [-2.4844451], [0.793666124], [-0.153682292], [-1.34783053], [2.66217923], [-0.509748101], [1.95605063], [1.55869102], [0.651033103], [-1.60817075], [-0.685210704], [1.2000494], [-0.177875772], [0.135787696], [-0.321203321], [-7.95643777E-4]]]> : tensor<1x64x1xf32>} : () -> tensor<1x64x1xf32>
-    %361 = "onnx.Add"(%359, %360) : (tensor<64x64x64xf32>, tensor<1x64x1xf32>) -> tensor<64x64x64xf32>
-    %362 = "onnx.Dim"(%351) {axis = 0 : si64} : (tensor<64x288x35x35xf32>) -> tensor<1xi64>
+    %361 = "onnx.Add"(%359, %360) : (tensor<8x64x?xf32>, tensor<1x64x1xf32>) -> tensor<8x64x?xf32>
+    %362 = "onnx.Dim"(%351) {axis = 0 : si64} : (tensor<8x288x35x35xf32>) -> tensor<1xi64>
     %363 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %364 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %365 = "onnx.Constant"() {value = dense<64> : tensor<1xi64>} : () -> tensor<1xi64>
     %366 = "onnx.Concat"(%362, %365, %363, %364) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %367 = "onnx.Reshape"(%361, %366) {allowzero = 0 : si64} : (tensor<64x64x64xf32>, tensor<4xi64>) -> tensor<64x64x35x35xf32>
-    %368 = "onnx.Relu"(%367) {onnx_node_name = "Relu_74"} : (tensor<64x64x35x35xf32>) -> tensor<64x64x35x35xf32>
-    %369 = "onnx.Dim"(%351) {axis = 0 : si64} : (tensor<64x288x35x35xf32>) -> tensor<1xi64>
+    %367 = "onnx.Reshape"(%361, %366) {allowzero = 0 : si64} : (tensor<8x64x?xf32>, tensor<4xi64>) -> tensor<8x64x35x35xf32>
+    %368 = "onnx.Relu"(%367) {onnx_node_name = "Relu_74"} : (tensor<8x64x35x35xf32>) -> tensor<8x64x35x35xf32>
+    %369 = "onnx.Dim"(%351) {axis = 0 : si64} : (tensor<8x288x35x35xf32>) -> tensor<1xi64>
     %370 = "onnx.Constant"() {value = dense<288> : tensor<1xi64>} : () -> tensor<1xi64>
     %371 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %372 = "onnx.Concat"(%369, %370, %371) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %373 = "onnx.Reshape"(%351, %372) {allowzero = 0 : si64} : (tensor<64x288x35x35xf32>, tensor<3xi64>) -> tensor<64x288x64xf32>
+    %373 = "onnx.Reshape"(%351, %372) {allowzero = 0 : si64} : (tensor<8x288x35x35xf32>, tensor<3xi64>) -> tensor<8x288x?xf32>
     %374 = "onnx.Constant"() {value = dense<[48, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %375 = "onnx.Reshape"(%32, %374) {allowzero = 0 : si64} : (tensor<48x288x1x1xf32>, tensor<2xi64>) -> tensor<48x288xf32>
-    %376 = "onnx.MatMul"(%375, %373) : (tensor<48x288xf32>, tensor<64x288x64xf32>) -> tensor<64x48x64xf32>
+    %376 = "onnx.MatMul"(%375, %373) : (tensor<48x288xf32>, tensor<8x288x?xf32>) -> tensor<8x48x?xf32>
     %377 = "onnx.Constant"() {value = dense<[[[-1.28406954], [1.93365264], [-2.822090e-01], [-2.30477047], [-0.451515675], [-0.0506169647], [0.140444383], [-1.94176757], [0.163884476], [2.25102401], [-0.745784699], [0.504520714], [-2.46328187], [-0.195279747], [0.51064676], [2.08258581], [0.466414809], [0.709277808], [-0.970585107], [1.10546744], [1.90588212], [1.3246845], [2.002850e+00], [-0.140165985], [1.94345653], [1.11116874], [-2.15620685], [-0.591149926], [-1.44521916], [2.22094536], [0.827665091], [0.72441858], [2.093436], [-0.281654477], [1.66640425], [0.696517825], [-0.864346743], [1.45681405], [0.541763723], [-2.36106682], [2.1493175], [-1.63264966], [-1.05032969], [-2.93439603], [0.597571731], [0.853695213], [-0.663273751], [2.687280e+00]]]> : tensor<1x48x1xf32>} : () -> tensor<1x48x1xf32>
-    %378 = "onnx.Add"(%376, %377) : (tensor<64x48x64xf32>, tensor<1x48x1xf32>) -> tensor<64x48x64xf32>
-    %379 = "onnx.Dim"(%351) {axis = 0 : si64} : (tensor<64x288x35x35xf32>) -> tensor<1xi64>
+    %378 = "onnx.Add"(%376, %377) : (tensor<8x48x?xf32>, tensor<1x48x1xf32>) -> tensor<8x48x?xf32>
+    %379 = "onnx.Dim"(%351) {axis = 0 : si64} : (tensor<8x288x35x35xf32>) -> tensor<1xi64>
     %380 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %381 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %382 = "onnx.Constant"() {value = dense<48> : tensor<1xi64>} : () -> tensor<1xi64>
     %383 = "onnx.Concat"(%379, %382, %380, %381) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %384 = "onnx.Reshape"(%378, %383) {allowzero = 0 : si64} : (tensor<64x48x64xf32>, tensor<4xi64>) -> tensor<64x48x35x35xf32>
-    %385 = "onnx.Relu"(%384) {onnx_node_name = "Relu_76"} : (tensor<64x48x35x35xf32>) -> tensor<64x48x35x35xf32>
-    %386 = "onnx.Conv"(%385, %33, %34) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [5, 5], onnx_node_name = "Conv_77", pads = [2, 2, 2, 2], strides = [1, 1]} : (tensor<64x48x35x35xf32>, tensor<64x48x5x5xf32>, tensor<64xf32>) -> tensor<64x64x35x35xf32>
-    %387 = "onnx.Relu"(%386) {onnx_node_name = "Relu_78"} : (tensor<64x64x35x35xf32>) -> tensor<64x64x35x35xf32>
-    %388 = "onnx.Dim"(%351) {axis = 0 : si64} : (tensor<64x288x35x35xf32>) -> tensor<1xi64>
+    %384 = "onnx.Reshape"(%378, %383) {allowzero = 0 : si64} : (tensor<8x48x?xf32>, tensor<4xi64>) -> tensor<8x48x35x35xf32>
+    %385 = "onnx.Relu"(%384) {onnx_node_name = "Relu_76"} : (tensor<8x48x35x35xf32>) -> tensor<8x48x35x35xf32>
+    %386 = "onnx.Conv"(%385, %33, %34) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [5, 5], onnx_node_name = "Conv_77", pads = [2, 2, 2, 2], strides = [1, 1]} : (tensor<8x48x35x35xf32>, tensor<64x48x5x5xf32>, tensor<64xf32>) -> tensor<8x64x35x35xf32>
+    %387 = "onnx.Relu"(%386) {onnx_node_name = "Relu_78"} : (tensor<8x64x35x35xf32>) -> tensor<8x64x35x35xf32>
+    %388 = "onnx.Dim"(%351) {axis = 0 : si64} : (tensor<8x288x35x35xf32>) -> tensor<1xi64>
     %389 = "onnx.Constant"() {value = dense<288> : tensor<1xi64>} : () -> tensor<1xi64>
     %390 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %391 = "onnx.Concat"(%388, %389, %390) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %392 = "onnx.Reshape"(%351, %391) {allowzero = 0 : si64} : (tensor<64x288x35x35xf32>, tensor<3xi64>) -> tensor<64x288x64xf32>
+    %392 = "onnx.Reshape"(%351, %391) {allowzero = 0 : si64} : (tensor<8x288x35x35xf32>, tensor<3xi64>) -> tensor<8x288x?xf32>
     %393 = "onnx.Constant"() {value = dense<[64, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %394 = "onnx.Reshape"(%35, %393) {allowzero = 0 : si64} : (tensor<64x288x1x1xf32>, tensor<2xi64>) -> tensor<64x288xf32>
-    %395 = "onnx.MatMul"(%394, %392) : (tensor<64x288xf32>, tensor<64x288x64xf32>) -> tensor<64x64x64xf32>
+    %395 = "onnx.MatMul"(%394, %392) : (tensor<64x288xf32>, tensor<8x288x?xf32>) -> tensor<8x64x?xf32>
     %396 = "onnx.Constant"() {value = dense<[[[-1.78424311], [-0.841147541], [-1.49751604], [-2.12292051], [1.41006529], [-0.200740978], [-2.24936652], [-0.684069514], [-2.34058475], [-2.4108212], [-1.27613664], [-0.507396936], [-1.58795881], [1.90702701], [0.565545142], [-2.28217745], [0.774171114], [-0.690235555], [-0.622764647], [-1.45315027], [-0.515803099], [-0.0873779579], [-0.947201967], [-0.483309031], [0.248901352], [5.04585266], [2.05308914], [0.773613512], [-0.76111114], [-0.210310653], [0.497335434], [0.272908568], [-0.106500208], [1.68603086], [-1.53710544], [-0.0653381348], [0.0248904228], [-2.53115559], [-0.051007092], [-0.0511821806], [-0.0984897911], [-2.55516315], [-2.70759964], [3.14163351], [-6.676080e-01], [-0.886321187], [-0.764313101], [-3.2686038], [-1.12973762], [-0.40952006], [-2.42394018], [-5.614970e-01], [0.249147207], [0.0403347611], [-0.195888788], [0.380401582], [1.02085471], [0.791945576], [-1.03563333], [0.497173458], [2.91009831], [0.399121106], [2.03886318], [3.64252663]]]> : tensor<1x64x1xf32>} : () -> tensor<1x64x1xf32>
-    %397 = "onnx.Add"(%395, %396) : (tensor<64x64x64xf32>, tensor<1x64x1xf32>) -> tensor<64x64x64xf32>
-    %398 = "onnx.Dim"(%351) {axis = 0 : si64} : (tensor<64x288x35x35xf32>) -> tensor<1xi64>
+    %397 = "onnx.Add"(%395, %396) : (tensor<8x64x?xf32>, tensor<1x64x1xf32>) -> tensor<8x64x?xf32>
+    %398 = "onnx.Dim"(%351) {axis = 0 : si64} : (tensor<8x288x35x35xf32>) -> tensor<1xi64>
     %399 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %400 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %401 = "onnx.Constant"() {value = dense<64> : tensor<1xi64>} : () -> tensor<1xi64>
     %402 = "onnx.Concat"(%398, %401, %399, %400) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %403 = "onnx.Reshape"(%397, %402) {allowzero = 0 : si64} : (tensor<64x64x64xf32>, tensor<4xi64>) -> tensor<64x64x35x35xf32>
-    %404 = "onnx.Relu"(%403) {onnx_node_name = "Relu_80"} : (tensor<64x64x35x35xf32>) -> tensor<64x64x35x35xf32>
-    %405 = "onnx.Conv"(%404, %36, %37) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_81", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<64x64x35x35xf32>, tensor<96x64x3x3xf32>, tensor<96xf32>) -> tensor<64x96x35x35xf32>
-    %406 = "onnx.Relu"(%405) {onnx_node_name = "Relu_82"} : (tensor<64x96x35x35xf32>) -> tensor<64x96x35x35xf32>
-    %407 = "onnx.Conv"(%406, %38, %39) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_83", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<64x96x35x35xf32>, tensor<96x96x3x3xf32>, tensor<96xf32>) -> tensor<64x96x35x35xf32>
-    %408 = "onnx.Relu"(%407) {onnx_node_name = "Relu_84"} : (tensor<64x96x35x35xf32>) -> tensor<64x96x35x35xf32>
-    %409 = "onnx.AveragePool"(%351) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "AveragePool_87", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<64x288x35x35xf32>) -> tensor<64x288x35x35xf32>
-    %410 = "onnx.Dim"(%409) {axis = 0 : si64} : (tensor<64x288x35x35xf32>) -> tensor<1xi64>
+    %403 = "onnx.Reshape"(%397, %402) {allowzero = 0 : si64} : (tensor<8x64x?xf32>, tensor<4xi64>) -> tensor<8x64x35x35xf32>
+    %404 = "onnx.Relu"(%403) {onnx_node_name = "Relu_80"} : (tensor<8x64x35x35xf32>) -> tensor<8x64x35x35xf32>
+    %405 = "onnx.Conv"(%404, %36, %37) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_81", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<8x64x35x35xf32>, tensor<96x64x3x3xf32>, tensor<96xf32>) -> tensor<8x96x35x35xf32>
+    %406 = "onnx.Relu"(%405) {onnx_node_name = "Relu_82"} : (tensor<8x96x35x35xf32>) -> tensor<8x96x35x35xf32>
+    %407 = "onnx.Conv"(%406, %38, %39) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_83", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<8x96x35x35xf32>, tensor<96x96x3x3xf32>, tensor<96xf32>) -> tensor<8x96x35x35xf32>
+    %408 = "onnx.Relu"(%407) {onnx_node_name = "Relu_84"} : (tensor<8x96x35x35xf32>) -> tensor<8x96x35x35xf32>
+    %409 = "onnx.AveragePool"(%351) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "AveragePool_87", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<8x288x35x35xf32>) -> tensor<8x288x35x35xf32>
+    %410 = "onnx.Dim"(%409) {axis = 0 : si64} : (tensor<8x288x35x35xf32>) -> tensor<1xi64>
     %411 = "onnx.Constant"() {value = dense<288> : tensor<1xi64>} : () -> tensor<1xi64>
     %412 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %413 = "onnx.Concat"(%410, %411, %412) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %414 = "onnx.Reshape"(%409, %413) {allowzero = 0 : si64} : (tensor<64x288x35x35xf32>, tensor<3xi64>) -> tensor<64x288x64xf32>
+    %414 = "onnx.Reshape"(%409, %413) {allowzero = 0 : si64} : (tensor<8x288x35x35xf32>, tensor<3xi64>) -> tensor<8x288x?xf32>
     %415 = "onnx.Constant"() {value = dense<[64, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %416 = "onnx.Reshape"(%40, %415) {allowzero = 0 : si64} : (tensor<64x288x1x1xf32>, tensor<2xi64>) -> tensor<64x288xf32>
-    %417 = "onnx.MatMul"(%416, %414) : (tensor<64x288xf32>, tensor<64x288x64xf32>) -> tensor<64x64x64xf32>
+    %417 = "onnx.MatMul"(%416, %414) : (tensor<64x288xf32>, tensor<8x288x?xf32>) -> tensor<8x64x?xf32>
     %418 = "onnx.Constant"() {value = dense<[[[-0.844534695], [0.830715537], [-0.912094355], [-0.937882781], [-1.05264473], [1.84711885], [-0.785269618], [-0.422189623], [0.881768703], [2.00252151], [-0.209745288], [-2.97806954], [-0.760324358], [1.49305367], [0.720675349], [1.02778316], [0.838226557], [1.27714491], [-1.37708402], [-1.54911375], [-0.792247116], [-0.511855185], [-1.02378941], [-0.994315505], [-0.520998657], [-3.59747934], [-2.82415557], [-2.82403517], [1.54716492], [1.93989766], [-1.17762589], [-0.199081868], [1.82805252], [0.973117232], [1.2121942], [-2.81189108], [-1.05697477], [-0.0968264639], [0.155403793], [2.410410e+00], [-0.133537918], [1.42885768], [2.46672869], [2.74028397], [-1.33011556], [3.05680561], [0.574164748], [-0.298623562], [0.306209683], [-0.215582967], [-2.36527371], [-0.118938565], [-0.557212353], [-0.0197560787], [2.89454794], [-1.8063786], [-4.77498484], [-0.964530467], [0.189049184], [-9.480500e-02], [-1.42111492], [1.01240396], [1.41974068], [0.781782329]]]> : tensor<1x64x1xf32>} : () -> tensor<1x64x1xf32>
-    %419 = "onnx.Add"(%417, %418) : (tensor<64x64x64xf32>, tensor<1x64x1xf32>) -> tensor<64x64x64xf32>
-    %420 = "onnx.Dim"(%409) {axis = 0 : si64} : (tensor<64x288x35x35xf32>) -> tensor<1xi64>
+    %419 = "onnx.Add"(%417, %418) : (tensor<8x64x?xf32>, tensor<1x64x1xf32>) -> tensor<8x64x?xf32>
+    %420 = "onnx.Dim"(%409) {axis = 0 : si64} : (tensor<8x288x35x35xf32>) -> tensor<1xi64>
     %421 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %422 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %423 = "onnx.Constant"() {value = dense<64> : tensor<1xi64>} : () -> tensor<1xi64>
     %424 = "onnx.Concat"(%420, %423, %421, %422) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %425 = "onnx.Reshape"(%419, %424) {allowzero = 0 : si64} : (tensor<64x64x64xf32>, tensor<4xi64>) -> tensor<64x64x35x35xf32>
-    %426 = "onnx.Relu"(%425) {onnx_node_name = "Relu_89"} : (tensor<64x64x35x35xf32>) -> tensor<64x64x35x35xf32>
-    %427 = "onnx.Concat"(%368, %387, %408, %426) {axis = 1 : si64, onnx_node_name = "Concat_90"} : (tensor<64x64x35x35xf32>, tensor<64x64x35x35xf32>, tensor<64x96x35x35xf32>, tensor<64x64x35x35xf32>) -> tensor<64x288x35x35xf32>
-    %428 = "onnx.Conv"(%427, %41, %42) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_91", pads = [0, 0, 0, 0], strides = [2, 2]} : (tensor<64x288x35x35xf32>, tensor<384x288x3x3xf32>, tensor<384xf32>) -> tensor<64x384x17x17xf32>
-    %429 = "onnx.Relu"(%428) {onnx_node_name = "Relu_92"} : (tensor<64x384x17x17xf32>) -> tensor<64x384x17x17xf32>
-    %430 = "onnx.Dim"(%427) {axis = 0 : si64} : (tensor<64x288x35x35xf32>) -> tensor<1xi64>
+    %425 = "onnx.Reshape"(%419, %424) {allowzero = 0 : si64} : (tensor<8x64x?xf32>, tensor<4xi64>) -> tensor<8x64x35x35xf32>
+    %426 = "onnx.Relu"(%425) {onnx_node_name = "Relu_89"} : (tensor<8x64x35x35xf32>) -> tensor<8x64x35x35xf32>
+    %427 = "onnx.Concat"(%368, %387, %408, %426) {axis = 1 : si64, onnx_node_name = "Concat_90"} : (tensor<8x64x35x35xf32>, tensor<8x64x35x35xf32>, tensor<8x96x35x35xf32>, tensor<8x64x35x35xf32>) -> tensor<8x288x35x35xf32>
+    %428 = "onnx.Conv"(%427, %41, %42) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_91", pads = [0, 0, 0, 0], strides = [2, 2]} : (tensor<8x288x35x35xf32>, tensor<384x288x3x3xf32>, tensor<384xf32>) -> tensor<8x384x17x17xf32>
+    %429 = "onnx.Relu"(%428) {onnx_node_name = "Relu_92"} : (tensor<8x384x17x17xf32>) -> tensor<8x384x17x17xf32>
+    %430 = "onnx.Dim"(%427) {axis = 0 : si64} : (tensor<8x288x35x35xf32>) -> tensor<1xi64>
     %431 = "onnx.Constant"() {value = dense<288> : tensor<1xi64>} : () -> tensor<1xi64>
     %432 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %433 = "onnx.Concat"(%430, %431, %432) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %434 = "onnx.Reshape"(%427, %433) {allowzero = 0 : si64} : (tensor<64x288x35x35xf32>, tensor<3xi64>) -> tensor<64x288x64xf32>
+    %434 = "onnx.Reshape"(%427, %433) {allowzero = 0 : si64} : (tensor<8x288x35x35xf32>, tensor<3xi64>) -> tensor<8x288x?xf32>
     %435 = "onnx.Constant"() {value = dense<[64, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %436 = "onnx.Reshape"(%43, %435) {allowzero = 0 : si64} : (tensor<64x288x1x1xf32>, tensor<2xi64>) -> tensor<64x288xf32>
-    %437 = "onnx.MatMul"(%436, %434) : (tensor<64x288xf32>, tensor<64x288x64xf32>) -> tensor<64x64x64xf32>
+    %437 = "onnx.MatMul"(%436, %434) : (tensor<64x288xf32>, tensor<8x288x?xf32>) -> tensor<8x64x?xf32>
     %438 = "onnx.Constant"() {value = dense<[[[-1.46911168], [1.22657251], [1.42839646], [-0.221390724], [-0.978853166], [3.5548749], [-0.251358688], [0.0782753527], [-2.39883137], [-1.94482613], [-0.210702538], [-0.331150651], [-0.765224039], [-0.849804461], [0.342932522], [-0.495088637], [2.0229578], [-1.85639668], [0.182673156], [-2.22979546], [-0.751384377], [-0.925413131], [-2.16191864], [-1.18619156], [-0.227042139], [-0.362068981], [0.486620784], [-1.27978337], [0.825107336], [-1.132653], [-2.21682358], [0.346993297], [-0.811932444], [-0.902998805], [-0.355991215], [-2.32964873], [1.10474753], [0.272839457], [0.368401289], [-0.971152663], [0.834477424], [-1.12759328], [-1.42997146], [-1.93927741], [1.16696811], [-1.95558929], [1.89669156], [-1.80778909], [-1.42435241], [0.132137299], [-0.0126542747], [0.284844935], [-0.0441632569], [1.13316369], [-0.913254797], [-1.47028244], [-0.475932389], [-1.3884927], [0.152247861], [-1.16394663], [-1.36790502], [-1.1885612], [-1.16665709], [-1.81553066]]]> : tensor<1x64x1xf32>} : () -> tensor<1x64x1xf32>
-    %439 = "onnx.Add"(%437, %438) : (tensor<64x64x64xf32>, tensor<1x64x1xf32>) -> tensor<64x64x64xf32>
-    %440 = "onnx.Dim"(%427) {axis = 0 : si64} : (tensor<64x288x35x35xf32>) -> tensor<1xi64>
+    %439 = "onnx.Add"(%437, %438) : (tensor<8x64x?xf32>, tensor<1x64x1xf32>) -> tensor<8x64x?xf32>
+    %440 = "onnx.Dim"(%427) {axis = 0 : si64} : (tensor<8x288x35x35xf32>) -> tensor<1xi64>
     %441 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %442 = "onnx.Constant"() {value = dense<35> : tensor<1xi64>} : () -> tensor<1xi64>
     %443 = "onnx.Constant"() {value = dense<64> : tensor<1xi64>} : () -> tensor<1xi64>
     %444 = "onnx.Concat"(%440, %443, %441, %442) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %445 = "onnx.Reshape"(%439, %444) {allowzero = 0 : si64} : (tensor<64x64x64xf32>, tensor<4xi64>) -> tensor<64x64x35x35xf32>
-    %446 = "onnx.Relu"(%445) {onnx_node_name = "Relu_94"} : (tensor<64x64x35x35xf32>) -> tensor<64x64x35x35xf32>
-    %447 = "onnx.Conv"(%446, %44, %45) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_95", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<64x64x35x35xf32>, tensor<96x64x3x3xf32>, tensor<96xf32>) -> tensor<64x96x35x35xf32>
-    %448 = "onnx.Relu"(%447) {onnx_node_name = "Relu_96"} : (tensor<64x96x35x35xf32>) -> tensor<64x96x35x35xf32>
-    %449 = "onnx.Conv"(%448, %46, %47) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_97", pads = [0, 0, 0, 0], strides = [2, 2]} : (tensor<64x96x35x35xf32>, tensor<96x96x3x3xf32>, tensor<96xf32>) -> tensor<64x96x17x17xf32>
-    %450 = "onnx.Relu"(%449) {onnx_node_name = "Relu_98"} : (tensor<64x96x17x17xf32>) -> tensor<64x96x17x17xf32>
-    %451 = "onnx.MaxPoolSingleOut"(%427) {auto_pad = "NOTSET", ceil_mode = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "MaxPool_99", pads = [0, 0, 0, 0], storage_order = 0 : si64, strides = [2, 2]} : (tensor<64x288x35x35xf32>) -> tensor<64x288x17x17xf32>
-    %452 = "onnx.Concat"(%429, %450, %451) {axis = 1 : si64, onnx_node_name = "Concat_100"} : (tensor<64x384x17x17xf32>, tensor<64x96x17x17xf32>, tensor<64x288x17x17xf32>) -> tensor<64x768x17x17xf32>
-    %453 = "onnx.Dim"(%452) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %445 = "onnx.Reshape"(%439, %444) {allowzero = 0 : si64} : (tensor<8x64x?xf32>, tensor<4xi64>) -> tensor<8x64x35x35xf32>
+    %446 = "onnx.Relu"(%445) {onnx_node_name = "Relu_94"} : (tensor<8x64x35x35xf32>) -> tensor<8x64x35x35xf32>
+    %447 = "onnx.Conv"(%446, %44, %45) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_95", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<8x64x35x35xf32>, tensor<96x64x3x3xf32>, tensor<96xf32>) -> tensor<8x96x35x35xf32>
+    %448 = "onnx.Relu"(%447) {onnx_node_name = "Relu_96"} : (tensor<8x96x35x35xf32>) -> tensor<8x96x35x35xf32>
+    %449 = "onnx.Conv"(%448, %46, %47) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_97", pads = [0, 0, 0, 0], strides = [2, 2]} : (tensor<8x96x35x35xf32>, tensor<96x96x3x3xf32>, tensor<96xf32>) -> tensor<8x96x17x17xf32>
+    %450 = "onnx.Relu"(%449) {onnx_node_name = "Relu_98"} : (tensor<8x96x17x17xf32>) -> tensor<8x96x17x17xf32>
+    %451 = "onnx.MaxPoolSingleOut"(%427) {auto_pad = "NOTSET", ceil_mode = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "MaxPool_99", pads = [0, 0, 0, 0], storage_order = 0 : si64, strides = [2, 2]} : (tensor<8x288x35x35xf32>) -> tensor<8x288x17x17xf32>
+    %452 = "onnx.Concat"(%429, %450, %451) {axis = 1 : si64, onnx_node_name = "Concat_100"} : (tensor<8x384x17x17xf32>, tensor<8x96x17x17xf32>, tensor<8x288x17x17xf32>) -> tensor<8x768x17x17xf32>
+    %453 = "onnx.Dim"(%452) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %454 = "onnx.Constant"() {value = dense<768> : tensor<1xi64>} : () -> tensor<1xi64>
     %455 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %456 = "onnx.Concat"(%453, %454, %455) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %457 = "onnx.Reshape"(%452, %456) {allowzero = 0 : si64} : (tensor<64x768x17x17xf32>, tensor<3xi64>) -> tensor<64x768x64xf32>
+    %457 = "onnx.Reshape"(%452, %456) {allowzero = 0 : si64} : (tensor<8x768x17x17xf32>, tensor<3xi64>) -> tensor<8x768x?xf32>
     %458 = "onnx.Constant"() {value = dense<[192, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %459 = "onnx.Reshape"(%48, %458) {allowzero = 0 : si64} : (tensor<192x768x1x1xf32>, tensor<2xi64>) -> tensor<192x768xf32>
-    %460 = "onnx.MatMul"(%459, %457) : (tensor<192x768xf32>, tensor<64x768x64xf32>) -> tensor<64x192x64xf32>
+    %460 = "onnx.MatMul"(%459, %457) : (tensor<192x768xf32>, tensor<8x768x?xf32>) -> tensor<8x192x?xf32>
     %461 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x192x1xf32>} : () -> tensor<1x192x1xf32>
-    %462 = "onnx.Add"(%460, %461) : (tensor<64x192x64xf32>, tensor<1x192x1xf32>) -> tensor<64x192x64xf32>
-    %463 = "onnx.Dim"(%452) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %462 = "onnx.Add"(%460, %461) : (tensor<8x192x?xf32>, tensor<1x192x1xf32>) -> tensor<8x192x?xf32>
+    %463 = "onnx.Dim"(%452) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %464 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %465 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %466 = "onnx.Constant"() {value = dense<192> : tensor<1xi64>} : () -> tensor<1xi64>
     %467 = "onnx.Concat"(%463, %466, %464, %465) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %468 = "onnx.Reshape"(%462, %467) {allowzero = 0 : si64} : (tensor<64x192x64xf32>, tensor<4xi64>) -> tensor<64x192x17x17xf32>
-    %469 = "onnx.Relu"(%468) {onnx_node_name = "Relu_102"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %470 = "onnx.Dim"(%452) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %468 = "onnx.Reshape"(%462, %467) {allowzero = 0 : si64} : (tensor<8x192x?xf32>, tensor<4xi64>) -> tensor<8x192x17x17xf32>
+    %469 = "onnx.Relu"(%468) {onnx_node_name = "Relu_102"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %470 = "onnx.Dim"(%452) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %471 = "onnx.Constant"() {value = dense<768> : tensor<1xi64>} : () -> tensor<1xi64>
     %472 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %473 = "onnx.Concat"(%470, %471, %472) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %474 = "onnx.Reshape"(%452, %473) {allowzero = 0 : si64} : (tensor<64x768x17x17xf32>, tensor<3xi64>) -> tensor<64x768x64xf32>
+    %474 = "onnx.Reshape"(%452, %473) {allowzero = 0 : si64} : (tensor<8x768x17x17xf32>, tensor<3xi64>) -> tensor<8x768x?xf32>
     %475 = "onnx.Constant"() {value = dense<[128, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %476 = "onnx.Reshape"(%49, %475) {allowzero = 0 : si64} : (tensor<128x768x1x1xf32>, tensor<2xi64>) -> tensor<128x768xf32>
-    %477 = "onnx.MatMul"(%476, %474) : (tensor<128x768xf32>, tensor<64x768x64xf32>) -> tensor<64x128x64xf32>
+    %477 = "onnx.MatMul"(%476, %474) : (tensor<128x768xf32>, tensor<8x768x?xf32>) -> tensor<8x128x?xf32>
     %478 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x128x1xf32>} : () -> tensor<1x128x1xf32>
-    %479 = "onnx.Add"(%477, %478) : (tensor<64x128x64xf32>, tensor<1x128x1xf32>) -> tensor<64x128x64xf32>
-    %480 = "onnx.Dim"(%452) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %479 = "onnx.Add"(%477, %478) : (tensor<8x128x?xf32>, tensor<1x128x1xf32>) -> tensor<8x128x?xf32>
+    %480 = "onnx.Dim"(%452) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %481 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %482 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %483 = "onnx.Constant"() {value = dense<128> : tensor<1xi64>} : () -> tensor<1xi64>
     %484 = "onnx.Concat"(%480, %483, %481, %482) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %485 = "onnx.Reshape"(%479, %484) {allowzero = 0 : si64} : (tensor<64x128x64xf32>, tensor<4xi64>) -> tensor<64x128x17x17xf32>
-    %486 = "onnx.Relu"(%485) {onnx_node_name = "Relu_104"} : (tensor<64x128x17x17xf32>) -> tensor<64x128x17x17xf32>
-    %487 = "onnx.Conv"(%486, %50, %51) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_105", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<64x128x17x17xf32>, tensor<128x128x1x7xf32>, tensor<128xf32>) -> tensor<64x128x17x17xf32>
-    %488 = "onnx.Relu"(%487) {onnx_node_name = "Relu_106"} : (tensor<64x128x17x17xf32>) -> tensor<64x128x17x17xf32>
-    %489 = "onnx.Conv"(%488, %52, %53) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_107", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<64x128x17x17xf32>, tensor<192x128x7x1xf32>, tensor<192xf32>) -> tensor<64x192x17x17xf32>
-    %490 = "onnx.Relu"(%489) {onnx_node_name = "Relu_108"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %491 = "onnx.Dim"(%452) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %485 = "onnx.Reshape"(%479, %484) {allowzero = 0 : si64} : (tensor<8x128x?xf32>, tensor<4xi64>) -> tensor<8x128x17x17xf32>
+    %486 = "onnx.Relu"(%485) {onnx_node_name = "Relu_104"} : (tensor<8x128x17x17xf32>) -> tensor<8x128x17x17xf32>
+    %487 = "onnx.Conv"(%486, %50, %51) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_105", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<8x128x17x17xf32>, tensor<128x128x1x7xf32>, tensor<128xf32>) -> tensor<8x128x17x17xf32>
+    %488 = "onnx.Relu"(%487) {onnx_node_name = "Relu_106"} : (tensor<8x128x17x17xf32>) -> tensor<8x128x17x17xf32>
+    %489 = "onnx.Conv"(%488, %52, %53) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_107", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<8x128x17x17xf32>, tensor<192x128x7x1xf32>, tensor<192xf32>) -> tensor<8x192x17x17xf32>
+    %490 = "onnx.Relu"(%489) {onnx_node_name = "Relu_108"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %491 = "onnx.Dim"(%452) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %492 = "onnx.Constant"() {value = dense<768> : tensor<1xi64>} : () -> tensor<1xi64>
     %493 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %494 = "onnx.Concat"(%491, %492, %493) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %495 = "onnx.Reshape"(%452, %494) {allowzero = 0 : si64} : (tensor<64x768x17x17xf32>, tensor<3xi64>) -> tensor<64x768x64xf32>
+    %495 = "onnx.Reshape"(%452, %494) {allowzero = 0 : si64} : (tensor<8x768x17x17xf32>, tensor<3xi64>) -> tensor<8x768x?xf32>
     %496 = "onnx.Constant"() {value = dense<[128, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %497 = "onnx.Reshape"(%54, %496) {allowzero = 0 : si64} : (tensor<128x768x1x1xf32>, tensor<2xi64>) -> tensor<128x768xf32>
-    %498 = "onnx.MatMul"(%497, %495) : (tensor<128x768xf32>, tensor<64x768x64xf32>) -> tensor<64x128x64xf32>
+    %498 = "onnx.MatMul"(%497, %495) : (tensor<128x768xf32>, tensor<8x768x?xf32>) -> tensor<8x128x?xf32>
     %499 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x128x1xf32>} : () -> tensor<1x128x1xf32>
-    %500 = "onnx.Add"(%498, %499) : (tensor<64x128x64xf32>, tensor<1x128x1xf32>) -> tensor<64x128x64xf32>
-    %501 = "onnx.Dim"(%452) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %500 = "onnx.Add"(%498, %499) : (tensor<8x128x?xf32>, tensor<1x128x1xf32>) -> tensor<8x128x?xf32>
+    %501 = "onnx.Dim"(%452) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %502 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %503 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %504 = "onnx.Constant"() {value = dense<128> : tensor<1xi64>} : () -> tensor<1xi64>
     %505 = "onnx.Concat"(%501, %504, %502, %503) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %506 = "onnx.Reshape"(%500, %505) {allowzero = 0 : si64} : (tensor<64x128x64xf32>, tensor<4xi64>) -> tensor<64x128x17x17xf32>
-    %507 = "onnx.Relu"(%506) {onnx_node_name = "Relu_110"} : (tensor<64x128x17x17xf32>) -> tensor<64x128x17x17xf32>
-    %508 = "onnx.Conv"(%507, %55, %56) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_111", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<64x128x17x17xf32>, tensor<128x128x7x1xf32>, tensor<128xf32>) -> tensor<64x128x17x17xf32>
-    %509 = "onnx.Relu"(%508) {onnx_node_name = "Relu_112"} : (tensor<64x128x17x17xf32>) -> tensor<64x128x17x17xf32>
-    %510 = "onnx.Conv"(%509, %57, %58) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_113", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<64x128x17x17xf32>, tensor<128x128x1x7xf32>, tensor<128xf32>) -> tensor<64x128x17x17xf32>
-    %511 = "onnx.Relu"(%510) {onnx_node_name = "Relu_114"} : (tensor<64x128x17x17xf32>) -> tensor<64x128x17x17xf32>
-    %512 = "onnx.Conv"(%511, %59, %60) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_115", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<64x128x17x17xf32>, tensor<128x128x7x1xf32>, tensor<128xf32>) -> tensor<64x128x17x17xf32>
-    %513 = "onnx.Relu"(%512) {onnx_node_name = "Relu_116"} : (tensor<64x128x17x17xf32>) -> tensor<64x128x17x17xf32>
-    %514 = "onnx.Conv"(%513, %61, %62) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_117", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<64x128x17x17xf32>, tensor<192x128x1x7xf32>, tensor<192xf32>) -> tensor<64x192x17x17xf32>
-    %515 = "onnx.Relu"(%514) {onnx_node_name = "Relu_118"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %516 = "onnx.AveragePool"(%452) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "AveragePool_121", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<64x768x17x17xf32>) -> tensor<64x768x17x17xf32>
-    %517 = "onnx.Dim"(%516) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %506 = "onnx.Reshape"(%500, %505) {allowzero = 0 : si64} : (tensor<8x128x?xf32>, tensor<4xi64>) -> tensor<8x128x17x17xf32>
+    %507 = "onnx.Relu"(%506) {onnx_node_name = "Relu_110"} : (tensor<8x128x17x17xf32>) -> tensor<8x128x17x17xf32>
+    %508 = "onnx.Conv"(%507, %55, %56) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_111", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<8x128x17x17xf32>, tensor<128x128x7x1xf32>, tensor<128xf32>) -> tensor<8x128x17x17xf32>
+    %509 = "onnx.Relu"(%508) {onnx_node_name = "Relu_112"} : (tensor<8x128x17x17xf32>) -> tensor<8x128x17x17xf32>
+    %510 = "onnx.Conv"(%509, %57, %58) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_113", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<8x128x17x17xf32>, tensor<128x128x1x7xf32>, tensor<128xf32>) -> tensor<8x128x17x17xf32>
+    %511 = "onnx.Relu"(%510) {onnx_node_name = "Relu_114"} : (tensor<8x128x17x17xf32>) -> tensor<8x128x17x17xf32>
+    %512 = "onnx.Conv"(%511, %59, %60) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_115", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<8x128x17x17xf32>, tensor<128x128x7x1xf32>, tensor<128xf32>) -> tensor<8x128x17x17xf32>
+    %513 = "onnx.Relu"(%512) {onnx_node_name = "Relu_116"} : (tensor<8x128x17x17xf32>) -> tensor<8x128x17x17xf32>
+    %514 = "onnx.Conv"(%513, %61, %62) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_117", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<8x128x17x17xf32>, tensor<192x128x1x7xf32>, tensor<192xf32>) -> tensor<8x192x17x17xf32>
+    %515 = "onnx.Relu"(%514) {onnx_node_name = "Relu_118"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %516 = "onnx.AveragePool"(%452) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "AveragePool_121", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<8x768x17x17xf32>) -> tensor<8x768x17x17xf32>
+    %517 = "onnx.Dim"(%516) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %518 = "onnx.Constant"() {value = dense<768> : tensor<1xi64>} : () -> tensor<1xi64>
     %519 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %520 = "onnx.Concat"(%517, %518, %519) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %521 = "onnx.Reshape"(%516, %520) {allowzero = 0 : si64} : (tensor<64x768x17x17xf32>, tensor<3xi64>) -> tensor<64x768x64xf32>
+    %521 = "onnx.Reshape"(%516, %520) {allowzero = 0 : si64} : (tensor<8x768x17x17xf32>, tensor<3xi64>) -> tensor<8x768x?xf32>
     %522 = "onnx.Constant"() {value = dense<[192, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %523 = "onnx.Reshape"(%63, %522) {allowzero = 0 : si64} : (tensor<192x768x1x1xf32>, tensor<2xi64>) -> tensor<192x768xf32>
-    %524 = "onnx.MatMul"(%523, %521) : (tensor<192x768xf32>, tensor<64x768x64xf32>) -> tensor<64x192x64xf32>
+    %524 = "onnx.MatMul"(%523, %521) : (tensor<192x768xf32>, tensor<8x768x?xf32>) -> tensor<8x192x?xf32>
     %525 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x192x1xf32>} : () -> tensor<1x192x1xf32>
-    %526 = "onnx.Add"(%524, %525) : (tensor<64x192x64xf32>, tensor<1x192x1xf32>) -> tensor<64x192x64xf32>
-    %527 = "onnx.Dim"(%516) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %526 = "onnx.Add"(%524, %525) : (tensor<8x192x?xf32>, tensor<1x192x1xf32>) -> tensor<8x192x?xf32>
+    %527 = "onnx.Dim"(%516) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %528 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %529 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %530 = "onnx.Constant"() {value = dense<192> : tensor<1xi64>} : () -> tensor<1xi64>
     %531 = "onnx.Concat"(%527, %530, %528, %529) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %532 = "onnx.Reshape"(%526, %531) {allowzero = 0 : si64} : (tensor<64x192x64xf32>, tensor<4xi64>) -> tensor<64x192x17x17xf32>
-    %533 = "onnx.Relu"(%532) {onnx_node_name = "Relu_123"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %534 = "onnx.Concat"(%469, %490, %515, %533) {axis = 1 : si64, onnx_node_name = "Concat_124"} : (tensor<64x192x17x17xf32>, tensor<64x192x17x17xf32>, tensor<64x192x17x17xf32>, tensor<64x192x17x17xf32>) -> tensor<64x768x17x17xf32>
-    %535 = "onnx.Dim"(%534) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %532 = "onnx.Reshape"(%526, %531) {allowzero = 0 : si64} : (tensor<8x192x?xf32>, tensor<4xi64>) -> tensor<8x192x17x17xf32>
+    %533 = "onnx.Relu"(%532) {onnx_node_name = "Relu_123"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %534 = "onnx.Concat"(%469, %490, %515, %533) {axis = 1 : si64, onnx_node_name = "Concat_124"} : (tensor<8x192x17x17xf32>, tensor<8x192x17x17xf32>, tensor<8x192x17x17xf32>, tensor<8x192x17x17xf32>) -> tensor<8x768x17x17xf32>
+    %535 = "onnx.Dim"(%534) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %536 = "onnx.Constant"() {value = dense<768> : tensor<1xi64>} : () -> tensor<1xi64>
     %537 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %538 = "onnx.Concat"(%535, %536, %537) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %539 = "onnx.Reshape"(%534, %538) {allowzero = 0 : si64} : (tensor<64x768x17x17xf32>, tensor<3xi64>) -> tensor<64x768x64xf32>
+    %539 = "onnx.Reshape"(%534, %538) {allowzero = 0 : si64} : (tensor<8x768x17x17xf32>, tensor<3xi64>) -> tensor<8x768x?xf32>
     %540 = "onnx.Constant"() {value = dense<[192, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %541 = "onnx.Reshape"(%64, %540) {allowzero = 0 : si64} : (tensor<192x768x1x1xf32>, tensor<2xi64>) -> tensor<192x768xf32>
-    %542 = "onnx.MatMul"(%541, %539) : (tensor<192x768xf32>, tensor<64x768x64xf32>) -> tensor<64x192x64xf32>
+    %542 = "onnx.MatMul"(%541, %539) : (tensor<192x768xf32>, tensor<8x768x?xf32>) -> tensor<8x192x?xf32>
     %543 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x192x1xf32>} : () -> tensor<1x192x1xf32>
-    %544 = "onnx.Add"(%542, %543) : (tensor<64x192x64xf32>, tensor<1x192x1xf32>) -> tensor<64x192x64xf32>
-    %545 = "onnx.Dim"(%534) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %544 = "onnx.Add"(%542, %543) : (tensor<8x192x?xf32>, tensor<1x192x1xf32>) -> tensor<8x192x?xf32>
+    %545 = "onnx.Dim"(%534) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %546 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %547 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %548 = "onnx.Constant"() {value = dense<192> : tensor<1xi64>} : () -> tensor<1xi64>
     %549 = "onnx.Concat"(%545, %548, %546, %547) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %550 = "onnx.Reshape"(%544, %549) {allowzero = 0 : si64} : (tensor<64x192x64xf32>, tensor<4xi64>) -> tensor<64x192x17x17xf32>
-    %551 = "onnx.Relu"(%550) {onnx_node_name = "Relu_126"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %552 = "onnx.Dim"(%534) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %550 = "onnx.Reshape"(%544, %549) {allowzero = 0 : si64} : (tensor<8x192x?xf32>, tensor<4xi64>) -> tensor<8x192x17x17xf32>
+    %551 = "onnx.Relu"(%550) {onnx_node_name = "Relu_126"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %552 = "onnx.Dim"(%534) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %553 = "onnx.Constant"() {value = dense<768> : tensor<1xi64>} : () -> tensor<1xi64>
     %554 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %555 = "onnx.Concat"(%552, %553, %554) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %556 = "onnx.Reshape"(%534, %555) {allowzero = 0 : si64} : (tensor<64x768x17x17xf32>, tensor<3xi64>) -> tensor<64x768x64xf32>
+    %556 = "onnx.Reshape"(%534, %555) {allowzero = 0 : si64} : (tensor<8x768x17x17xf32>, tensor<3xi64>) -> tensor<8x768x?xf32>
     %557 = "onnx.Constant"() {value = dense<[160, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %558 = "onnx.Reshape"(%65, %557) {allowzero = 0 : si64} : (tensor<160x768x1x1xf32>, tensor<2xi64>) -> tensor<160x768xf32>
-    %559 = "onnx.MatMul"(%558, %556) : (tensor<160x768xf32>, tensor<64x768x64xf32>) -> tensor<64x160x64xf32>
+    %559 = "onnx.MatMul"(%558, %556) : (tensor<160x768xf32>, tensor<8x768x?xf32>) -> tensor<8x160x?xf32>
     %560 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x160x1xf32>} : () -> tensor<1x160x1xf32>
-    %561 = "onnx.Add"(%559, %560) : (tensor<64x160x64xf32>, tensor<1x160x1xf32>) -> tensor<64x160x64xf32>
-    %562 = "onnx.Dim"(%534) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %561 = "onnx.Add"(%559, %560) : (tensor<8x160x?xf32>, tensor<1x160x1xf32>) -> tensor<8x160x?xf32>
+    %562 = "onnx.Dim"(%534) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %563 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %564 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %565 = "onnx.Constant"() {value = dense<160> : tensor<1xi64>} : () -> tensor<1xi64>
     %566 = "onnx.Concat"(%562, %565, %563, %564) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %567 = "onnx.Reshape"(%561, %566) {allowzero = 0 : si64} : (tensor<64x160x64xf32>, tensor<4xi64>) -> tensor<64x160x17x17xf32>
-    %568 = "onnx.Relu"(%567) {onnx_node_name = "Relu_128"} : (tensor<64x160x17x17xf32>) -> tensor<64x160x17x17xf32>
-    %569 = "onnx.Conv"(%568, %66, %67) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_129", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<64x160x17x17xf32>, tensor<160x160x1x7xf32>, tensor<160xf32>) -> tensor<64x160x17x17xf32>
-    %570 = "onnx.Relu"(%569) {onnx_node_name = "Relu_130"} : (tensor<64x160x17x17xf32>) -> tensor<64x160x17x17xf32>
-    %571 = "onnx.Conv"(%570, %68, %69) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_131", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<64x160x17x17xf32>, tensor<192x160x7x1xf32>, tensor<192xf32>) -> tensor<64x192x17x17xf32>
-    %572 = "onnx.Relu"(%571) {onnx_node_name = "Relu_132"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %573 = "onnx.Dim"(%534) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %567 = "onnx.Reshape"(%561, %566) {allowzero = 0 : si64} : (tensor<8x160x?xf32>, tensor<4xi64>) -> tensor<8x160x17x17xf32>
+    %568 = "onnx.Relu"(%567) {onnx_node_name = "Relu_128"} : (tensor<8x160x17x17xf32>) -> tensor<8x160x17x17xf32>
+    %569 = "onnx.Conv"(%568, %66, %67) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_129", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<8x160x17x17xf32>, tensor<160x160x1x7xf32>, tensor<160xf32>) -> tensor<8x160x17x17xf32>
+    %570 = "onnx.Relu"(%569) {onnx_node_name = "Relu_130"} : (tensor<8x160x17x17xf32>) -> tensor<8x160x17x17xf32>
+    %571 = "onnx.Conv"(%570, %68, %69) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_131", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<8x160x17x17xf32>, tensor<192x160x7x1xf32>, tensor<192xf32>) -> tensor<8x192x17x17xf32>
+    %572 = "onnx.Relu"(%571) {onnx_node_name = "Relu_132"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %573 = "onnx.Dim"(%534) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %574 = "onnx.Constant"() {value = dense<768> : tensor<1xi64>} : () -> tensor<1xi64>
     %575 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %576 = "onnx.Concat"(%573, %574, %575) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %577 = "onnx.Reshape"(%534, %576) {allowzero = 0 : si64} : (tensor<64x768x17x17xf32>, tensor<3xi64>) -> tensor<64x768x64xf32>
+    %577 = "onnx.Reshape"(%534, %576) {allowzero = 0 : si64} : (tensor<8x768x17x17xf32>, tensor<3xi64>) -> tensor<8x768x?xf32>
     %578 = "onnx.Constant"() {value = dense<[160, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %579 = "onnx.Reshape"(%70, %578) {allowzero = 0 : si64} : (tensor<160x768x1x1xf32>, tensor<2xi64>) -> tensor<160x768xf32>
-    %580 = "onnx.MatMul"(%579, %577) : (tensor<160x768xf32>, tensor<64x768x64xf32>) -> tensor<64x160x64xf32>
+    %580 = "onnx.MatMul"(%579, %577) : (tensor<160x768xf32>, tensor<8x768x?xf32>) -> tensor<8x160x?xf32>
     %581 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x160x1xf32>} : () -> tensor<1x160x1xf32>
-    %582 = "onnx.Add"(%580, %581) : (tensor<64x160x64xf32>, tensor<1x160x1xf32>) -> tensor<64x160x64xf32>
-    %583 = "onnx.Dim"(%534) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %582 = "onnx.Add"(%580, %581) : (tensor<8x160x?xf32>, tensor<1x160x1xf32>) -> tensor<8x160x?xf32>
+    %583 = "onnx.Dim"(%534) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %584 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %585 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %586 = "onnx.Constant"() {value = dense<160> : tensor<1xi64>} : () -> tensor<1xi64>
     %587 = "onnx.Concat"(%583, %586, %584, %585) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %588 = "onnx.Reshape"(%582, %587) {allowzero = 0 : si64} : (tensor<64x160x64xf32>, tensor<4xi64>) -> tensor<64x160x17x17xf32>
-    %589 = "onnx.Relu"(%588) {onnx_node_name = "Relu_134"} : (tensor<64x160x17x17xf32>) -> tensor<64x160x17x17xf32>
-    %590 = "onnx.Conv"(%589, %71, %72) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_135", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<64x160x17x17xf32>, tensor<160x160x7x1xf32>, tensor<160xf32>) -> tensor<64x160x17x17xf32>
-    %591 = "onnx.Relu"(%590) {onnx_node_name = "Relu_136"} : (tensor<64x160x17x17xf32>) -> tensor<64x160x17x17xf32>
-    %592 = "onnx.Conv"(%591, %73, %74) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_137", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<64x160x17x17xf32>, tensor<160x160x1x7xf32>, tensor<160xf32>) -> tensor<64x160x17x17xf32>
-    %593 = "onnx.Relu"(%592) {onnx_node_name = "Relu_138"} : (tensor<64x160x17x17xf32>) -> tensor<64x160x17x17xf32>
-    %594 = "onnx.Conv"(%593, %75, %76) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_139", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<64x160x17x17xf32>, tensor<160x160x7x1xf32>, tensor<160xf32>) -> tensor<64x160x17x17xf32>
-    %595 = "onnx.Relu"(%594) {onnx_node_name = "Relu_140"} : (tensor<64x160x17x17xf32>) -> tensor<64x160x17x17xf32>
-    %596 = "onnx.Conv"(%595, %77, %78) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_141", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<64x160x17x17xf32>, tensor<192x160x1x7xf32>, tensor<192xf32>) -> tensor<64x192x17x17xf32>
-    %597 = "onnx.Relu"(%596) {onnx_node_name = "Relu_142"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %598 = "onnx.AveragePool"(%534) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "AveragePool_145", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<64x768x17x17xf32>) -> tensor<64x768x17x17xf32>
-    %599 = "onnx.Dim"(%598) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %588 = "onnx.Reshape"(%582, %587) {allowzero = 0 : si64} : (tensor<8x160x?xf32>, tensor<4xi64>) -> tensor<8x160x17x17xf32>
+    %589 = "onnx.Relu"(%588) {onnx_node_name = "Relu_134"} : (tensor<8x160x17x17xf32>) -> tensor<8x160x17x17xf32>
+    %590 = "onnx.Conv"(%589, %71, %72) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_135", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<8x160x17x17xf32>, tensor<160x160x7x1xf32>, tensor<160xf32>) -> tensor<8x160x17x17xf32>
+    %591 = "onnx.Relu"(%590) {onnx_node_name = "Relu_136"} : (tensor<8x160x17x17xf32>) -> tensor<8x160x17x17xf32>
+    %592 = "onnx.Conv"(%591, %73, %74) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_137", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<8x160x17x17xf32>, tensor<160x160x1x7xf32>, tensor<160xf32>) -> tensor<8x160x17x17xf32>
+    %593 = "onnx.Relu"(%592) {onnx_node_name = "Relu_138"} : (tensor<8x160x17x17xf32>) -> tensor<8x160x17x17xf32>
+    %594 = "onnx.Conv"(%593, %75, %76) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_139", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<8x160x17x17xf32>, tensor<160x160x7x1xf32>, tensor<160xf32>) -> tensor<8x160x17x17xf32>
+    %595 = "onnx.Relu"(%594) {onnx_node_name = "Relu_140"} : (tensor<8x160x17x17xf32>) -> tensor<8x160x17x17xf32>
+    %596 = "onnx.Conv"(%595, %77, %78) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_141", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<8x160x17x17xf32>, tensor<192x160x1x7xf32>, tensor<192xf32>) -> tensor<8x192x17x17xf32>
+    %597 = "onnx.Relu"(%596) {onnx_node_name = "Relu_142"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %598 = "onnx.AveragePool"(%534) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "AveragePool_145", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<8x768x17x17xf32>) -> tensor<8x768x17x17xf32>
+    %599 = "onnx.Dim"(%598) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %600 = "onnx.Constant"() {value = dense<768> : tensor<1xi64>} : () -> tensor<1xi64>
     %601 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %602 = "onnx.Concat"(%599, %600, %601) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %603 = "onnx.Reshape"(%598, %602) {allowzero = 0 : si64} : (tensor<64x768x17x17xf32>, tensor<3xi64>) -> tensor<64x768x64xf32>
+    %603 = "onnx.Reshape"(%598, %602) {allowzero = 0 : si64} : (tensor<8x768x17x17xf32>, tensor<3xi64>) -> tensor<8x768x?xf32>
     %604 = "onnx.Constant"() {value = dense<[192, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %605 = "onnx.Reshape"(%79, %604) {allowzero = 0 : si64} : (tensor<192x768x1x1xf32>, tensor<2xi64>) -> tensor<192x768xf32>
-    %606 = "onnx.MatMul"(%605, %603) : (tensor<192x768xf32>, tensor<64x768x64xf32>) -> tensor<64x192x64xf32>
+    %606 = "onnx.MatMul"(%605, %603) : (tensor<192x768xf32>, tensor<8x768x?xf32>) -> tensor<8x192x?xf32>
     %607 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x192x1xf32>} : () -> tensor<1x192x1xf32>
-    %608 = "onnx.Add"(%606, %607) : (tensor<64x192x64xf32>, tensor<1x192x1xf32>) -> tensor<64x192x64xf32>
-    %609 = "onnx.Dim"(%598) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %608 = "onnx.Add"(%606, %607) : (tensor<8x192x?xf32>, tensor<1x192x1xf32>) -> tensor<8x192x?xf32>
+    %609 = "onnx.Dim"(%598) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %610 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %611 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %612 = "onnx.Constant"() {value = dense<192> : tensor<1xi64>} : () -> tensor<1xi64>
     %613 = "onnx.Concat"(%609, %612, %610, %611) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %614 = "onnx.Reshape"(%608, %613) {allowzero = 0 : si64} : (tensor<64x192x64xf32>, tensor<4xi64>) -> tensor<64x192x17x17xf32>
-    %615 = "onnx.Relu"(%614) {onnx_node_name = "Relu_147"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %616 = "onnx.Concat"(%551, %572, %597, %615) {axis = 1 : si64, onnx_node_name = "Concat_148"} : (tensor<64x192x17x17xf32>, tensor<64x192x17x17xf32>, tensor<64x192x17x17xf32>, tensor<64x192x17x17xf32>) -> tensor<64x768x17x17xf32>
-    %617 = "onnx.Dim"(%616) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %614 = "onnx.Reshape"(%608, %613) {allowzero = 0 : si64} : (tensor<8x192x?xf32>, tensor<4xi64>) -> tensor<8x192x17x17xf32>
+    %615 = "onnx.Relu"(%614) {onnx_node_name = "Relu_147"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %616 = "onnx.Concat"(%551, %572, %597, %615) {axis = 1 : si64, onnx_node_name = "Concat_148"} : (tensor<8x192x17x17xf32>, tensor<8x192x17x17xf32>, tensor<8x192x17x17xf32>, tensor<8x192x17x17xf32>) -> tensor<8x768x17x17xf32>
+    %617 = "onnx.Dim"(%616) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %618 = "onnx.Constant"() {value = dense<768> : tensor<1xi64>} : () -> tensor<1xi64>
     %619 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %620 = "onnx.Concat"(%617, %618, %619) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %621 = "onnx.Reshape"(%616, %620) {allowzero = 0 : si64} : (tensor<64x768x17x17xf32>, tensor<3xi64>) -> tensor<64x768x64xf32>
+    %621 = "onnx.Reshape"(%616, %620) {allowzero = 0 : si64} : (tensor<8x768x17x17xf32>, tensor<3xi64>) -> tensor<8x768x?xf32>
     %622 = "onnx.Constant"() {value = dense<[192, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %623 = "onnx.Reshape"(%80, %622) {allowzero = 0 : si64} : (tensor<192x768x1x1xf32>, tensor<2xi64>) -> tensor<192x768xf32>
-    %624 = "onnx.MatMul"(%623, %621) : (tensor<192x768xf32>, tensor<64x768x64xf32>) -> tensor<64x192x64xf32>
+    %624 = "onnx.MatMul"(%623, %621) : (tensor<192x768xf32>, tensor<8x768x?xf32>) -> tensor<8x192x?xf32>
     %625 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x192x1xf32>} : () -> tensor<1x192x1xf32>
-    %626 = "onnx.Add"(%624, %625) : (tensor<64x192x64xf32>, tensor<1x192x1xf32>) -> tensor<64x192x64xf32>
-    %627 = "onnx.Dim"(%616) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %626 = "onnx.Add"(%624, %625) : (tensor<8x192x?xf32>, tensor<1x192x1xf32>) -> tensor<8x192x?xf32>
+    %627 = "onnx.Dim"(%616) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %628 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %629 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %630 = "onnx.Constant"() {value = dense<192> : tensor<1xi64>} : () -> tensor<1xi64>
     %631 = "onnx.Concat"(%627, %630, %628, %629) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %632 = "onnx.Reshape"(%626, %631) {allowzero = 0 : si64} : (tensor<64x192x64xf32>, tensor<4xi64>) -> tensor<64x192x17x17xf32>
-    %633 = "onnx.Relu"(%632) {onnx_node_name = "Relu_150"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %634 = "onnx.Dim"(%616) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %632 = "onnx.Reshape"(%626, %631) {allowzero = 0 : si64} : (tensor<8x192x?xf32>, tensor<4xi64>) -> tensor<8x192x17x17xf32>
+    %633 = "onnx.Relu"(%632) {onnx_node_name = "Relu_150"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %634 = "onnx.Dim"(%616) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %635 = "onnx.Constant"() {value = dense<768> : tensor<1xi64>} : () -> tensor<1xi64>
     %636 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %637 = "onnx.Concat"(%634, %635, %636) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %638 = "onnx.Reshape"(%616, %637) {allowzero = 0 : si64} : (tensor<64x768x17x17xf32>, tensor<3xi64>) -> tensor<64x768x64xf32>
+    %638 = "onnx.Reshape"(%616, %637) {allowzero = 0 : si64} : (tensor<8x768x17x17xf32>, tensor<3xi64>) -> tensor<8x768x?xf32>
     %639 = "onnx.Constant"() {value = dense<[160, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %640 = "onnx.Reshape"(%81, %639) {allowzero = 0 : si64} : (tensor<160x768x1x1xf32>, tensor<2xi64>) -> tensor<160x768xf32>
-    %641 = "onnx.MatMul"(%640, %638) : (tensor<160x768xf32>, tensor<64x768x64xf32>) -> tensor<64x160x64xf32>
+    %641 = "onnx.MatMul"(%640, %638) : (tensor<160x768xf32>, tensor<8x768x?xf32>) -> tensor<8x160x?xf32>
     %642 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x160x1xf32>} : () -> tensor<1x160x1xf32>
-    %643 = "onnx.Add"(%641, %642) : (tensor<64x160x64xf32>, tensor<1x160x1xf32>) -> tensor<64x160x64xf32>
-    %644 = "onnx.Dim"(%616) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %643 = "onnx.Add"(%641, %642) : (tensor<8x160x?xf32>, tensor<1x160x1xf32>) -> tensor<8x160x?xf32>
+    %644 = "onnx.Dim"(%616) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %645 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %646 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %647 = "onnx.Constant"() {value = dense<160> : tensor<1xi64>} : () -> tensor<1xi64>
     %648 = "onnx.Concat"(%644, %647, %645, %646) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %649 = "onnx.Reshape"(%643, %648) {allowzero = 0 : si64} : (tensor<64x160x64xf32>, tensor<4xi64>) -> tensor<64x160x17x17xf32>
-    %650 = "onnx.Relu"(%649) {onnx_node_name = "Relu_152"} : (tensor<64x160x17x17xf32>) -> tensor<64x160x17x17xf32>
-    %651 = "onnx.Conv"(%650, %82, %83) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_153", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<64x160x17x17xf32>, tensor<160x160x1x7xf32>, tensor<160xf32>) -> tensor<64x160x17x17xf32>
-    %652 = "onnx.Relu"(%651) {onnx_node_name = "Relu_154"} : (tensor<64x160x17x17xf32>) -> tensor<64x160x17x17xf32>
-    %653 = "onnx.Conv"(%652, %84, %85) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_155", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<64x160x17x17xf32>, tensor<192x160x7x1xf32>, tensor<192xf32>) -> tensor<64x192x17x17xf32>
-    %654 = "onnx.Relu"(%653) {onnx_node_name = "Relu_156"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %655 = "onnx.Dim"(%616) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %649 = "onnx.Reshape"(%643, %648) {allowzero = 0 : si64} : (tensor<8x160x?xf32>, tensor<4xi64>) -> tensor<8x160x17x17xf32>
+    %650 = "onnx.Relu"(%649) {onnx_node_name = "Relu_152"} : (tensor<8x160x17x17xf32>) -> tensor<8x160x17x17xf32>
+    %651 = "onnx.Conv"(%650, %82, %83) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_153", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<8x160x17x17xf32>, tensor<160x160x1x7xf32>, tensor<160xf32>) -> tensor<8x160x17x17xf32>
+    %652 = "onnx.Relu"(%651) {onnx_node_name = "Relu_154"} : (tensor<8x160x17x17xf32>) -> tensor<8x160x17x17xf32>
+    %653 = "onnx.Conv"(%652, %84, %85) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_155", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<8x160x17x17xf32>, tensor<192x160x7x1xf32>, tensor<192xf32>) -> tensor<8x192x17x17xf32>
+    %654 = "onnx.Relu"(%653) {onnx_node_name = "Relu_156"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %655 = "onnx.Dim"(%616) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %656 = "onnx.Constant"() {value = dense<768> : tensor<1xi64>} : () -> tensor<1xi64>
     %657 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %658 = "onnx.Concat"(%655, %656, %657) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %659 = "onnx.Reshape"(%616, %658) {allowzero = 0 : si64} : (tensor<64x768x17x17xf32>, tensor<3xi64>) -> tensor<64x768x64xf32>
+    %659 = "onnx.Reshape"(%616, %658) {allowzero = 0 : si64} : (tensor<8x768x17x17xf32>, tensor<3xi64>) -> tensor<8x768x?xf32>
     %660 = "onnx.Constant"() {value = dense<[160, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %661 = "onnx.Reshape"(%86, %660) {allowzero = 0 : si64} : (tensor<160x768x1x1xf32>, tensor<2xi64>) -> tensor<160x768xf32>
-    %662 = "onnx.MatMul"(%661, %659) : (tensor<160x768xf32>, tensor<64x768x64xf32>) -> tensor<64x160x64xf32>
+    %662 = "onnx.MatMul"(%661, %659) : (tensor<160x768xf32>, tensor<8x768x?xf32>) -> tensor<8x160x?xf32>
     %663 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x160x1xf32>} : () -> tensor<1x160x1xf32>
-    %664 = "onnx.Add"(%662, %663) : (tensor<64x160x64xf32>, tensor<1x160x1xf32>) -> tensor<64x160x64xf32>
-    %665 = "onnx.Dim"(%616) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %664 = "onnx.Add"(%662, %663) : (tensor<8x160x?xf32>, tensor<1x160x1xf32>) -> tensor<8x160x?xf32>
+    %665 = "onnx.Dim"(%616) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %666 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %667 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %668 = "onnx.Constant"() {value = dense<160> : tensor<1xi64>} : () -> tensor<1xi64>
     %669 = "onnx.Concat"(%665, %668, %666, %667) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %670 = "onnx.Reshape"(%664, %669) {allowzero = 0 : si64} : (tensor<64x160x64xf32>, tensor<4xi64>) -> tensor<64x160x17x17xf32>
-    %671 = "onnx.Relu"(%670) {onnx_node_name = "Relu_158"} : (tensor<64x160x17x17xf32>) -> tensor<64x160x17x17xf32>
-    %672 = "onnx.Conv"(%671, %87, %88) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_159", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<64x160x17x17xf32>, tensor<160x160x7x1xf32>, tensor<160xf32>) -> tensor<64x160x17x17xf32>
-    %673 = "onnx.Relu"(%672) {onnx_node_name = "Relu_160"} : (tensor<64x160x17x17xf32>) -> tensor<64x160x17x17xf32>
-    %674 = "onnx.Conv"(%673, %89, %90) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_161", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<64x160x17x17xf32>, tensor<160x160x1x7xf32>, tensor<160xf32>) -> tensor<64x160x17x17xf32>
-    %675 = "onnx.Relu"(%674) {onnx_node_name = "Relu_162"} : (tensor<64x160x17x17xf32>) -> tensor<64x160x17x17xf32>
-    %676 = "onnx.Conv"(%675, %91, %92) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_163", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<64x160x17x17xf32>, tensor<160x160x7x1xf32>, tensor<160xf32>) -> tensor<64x160x17x17xf32>
-    %677 = "onnx.Relu"(%676) {onnx_node_name = "Relu_164"} : (tensor<64x160x17x17xf32>) -> tensor<64x160x17x17xf32>
-    %678 = "onnx.Conv"(%677, %93, %94) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_165", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<64x160x17x17xf32>, tensor<192x160x1x7xf32>, tensor<192xf32>) -> tensor<64x192x17x17xf32>
-    %679 = "onnx.Relu"(%678) {onnx_node_name = "Relu_166"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %680 = "onnx.AveragePool"(%616) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "AveragePool_169", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<64x768x17x17xf32>) -> tensor<64x768x17x17xf32>
-    %681 = "onnx.Dim"(%680) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %670 = "onnx.Reshape"(%664, %669) {allowzero = 0 : si64} : (tensor<8x160x?xf32>, tensor<4xi64>) -> tensor<8x160x17x17xf32>
+    %671 = "onnx.Relu"(%670) {onnx_node_name = "Relu_158"} : (tensor<8x160x17x17xf32>) -> tensor<8x160x17x17xf32>
+    %672 = "onnx.Conv"(%671, %87, %88) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_159", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<8x160x17x17xf32>, tensor<160x160x7x1xf32>, tensor<160xf32>) -> tensor<8x160x17x17xf32>
+    %673 = "onnx.Relu"(%672) {onnx_node_name = "Relu_160"} : (tensor<8x160x17x17xf32>) -> tensor<8x160x17x17xf32>
+    %674 = "onnx.Conv"(%673, %89, %90) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_161", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<8x160x17x17xf32>, tensor<160x160x1x7xf32>, tensor<160xf32>) -> tensor<8x160x17x17xf32>
+    %675 = "onnx.Relu"(%674) {onnx_node_name = "Relu_162"} : (tensor<8x160x17x17xf32>) -> tensor<8x160x17x17xf32>
+    %676 = "onnx.Conv"(%675, %91, %92) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_163", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<8x160x17x17xf32>, tensor<160x160x7x1xf32>, tensor<160xf32>) -> tensor<8x160x17x17xf32>
+    %677 = "onnx.Relu"(%676) {onnx_node_name = "Relu_164"} : (tensor<8x160x17x17xf32>) -> tensor<8x160x17x17xf32>
+    %678 = "onnx.Conv"(%677, %93, %94) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_165", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<8x160x17x17xf32>, tensor<192x160x1x7xf32>, tensor<192xf32>) -> tensor<8x192x17x17xf32>
+    %679 = "onnx.Relu"(%678) {onnx_node_name = "Relu_166"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %680 = "onnx.AveragePool"(%616) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "AveragePool_169", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<8x768x17x17xf32>) -> tensor<8x768x17x17xf32>
+    %681 = "onnx.Dim"(%680) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %682 = "onnx.Constant"() {value = dense<768> : tensor<1xi64>} : () -> tensor<1xi64>
     %683 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %684 = "onnx.Concat"(%681, %682, %683) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %685 = "onnx.Reshape"(%680, %684) {allowzero = 0 : si64} : (tensor<64x768x17x17xf32>, tensor<3xi64>) -> tensor<64x768x64xf32>
+    %685 = "onnx.Reshape"(%680, %684) {allowzero = 0 : si64} : (tensor<8x768x17x17xf32>, tensor<3xi64>) -> tensor<8x768x?xf32>
     %686 = "onnx.Constant"() {value = dense<[192, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %687 = "onnx.Reshape"(%95, %686) {allowzero = 0 : si64} : (tensor<192x768x1x1xf32>, tensor<2xi64>) -> tensor<192x768xf32>
-    %688 = "onnx.MatMul"(%687, %685) : (tensor<192x768xf32>, tensor<64x768x64xf32>) -> tensor<64x192x64xf32>
+    %688 = "onnx.MatMul"(%687, %685) : (tensor<192x768xf32>, tensor<8x768x?xf32>) -> tensor<8x192x?xf32>
     %689 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x192x1xf32>} : () -> tensor<1x192x1xf32>
-    %690 = "onnx.Add"(%688, %689) : (tensor<64x192x64xf32>, tensor<1x192x1xf32>) -> tensor<64x192x64xf32>
-    %691 = "onnx.Dim"(%680) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %690 = "onnx.Add"(%688, %689) : (tensor<8x192x?xf32>, tensor<1x192x1xf32>) -> tensor<8x192x?xf32>
+    %691 = "onnx.Dim"(%680) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %692 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %693 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %694 = "onnx.Constant"() {value = dense<192> : tensor<1xi64>} : () -> tensor<1xi64>
     %695 = "onnx.Concat"(%691, %694, %692, %693) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %696 = "onnx.Reshape"(%690, %695) {allowzero = 0 : si64} : (tensor<64x192x64xf32>, tensor<4xi64>) -> tensor<64x192x17x17xf32>
-    %697 = "onnx.Relu"(%696) {onnx_node_name = "Relu_171"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %698 = "onnx.Concat"(%633, %654, %679, %697) {axis = 1 : si64, onnx_node_name = "Concat_172"} : (tensor<64x192x17x17xf32>, tensor<64x192x17x17xf32>, tensor<64x192x17x17xf32>, tensor<64x192x17x17xf32>) -> tensor<64x768x17x17xf32>
-    %699 = "onnx.Dim"(%698) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %696 = "onnx.Reshape"(%690, %695) {allowzero = 0 : si64} : (tensor<8x192x?xf32>, tensor<4xi64>) -> tensor<8x192x17x17xf32>
+    %697 = "onnx.Relu"(%696) {onnx_node_name = "Relu_171"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %698 = "onnx.Concat"(%633, %654, %679, %697) {axis = 1 : si64, onnx_node_name = "Concat_172"} : (tensor<8x192x17x17xf32>, tensor<8x192x17x17xf32>, tensor<8x192x17x17xf32>, tensor<8x192x17x17xf32>) -> tensor<8x768x17x17xf32>
+    %699 = "onnx.Dim"(%698) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %700 = "onnx.Constant"() {value = dense<768> : tensor<1xi64>} : () -> tensor<1xi64>
     %701 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %702 = "onnx.Concat"(%699, %700, %701) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %703 = "onnx.Reshape"(%698, %702) {allowzero = 0 : si64} : (tensor<64x768x17x17xf32>, tensor<3xi64>) -> tensor<64x768x64xf32>
+    %703 = "onnx.Reshape"(%698, %702) {allowzero = 0 : si64} : (tensor<8x768x17x17xf32>, tensor<3xi64>) -> tensor<8x768x?xf32>
     %704 = "onnx.Constant"() {value = dense<[192, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %705 = "onnx.Reshape"(%96, %704) {allowzero = 0 : si64} : (tensor<192x768x1x1xf32>, tensor<2xi64>) -> tensor<192x768xf32>
-    %706 = "onnx.MatMul"(%705, %703) : (tensor<192x768xf32>, tensor<64x768x64xf32>) -> tensor<64x192x64xf32>
+    %706 = "onnx.MatMul"(%705, %703) : (tensor<192x768xf32>, tensor<8x768x?xf32>) -> tensor<8x192x?xf32>
     %707 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x192x1xf32>} : () -> tensor<1x192x1xf32>
-    %708 = "onnx.Add"(%706, %707) : (tensor<64x192x64xf32>, tensor<1x192x1xf32>) -> tensor<64x192x64xf32>
-    %709 = "onnx.Dim"(%698) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %708 = "onnx.Add"(%706, %707) : (tensor<8x192x?xf32>, tensor<1x192x1xf32>) -> tensor<8x192x?xf32>
+    %709 = "onnx.Dim"(%698) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %710 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %711 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %712 = "onnx.Constant"() {value = dense<192> : tensor<1xi64>} : () -> tensor<1xi64>
     %713 = "onnx.Concat"(%709, %712, %710, %711) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %714 = "onnx.Reshape"(%708, %713) {allowzero = 0 : si64} : (tensor<64x192x64xf32>, tensor<4xi64>) -> tensor<64x192x17x17xf32>
-    %715 = "onnx.Relu"(%714) {onnx_node_name = "Relu_174"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %716 = "onnx.Dim"(%698) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %714 = "onnx.Reshape"(%708, %713) {allowzero = 0 : si64} : (tensor<8x192x?xf32>, tensor<4xi64>) -> tensor<8x192x17x17xf32>
+    %715 = "onnx.Relu"(%714) {onnx_node_name = "Relu_174"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %716 = "onnx.Dim"(%698) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %717 = "onnx.Constant"() {value = dense<768> : tensor<1xi64>} : () -> tensor<1xi64>
     %718 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %719 = "onnx.Concat"(%716, %717, %718) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %720 = "onnx.Reshape"(%698, %719) {allowzero = 0 : si64} : (tensor<64x768x17x17xf32>, tensor<3xi64>) -> tensor<64x768x64xf32>
+    %720 = "onnx.Reshape"(%698, %719) {allowzero = 0 : si64} : (tensor<8x768x17x17xf32>, tensor<3xi64>) -> tensor<8x768x?xf32>
     %721 = "onnx.Constant"() {value = dense<[192, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %722 = "onnx.Reshape"(%97, %721) {allowzero = 0 : si64} : (tensor<192x768x1x1xf32>, tensor<2xi64>) -> tensor<192x768xf32>
-    %723 = "onnx.MatMul"(%722, %720) : (tensor<192x768xf32>, tensor<64x768x64xf32>) -> tensor<64x192x64xf32>
+    %723 = "onnx.MatMul"(%722, %720) : (tensor<192x768xf32>, tensor<8x768x?xf32>) -> tensor<8x192x?xf32>
     %724 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x192x1xf32>} : () -> tensor<1x192x1xf32>
-    %725 = "onnx.Add"(%723, %724) : (tensor<64x192x64xf32>, tensor<1x192x1xf32>) -> tensor<64x192x64xf32>
-    %726 = "onnx.Dim"(%698) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %725 = "onnx.Add"(%723, %724) : (tensor<8x192x?xf32>, tensor<1x192x1xf32>) -> tensor<8x192x?xf32>
+    %726 = "onnx.Dim"(%698) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %727 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %728 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %729 = "onnx.Constant"() {value = dense<192> : tensor<1xi64>} : () -> tensor<1xi64>
     %730 = "onnx.Concat"(%726, %729, %727, %728) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %731 = "onnx.Reshape"(%725, %730) {allowzero = 0 : si64} : (tensor<64x192x64xf32>, tensor<4xi64>) -> tensor<64x192x17x17xf32>
-    %732 = "onnx.Relu"(%731) {onnx_node_name = "Relu_176"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %733 = "onnx.Conv"(%732, %98, %99) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_177", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<64x192x17x17xf32>, tensor<192x192x1x7xf32>, tensor<192xf32>) -> tensor<64x192x17x17xf32>
-    %734 = "onnx.Relu"(%733) {onnx_node_name = "Relu_178"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %735 = "onnx.Conv"(%734, %100, %101) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_179", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<64x192x17x17xf32>, tensor<192x192x7x1xf32>, tensor<192xf32>) -> tensor<64x192x17x17xf32>
-    %736 = "onnx.Relu"(%735) {onnx_node_name = "Relu_180"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %737 = "onnx.Dim"(%698) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %731 = "onnx.Reshape"(%725, %730) {allowzero = 0 : si64} : (tensor<8x192x?xf32>, tensor<4xi64>) -> tensor<8x192x17x17xf32>
+    %732 = "onnx.Relu"(%731) {onnx_node_name = "Relu_176"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %733 = "onnx.Conv"(%732, %98, %99) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_177", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<8x192x17x17xf32>, tensor<192x192x1x7xf32>, tensor<192xf32>) -> tensor<8x192x17x17xf32>
+    %734 = "onnx.Relu"(%733) {onnx_node_name = "Relu_178"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %735 = "onnx.Conv"(%734, %100, %101) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_179", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<8x192x17x17xf32>, tensor<192x192x7x1xf32>, tensor<192xf32>) -> tensor<8x192x17x17xf32>
+    %736 = "onnx.Relu"(%735) {onnx_node_name = "Relu_180"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %737 = "onnx.Dim"(%698) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %738 = "onnx.Constant"() {value = dense<768> : tensor<1xi64>} : () -> tensor<1xi64>
     %739 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %740 = "onnx.Concat"(%737, %738, %739) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %741 = "onnx.Reshape"(%698, %740) {allowzero = 0 : si64} : (tensor<64x768x17x17xf32>, tensor<3xi64>) -> tensor<64x768x64xf32>
+    %741 = "onnx.Reshape"(%698, %740) {allowzero = 0 : si64} : (tensor<8x768x17x17xf32>, tensor<3xi64>) -> tensor<8x768x?xf32>
     %742 = "onnx.Constant"() {value = dense<[192, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %743 = "onnx.Reshape"(%102, %742) {allowzero = 0 : si64} : (tensor<192x768x1x1xf32>, tensor<2xi64>) -> tensor<192x768xf32>
-    %744 = "onnx.MatMul"(%743, %741) : (tensor<192x768xf32>, tensor<64x768x64xf32>) -> tensor<64x192x64xf32>
+    %744 = "onnx.MatMul"(%743, %741) : (tensor<192x768xf32>, tensor<8x768x?xf32>) -> tensor<8x192x?xf32>
     %745 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x192x1xf32>} : () -> tensor<1x192x1xf32>
-    %746 = "onnx.Add"(%744, %745) : (tensor<64x192x64xf32>, tensor<1x192x1xf32>) -> tensor<64x192x64xf32>
-    %747 = "onnx.Dim"(%698) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %746 = "onnx.Add"(%744, %745) : (tensor<8x192x?xf32>, tensor<1x192x1xf32>) -> tensor<8x192x?xf32>
+    %747 = "onnx.Dim"(%698) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %748 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %749 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %750 = "onnx.Constant"() {value = dense<192> : tensor<1xi64>} : () -> tensor<1xi64>
     %751 = "onnx.Concat"(%747, %750, %748, %749) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %752 = "onnx.Reshape"(%746, %751) {allowzero = 0 : si64} : (tensor<64x192x64xf32>, tensor<4xi64>) -> tensor<64x192x17x17xf32>
-    %753 = "onnx.Relu"(%752) {onnx_node_name = "Relu_182"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %754 = "onnx.Conv"(%753, %103, %104) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_183", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<64x192x17x17xf32>, tensor<192x192x7x1xf32>, tensor<192xf32>) -> tensor<64x192x17x17xf32>
-    %755 = "onnx.Relu"(%754) {onnx_node_name = "Relu_184"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %756 = "onnx.Conv"(%755, %105, %106) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_185", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<64x192x17x17xf32>, tensor<192x192x1x7xf32>, tensor<192xf32>) -> tensor<64x192x17x17xf32>
-    %757 = "onnx.Relu"(%756) {onnx_node_name = "Relu_186"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %758 = "onnx.Conv"(%757, %107, %108) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_187", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<64x192x17x17xf32>, tensor<192x192x7x1xf32>, tensor<192xf32>) -> tensor<64x192x17x17xf32>
-    %759 = "onnx.Relu"(%758) {onnx_node_name = "Relu_188"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %760 = "onnx.Conv"(%759, %109, %110) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_189", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<64x192x17x17xf32>, tensor<192x192x1x7xf32>, tensor<192xf32>) -> tensor<64x192x17x17xf32>
-    %761 = "onnx.Relu"(%760) {onnx_node_name = "Relu_190"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %762 = "onnx.AveragePool"(%698) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "AveragePool_193", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<64x768x17x17xf32>) -> tensor<64x768x17x17xf32>
-    %763 = "onnx.Dim"(%762) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %752 = "onnx.Reshape"(%746, %751) {allowzero = 0 : si64} : (tensor<8x192x?xf32>, tensor<4xi64>) -> tensor<8x192x17x17xf32>
+    %753 = "onnx.Relu"(%752) {onnx_node_name = "Relu_182"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %754 = "onnx.Conv"(%753, %103, %104) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_183", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<8x192x17x17xf32>, tensor<192x192x7x1xf32>, tensor<192xf32>) -> tensor<8x192x17x17xf32>
+    %755 = "onnx.Relu"(%754) {onnx_node_name = "Relu_184"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %756 = "onnx.Conv"(%755, %105, %106) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_185", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<8x192x17x17xf32>, tensor<192x192x1x7xf32>, tensor<192xf32>) -> tensor<8x192x17x17xf32>
+    %757 = "onnx.Relu"(%756) {onnx_node_name = "Relu_186"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %758 = "onnx.Conv"(%757, %107, %108) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_187", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<8x192x17x17xf32>, tensor<192x192x7x1xf32>, tensor<192xf32>) -> tensor<8x192x17x17xf32>
+    %759 = "onnx.Relu"(%758) {onnx_node_name = "Relu_188"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %760 = "onnx.Conv"(%759, %109, %110) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_189", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<8x192x17x17xf32>, tensor<192x192x1x7xf32>, tensor<192xf32>) -> tensor<8x192x17x17xf32>
+    %761 = "onnx.Relu"(%760) {onnx_node_name = "Relu_190"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %762 = "onnx.AveragePool"(%698) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "AveragePool_193", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<8x768x17x17xf32>) -> tensor<8x768x17x17xf32>
+    %763 = "onnx.Dim"(%762) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %764 = "onnx.Constant"() {value = dense<768> : tensor<1xi64>} : () -> tensor<1xi64>
     %765 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %766 = "onnx.Concat"(%763, %764, %765) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %767 = "onnx.Reshape"(%762, %766) {allowzero = 0 : si64} : (tensor<64x768x17x17xf32>, tensor<3xi64>) -> tensor<64x768x64xf32>
+    %767 = "onnx.Reshape"(%762, %766) {allowzero = 0 : si64} : (tensor<8x768x17x17xf32>, tensor<3xi64>) -> tensor<8x768x?xf32>
     %768 = "onnx.Constant"() {value = dense<[192, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %769 = "onnx.Reshape"(%111, %768) {allowzero = 0 : si64} : (tensor<192x768x1x1xf32>, tensor<2xi64>) -> tensor<192x768xf32>
-    %770 = "onnx.MatMul"(%769, %767) : (tensor<192x768xf32>, tensor<64x768x64xf32>) -> tensor<64x192x64xf32>
+    %770 = "onnx.MatMul"(%769, %767) : (tensor<192x768xf32>, tensor<8x768x?xf32>) -> tensor<8x192x?xf32>
     %771 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x192x1xf32>} : () -> tensor<1x192x1xf32>
-    %772 = "onnx.Add"(%770, %771) : (tensor<64x192x64xf32>, tensor<1x192x1xf32>) -> tensor<64x192x64xf32>
-    %773 = "onnx.Dim"(%762) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %772 = "onnx.Add"(%770, %771) : (tensor<8x192x?xf32>, tensor<1x192x1xf32>) -> tensor<8x192x?xf32>
+    %773 = "onnx.Dim"(%762) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %774 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %775 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %776 = "onnx.Constant"() {value = dense<192> : tensor<1xi64>} : () -> tensor<1xi64>
     %777 = "onnx.Concat"(%773, %776, %774, %775) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %778 = "onnx.Reshape"(%772, %777) {allowzero = 0 : si64} : (tensor<64x192x64xf32>, tensor<4xi64>) -> tensor<64x192x17x17xf32>
-    %779 = "onnx.Relu"(%778) {onnx_node_name = "Relu_195"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %780 = "onnx.Concat"(%715, %736, %761, %779) {axis = 1 : si64, onnx_node_name = "Concat_196"} : (tensor<64x192x17x17xf32>, tensor<64x192x17x17xf32>, tensor<64x192x17x17xf32>, tensor<64x192x17x17xf32>) -> tensor<64x768x17x17xf32>
-    %781 = "onnx.Dim"(%780) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %778 = "onnx.Reshape"(%772, %777) {allowzero = 0 : si64} : (tensor<8x192x?xf32>, tensor<4xi64>) -> tensor<8x192x17x17xf32>
+    %779 = "onnx.Relu"(%778) {onnx_node_name = "Relu_195"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %780 = "onnx.Concat"(%715, %736, %761, %779) {axis = 1 : si64, onnx_node_name = "Concat_196"} : (tensor<8x192x17x17xf32>, tensor<8x192x17x17xf32>, tensor<8x192x17x17xf32>, tensor<8x192x17x17xf32>) -> tensor<8x768x17x17xf32>
+    %781 = "onnx.Dim"(%780) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %782 = "onnx.Constant"() {value = dense<768> : tensor<1xi64>} : () -> tensor<1xi64>
     %783 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %784 = "onnx.Concat"(%781, %782, %783) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %785 = "onnx.Reshape"(%780, %784) {allowzero = 0 : si64} : (tensor<64x768x17x17xf32>, tensor<3xi64>) -> tensor<64x768x64xf32>
+    %785 = "onnx.Reshape"(%780, %784) {allowzero = 0 : si64} : (tensor<8x768x17x17xf32>, tensor<3xi64>) -> tensor<8x768x?xf32>
     %786 = "onnx.Constant"() {value = dense<[192, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %787 = "onnx.Reshape"(%112, %786) {allowzero = 0 : si64} : (tensor<192x768x1x1xf32>, tensor<2xi64>) -> tensor<192x768xf32>
-    %788 = "onnx.MatMul"(%787, %785) : (tensor<192x768xf32>, tensor<64x768x64xf32>) -> tensor<64x192x64xf32>
+    %788 = "onnx.MatMul"(%787, %785) : (tensor<192x768xf32>, tensor<8x768x?xf32>) -> tensor<8x192x?xf32>
     %789 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x192x1xf32>} : () -> tensor<1x192x1xf32>
-    %790 = "onnx.Add"(%788, %789) : (tensor<64x192x64xf32>, tensor<1x192x1xf32>) -> tensor<64x192x64xf32>
-    %791 = "onnx.Dim"(%780) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %790 = "onnx.Add"(%788, %789) : (tensor<8x192x?xf32>, tensor<1x192x1xf32>) -> tensor<8x192x?xf32>
+    %791 = "onnx.Dim"(%780) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %792 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %793 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %794 = "onnx.Constant"() {value = dense<192> : tensor<1xi64>} : () -> tensor<1xi64>
     %795 = "onnx.Concat"(%791, %794, %792, %793) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %796 = "onnx.Reshape"(%790, %795) {allowzero = 0 : si64} : (tensor<64x192x64xf32>, tensor<4xi64>) -> tensor<64x192x17x17xf32>
-    %797 = "onnx.Relu"(%796) {onnx_node_name = "Relu_198"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %798 = "onnx.Conv"(%797, %113, %114) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_199", pads = [0, 0, 0, 0], strides = [2, 2]} : (tensor<64x192x17x17xf32>, tensor<320x192x3x3xf32>, tensor<320xf32>) -> tensor<64x320x8x8xf32>
-    %799 = "onnx.Relu"(%798) {onnx_node_name = "Relu_200"} : (tensor<64x320x8x8xf32>) -> tensor<64x320x8x8xf32>
-    %800 = "onnx.Dim"(%780) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %796 = "onnx.Reshape"(%790, %795) {allowzero = 0 : si64} : (tensor<8x192x?xf32>, tensor<4xi64>) -> tensor<8x192x17x17xf32>
+    %797 = "onnx.Relu"(%796) {onnx_node_name = "Relu_198"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %798 = "onnx.Conv"(%797, %113, %114) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_199", pads = [0, 0, 0, 0], strides = [2, 2]} : (tensor<8x192x17x17xf32>, tensor<320x192x3x3xf32>, tensor<320xf32>) -> tensor<8x320x8x8xf32>
+    %799 = "onnx.Relu"(%798) {onnx_node_name = "Relu_200"} : (tensor<8x320x8x8xf32>) -> tensor<8x320x8x8xf32>
+    %800 = "onnx.Dim"(%780) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %801 = "onnx.Constant"() {value = dense<768> : tensor<1xi64>} : () -> tensor<1xi64>
     %802 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %803 = "onnx.Concat"(%800, %801, %802) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %804 = "onnx.Reshape"(%780, %803) {allowzero = 0 : si64} : (tensor<64x768x17x17xf32>, tensor<3xi64>) -> tensor<64x768x64xf32>
+    %804 = "onnx.Reshape"(%780, %803) {allowzero = 0 : si64} : (tensor<8x768x17x17xf32>, tensor<3xi64>) -> tensor<8x768x?xf32>
     %805 = "onnx.Constant"() {value = dense<[192, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %806 = "onnx.Reshape"(%115, %805) {allowzero = 0 : si64} : (tensor<192x768x1x1xf32>, tensor<2xi64>) -> tensor<192x768xf32>
-    %807 = "onnx.MatMul"(%806, %804) : (tensor<192x768xf32>, tensor<64x768x64xf32>) -> tensor<64x192x64xf32>
+    %807 = "onnx.MatMul"(%806, %804) : (tensor<192x768xf32>, tensor<8x768x?xf32>) -> tensor<8x192x?xf32>
     %808 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x192x1xf32>} : () -> tensor<1x192x1xf32>
-    %809 = "onnx.Add"(%807, %808) : (tensor<64x192x64xf32>, tensor<1x192x1xf32>) -> tensor<64x192x64xf32>
-    %810 = "onnx.Dim"(%780) {axis = 0 : si64} : (tensor<64x768x17x17xf32>) -> tensor<1xi64>
+    %809 = "onnx.Add"(%807, %808) : (tensor<8x192x?xf32>, tensor<1x192x1xf32>) -> tensor<8x192x?xf32>
+    %810 = "onnx.Dim"(%780) {axis = 0 : si64} : (tensor<8x768x17x17xf32>) -> tensor<1xi64>
     %811 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %812 = "onnx.Constant"() {value = dense<17> : tensor<1xi64>} : () -> tensor<1xi64>
     %813 = "onnx.Constant"() {value = dense<192> : tensor<1xi64>} : () -> tensor<1xi64>
     %814 = "onnx.Concat"(%810, %813, %811, %812) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %815 = "onnx.Reshape"(%809, %814) {allowzero = 0 : si64} : (tensor<64x192x64xf32>, tensor<4xi64>) -> tensor<64x192x17x17xf32>
-    %816 = "onnx.Relu"(%815) {onnx_node_name = "Relu_202"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %817 = "onnx.Conv"(%816, %116, %117) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_203", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<64x192x17x17xf32>, tensor<192x192x1x7xf32>, tensor<192xf32>) -> tensor<64x192x17x17xf32>
-    %818 = "onnx.Relu"(%817) {onnx_node_name = "Relu_204"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %819 = "onnx.Conv"(%818, %118, %119) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_205", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<64x192x17x17xf32>, tensor<192x192x7x1xf32>, tensor<192xf32>) -> tensor<64x192x17x17xf32>
-    %820 = "onnx.Relu"(%819) {onnx_node_name = "Relu_206"} : (tensor<64x192x17x17xf32>) -> tensor<64x192x17x17xf32>
-    %821 = "onnx.Conv"(%820, %120, %121) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_207", pads = [0, 0, 0, 0], strides = [2, 2]} : (tensor<64x192x17x17xf32>, tensor<192x192x3x3xf32>, tensor<192xf32>) -> tensor<64x192x8x8xf32>
-    %822 = "onnx.Relu"(%821) {onnx_node_name = "Relu_208"} : (tensor<64x192x8x8xf32>) -> tensor<64x192x8x8xf32>
-    %823 = "onnx.MaxPoolSingleOut"(%780) {auto_pad = "NOTSET", ceil_mode = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "MaxPool_209", pads = [0, 0, 0, 0], storage_order = 0 : si64, strides = [2, 2]} : (tensor<64x768x17x17xf32>) -> tensor<64x768x8x8xf32>
-    %824 = "onnx.Concat"(%799, %822, %823) {axis = 1 : si64, onnx_node_name = "Concat_210"} : (tensor<64x320x8x8xf32>, tensor<64x192x8x8xf32>, tensor<64x768x8x8xf32>) -> tensor<64x1280x8x8xf32>
-    %825 = "onnx.Dim"(%824) {axis = 0 : si64} : (tensor<64x1280x8x8xf32>) -> tensor<1xi64>
+    %815 = "onnx.Reshape"(%809, %814) {allowzero = 0 : si64} : (tensor<8x192x?xf32>, tensor<4xi64>) -> tensor<8x192x17x17xf32>
+    %816 = "onnx.Relu"(%815) {onnx_node_name = "Relu_202"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %817 = "onnx.Conv"(%816, %116, %117) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 7], onnx_node_name = "Conv_203", pads = [0, 3, 0, 3], strides = [1, 1]} : (tensor<8x192x17x17xf32>, tensor<192x192x1x7xf32>, tensor<192xf32>) -> tensor<8x192x17x17xf32>
+    %818 = "onnx.Relu"(%817) {onnx_node_name = "Relu_204"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %819 = "onnx.Conv"(%818, %118, %119) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [7, 1], onnx_node_name = "Conv_205", pads = [3, 0, 3, 0], strides = [1, 1]} : (tensor<8x192x17x17xf32>, tensor<192x192x7x1xf32>, tensor<192xf32>) -> tensor<8x192x17x17xf32>
+    %820 = "onnx.Relu"(%819) {onnx_node_name = "Relu_206"} : (tensor<8x192x17x17xf32>) -> tensor<8x192x17x17xf32>
+    %821 = "onnx.Conv"(%820, %120, %121) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_207", pads = [0, 0, 0, 0], strides = [2, 2]} : (tensor<8x192x17x17xf32>, tensor<192x192x3x3xf32>, tensor<192xf32>) -> tensor<8x192x8x8xf32>
+    %822 = "onnx.Relu"(%821) {onnx_node_name = "Relu_208"} : (tensor<8x192x8x8xf32>) -> tensor<8x192x8x8xf32>
+    %823 = "onnx.MaxPoolSingleOut"(%780) {auto_pad = "NOTSET", ceil_mode = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "MaxPool_209", pads = [0, 0, 0, 0], storage_order = 0 : si64, strides = [2, 2]} : (tensor<8x768x17x17xf32>) -> tensor<8x768x8x8xf32>
+    %824 = "onnx.Concat"(%799, %822, %823) {axis = 1 : si64, onnx_node_name = "Concat_210"} : (tensor<8x320x8x8xf32>, tensor<8x192x8x8xf32>, tensor<8x768x8x8xf32>) -> tensor<8x1280x8x8xf32>
+    %825 = "onnx.Dim"(%824) {axis = 0 : si64} : (tensor<8x1280x8x8xf32>) -> tensor<1xi64>
     %826 = "onnx.Constant"() {value = dense<1280> : tensor<1xi64>} : () -> tensor<1xi64>
     %827 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %828 = "onnx.Concat"(%825, %826, %827) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %829 = "onnx.Reshape"(%824, %828) {allowzero = 0 : si64} : (tensor<64x1280x8x8xf32>, tensor<3xi64>) -> tensor<64x1280x64xf32>
+    %829 = "onnx.Reshape"(%824, %828) {allowzero = 0 : si64} : (tensor<8x1280x8x8xf32>, tensor<3xi64>) -> tensor<8x1280x?xf32>
     %830 = "onnx.Constant"() {value = dense<[320, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %831 = "onnx.Reshape"(%122, %830) {allowzero = 0 : si64} : (tensor<320x1280x1x1xf32>, tensor<2xi64>) -> tensor<320x1280xf32>
-    %832 = "onnx.MatMul"(%831, %829) : (tensor<320x1280xf32>, tensor<64x1280x64xf32>) -> tensor<64x320x64xf32>
+    %832 = "onnx.MatMul"(%831, %829) : (tensor<320x1280xf32>, tensor<8x1280x?xf32>) -> tensor<8x320x?xf32>
     %833 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x320x1xf32>} : () -> tensor<1x320x1xf32>
-    %834 = "onnx.Add"(%832, %833) : (tensor<64x320x64xf32>, tensor<1x320x1xf32>) -> tensor<64x320x64xf32>
-    %835 = "onnx.Dim"(%824) {axis = 0 : si64} : (tensor<64x1280x8x8xf32>) -> tensor<1xi64>
+    %834 = "onnx.Add"(%832, %833) : (tensor<8x320x?xf32>, tensor<1x320x1xf32>) -> tensor<8x320x?xf32>
+    %835 = "onnx.Dim"(%824) {axis = 0 : si64} : (tensor<8x1280x8x8xf32>) -> tensor<1xi64>
     %836 = "onnx.Constant"() {value = dense<8> : tensor<1xi64>} : () -> tensor<1xi64>
     %837 = "onnx.Constant"() {value = dense<8> : tensor<1xi64>} : () -> tensor<1xi64>
     %838 = "onnx.Constant"() {value = dense<320> : tensor<1xi64>} : () -> tensor<1xi64>
     %839 = "onnx.Concat"(%835, %838, %836, %837) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %840 = "onnx.Reshape"(%834, %839) {allowzero = 0 : si64} : (tensor<64x320x64xf32>, tensor<4xi64>) -> tensor<64x320x8x8xf32>
-    %841 = "onnx.Relu"(%840) {onnx_node_name = "Relu_212"} : (tensor<64x320x8x8xf32>) -> tensor<64x320x8x8xf32>
-    %842 = "onnx.Dim"(%824) {axis = 0 : si64} : (tensor<64x1280x8x8xf32>) -> tensor<1xi64>
+    %840 = "onnx.Reshape"(%834, %839) {allowzero = 0 : si64} : (tensor<8x320x?xf32>, tensor<4xi64>) -> tensor<8x320x8x8xf32>
+    %841 = "onnx.Relu"(%840) {onnx_node_name = "Relu_212"} : (tensor<8x320x8x8xf32>) -> tensor<8x320x8x8xf32>
+    %842 = "onnx.Dim"(%824) {axis = 0 : si64} : (tensor<8x1280x8x8xf32>) -> tensor<1xi64>
     %843 = "onnx.Constant"() {value = dense<1280> : tensor<1xi64>} : () -> tensor<1xi64>
     %844 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %845 = "onnx.Concat"(%842, %843, %844) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %846 = "onnx.Reshape"(%824, %845) {allowzero = 0 : si64} : (tensor<64x1280x8x8xf32>, tensor<3xi64>) -> tensor<64x1280x64xf32>
+    %846 = "onnx.Reshape"(%824, %845) {allowzero = 0 : si64} : (tensor<8x1280x8x8xf32>, tensor<3xi64>) -> tensor<8x1280x?xf32>
     %847 = "onnx.Constant"() {value = dense<[384, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %848 = "onnx.Reshape"(%123, %847) {allowzero = 0 : si64} : (tensor<384x1280x1x1xf32>, tensor<2xi64>) -> tensor<384x1280xf32>
-    %849 = "onnx.MatMul"(%848, %846) : (tensor<384x1280xf32>, tensor<64x1280x64xf32>) -> tensor<64x384x64xf32>
+    %849 = "onnx.MatMul"(%848, %846) : (tensor<384x1280xf32>, tensor<8x1280x?xf32>) -> tensor<8x384x?xf32>
     %850 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x384x1xf32>} : () -> tensor<1x384x1xf32>
-    %851 = "onnx.Add"(%849, %850) : (tensor<64x384x64xf32>, tensor<1x384x1xf32>) -> tensor<64x384x64xf32>
-    %852 = "onnx.Dim"(%824) {axis = 0 : si64} : (tensor<64x1280x8x8xf32>) -> tensor<1xi64>
+    %851 = "onnx.Add"(%849, %850) : (tensor<8x384x?xf32>, tensor<1x384x1xf32>) -> tensor<8x384x?xf32>
+    %852 = "onnx.Dim"(%824) {axis = 0 : si64} : (tensor<8x1280x8x8xf32>) -> tensor<1xi64>
     %853 = "onnx.Constant"() {value = dense<8> : tensor<1xi64>} : () -> tensor<1xi64>
     %854 = "onnx.Constant"() {value = dense<8> : tensor<1xi64>} : () -> tensor<1xi64>
     %855 = "onnx.Constant"() {value = dense<384> : tensor<1xi64>} : () -> tensor<1xi64>
     %856 = "onnx.Concat"(%852, %855, %853, %854) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %857 = "onnx.Reshape"(%851, %856) {allowzero = 0 : si64} : (tensor<64x384x64xf32>, tensor<4xi64>) -> tensor<64x384x8x8xf32>
-    %858 = "onnx.Relu"(%857) {onnx_node_name = "Relu_214"} : (tensor<64x384x8x8xf32>) -> tensor<64x384x8x8xf32>
-    %859 = "onnx.Conv"(%858, %124, %125) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 3], onnx_node_name = "Conv_215", pads = [0, 1, 0, 1], strides = [1, 1]} : (tensor<64x384x8x8xf32>, tensor<384x384x1x3xf32>, tensor<384xf32>) -> tensor<64x384x8x8xf32>
-    %860 = "onnx.Relu"(%859) {onnx_node_name = "Relu_216"} : (tensor<64x384x8x8xf32>) -> tensor<64x384x8x8xf32>
-    %861 = "onnx.Conv"(%858, %126, %127) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 1], onnx_node_name = "Conv_217", pads = [1, 0, 1, 0], strides = [1, 1]} : (tensor<64x384x8x8xf32>, tensor<384x384x3x1xf32>, tensor<384xf32>) -> tensor<64x384x8x8xf32>
-    %862 = "onnx.Relu"(%861) {onnx_node_name = "Relu_218"} : (tensor<64x384x8x8xf32>) -> tensor<64x384x8x8xf32>
-    %863 = "onnx.Dim"(%824) {axis = 0 : si64} : (tensor<64x1280x8x8xf32>) -> tensor<1xi64>
+    %857 = "onnx.Reshape"(%851, %856) {allowzero = 0 : si64} : (tensor<8x384x?xf32>, tensor<4xi64>) -> tensor<8x384x8x8xf32>
+    %858 = "onnx.Relu"(%857) {onnx_node_name = "Relu_214"} : (tensor<8x384x8x8xf32>) -> tensor<8x384x8x8xf32>
+    %859 = "onnx.Conv"(%858, %124, %125) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 3], onnx_node_name = "Conv_215", pads = [0, 1, 0, 1], strides = [1, 1]} : (tensor<8x384x8x8xf32>, tensor<384x384x1x3xf32>, tensor<384xf32>) -> tensor<8x384x8x8xf32>
+    %860 = "onnx.Relu"(%859) {onnx_node_name = "Relu_216"} : (tensor<8x384x8x8xf32>) -> tensor<8x384x8x8xf32>
+    %861 = "onnx.Conv"(%858, %126, %127) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 1], onnx_node_name = "Conv_217", pads = [1, 0, 1, 0], strides = [1, 1]} : (tensor<8x384x8x8xf32>, tensor<384x384x3x1xf32>, tensor<384xf32>) -> tensor<8x384x8x8xf32>
+    %862 = "onnx.Relu"(%861) {onnx_node_name = "Relu_218"} : (tensor<8x384x8x8xf32>) -> tensor<8x384x8x8xf32>
+    %863 = "onnx.Dim"(%824) {axis = 0 : si64} : (tensor<8x1280x8x8xf32>) -> tensor<1xi64>
     %864 = "onnx.Constant"() {value = dense<1280> : tensor<1xi64>} : () -> tensor<1xi64>
     %865 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %866 = "onnx.Concat"(%863, %864, %865) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %867 = "onnx.Reshape"(%824, %866) {allowzero = 0 : si64} : (tensor<64x1280x8x8xf32>, tensor<3xi64>) -> tensor<64x1280x64xf32>
+    %867 = "onnx.Reshape"(%824, %866) {allowzero = 0 : si64} : (tensor<8x1280x8x8xf32>, tensor<3xi64>) -> tensor<8x1280x?xf32>
     %868 = "onnx.Constant"() {value = dense<[448, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %869 = "onnx.Reshape"(%128, %868) {allowzero = 0 : si64} : (tensor<448x1280x1x1xf32>, tensor<2xi64>) -> tensor<448x1280xf32>
-    %870 = "onnx.MatMul"(%869, %867) : (tensor<448x1280xf32>, tensor<64x1280x64xf32>) -> tensor<64x448x64xf32>
+    %870 = "onnx.MatMul"(%869, %867) : (tensor<448x1280xf32>, tensor<8x1280x?xf32>) -> tensor<8x448x?xf32>
     %871 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x448x1xf32>} : () -> tensor<1x448x1xf32>
-    %872 = "onnx.Add"(%870, %871) : (tensor<64x448x64xf32>, tensor<1x448x1xf32>) -> tensor<64x448x64xf32>
-    %873 = "onnx.Dim"(%824) {axis = 0 : si64} : (tensor<64x1280x8x8xf32>) -> tensor<1xi64>
+    %872 = "onnx.Add"(%870, %871) : (tensor<8x448x?xf32>, tensor<1x448x1xf32>) -> tensor<8x448x?xf32>
+    %873 = "onnx.Dim"(%824) {axis = 0 : si64} : (tensor<8x1280x8x8xf32>) -> tensor<1xi64>
     %874 = "onnx.Constant"() {value = dense<8> : tensor<1xi64>} : () -> tensor<1xi64>
     %875 = "onnx.Constant"() {value = dense<8> : tensor<1xi64>} : () -> tensor<1xi64>
     %876 = "onnx.Constant"() {value = dense<448> : tensor<1xi64>} : () -> tensor<1xi64>
     %877 = "onnx.Concat"(%873, %876, %874, %875) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %878 = "onnx.Reshape"(%872, %877) {allowzero = 0 : si64} : (tensor<64x448x64xf32>, tensor<4xi64>) -> tensor<64x448x8x8xf32>
-    %879 = "onnx.Relu"(%878) {onnx_node_name = "Relu_221"} : (tensor<64x448x8x8xf32>) -> tensor<64x448x8x8xf32>
-    %880 = "onnx.Conv"(%879, %129, %130) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_222", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<64x448x8x8xf32>, tensor<384x448x3x3xf32>, tensor<384xf32>) -> tensor<64x384x8x8xf32>
-    %881 = "onnx.Relu"(%880) {onnx_node_name = "Relu_223"} : (tensor<64x384x8x8xf32>) -> tensor<64x384x8x8xf32>
-    %882 = "onnx.Conv"(%881, %131, %132) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 3], onnx_node_name = "Conv_224", pads = [0, 1, 0, 1], strides = [1, 1]} : (tensor<64x384x8x8xf32>, tensor<384x384x1x3xf32>, tensor<384xf32>) -> tensor<64x384x8x8xf32>
-    %883 = "onnx.Relu"(%882) {onnx_node_name = "Relu_225"} : (tensor<64x384x8x8xf32>) -> tensor<64x384x8x8xf32>
-    %884 = "onnx.Conv"(%881, %133, %134) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 1], onnx_node_name = "Conv_226", pads = [1, 0, 1, 0], strides = [1, 1]} : (tensor<64x384x8x8xf32>, tensor<384x384x3x1xf32>, tensor<384xf32>) -> tensor<64x384x8x8xf32>
-    %885 = "onnx.Relu"(%884) {onnx_node_name = "Relu_227"} : (tensor<64x384x8x8xf32>) -> tensor<64x384x8x8xf32>
-    %886 = "onnx.AveragePool"(%824) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "AveragePool_231", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<64x1280x8x8xf32>) -> tensor<64x1280x8x8xf32>
-    %887 = "onnx.Dim"(%886) {axis = 0 : si64} : (tensor<64x1280x8x8xf32>) -> tensor<1xi64>
+    %878 = "onnx.Reshape"(%872, %877) {allowzero = 0 : si64} : (tensor<8x448x?xf32>, tensor<4xi64>) -> tensor<8x448x8x8xf32>
+    %879 = "onnx.Relu"(%878) {onnx_node_name = "Relu_221"} : (tensor<8x448x8x8xf32>) -> tensor<8x448x8x8xf32>
+    %880 = "onnx.Conv"(%879, %129, %130) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_222", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<8x448x8x8xf32>, tensor<384x448x3x3xf32>, tensor<384xf32>) -> tensor<8x384x8x8xf32>
+    %881 = "onnx.Relu"(%880) {onnx_node_name = "Relu_223"} : (tensor<8x384x8x8xf32>) -> tensor<8x384x8x8xf32>
+    %882 = "onnx.Conv"(%881, %131, %132) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 3], onnx_node_name = "Conv_224", pads = [0, 1, 0, 1], strides = [1, 1]} : (tensor<8x384x8x8xf32>, tensor<384x384x1x3xf32>, tensor<384xf32>) -> tensor<8x384x8x8xf32>
+    %883 = "onnx.Relu"(%882) {onnx_node_name = "Relu_225"} : (tensor<8x384x8x8xf32>) -> tensor<8x384x8x8xf32>
+    %884 = "onnx.Conv"(%881, %133, %134) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 1], onnx_node_name = "Conv_226", pads = [1, 0, 1, 0], strides = [1, 1]} : (tensor<8x384x8x8xf32>, tensor<384x384x3x1xf32>, tensor<384xf32>) -> tensor<8x384x8x8xf32>
+    %885 = "onnx.Relu"(%884) {onnx_node_name = "Relu_227"} : (tensor<8x384x8x8xf32>) -> tensor<8x384x8x8xf32>
+    %886 = "onnx.AveragePool"(%824) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "AveragePool_231", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<8x1280x8x8xf32>) -> tensor<8x1280x8x8xf32>
+    %887 = "onnx.Dim"(%886) {axis = 0 : si64} : (tensor<8x1280x8x8xf32>) -> tensor<1xi64>
     %888 = "onnx.Constant"() {value = dense<1280> : tensor<1xi64>} : () -> tensor<1xi64>
     %889 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %890 = "onnx.Concat"(%887, %888, %889) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %891 = "onnx.Reshape"(%886, %890) {allowzero = 0 : si64} : (tensor<64x1280x8x8xf32>, tensor<3xi64>) -> tensor<64x1280x64xf32>
+    %891 = "onnx.Reshape"(%886, %890) {allowzero = 0 : si64} : (tensor<8x1280x8x8xf32>, tensor<3xi64>) -> tensor<8x1280x?xf32>
     %892 = "onnx.Constant"() {value = dense<[192, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %893 = "onnx.Reshape"(%135, %892) {allowzero = 0 : si64} : (tensor<192x1280x1x1xf32>, tensor<2xi64>) -> tensor<192x1280xf32>
-    %894 = "onnx.MatMul"(%893, %891) : (tensor<192x1280xf32>, tensor<64x1280x64xf32>) -> tensor<64x192x64xf32>
+    %894 = "onnx.MatMul"(%893, %891) : (tensor<192x1280xf32>, tensor<8x1280x?xf32>) -> tensor<8x192x?xf32>
     %895 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x192x1xf32>} : () -> tensor<1x192x1xf32>
-    %896 = "onnx.Add"(%894, %895) : (tensor<64x192x64xf32>, tensor<1x192x1xf32>) -> tensor<64x192x64xf32>
-    %897 = "onnx.Dim"(%886) {axis = 0 : si64} : (tensor<64x1280x8x8xf32>) -> tensor<1xi64>
+    %896 = "onnx.Add"(%894, %895) : (tensor<8x192x?xf32>, tensor<1x192x1xf32>) -> tensor<8x192x?xf32>
+    %897 = "onnx.Dim"(%886) {axis = 0 : si64} : (tensor<8x1280x8x8xf32>) -> tensor<1xi64>
     %898 = "onnx.Constant"() {value = dense<8> : tensor<1xi64>} : () -> tensor<1xi64>
     %899 = "onnx.Constant"() {value = dense<8> : tensor<1xi64>} : () -> tensor<1xi64>
     %900 = "onnx.Constant"() {value = dense<192> : tensor<1xi64>} : () -> tensor<1xi64>
     %901 = "onnx.Concat"(%897, %900, %898, %899) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %902 = "onnx.Reshape"(%896, %901) {allowzero = 0 : si64} : (tensor<64x192x64xf32>, tensor<4xi64>) -> tensor<64x192x8x8xf32>
-    %903 = "onnx.Relu"(%902) {onnx_node_name = "Relu_233"} : (tensor<64x192x8x8xf32>) -> tensor<64x192x8x8xf32>
-    %904 = "onnx.Concat"(%841, %860, %862, %883, %885, %903) {axis = 1 : si64, onnx_node_name = "Concat_234"} : (tensor<64x320x8x8xf32>, tensor<64x384x8x8xf32>, tensor<64x384x8x8xf32>, tensor<64x384x8x8xf32>, tensor<64x384x8x8xf32>, tensor<64x192x8x8xf32>) -> tensor<64x2048x8x8xf32>
-    %905 = "onnx.Dim"(%904) {axis = 0 : si64} : (tensor<64x2048x8x8xf32>) -> tensor<1xi64>
+    %902 = "onnx.Reshape"(%896, %901) {allowzero = 0 : si64} : (tensor<8x192x?xf32>, tensor<4xi64>) -> tensor<8x192x8x8xf32>
+    %903 = "onnx.Relu"(%902) {onnx_node_name = "Relu_233"} : (tensor<8x192x8x8xf32>) -> tensor<8x192x8x8xf32>
+    %904 = "onnx.Concat"(%841, %860, %862, %883, %885, %903) {axis = 1 : si64, onnx_node_name = "Concat_234"} : (tensor<8x320x8x8xf32>, tensor<8x384x8x8xf32>, tensor<8x384x8x8xf32>, tensor<8x384x8x8xf32>, tensor<8x384x8x8xf32>, tensor<8x192x8x8xf32>) -> tensor<8x2048x8x8xf32>
+    %905 = "onnx.Dim"(%904) {axis = 0 : si64} : (tensor<8x2048x8x8xf32>) -> tensor<1xi64>
     %906 = "onnx.Constant"() {value = dense<2048> : tensor<1xi64>} : () -> tensor<1xi64>
     %907 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %908 = "onnx.Concat"(%905, %906, %907) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %909 = "onnx.Reshape"(%904, %908) {allowzero = 0 : si64} : (tensor<64x2048x8x8xf32>, tensor<3xi64>) -> tensor<64x2048x64xf32>
+    %909 = "onnx.Reshape"(%904, %908) {allowzero = 0 : si64} : (tensor<8x2048x8x8xf32>, tensor<3xi64>) -> tensor<8x2048x?xf32>
     %910 = "onnx.Constant"() {value = dense<[320, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %911 = "onnx.Reshape"(%136, %910) {allowzero = 0 : si64} : (tensor<320x2048x1x1xf32>, tensor<2xi64>) -> tensor<320x2048xf32>
-    %912 = "onnx.MatMul"(%911, %909) : (tensor<320x2048xf32>, tensor<64x2048x64xf32>) -> tensor<64x320x64xf32>
+    %912 = "onnx.MatMul"(%911, %909) : (tensor<320x2048xf32>, tensor<8x2048x?xf32>) -> tensor<8x320x?xf32>
     %913 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x320x1xf32>} : () -> tensor<1x320x1xf32>
-    %914 = "onnx.Add"(%912, %913) : (tensor<64x320x64xf32>, tensor<1x320x1xf32>) -> tensor<64x320x64xf32>
-    %915 = "onnx.Dim"(%904) {axis = 0 : si64} : (tensor<64x2048x8x8xf32>) -> tensor<1xi64>
+    %914 = "onnx.Add"(%912, %913) : (tensor<8x320x?xf32>, tensor<1x320x1xf32>) -> tensor<8x320x?xf32>
+    %915 = "onnx.Dim"(%904) {axis = 0 : si64} : (tensor<8x2048x8x8xf32>) -> tensor<1xi64>
     %916 = "onnx.Constant"() {value = dense<8> : tensor<1xi64>} : () -> tensor<1xi64>
     %917 = "onnx.Constant"() {value = dense<8> : tensor<1xi64>} : () -> tensor<1xi64>
     %918 = "onnx.Constant"() {value = dense<320> : tensor<1xi64>} : () -> tensor<1xi64>
     %919 = "onnx.Concat"(%915, %918, %916, %917) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %920 = "onnx.Reshape"(%914, %919) {allowzero = 0 : si64} : (tensor<64x320x64xf32>, tensor<4xi64>) -> tensor<64x320x8x8xf32>
-    %921 = "onnx.Relu"(%920) {onnx_node_name = "Relu_236"} : (tensor<64x320x8x8xf32>) -> tensor<64x320x8x8xf32>
-    %922 = "onnx.Dim"(%904) {axis = 0 : si64} : (tensor<64x2048x8x8xf32>) -> tensor<1xi64>
+    %920 = "onnx.Reshape"(%914, %919) {allowzero = 0 : si64} : (tensor<8x320x?xf32>, tensor<4xi64>) -> tensor<8x320x8x8xf32>
+    %921 = "onnx.Relu"(%920) {onnx_node_name = "Relu_236"} : (tensor<8x320x8x8xf32>) -> tensor<8x320x8x8xf32>
+    %922 = "onnx.Dim"(%904) {axis = 0 : si64} : (tensor<8x2048x8x8xf32>) -> tensor<1xi64>
     %923 = "onnx.Constant"() {value = dense<2048> : tensor<1xi64>} : () -> tensor<1xi64>
     %924 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %925 = "onnx.Concat"(%922, %923, %924) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %926 = "onnx.Reshape"(%904, %925) {allowzero = 0 : si64} : (tensor<64x2048x8x8xf32>, tensor<3xi64>) -> tensor<64x2048x64xf32>
+    %926 = "onnx.Reshape"(%904, %925) {allowzero = 0 : si64} : (tensor<8x2048x8x8xf32>, tensor<3xi64>) -> tensor<8x2048x?xf32>
     %927 = "onnx.Constant"() {value = dense<[384, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %928 = "onnx.Reshape"(%137, %927) {allowzero = 0 : si64} : (tensor<384x2048x1x1xf32>, tensor<2xi64>) -> tensor<384x2048xf32>
-    %929 = "onnx.MatMul"(%928, %926) : (tensor<384x2048xf32>, tensor<64x2048x64xf32>) -> tensor<64x384x64xf32>
+    %929 = "onnx.MatMul"(%928, %926) : (tensor<384x2048xf32>, tensor<8x2048x?xf32>) -> tensor<8x384x?xf32>
     %930 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x384x1xf32>} : () -> tensor<1x384x1xf32>
-    %931 = "onnx.Add"(%929, %930) : (tensor<64x384x64xf32>, tensor<1x384x1xf32>) -> tensor<64x384x64xf32>
-    %932 = "onnx.Dim"(%904) {axis = 0 : si64} : (tensor<64x2048x8x8xf32>) -> tensor<1xi64>
+    %931 = "onnx.Add"(%929, %930) : (tensor<8x384x?xf32>, tensor<1x384x1xf32>) -> tensor<8x384x?xf32>
+    %932 = "onnx.Dim"(%904) {axis = 0 : si64} : (tensor<8x2048x8x8xf32>) -> tensor<1xi64>
     %933 = "onnx.Constant"() {value = dense<8> : tensor<1xi64>} : () -> tensor<1xi64>
     %934 = "onnx.Constant"() {value = dense<8> : tensor<1xi64>} : () -> tensor<1xi64>
     %935 = "onnx.Constant"() {value = dense<384> : tensor<1xi64>} : () -> tensor<1xi64>
     %936 = "onnx.Concat"(%932, %935, %933, %934) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %937 = "onnx.Reshape"(%931, %936) {allowzero = 0 : si64} : (tensor<64x384x64xf32>, tensor<4xi64>) -> tensor<64x384x8x8xf32>
-    %938 = "onnx.Relu"(%937) {onnx_node_name = "Relu_238"} : (tensor<64x384x8x8xf32>) -> tensor<64x384x8x8xf32>
-    %939 = "onnx.Conv"(%938, %138, %139) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 3], onnx_node_name = "Conv_239", pads = [0, 1, 0, 1], strides = [1, 1]} : (tensor<64x384x8x8xf32>, tensor<384x384x1x3xf32>, tensor<384xf32>) -> tensor<64x384x8x8xf32>
-    %940 = "onnx.Relu"(%939) {onnx_node_name = "Relu_240"} : (tensor<64x384x8x8xf32>) -> tensor<64x384x8x8xf32>
-    %941 = "onnx.Conv"(%938, %140, %141) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 1], onnx_node_name = "Conv_241", pads = [1, 0, 1, 0], strides = [1, 1]} : (tensor<64x384x8x8xf32>, tensor<384x384x3x1xf32>, tensor<384xf32>) -> tensor<64x384x8x8xf32>
-    %942 = "onnx.Relu"(%941) {onnx_node_name = "Relu_242"} : (tensor<64x384x8x8xf32>) -> tensor<64x384x8x8xf32>
-    %943 = "onnx.Dim"(%904) {axis = 0 : si64} : (tensor<64x2048x8x8xf32>) -> tensor<1xi64>
+    %937 = "onnx.Reshape"(%931, %936) {allowzero = 0 : si64} : (tensor<8x384x?xf32>, tensor<4xi64>) -> tensor<8x384x8x8xf32>
+    %938 = "onnx.Relu"(%937) {onnx_node_name = "Relu_238"} : (tensor<8x384x8x8xf32>) -> tensor<8x384x8x8xf32>
+    %939 = "onnx.Conv"(%938, %138, %139) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 3], onnx_node_name = "Conv_239", pads = [0, 1, 0, 1], strides = [1, 1]} : (tensor<8x384x8x8xf32>, tensor<384x384x1x3xf32>, tensor<384xf32>) -> tensor<8x384x8x8xf32>
+    %940 = "onnx.Relu"(%939) {onnx_node_name = "Relu_240"} : (tensor<8x384x8x8xf32>) -> tensor<8x384x8x8xf32>
+    %941 = "onnx.Conv"(%938, %140, %141) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 1], onnx_node_name = "Conv_241", pads = [1, 0, 1, 0], strides = [1, 1]} : (tensor<8x384x8x8xf32>, tensor<384x384x3x1xf32>, tensor<384xf32>) -> tensor<8x384x8x8xf32>
+    %942 = "onnx.Relu"(%941) {onnx_node_name = "Relu_242"} : (tensor<8x384x8x8xf32>) -> tensor<8x384x8x8xf32>
+    %943 = "onnx.Dim"(%904) {axis = 0 : si64} : (tensor<8x2048x8x8xf32>) -> tensor<1xi64>
     %944 = "onnx.Constant"() {value = dense<2048> : tensor<1xi64>} : () -> tensor<1xi64>
     %945 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %946 = "onnx.Concat"(%943, %944, %945) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %947 = "onnx.Reshape"(%904, %946) {allowzero = 0 : si64} : (tensor<64x2048x8x8xf32>, tensor<3xi64>) -> tensor<64x2048x64xf32>
+    %947 = "onnx.Reshape"(%904, %946) {allowzero = 0 : si64} : (tensor<8x2048x8x8xf32>, tensor<3xi64>) -> tensor<8x2048x?xf32>
     %948 = "onnx.Constant"() {value = dense<[448, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %949 = "onnx.Reshape"(%142, %948) {allowzero = 0 : si64} : (tensor<448x2048x1x1xf32>, tensor<2xi64>) -> tensor<448x2048xf32>
-    %950 = "onnx.MatMul"(%949, %947) : (tensor<448x2048xf32>, tensor<64x2048x64xf32>) -> tensor<64x448x64xf32>
+    %950 = "onnx.MatMul"(%949, %947) : (tensor<448x2048xf32>, tensor<8x2048x?xf32>) -> tensor<8x448x?xf32>
     %951 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x448x1xf32>} : () -> tensor<1x448x1xf32>
-    %952 = "onnx.Add"(%950, %951) : (tensor<64x448x64xf32>, tensor<1x448x1xf32>) -> tensor<64x448x64xf32>
-    %953 = "onnx.Dim"(%904) {axis = 0 : si64} : (tensor<64x2048x8x8xf32>) -> tensor<1xi64>
+    %952 = "onnx.Add"(%950, %951) : (tensor<8x448x?xf32>, tensor<1x448x1xf32>) -> tensor<8x448x?xf32>
+    %953 = "onnx.Dim"(%904) {axis = 0 : si64} : (tensor<8x2048x8x8xf32>) -> tensor<1xi64>
     %954 = "onnx.Constant"() {value = dense<8> : tensor<1xi64>} : () -> tensor<1xi64>
     %955 = "onnx.Constant"() {value = dense<8> : tensor<1xi64>} : () -> tensor<1xi64>
     %956 = "onnx.Constant"() {value = dense<448> : tensor<1xi64>} : () -> tensor<1xi64>
     %957 = "onnx.Concat"(%953, %956, %954, %955) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %958 = "onnx.Reshape"(%952, %957) {allowzero = 0 : si64} : (tensor<64x448x64xf32>, tensor<4xi64>) -> tensor<64x448x8x8xf32>
-    %959 = "onnx.Relu"(%958) {onnx_node_name = "Relu_245"} : (tensor<64x448x8x8xf32>) -> tensor<64x448x8x8xf32>
-    %960 = "onnx.Conv"(%959, %143, %144) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_246", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<64x448x8x8xf32>, tensor<384x448x3x3xf32>, tensor<384xf32>) -> tensor<64x384x8x8xf32>
-    %961 = "onnx.Relu"(%960) {onnx_node_name = "Relu_247"} : (tensor<64x384x8x8xf32>) -> tensor<64x384x8x8xf32>
-    %962 = "onnx.Conv"(%961, %145, %146) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 3], onnx_node_name = "Conv_248", pads = [0, 1, 0, 1], strides = [1, 1]} : (tensor<64x384x8x8xf32>, tensor<384x384x1x3xf32>, tensor<384xf32>) -> tensor<64x384x8x8xf32>
-    %963 = "onnx.Relu"(%962) {onnx_node_name = "Relu_249"} : (tensor<64x384x8x8xf32>) -> tensor<64x384x8x8xf32>
-    %964 = "onnx.Conv"(%961, %147, %148) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 1], onnx_node_name = "Conv_250", pads = [1, 0, 1, 0], strides = [1, 1]} : (tensor<64x384x8x8xf32>, tensor<384x384x3x1xf32>, tensor<384xf32>) -> tensor<64x384x8x8xf32>
-    %965 = "onnx.Relu"(%964) {onnx_node_name = "Relu_251"} : (tensor<64x384x8x8xf32>) -> tensor<64x384x8x8xf32>
-    %966 = "onnx.AveragePool"(%904) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "AveragePool_255", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<64x2048x8x8xf32>) -> tensor<64x2048x8x8xf32>
-    %967 = "onnx.Dim"(%966) {axis = 0 : si64} : (tensor<64x2048x8x8xf32>) -> tensor<1xi64>
+    %958 = "onnx.Reshape"(%952, %957) {allowzero = 0 : si64} : (tensor<8x448x?xf32>, tensor<4xi64>) -> tensor<8x448x8x8xf32>
+    %959 = "onnx.Relu"(%958) {onnx_node_name = "Relu_245"} : (tensor<8x448x8x8xf32>) -> tensor<8x448x8x8xf32>
+    %960 = "onnx.Conv"(%959, %143, %144) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 3], onnx_node_name = "Conv_246", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<8x448x8x8xf32>, tensor<384x448x3x3xf32>, tensor<384xf32>) -> tensor<8x384x8x8xf32>
+    %961 = "onnx.Relu"(%960) {onnx_node_name = "Relu_247"} : (tensor<8x384x8x8xf32>) -> tensor<8x384x8x8xf32>
+    %962 = "onnx.Conv"(%961, %145, %146) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [1, 3], onnx_node_name = "Conv_248", pads = [0, 1, 0, 1], strides = [1, 1]} : (tensor<8x384x8x8xf32>, tensor<384x384x1x3xf32>, tensor<384xf32>) -> tensor<8x384x8x8xf32>
+    %963 = "onnx.Relu"(%962) {onnx_node_name = "Relu_249"} : (tensor<8x384x8x8xf32>) -> tensor<8x384x8x8xf32>
+    %964 = "onnx.Conv"(%961, %147, %148) {auto_pad = "NOTSET", dilations = [1, 1], group = 1 : si64, kernel_shape = [3, 1], onnx_node_name = "Conv_250", pads = [1, 0, 1, 0], strides = [1, 1]} : (tensor<8x384x8x8xf32>, tensor<384x384x3x1xf32>, tensor<384xf32>) -> tensor<8x384x8x8xf32>
+    %965 = "onnx.Relu"(%964) {onnx_node_name = "Relu_251"} : (tensor<8x384x8x8xf32>) -> tensor<8x384x8x8xf32>
+    %966 = "onnx.AveragePool"(%904) {auto_pad = "NOTSET", ceil_mode = 0 : si64, count_include_pad = 0 : si64, kernel_shape = [3, 3], onnx_node_name = "AveragePool_255", pads = [1, 1, 1, 1], strides = [1, 1]} : (tensor<8x2048x8x8xf32>) -> tensor<8x2048x8x8xf32>
+    %967 = "onnx.Dim"(%966) {axis = 0 : si64} : (tensor<8x2048x8x8xf32>) -> tensor<1xi64>
     %968 = "onnx.Constant"() {value = dense<2048> : tensor<1xi64>} : () -> tensor<1xi64>
     %969 = "onnx.Constant"() {value = dense<-1> : tensor<1xi64>} : () -> tensor<1xi64>
     %970 = "onnx.Concat"(%967, %968, %969) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<3xi64>
-    %971 = "onnx.Reshape"(%966, %970) {allowzero = 0 : si64} : (tensor<64x2048x8x8xf32>, tensor<3xi64>) -> tensor<64x2048x64xf32>
+    %971 = "onnx.Reshape"(%966, %970) {allowzero = 0 : si64} : (tensor<8x2048x8x8xf32>, tensor<3xi64>) -> tensor<8x2048x?xf32>
     %972 = "onnx.Constant"() {value = dense<[192, -1]> : tensor<2xi64>} : () -> tensor<2xi64>
     %973 = "onnx.Reshape"(%149, %972) {allowzero = 0 : si64} : (tensor<192x2048x1x1xf32>, tensor<2xi64>) -> tensor<192x2048xf32>
-    %974 = "onnx.MatMul"(%973, %971) : (tensor<192x2048xf32>, tensor<64x2048x64xf32>) -> tensor<64x192x64xf32>
+    %974 = "onnx.MatMul"(%973, %971) : (tensor<192x2048xf32>, tensor<8x2048x?xf32>) -> tensor<8x192x?xf32>
     %975 = "onnx.Constant"() {value = dense_resource<__elided__> : tensor<1x192x1xf32>} : () -> tensor<1x192x1xf32>
-    %976 = "onnx.Add"(%974, %975) : (tensor<64x192x64xf32>, tensor<1x192x1xf32>) -> tensor<64x192x64xf32>
-    %977 = "onnx.Dim"(%966) {axis = 0 : si64} : (tensor<64x2048x8x8xf32>) -> tensor<1xi64>
+    %976 = "onnx.Add"(%974, %975) : (tensor<8x192x?xf32>, tensor<1x192x1xf32>) -> tensor<8x192x?xf32>
+    %977 = "onnx.Dim"(%966) {axis = 0 : si64} : (tensor<8x2048x8x8xf32>) -> tensor<1xi64>
     %978 = "onnx.Constant"() {value = dense<8> : tensor<1xi64>} : () -> tensor<1xi64>
     %979 = "onnx.Constant"() {value = dense<8> : tensor<1xi64>} : () -> tensor<1xi64>
     %980 = "onnx.Constant"() {value = dense<192> : tensor<1xi64>} : () -> tensor<1xi64>
     %981 = "onnx.Concat"(%977, %980, %978, %979) {axis = 0 : si64} : (tensor<1xi64>, tensor<1xi64>, tensor<1xi64>, tensor<1xi64>) -> tensor<4xi64>
-    %982 = "onnx.Reshape"(%976, %981) {allowzero = 0 : si64} : (tensor<64x192x64xf32>, tensor<4xi64>) -> tensor<64x192x8x8xf32>
-    %983 = "onnx.Relu"(%982) {onnx_node_name = "Relu_257"} : (tensor<64x192x8x8xf32>) -> tensor<64x192x8x8xf32>
-    %984 = "onnx.Concat"(%921, %940, %942, %963, %965, %983) {axis = 1 : si64, onnx_node_name = "Concat_258"} : (tensor<64x320x8x8xf32>, tensor<64x384x8x8xf32>, tensor<64x384x8x8xf32>, tensor<64x384x8x8xf32>, tensor<64x384x8x8xf32>, tensor<64x192x8x8xf32>) -> tensor<64x2048x8x8xf32>
-    %985 = "onnx.ReduceMean"(%984) {axes = [2, 3], keepdims = 1 : si64} : (tensor<64x2048x8x8xf32>) -> tensor<64x2048x1x1xf32>
-    %986 = "onnx.Flatten"(%985) {axis = 1 : si64, onnx_node_name = "Flatten_260"} : (tensor<64x2048x1x1xf32>) -> tensor<64x2048xf32>
-    %987 = "onnx.Gemm"(%986, %0, %1) {alpha = 1.000000e+00 : f32, beta = 1.000000e+00 : f32, onnx_node_name = "Gemm_261", transA = 0 : si64, transB = 1 : si64} : (tensor<64x2048xf32>, tensor<1000x2048xf32>, tensor<1000xf32>) -> tensor<64x1000xf32>
-    return %987 : tensor<64x1000xf32>
+    %982 = "onnx.Reshape"(%976, %981) {allowzero = 0 : si64} : (tensor<8x192x?xf32>, tensor<4xi64>) -> tensor<8x192x8x8xf32>
+    %983 = "onnx.Relu"(%982) {onnx_node_name = "Relu_257"} : (tensor<8x192x8x8xf32>) -> tensor<8x192x8x8xf32>
+    %984 = "onnx.Concat"(%921, %940, %942, %963, %965, %983) {axis = 1 : si64, onnx_node_name = "Concat_258"} : (tensor<8x320x8x8xf32>, tensor<8x384x8x8xf32>, tensor<8x384x8x8xf32>, tensor<8x384x8x8xf32>, tensor<8x384x8x8xf32>, tensor<8x192x8x8xf32>) -> tensor<8x2048x8x8xf32>
+    %985 = "onnx.ReduceMean"(%984) {axes = [2, 3], keepdims = 1 : si64} : (tensor<8x2048x8x8xf32>) -> tensor<8x2048x1x1xf32>
+    %986 = "onnx.Flatten"(%985) {axis = 1 : si64, onnx_node_name = "Flatten_260"} : (tensor<8x2048x1x1xf32>) -> tensor<8x2048xf32>
+    %987 = "onnx.Gemm"(%986, %0, %1) {alpha = 1.000000e+00 : f32, beta = 1.000000e+00 : f32, onnx_node_name = "Gemm_261", transA = 0 : si64, transB = 1 : si64} : (tensor<8x2048xf32>, tensor<1000x2048xf32>, tensor<1000xf32>) -> tensor<8x1000xf32>
+    return %987 : tensor<8x1000xf32>
   }
   "onnx.EntryPoint"() {func = @main_graph} : () -> ()
 }

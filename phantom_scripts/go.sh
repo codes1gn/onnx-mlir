@@ -64,7 +64,7 @@ fi
 cd $top_dir_realpath
 
 bash $top_dir_realpath/phantom_scripts/build_onnx.sh
-/root/fun/onnx-mlir/onnx-build/Debug/bin/onnx-mlir --EmitCRT /root/fun/onnx-mlir/model-workspace/models-onnx-ir/Inception-v3-op13-fp32-torchvision.mlir
+# /root/fun/onnx-mlir/onnx-build/Debug/bin/onnx-mlir --EmitCRT /root/fun/onnx-mlir/model-workspace/models-onnx-ir/Inception-v3-op13-fp32-torchvision.mlir
 
 
 

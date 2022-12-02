@@ -129,6 +129,23 @@ struct ONNXCastOpLoweringToCrt : public ConversionPattern {
   }
 };
 
+struct ONNXTanhOpLoweringToCrt : public ConversionPattern {
+  ONNXTanhOpLoweringToCrt(MLIRContext *ctx)
+      : ConversionPattern(mlir::ONNXCastOp::getOperationName(), 1, ctx) {}
+
+  LogicalResult matchAndRewrite(Operation *op, ArrayRef<Value> operands,
+      ConversionPatternRewriter &rewriter) const final {
+    ONNXCastOpAdaptor operandAdaptor(operands, op->getAttrDictionary());
+    Location loc = op->getLoc();
+    Value data = operandAdaptor.input();
+    Type outputType = op->getResult(0).getType();
+    Value result =
+        rewriter.create<crt::CastOp>(loc, outputType, data);
+    rewriter.replaceOp(op, result);
+    return success();
+  }
+};
+
 struct ONNXReshapeOpLoweringToCrt : public ConversionPattern {
   ONNXReshapeOpLoweringToCrt(MLIRContext *ctx)
       : ConversionPattern(mlir::ONNXReshapeOp::getOperationName(), 1, ctx) {}
@@ -294,6 +311,7 @@ void populateLoweringONNXToCrtPattern(ConversionTarget &target,
   patterns.add<ConvertUnaryOpOnnxToCrt<ONNXPowOp, crt::PowOp>>(typeConverter, ctx);
   patterns.add<ConvertUnaryOpOnnxToCrt<ONNXSqrtOp, crt::SqrtOp>>(typeConverter, ctx);
   patterns.add<ConvertUnaryOpOnnxToCrt<ONNXErfOp, crt::ErfOp>>(typeConverter, ctx);
+  patterns.add<ConvertUnaryOpOnnxToCrt<ONNXTanhOp, crt::TanhOp>>(typeConverter, ctx);
   patterns.add<ConvertUnaryOpOnnxToCrt<ONNXTransposeOp, crt::TransposeOp>>(typeConverter, ctx);
   patterns.add<ConvertUnaryOpOnnxToCrt<ONNXDimOp, crt::DimOp>>(typeConverter, ctx);
   patterns.add<ConvertUnaryOpOnnxToCrt<ONNXAbsOp, crt::AbsOp>>(typeConverter, ctx);
@@ -316,6 +334,7 @@ void populateLoweringONNXToCrtPattern(ConversionTarget &target,
   patterns.add<ONNXSplitOpLoweringToCrt>(ctx);
   patterns.add<ONNXReshapeOpLoweringToCrt>(ctx);
   patterns.add<ONNXCastOpLoweringToCrt>(ctx);
+  patterns.add<ONNXTanhOpLoweringToCrt>(ctx);
   patterns.add<ONNXDimOpLoweringToCrt>(ctx);
   patterns.add<ONNXGatherOpLoweringToCrt>(ctx);
   patterns.add<ONNXUnsqueezeOpLoweringToCrt>(ctx);

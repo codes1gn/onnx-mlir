@@ -178,6 +178,7 @@ int main(int argc, char **argv) {
     llvm::errs() << "Failed to parse options\n";
     return 1;
   }
+  
 
   // Set up the input file.
   std::string error_message;

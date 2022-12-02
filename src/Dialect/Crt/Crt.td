@@ -71,7 +71,7 @@ def Crt_YieldOp : Crt_PureOp<"yield", [ReturnLike, Terminator,
 }
 
 def Crt_AllreduceOp : Crt_Op<"allreduce", [
-                                             SameOperandsAndResultShape,
+                                             /* no-need, since it covers semantic of allreduce: SameOperandsAndResultShape, */
                                              SameOperandsAndResultElementType]> {
   let summary = "negate function";
   let description = [{
@@ -266,9 +266,9 @@ def Crt_CastOp : Crt_Op<"cast"> {
   }];
   let arguments = (
       ins
-      TensorRankOf<[F32, I32, I64, I8, F64], [0, 1, 2, 3, 4, 5, 6]>:$operand);
+      TensorRankOf<[F32, I32, I64, I8,I1, F64], [0, 1, 2, 3, 4, 5, 6]>:$operand);
   let results = (outs
-      TensorRankOf<[F32, I32, I64, I8, F64], [0, 1, 2, 3, 4, 5, 6]>:$result);
+      TensorRankOf<[F32, I32, I64, I8,I1, F64], [0, 1, 2, 3, 4, 5, 6]>:$result);
 
   let assemblyFormat = "$operand attr-dict `:` functional-type(operands, results)";
 }
@@ -377,7 +377,7 @@ def Crt_SplitOp : Crt_Op<"split"> {
     If the `K` dimension mismatches between the operands, this op aborts the
     program.
   }];
-  let arguments = (ins TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4, 5, 6]>:$input, TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4, 5, 6]>:$split);
+  let arguments = (ins TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4, 5, 6]>:$input, AnyTypeOf<[TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4, 5, 6]>, NoneType]>:$split);
   let results = (outs Variadic<TensorRankOf<[F32, I32, I64], [0, 1, 2, 3, 4, 5, 6]>>:$outputs);
 
   let assemblyFormat = "$input `,` $split attr-dict `:` functional-type(operands, results)";
